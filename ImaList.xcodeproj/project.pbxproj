@@ -17,7 +17,7 @@
 		4B534046172B66C3003F9AE2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B534045172B66C3003F9AE2 /* Default@2x.png */; };
 		4B534048172B66C3003F9AE2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B534047172B66C3003F9AE2 /* Default-568h@2x.png */; };
 		4B53404B172B66C3003F9AE2 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */; };
-		4B53404E172B66C3003F9AE2 /* CRBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53404D172B66C3003F9AE2 /* CRBViewController.m */; };
+		4B53404E172B66C3003F9AE2 /* CRBListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53404D172B66C3003F9AE2 /* CRBListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,8 +35,8 @@
 		4B534045172B66C3003F9AE2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4B534047172B66C3003F9AE2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4B53404A172B66C3003F9AE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		4B53404C172B66C3003F9AE2 /* CRBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBViewController.h; sourceTree = "<group>"; };
-		4B53404D172B66C3003F9AE2 /* CRBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRBViewController.m; sourceTree = "<group>"; };
+		4B53404C172B66C3003F9AE2 /* CRBListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRBListViewController.h; sourceTree = "<group>"; };
+		4B53404D172B66C3003F9AE2 /* CRBListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRBListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +86,8 @@
 				4B534040172B66C3003F9AE2 /* CRBAppDelegate.h */,
 				4B534041172B66C3003F9AE2 /* CRBAppDelegate.m */,
 				4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */,
-				4B53404C172B66C3003F9AE2 /* CRBViewController.h */,
-				4B53404D172B66C3003F9AE2 /* CRBViewController.m */,
+				4B53404C172B66C3003F9AE2 /* CRBListViewController.h */,
+				4B53404D172B66C3003F9AE2 /* CRBListViewController.m */,
 				4B534038172B66C3003F9AE2 /* Supporting Files */,
 			);
 			path = ImaList;
@@ -176,7 +176,7 @@
 			files = (
 				4B53403E172B66C3003F9AE2 /* main.m in Sources */,
 				4B534042172B66C3003F9AE2 /* CRBAppDelegate.m in Sources */,
-				4B53404E172B66C3003F9AE2 /* CRBViewController.m in Sources */,
+				4B53404E172B66C3003F9AE2 /* CRBListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
