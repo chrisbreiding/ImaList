@@ -7,10 +7,15 @@
 //
 
 #import "CRBAppDelegate.h"
+#import "CRBViewController.h"
+#import "CRBItemListSource.h"
 
 @implementation CRBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    CRBViewController *viewController = (CRBViewController *)self.window.rootViewController;
+    viewController.dataSource = [[CRBItemListSource alloc] init];
+    
     return YES;
 }
 							
