@@ -1,6 +1,5 @@
 .DS_Store
-*.ipa
-*/build/*
+build/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -9,9 +8,13 @@
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
 xcuserdata
 profile
 *.moved-aside
 DerivedData
 .idea/
-*.hmap
+Podfile.lock
+Pods
+**/*.orig
