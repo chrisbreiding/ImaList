@@ -1,22 +1,21 @@
 #import "CRBItemListSource.h"
 #import "CRBItem.h"
 
-@implementation CRBItemListSource
-{
+@implementation CRBItemListSource {
     NSMutableArray *_items;
 }
 
 - (CRBItemListSource *)init {
     NSArray *fixtureItems = @[
-        @{ @"name": @"eggs", @"isChecked": @(NO) },
-        @{ @"name": @"bread", @"isChecked": @(YES) },
-        @{ @"name": @"milk", @"isChecked": @(NO) },
+        @{ @"name": @"eggs",         @"isChecked": @(NO)  },
+        @{ @"name": @"bread",        @"isChecked": @(YES) },
+        @{ @"name": @"milk",         @"isChecked": @(NO)  },
         @{ @"name": @"potato chips", @"isChecked": @(YES) },
-        @{ @"name": @"butter", @"isChecked": @(YES) },
-        @{ @"name": @"orange juice", @"isChecked": @(NO) },
-        @{ @"name": @"turkey", @"isChecked": @(NO) },
-        @{ @"name": @"bacon", @"isChecked": @(YES) },
-        @{ @"name": @"tomatoes", @"isChecked": @(NO) }
+        @{ @"name": @"butter",       @"isChecked": @(YES) },
+        @{ @"name": @"orange juice", @"isChecked": @(NO)  },
+        @{ @"name": @"turkey",       @"isChecked": @(NO)  },
+        @{ @"name": @"bacon",        @"isChecked": @(YES) },
+        @{ @"name": @"tomatoes",     @"isChecked": @(NO)  }
     ];
     
     self = [super init];
