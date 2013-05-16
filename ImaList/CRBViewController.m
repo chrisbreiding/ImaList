@@ -4,6 +4,8 @@
 
 @implementation CRBViewController
 
+# pragma marl - view lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self styleView];
@@ -13,6 +15,8 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+# pragma mark - tableview delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.dataSource itemCount];
@@ -27,6 +31,8 @@
     
     return cell;
 }
+
+#pragma mark - appearance
 
 - (void)styleView {
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
@@ -71,6 +77,8 @@
     [cell.imageView setGestureRecognizers:@[]];
     [cell.imageView addGestureRecognizer:gestureRecognizer];
 }
+
+#pragma mark - user actions
 
 - (IBAction)didPressClearCompleted:(id)sender {
     [self.dataSource clearCompleted];
