@@ -35,10 +35,6 @@
     static NSString *cellIdentifier = @"ItemCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];        
-    }
-
     [self styleCell:cell];
     [self giveAttributesToCell:cell atIndexPath:indexPath];
     

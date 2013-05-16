@@ -23,8 +23,7 @@
         if (!_items) {
             _items = [NSMutableArray array];
             for (NSDictionary *item in fixtureItems) {
-                CRBItem *newItem = [self createCountDownWithName:item[@"name"] checked:item[@"isChecked"]];
-                [_items addObject:newItem];
+                [self createCountDownWithName:item[@"name"] checked:item[@"isChecked"]];
             }
         }
 
