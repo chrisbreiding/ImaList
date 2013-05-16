@@ -1,11 +1,3 @@
-//
-//  CRBAppDelegate.m
-//  ImaList
-//
-//  Created by CB on 04/26/13.
-//  Copyright (c) 2013 CB. All rights reserved.
-//
-
 #import "CRBAppDelegate.h"
 #import "CRBViewController.h"
 #import "CRBItemListSource.h"

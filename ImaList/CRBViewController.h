@@ -1,7 +1,3 @@
-//
-//  CRBViewController.h
-//
-
 #import <UIKit/UIKit.h>
 #import "CRBItemListDataSource.h"
 

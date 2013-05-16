@@ -1,7 +1,3 @@
-//
-//  CRBItemListSource.h
-//
-
 #import <Foundation/Foundation.h>
 #import "CRBItemListDataSource.h"
 

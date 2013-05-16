@@ -1,20 +1,7 @@
-//
-//  CRBViewController.m
-//
-
 #import "CRBViewController.h"
 #import "CRBItemListSource.h"
 #import "CRBItem.h"
 
-//@interface CRBViewController ()
-//
-//- (void)styleView;
-//- (void)styleNavBar;
-//- (void)styleCell:(UITableViewCell *)cell;
-//- (void)giveAttributesToCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
-//
-//@end
-//
 @implementation CRBViewController
 
 - (void)viewDidLoad {
