@@ -38,6 +38,7 @@
 		4B53408D172F59F2003F9AE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534031172B66C3003F9AE2 /* UIKit.framework */; };
 		4B53408E172F59F2003F9AE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534033172B66C3003F9AE2 /* Foundation.framework */; };
 		4B534094172F59F2003F9AE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B534092172F59F2003F9AE2 /* InfoPlist.strings */; };
+		4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA2879517357D160041BB2D /* ItemListSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		4B534091172F59F2003F9AE2 /* ImaListTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImaListTests-Info.plist"; sourceTree = "<group>"; };
 		4B534093172F59F2003F9AE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4B534098172F59F2003F9AE2 /* ImaListTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImaListTests-Prefix.pch"; sourceTree = "<group>"; };
+		4BA2879517357D160041BB2D /* ItemListSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListSpec.m; path = ImaListTests/ItemListSpec.m; sourceTree = SOURCE_ROOT; };
 		F75EF69AC1CE4BD882710606 /* Pods-ImaListTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImaListTests.xcconfig"; path = "Pods/Pods-ImaListTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -212,6 +214,7 @@
 		4B53408F172F59F2003F9AE2 /* ImaListTests */ = {
 			isa = PBXGroup;
 			children = (
+				4BA2879517357D160041BB2D /* ItemListSpec.m */,
 				4B3693BA172F6D7C00C81D9F /* ItemSpec.m */,
 				4B534090172F59F2003F9AE2 /* Supporting Files */,
 			);
@@ -393,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */,
+				4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

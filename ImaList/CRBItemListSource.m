@@ -1,23 +1,12 @@
-//
-//  CRBItemListSource.m
-//  ImaList
-//
-//  Created by CB on 04/27/13.
-//  Copyright (c) 2013 CB. All rights reserved.
-//
-
 #import "CRBItemListSource.h"
 #import "CRBItem.h"
 
-@interface CRBItemListSource ()
-
-@property(nonatomic, strong) NSMutableArray *items;
-
-@end
-
 @implementation CRBItemListSource
+{
+    NSMutableArray *_items;
+}
 
-- (NSMutableArray *)items {
+- (CRBItemListSource *)init {
     NSArray *fixtureItems = @[
         @{ @"name": @"eggs", @"isChecked": @(NO) },
         @{ @"name": @"bread", @"isChecked": @(YES) },
@@ -30,38 +19,42 @@
         @{ @"name": @"tomatoes", @"isChecked": @(NO) }
     ];
     
-    if (!_items) {
-        self.items = [NSMutableArray array];
-        for (NSDictionary *item in fixtureItems) {
-            CRBItem *newItem = [[CRBItem alloc] init];
-            newItem.name = item[@"name"];
-            newItem.isChecked = item[@"isChecked"];
-            [self.items addObject:newItem];
+    self = [super init];
+    if (self) {
+        if (!_items) {
+            _items = [NSMutableArray array];
+            for (NSDictionary *item in fixtureItems) {
+                CRBItem *newItem = [self createCountDownWithName:item[@"name"] checked:item[@"isChecked"]];
+                [_items addObject:newItem];
+            }
         }
+
+        [self sortItems];
     }
-    [self sortItems];
-    return _items;
+    return self;
 }
 
 - (NSInteger)itemCount {
-    return self.items.count;
+    return _items.count;
 }
 
 - (CRBItem *)itemAtIndex:(NSInteger)index {
-    return [self.items objectAtIndex:index];
+    return [_items objectAtIndex:index];
 }
 
 - (NSInteger)indexOfItem:(CRBItem *)item {
-    return [self.items indexOfObject:item];
+    return [_items indexOfObject:item];
 }
 
 - (void)deleteItemAtIndex:(NSInteger)index {
-    [self.items removeObjectAtIndex:index];
+    [_items removeObjectAtIndex:index];
 }
 
-- (CRBItem *)createCountDown {
+- (CRBItem *)createCountDownWithName:(NSString *)name checked:(NSNumber *)isChecked {
     CRBItem *newItem = [[CRBItem alloc] init];
-    [self.items addObject:newItem];
+    newItem.name = name;
+    newItem.isChecked = isChecked;
+    [_items addObject:newItem];
     return newItem;
 }
 
@@ -79,12 +72,16 @@
         return NSOrderedSame;
     }];
     
-    self.items = [NSMutableArray arrayWithArray:sortedItems];
+    _items = [NSMutableArray arrayWithArray:sortedItems];
 }
 
 - (void)itemsChanged {
     [self sortItems];
     // persist data
+}
+
+- (void)clear {
+    _items = [NSMutableArray array];
 }
 
 @end
