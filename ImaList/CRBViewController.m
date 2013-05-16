@@ -85,6 +85,11 @@
     [cell.imageView addGestureRecognizer:gestureRecognizer];
 }
 
+- (IBAction)didPressClearCompleted:(id)sender {
+    [self.dataSource clearCompleted];
+    [self.tableView reloadData];
+}
+
 - (void)checkmarkTapped:(id)gesture {
     CRBItem *item = [self.dataSource itemAtIndex:[[gesture view] tag]];
     BOOL isChecked = [item.isChecked boolValue];

@@ -82,4 +82,10 @@
     _items = [NSMutableArray array];
 }
 
+- (void)clearCompleted {
+    [_items filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id item, NSDictionary *bindings) {
+        return ![[item isChecked] boolValue];
+    }]];
+}
+
 @end

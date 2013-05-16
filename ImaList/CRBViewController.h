@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
+- (IBAction) didPressClearCompleted:(id)sender;
 - (void) checkmarkTapped:(id)gesture;
 
 @end

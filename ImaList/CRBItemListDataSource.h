@@ -16,5 +16,6 @@
 - (void)sortItems;
 - (void)itemsChanged;
 - (void)clear;
+- (void)clearCompleted;
 
 @end

@@ -80,12 +80,17 @@ describe(@"Item List", ^{
                 [[[dataSource itemAtIndex:2] should] equal:item1];
             });
         });
-    });
-    
-    describe(@"clearing the list", ^{
-        it(@"has a count of zero", ^{
-            [dataSource clear];
-            [[theValue([dataSource itemCount]) should] beZero];
+
+        describe(@"clearing", ^{
+            it(@"has a count of zero after clearing all", ^{
+                [dataSource clear];
+                [[theValue([dataSource itemCount]) should] beZero];
+            });
+            
+            it(@"has a count of 2 after clearing completed", ^{
+                [dataSource clearCompleted];
+                [[theValue([dataSource itemCount]) should] equal:@2];
+            });
         });
     });
     
