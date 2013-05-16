@@ -2,7 +2,10 @@
 #import "CRBItemListSource.h"
 #import "CRBItem.h"
 
-@implementation CRBViewController
+@implementation CRBViewController {
+    NSIndexPath *_indexPathBeingEdited;
+    UITextField *_editNameField;
+}
 
 # pragma marl - view lifecycle
 
@@ -30,6 +33,22 @@
     [self giveAttributesToCell:cell atIndexPath:indexPath];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.hidden = YES;
+    
+    [self addNameFieldToCell:cell atIndexPath:indexPath];
+}
+
+#pragma mark - textfield delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self finishedEditingName];
+    [_editNameField removeFromSuperview];
+    _editNameField = nil;
+    return YES;
 }
 
 #pragma mark - appearance
@@ -93,6 +112,36 @@
 
     [self.dataSource itemsChanged];
     [self.tableView reloadData];
+}
+
+#pragma mark - edit mode
+
+- (void)addNameFieldToCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    CGRect editRect = CGRectMake(cell.textLabel.frame.origin.x, 0.0, cell.frame.size.width - cell.textLabel.frame.origin.x, cell.frame.size.height);
+    if (_editNameField) {
+        [self finishedEditingName];
+        [_editNameField removeFromSuperview];
+        [[[_tableView cellForRowAtIndexPath:_indexPathBeingEdited] textLabel] setHidden:NO];
+    } else {
+        _editNameField = [[UITextField alloc] init];
+        _editNameField.font = cell.textLabel.font;
+        _editNameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    }
+    _indexPathBeingEdited = indexPath;
+    _editNameField.frame = editRect;
+    _editNameField.text = cell.textLabel.text;
+    _editNameField.delegate = self;
+    [cell addSubview:_editNameField];
+    [_editNameField becomeFirstResponder];
+}
+
+- (void)finishedEditingName {
+    CRBItem *item = [self.dataSource itemAtIndex:_indexPathBeingEdited.row];
+    item.name = _editNameField.text;
+    
+    UITableViewCell *cell = [_tableView cellForRowAtIndexPath:_indexPathBeingEdited];
+    cell.textLabel.text = _editNameField.text;
+    cell.textLabel.hidden = NO;
 }
 
 @end
