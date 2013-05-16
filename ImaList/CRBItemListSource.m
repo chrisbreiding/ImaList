@@ -57,8 +57,7 @@
 }
 
 - (void)sortItems {
-    NSArray *sortedItems = [_items sortedArrayUsingComparator:^NSComparisonResult(CRBItem *item1, CRBItem *item2) {
-
+    [_items sortUsingComparator:^NSComparisonResult(CRBItem *item1, CRBItem *item2) {
         if ([item1.isChecked boolValue] != [item2.isChecked boolValue]) {
             if ([item1.isChecked boolValue]) {
                 return NSOrderedDescending;
@@ -66,11 +65,8 @@
                 return NSOrderedAscending;
             }
         }
-        
         return NSOrderedSame;
     }];
-    
-    _items = [NSMutableArray arrayWithArray:sortedItems];
 }
 
 - (void)itemsChanged {
