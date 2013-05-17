@@ -15,6 +15,12 @@
         @{ @"name": @"orange juice", @"isChecked": @(NO)  },
         @{ @"name": @"turkey",       @"isChecked": @(NO)  },
         @{ @"name": @"bacon",        @"isChecked": @(YES) },
+        @{ @"name": @"mustard",      @"isChecked": @(YES) },
+        @{ @"name": @"cheese",       @"isChecked": @(NO)  },
+        @{ @"name": @"jelly",        @"isChecked": @(YES) },
+        @{ @"name": @"strawberries", @"isChecked": @(NO)  },
+        @{ @"name": @"yogurt",       @"isChecked": @(NO)  },
+        @{ @"name": @"carrots",      @"isChecked": @(NO)  },
         @{ @"name": @"tomatoes",     @"isChecked": @(NO)  }
     ];
     
