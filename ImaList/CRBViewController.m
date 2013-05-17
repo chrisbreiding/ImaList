@@ -5,6 +5,7 @@
 @implementation CRBViewController {
     NSIndexPath *_indexPathBeingEdited;
     UITextField *_editNameField;
+    int _savedOffsetY;
 }
 
 # pragma marl - view lifecycle
@@ -180,6 +181,7 @@
                                            toView:_tableView.superview];
     
 	// set inset to make up for covered array at bottom
+    _savedOffsetY = _tableView.contentOffset.y;
 	_tableView.contentInset = UIEdgeInsetsMake(0, 0, coveredFrame.size.height, 0);
 	_tableView.scrollIndicatorInsets = _tableView.contentInset;
 
@@ -189,8 +191,9 @@
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    [_tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+    _tableView.contentInset = UIEdgeInsetsZero;
 	_tableView.scrollIndicatorInsets = _tableView.contentInset;
+    [_tableView setContentOffset:CGPointMake(0, _savedOffsetY) animated:YES];
 }
 
 @end
