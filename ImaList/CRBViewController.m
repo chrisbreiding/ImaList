@@ -110,6 +110,12 @@
     
     item.isChecked = @(!isChecked);
 
+    if (_editNameField) {
+        [_editNameField removeFromSuperview];
+        [[[_tableView cellForRowAtIndexPath:_indexPathBeingEdited] textLabel] setHidden:NO];
+        _editNameField = nil;
+    }
+    
     [self.dataSource itemsChanged];
     [self.tableView reloadData];
 }
@@ -126,6 +132,7 @@
         _editNameField = [[UITextField alloc] init];
         _editNameField.font = cell.textLabel.font;
         _editNameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        _editNameField.returnKeyType = UIReturnKeyDone;
     }
     _indexPathBeingEdited = indexPath;
     _editNameField.frame = editRect;
