@@ -13,6 +13,13 @@
     [super viewDidLoad];
     [self styleView];
     [self styleNavBar];
+
+    // post notification to add insets when keyboard is shown
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(keyboardWillShow:)
+                   name:UIKeyboardWillShowNotification object:nil];
+    [center addObserver:self selector:@selector(keyboardWillHide:)
+                   name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,7 +53,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self finishedEditingName];
-    [_editNameField removeFromSuperview];
     _editNameField = nil;
     return YES;
 }
@@ -100,6 +106,10 @@
 #pragma mark - user actions
 
 - (IBAction)didPressClearCompleted:(id)sender {
+    if (_editNameField) {
+        [self finishedEditingName];
+        _editNameField = nil;
+    }
     [self.dataSource clearCompleted];
     [self.tableView reloadData];
 }
@@ -111,8 +121,7 @@
     item.isChecked = @(!isChecked);
 
     if (_editNameField) {
-        [_editNameField removeFromSuperview];
-        [[[_tableView cellForRowAtIndexPath:_indexPathBeingEdited] textLabel] setHidden:NO];
+        [self finishedEditingName];
         _editNameField = nil;
     }
     
@@ -126,14 +135,12 @@
     CGRect editRect = CGRectMake(cell.textLabel.frame.origin.x, 0.0, cell.frame.size.width - cell.textLabel.frame.origin.x, cell.frame.size.height);
     if (_editNameField) {
         [self finishedEditingName];
-        [_editNameField removeFromSuperview];
-        [[[_tableView cellForRowAtIndexPath:_indexPathBeingEdited] textLabel] setHidden:NO];
     } else {
         _editNameField = [[UITextField alloc] init];
         _editNameField.font = cell.textLabel.font;
         _editNameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         _editNameField.returnKeyType = UIReturnKeyDone;
-    }
+    }    
     _indexPathBeingEdited = indexPath;
     _editNameField.frame = editRect;
     _editNameField.text = cell.textLabel.text;
@@ -145,10 +152,45 @@
 - (void)finishedEditingName {
     CRBItem *item = [self.dataSource itemAtIndex:_indexPathBeingEdited.row];
     item.name = _editNameField.text;
-    
+
     UITableViewCell *cell = [_tableView cellForRowAtIndexPath:_indexPathBeingEdited];
     cell.textLabel.text = _editNameField.text;
     cell.textLabel.hidden = NO;
+
+    [_editNameField removeFromSuperview];
+    [[[_tableView cellForRowAtIndexPath:_indexPathBeingEdited] textLabel] setHidden:NO];
+}
+
+#pragma mark - keyboard notifications
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+	// keyboard frame is in window coordinates
+	NSDictionary *userInfo = [notification userInfo];
+	CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+	// convert own frame to window coordinates, frame is in superview's coordinates
+	CGRect ownFrame = [_tableView.window convertRect:_tableView.frame
+                                            fromView:_tableView.superview];
+    
+	// calculate the area of own frame that is covered by keyboard
+	CGRect coveredFrame = CGRectIntersection(ownFrame, keyboardFrame);
+    
+	// now this might be rotated, so convert it back
+	coveredFrame = [_tableView.window convertRect:coveredFrame
+                                           toView:_tableView.superview];
+    
+	// set inset to make up for covered array at bottom
+	_tableView.contentInset = UIEdgeInsetsMake(0, 0, coveredFrame.size.height, 0);
+	_tableView.scrollIndicatorInsets = _tableView.contentInset;
+
+    [_tableView scrollToRowAtIndexPath:_indexPathBeingEdited
+                      atScrollPosition:UITableViewScrollPositionBottom
+                              animated:YES];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    [_tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+	_tableView.scrollIndicatorInsets = _tableView.contentInset;
 }
 
 @end
