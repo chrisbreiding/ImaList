@@ -1,26 +1,22 @@
+#import <QuartzCore/QuartzCore.h>
 #import "CRBViewController.h"
 #import "CRBItemListSource.h"
 #import "CRBItem.h"
 
 @implementation CRBViewController {
     NSIndexPath *_indexPathBeingEdited;
-    UITextField *_editNameField;
-    int _savedOffsetY;
+    UIView *_shadowboxView;
+    UILabel *_tempLabel;
+    UIImageView *_nameFieldBackground;
+    UITextField *_nameField;
 }
 
-# pragma marl - view lifecycle
+# pragma mark - view lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self styleView];
     [self styleNavBar];
-
-    // post notification to add insets when keyboard is shown
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(keyboardWillShow:)
-                   name:UIKeyboardWillShowNotification object:nil];
-    [center addObserver:self selector:@selector(keyboardWillHide:)
-                   name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,23 +35,29 @@
     
     [self styleCell:cell];
     [self giveAttributesToCell:cell atIndexPath:indexPath];
-    
+
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    _indexPathBeingEdited = indexPath;
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.textLabel.hidden = YES;
-    
-    [self addNameFieldToCell:cell atIndexPath:indexPath];
+    [self editNameForCell:cell];
 }
 
 #pragma mark - textfield delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self finishedEditingName];
-    _editNameField = nil;
+    [self endEditingName];
     return YES;
+}
+
+- (CGRect)textRectForBounds:(CGRect)bounds {
+    return CGRectInset(bounds, 10, 10);
+}
+
+- (CGRect)editingRectForBounds:(CGRect)bounds {
+    return CGRectInset(bounds, 10, 10);
 }
 
 #pragma mark - appearance
@@ -85,6 +87,8 @@
     cell.textLabel.font = [UIFont systemFontOfSize:15.0];
 }
 
+#pragma mark - cell setup
+
 - (void)giveAttributesToCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     CRBItem *item = [self.dataSource itemAtIndex:indexPath.row];
     
@@ -100,17 +104,12 @@
     cell.imageView.tag = indexPath.row;
 
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkmarkTapped:)];
-    [cell.imageView setGestureRecognizers:@[]];
-    [cell.imageView addGestureRecognizer:gestureRecognizer];
+    [cell.imageView setGestureRecognizers:@[gestureRecognizer]];
 }
 
 #pragma mark - user actions
 
 - (IBAction)didPressClearCompleted:(id)sender {
-    if (_editNameField) {
-        [self finishedEditingName];
-        _editNameField = nil;
-    }
     [self.dataSource clearCompleted];
     [self.tableView reloadData];
 }
@@ -118,82 +117,100 @@
 - (void)checkmarkTapped:(id)gesture {
     CRBItem *item = [self.dataSource itemAtIndex:[[gesture view] tag]];
     BOOL isChecked = [item.isChecked boolValue];
-    
     item.isChecked = @(!isChecked);
 
-    if (_editNameField) {
-        [self finishedEditingName];
-        _editNameField = nil;
-    }
-    
     [self.dataSource itemsChanged];
     [self.tableView reloadData];
 }
 
 #pragma mark - edit mode
 
-- (void)addNameFieldToCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    CGRect editRect = CGRectMake(cell.textLabel.frame.origin.x, 0.0, cell.frame.size.width - cell.textLabel.frame.origin.x, cell.frame.size.height);
-    if (_editNameField) {
-        [self finishedEditingName];
-    } else {
-        _editNameField = [[UITextField alloc] init];
-        _editNameField.font = cell.textLabel.font;
-        _editNameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        _editNameField.returnKeyType = UIReturnKeyDone;
-    }    
-    _indexPathBeingEdited = indexPath;
-    _editNameField.frame = editRect;
-    _editNameField.text = cell.textLabel.text;
-    _editNameField.delegate = self;
-    [cell addSubview:_editNameField];
-    [_editNameField becomeFirstResponder];
+- (void)editNameForCell:(UITableViewCell *)cell {
+    NSLog(@"    going: %@", NSStringFromCGRect(cell.frame));
+    cell.textLabel.hidden = YES;
+    
+    UIView *shadowboxView = [[UIView alloc] initWithFrame:self.view.bounds];
+    shadowboxView.backgroundColor = [UIColor blackColor];
+    shadowboxView.alpha = 0;
+    _shadowboxView = shadowboxView;
+    [self.view addSubview:shadowboxView];
+    
+    CGFloat originX = cell.frame.origin.x + 54;
+    CGFloat originY = cell.frame.origin.y + 50;
+    CGFloat originWidth = cell.frame.size.width - 64;
+    CGFloat originHeight = cell.frame.size.height;
+    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(originX, originY, originWidth, originHeight)];
+    tempLabel.backgroundColor = [UIColor clearColor];
+    tempLabel.text = cell.textLabel.text;
+    tempLabel.font = cell.textLabel.font;
+    _tempLabel = tempLabel;
+    [shadowboxView addSubview:tempLabel];
+    
+    UIImageView *nameFieldBackground = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, self.view.bounds.size.width - 40, cell.bounds.size.height)];
+    nameFieldBackground.image = [[UIImage imageNamed:@"textfield"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    nameFieldBackground.alpha = 0;
+    _nameFieldBackground = nameFieldBackground;
+    [shadowboxView addSubview:nameFieldBackground];
+
+    UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(30, 50, self.view.bounds.size.width - 60, cell.bounds.size.height)];
+    nameField.text = cell.textLabel.text;
+    nameField.textColor = [UIColor whiteColor];
+    nameField.alpha = 0;
+    nameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    nameField.returnKeyType = UIReturnKeyDone;
+    nameField.delegate = self;
+    _nameField = nameField;
+    [shadowboxView addSubview:nameField];
+
+    CGFloat destinationX = 30;
+    CGFloat destinationY = 50;
+    CGFloat destinationWidth = self.view.bounds.size.width - 60;
+    CGFloat destinationHeight = cell.bounds.size.height;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        tempLabel.frame = CGRectMake(destinationX, destinationY, destinationWidth, destinationHeight);
+        shadowboxView.alpha = 0.8;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 animations:^{
+            nameFieldBackground.alpha = 1;
+            nameField.alpha = 1;
+            tempLabel.alpha = 0;
+        }];
+        [nameField becomeFirstResponder];
+    }];
 }
 
-- (void)finishedEditingName {
-    CRBItem *item = [self.dataSource itemAtIndex:_indexPathBeingEdited.row];
-    item.name = _editNameField.text;
-
+- (void)endEditingName {
     UITableViewCell *cell = [_tableView cellForRowAtIndexPath:_indexPathBeingEdited];
-    cell.textLabel.text = _editNameField.text;
-    cell.textLabel.hidden = NO;
-
-    [_editNameField removeFromSuperview];
-    [[[_tableView cellForRowAtIndexPath:_indexPathBeingEdited] textLabel] setHidden:NO];
-}
-
-#pragma mark - keyboard notifications
-
-- (void)keyboardWillShow:(NSNotification *)notification {
-	// keyboard frame is in window coordinates
-	NSDictionary *userInfo = [notification userInfo];
-	CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-	// convert own frame to window coordinates, frame is in superview's coordinates
-	CGRect ownFrame = [_tableView.window convertRect:_tableView.frame
-                                            fromView:_tableView.superview];
-    
-	// calculate the area of own frame that is covered by keyboard
-	CGRect coveredFrame = CGRectIntersection(ownFrame, keyboardFrame);
-    
-	// now this might be rotated, so convert it back
-	coveredFrame = [_tableView.window convertRect:coveredFrame
-                                           toView:_tableView.superview];
-    
-	// set inset to make up for covered array at bottom
-    _savedOffsetY = _tableView.contentOffset.y;
-	_tableView.contentInset = UIEdgeInsetsMake(0, 0, coveredFrame.size.height, 0);
-	_tableView.scrollIndicatorInsets = _tableView.contentInset;
-
-    [_tableView scrollToRowAtIndexPath:_indexPathBeingEdited
-                      atScrollPosition:UITableViewScrollPositionBottom
-                              animated:YES];
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-    _tableView.contentInset = UIEdgeInsetsZero;
-	_tableView.scrollIndicatorInsets = _tableView.contentInset;
-    [_tableView setContentOffset:CGPointMake(0, _savedOffsetY) animated:YES];
+    NSLog(@"returning: %@", NSStringFromCGRect(cell.frame));
+    [_nameField resignFirstResponder];
+    NSString *newName = _nameField.text;
+    _tempLabel.text = newName;
+    [UIView animateWithDuration:0.5 animations:^{
+        _nameFieldBackground.alpha = 0;
+        _nameField.alpha = 0;
+        _tempLabel.alpha = 1;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 animations:^{
+            CGFloat destinationX = cell.frame.origin.x + 54;
+            CGFloat destinationY = cell.frame.origin.y + 50;
+            CGFloat destinationWidth = cell.frame.size.width - 64;
+            CGFloat destinationHeight = cell.frame.size.height;
+            _tempLabel.frame = CGRectMake(destinationX, destinationY, destinationWidth, destinationHeight);
+            _shadowboxView.alpha = 0;
+        } completion:^(BOOL finished) {
+            cell.textLabel.text = newName;
+            cell.textLabel.hidden = NO;
+            [_shadowboxView removeFromSuperview];
+            _shadowboxView = nil;
+            _nameField = nil;
+            _nameFieldBackground = nil;
+            _tempLabel = nil;
+            _indexPathBeingEdited = nil;
+        }];
+    }];
+    CRBItem *item = [self.dataSource itemAtIndex:[[_tableView indexPathForCell:cell] row]];
+    item.name = newName;
 }
 
 @end

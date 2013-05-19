@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		18A0A26FBBC444A18E65BACF /* libPods-ImaListTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31595206A7E041189CC67E84 /* libPods-ImaListTests.a */; };
 		4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3693BA172F6D7C00C81D9F /* ItemSpec.m */; };
+		4B3717C81748604C0068366B /* textfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B3717C61748604C0068366B /* textfield.png */; };
+		4B3717C91748604C0068366B /* textfield@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B3717C71748604C0068366B /* textfield@2x.png */; };
 		4B534032172B66C3003F9AE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534031172B66C3003F9AE2 /* UIKit.framework */; };
 		4B534034172B66C3003F9AE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534033172B66C3003F9AE2 /* Foundation.framework */; };
 		4B534036172B66C3003F9AE2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534035172B66C3003F9AE2 /* CoreGraphics.framework */; };
@@ -44,6 +46,8 @@
 /* Begin PBXFileReference section */
 		31595206A7E041189CC67E84 /* libPods-ImaListTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImaListTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B3693BA172F6D7C00C81D9F /* ItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemSpec.m; sourceTree = "<group>"; };
+		4B3717C61748604C0068366B /* textfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textfield.png; path = UI/textfield.png; sourceTree = "<group>"; };
+		4B3717C71748604C0068366B /* textfield@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "textfield@2x.png"; path = "UI/textfield@2x.png"; sourceTree = "<group>"; };
 		4B53402E172B66C3003F9AE2 /* ImaList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImaList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B534031172B66C3003F9AE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4B534033172B66C3003F9AE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -191,6 +195,8 @@
 		4B53405C172CD0F5003F9AE2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4B3717C61748604C0068366B /* textfield.png */,
+				4B3717C71748604C0068366B /* textfield@2x.png */,
 				4B534080172E06D9003F9AE2 /* nav-bar-button.png */,
 				4B534081172E06D9003F9AE2 /* nav-bar-button@2x.png */,
 				4B534084172E06E1003F9AE2 /* nav-bar-button@2x.psd */,
@@ -321,6 +327,8 @@
 				4B53407D172E023D003F9AE2 /* background@2x.png in Resources */,
 				4B534082172E06D9003F9AE2 /* nav-bar-button.png in Resources */,
 				4B534083172E06D9003F9AE2 /* nav-bar-button@2x.png in Resources */,
+				4B3717C81748604C0068366B /* textfield.png in Resources */,
+				4B3717C91748604C0068366B /* textfield@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
