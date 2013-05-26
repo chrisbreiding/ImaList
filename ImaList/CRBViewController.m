@@ -76,23 +76,22 @@ static CGFloat nameFieldWidth;
 }
 
 - (void)styleButtons {
-    [self.listsButton setBackgroundImage:[[UIImage imageNamed:@"nav-bar-button"]
+    [self styleButton:self.listsButton icon:@"icon-list"];
+    [self styleButton:self.addItemButton icon:@"icon-add"];
+    [self styleButton:self.clearCompletedButton icon:@"icon-clear"];
+}
+
+- (void)styleButton:(UIButton *)button icon:(NSString *)iconName {
+    [button setBackgroundImage:[[UIImage imageNamed:@"nav-bar-button"]
                                           resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)]
                                 forState:UIControlStateNormal];
-    [self.listsButton setImage:[UIImage imageNamed:@"icon-list"] forState:UIControlStateNormal];
-    self.listsButton.titleLabel.text = @"";
     
-    [self.addItemButton setBackgroundImage:[[UIImage imageNamed:@"nav-bar-button"]
-                                          resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)]
-                                forState:UIControlStateNormal];
-    [self.addItemButton setImage:[UIImage imageNamed:@"icon-add"] forState:UIControlStateNormal];
-    self.addItemButton.titleLabel.text = @"";
+    CALayer *iconLayer = [CALayer layer];
+    iconLayer.frame = CGRectMake(0, 0, 36, 36);
+    [iconLayer setContents:(id)[[UIImage imageNamed:iconName] CGImage]];
+    [button.layer addSublayer:iconLayer];
     
-    [self.clearCompletedButton setBackgroundImage:[[UIImage imageNamed:@"nav-bar-button"]
-                                          resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)]
-                                forState:UIControlStateNormal];
-    [self.clearCompletedButton setImage:[UIImage imageNamed:@"icon-clear"] forState:UIControlStateNormal];
-    self.clearCompletedButton.titleLabel.text = @"";
+    button.titleLabel.text = @"";
 }
 
 - (void)styleCell:(UITableViewCell *)cell {

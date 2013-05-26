@@ -51,10 +51,11 @@
                                     <constraint firstAttribute="height" constant="50" type="user" id="Drq-PD-clh"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fB8-1s-A4x" userLabel="List Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fB8-1s-A4x" userLabel="List Button">
+                                <accessibility key="accessibilityConfiguration" label="Lists"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="34" id="Cx4-lH-TuO"/>
-                                    <constraint firstAttribute="height" constant="33" type="user" id="sCT-aW-mw3"/>
+                                    <constraint firstAttribute="width" constant="36" type="user" id="B4N-FY-w6s"/>
+                                    <constraint firstAttribute="height" constant="36" type="user" id="Pa3-ft-uvi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title=" ">
@@ -65,25 +66,11 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGG-wI-KFr" userLabel="Clear Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFd-kg-pp0" userLabel="Add Button">
+                                <accessibility key="accessibilityConfiguration" label="Add Item"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" type="user" id="ncE-DQ-Oh9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title=" ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="clearCompleted:" destination="2" eventType="touchUpInside" id="vMD-UH-RaB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFd-kg-pp0" userLabel="Add Button">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="34" type="user" id="3q5-k9-AUK"/>
-                                    <constraint firstAttribute="height" constant="34" type="user" id="jq9-k4-x6L"/>
+                                    <constraint firstAttribute="width" constant="36" type="user" id="3q5-k9-AUK"/>
+                                    <constraint firstAttribute="height" constant="36" type="user" id="Dbh-bg-yWU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title=" ">
@@ -96,26 +83,42 @@
                                     <action selector="addItem:" destination="2" eventType="touchUpInside" id="PXV-8w-s61"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGG-wI-KFr" userLabel="Clear Button">
+                                <accessibility key="accessibilityConfiguration" label="Clear Completed"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" type="user" id="nlO-Iz-qA0"/>
+                                    <constraint firstAttribute="width" constant="36" type="user" id="v03-eg-ZhE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title=" ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearCompleted:" destination="2" eventType="touchUpInside" id="vMD-UH-RaB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.15541389454400609" green="0.25751355229591832" blue="0.01885351777641768" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="3k3-l7-ZEX"/>
                             <constraint firstItem="0Yf-Rr-5rS" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="6oj-J8-n2w"/>
-                            <constraint firstItem="qwF-lj-WTI" firstAttribute="top" secondItem="3" secondAttribute="top" type="user" id="736-ox-HTv"/>
                             <constraint firstItem="0Yf-Rr-5rS" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="Bth-MB-xXx"/>
-                            <constraint firstAttribute="trailing" secondItem="KFd-kg-pp0" secondAttribute="trailing" constant="8" type="user" id="LKl-oR-NxC"/>
+                            <constraint firstAttribute="trailing" secondItem="KFd-kg-pp0" secondAttribute="trailing" constant="7" type="user" id="LKl-oR-NxC"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="PVU-W0-51a"/>
                             <constraint firstAttribute="bottom" secondItem="0Yf-Rr-5rS" secondAttribute="bottom" constant="50" type="user" id="Vlh-5d-rgg"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="user" id="W0y-Uu-r8M"/>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="WuC-EW-cT0"/>
-                            <constraint firstItem="KFd-kg-pp0" firstAttribute="top" secondItem="3" secondAttribute="top" constant="8" type="user" id="Y0A-KI-88r"/>
-                            <constraint firstItem="fB8-1s-A4x" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="8" id="ZBu-cl-2lI"/>
-                            <constraint firstItem="KFd-kg-pp0" firstAttribute="trailing" secondItem="IGG-wI-KFr" secondAttribute="trailing" type="default" id="ZRu-Pr-6Jf"/>
-                            <constraint firstAttribute="bottom" secondItem="IGG-wI-KFr" secondAttribute="bottom" constant="8" type="user" id="blu-7B-NSS"/>
-                            <constraint firstItem="fB8-1s-A4x" firstAttribute="top" secondItem="3" secondAttribute="top" constant="8" type="user" id="lv8-Gc-9QI"/>
+                            <constraint firstItem="fB8-1s-A4x" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="7" type="user" id="ZBu-cl-2lI"/>
+                            <constraint firstAttribute="bottom" secondItem="IGG-wI-KFr" secondAttribute="bottom" constant="7" type="user" id="blu-7B-NSS"/>
+                            <constraint firstItem="fB8-1s-A4x" firstAttribute="top" secondItem="3" secondAttribute="top" constant="7" type="user" id="lv8-Gc-9QI"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="p4G-jc-rue"/>
-                            <constraint firstItem="KFd-kg-pp0" firstAttribute="leading" secondItem="IGG-wI-KFr" secondAttribute="leading" type="default" id="qVz-qK-04k"/>
+                            <constraint firstAttribute="trailing" secondItem="IGG-wI-KFr" secondAttribute="trailing" constant="7" type="user" id="plC-J4-TBN"/>
+                            <constraint firstItem="qwF-lj-WTI" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="q7Q-De-Uzv"/>
                             <constraint firstItem="0Yf-Rr-5rS" firstAttribute="top" secondItem="3" secondAttribute="top" constant="50" type="user" id="sdP-zD-cf5"/>
+                            <constraint firstItem="KFd-kg-pp0" firstAttribute="top" secondItem="3" secondAttribute="top" constant="7" type="user" id="uMa-Bi-leI"/>
                         </constraints>
                     </view>
                     <connections>
@@ -137,7 +140,6 @@
             <relationships>
                 <relationship kind="action" name="addItem:"/>
                 <relationship kind="action" name="clearCompleted:"/>
-                <relationship kind="action" name="didPressClearCompleted:"/>
                 <relationship kind="outlet" name="addItemButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="clearCompletedButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="footerView" candidateClass="UIView"/>
