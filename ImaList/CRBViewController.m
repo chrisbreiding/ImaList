@@ -3,6 +3,15 @@
 #import "CRBItemListSource.h"
 #import "CRBItem.h"
 
+static CGFloat cellHeight = 50;
+
+static CGFloat cellX = 60;
+static CGFloat cellWidth;
+
+static CGFloat nameFieldX = 30;
+static CGFloat nameFieldY = 50;
+static CGFloat nameFieldWidth;
+
 @implementation CRBViewController {
     NSIndexPath *_indexPathBeingEdited;
     UIView *_shadowboxView;
@@ -15,8 +24,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self styleView];
-    [self styleNavBar];
+    [self styleViews];
+    [self styleButtons];
+    cellWidth = self.view.frame.size.width - (cellX * 2);
+    nameFieldWidth = self.view.bounds.size.width - (nameFieldX * 2);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,34 +63,41 @@
     return YES;
 }
 
-- (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectInset(bounds, 10, 10);
-}
-
-- (CGRect)editingRectForBounds:(CGRect)bounds {
-    return CGRectInset(bounds, 10, 10);
-}
-
 #pragma mark - appearance
 
-- (void)styleView {
+- (void)styleViews {
+    UIImage *navbarBackground = [[UIImage imageNamed:@"nav-bar"] resizableImageWithCapInsets:UIEdgeInsetsZero];
+    [self.navBarView.layer setContents:(id)[navbarBackground CGImage]];
+
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
+
+    UIImage *footerBackground = [[UIImage imageNamed:@"footer"] resizableImageWithCapInsets:UIEdgeInsetsZero];
+    [self.footerView.layer setContents:(id)[footerBackground CGImage]];
 }
 
-- (void)styleNavBar {
-    self.navBarImageView.image = [[UIImage imageNamed:@"nav-bar.png"]
-                                  resizableImageWithCapInsets:UIEdgeInsetsMake(1.0, 0, 1.0, 0)];
-    [self.listsButton setBackgroundImage:[[UIImage imageNamed:@"nav-bar-button.png"]
-                                          resizableImageWithCapInsets:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)]
+- (void)styleButtons {
+    [self.listsButton setBackgroundImage:[[UIImage imageNamed:@"nav-bar-button"]
+                                          resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)]
                                 forState:UIControlStateNormal];
-    [self.clearCompletedButton setBackgroundImage:[[UIImage imageNamed:@"nav-bar-button.png"]
-                                          resizableImageWithCapInsets:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)]
+    [self.listsButton setImage:[UIImage imageNamed:@"icon-list"] forState:UIControlStateNormal];
+    self.listsButton.titleLabel.text = @"";
+    
+    [self.addItemButton setBackgroundImage:[[UIImage imageNamed:@"nav-bar-button"]
+                                          resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)]
                                 forState:UIControlStateNormal];
+    [self.addItemButton setImage:[UIImage imageNamed:@"icon-add"] forState:UIControlStateNormal];
+    self.addItemButton.titleLabel.text = @"";
+    
+    [self.clearCompletedButton setBackgroundImage:[[UIImage imageNamed:@"nav-bar-button"]
+                                          resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)]
+                                forState:UIControlStateNormal];
+    [self.clearCompletedButton setImage:[UIImage imageNamed:@"icon-clear"] forState:UIControlStateNormal];
+    self.clearCompletedButton.titleLabel.text = @"";
 }
 
 - (void)styleCell:(UITableViewCell *)cell {
     UIImage *cellBackgroundImage = [[UIImage imageNamed:@"item-cell.png"]
-                                    resizableImageWithCapInsets:UIEdgeInsetsMake(0, 44.0, 1.0, 0)];
+                                    resizableImageWithCapInsets:UIEdgeInsetsMake(0, 51, 1, 0)];
     UIImageView *cellBackgroundView = [[UIImageView alloc] initWithFrame:cell.frame];
     cellBackgroundView.image = cellBackgroundImage;
     cell.backgroundView = cellBackgroundView;
@@ -109,9 +127,13 @@
 
 #pragma mark - user actions
 
-- (IBAction)didPressClearCompleted:(id)sender {
+- (IBAction)clearCompleted:(id)sender {
     [self.dataSource clearCompleted];
     [self.tableView reloadData];
+}
+
+- (IBAction)addItem:(id)sender {
+    NSLog(@"add new item");
 }
 
 - (void)checkmarkTapped:(id)gesture {
@@ -125,35 +147,34 @@
 
 #pragma mark - edit mode
 
-- (void)editNameForCell:(UITableViewCell *)cell {
-    NSLog(@"    going: %@", NSStringFromCGRect(cell.frame));
-    cell.textLabel.hidden = YES;
-    
+- (void)editNameForCell:(UITableViewCell *)cell {    
     UIView *shadowboxView = [[UIView alloc] initWithFrame:self.view.bounds];
     shadowboxView.backgroundColor = [UIColor blackColor];
     shadowboxView.alpha = 0;
     _shadowboxView = shadowboxView;
     [self.view addSubview:shadowboxView];
+
+    UISwipeGestureRecognizer *swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipeDownOnShadowbox:)];
+    [swipeRecognizer setDirection:UISwipeGestureRecognizerDirectionDown];
+    [_shadowboxView setGestureRecognizers:@[swipeRecognizer]];
     
-    CGFloat originX = cell.frame.origin.x + 54;
-    CGFloat originY = cell.frame.origin.y + 50;
-    CGFloat originWidth = cell.frame.size.width - 64;
-    CGFloat originHeight = cell.frame.size.height;
-    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(originX, originY, originWidth, originHeight)];
+    CGFloat cellY = cell.frame.origin.y + 50 - _tableView.contentOffset.y;
+    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(cellX, cellY, cellWidth, cellHeight)];
     tempLabel.backgroundColor = [UIColor clearColor];
     tempLabel.text = cell.textLabel.text;
     tempLabel.font = cell.textLabel.font;
     _tempLabel = tempLabel;
     [shadowboxView addSubview:tempLabel];
     
-    UIImageView *nameFieldBackground = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, self.view.bounds.size.width - 40, cell.bounds.size.height)];
+    UIImageView *nameFieldBackground = [[UIImageView alloc] initWithFrame:CGRectMake(nameFieldX - 10, nameFieldY, nameFieldWidth, cellHeight)];
     nameFieldBackground.image = [[UIImage imageNamed:@"textfield"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     nameFieldBackground.alpha = 0;
     _nameFieldBackground = nameFieldBackground;
     [shadowboxView addSubview:nameFieldBackground];
 
-    UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(30, 50, self.view.bounds.size.width - 60, cell.bounds.size.height)];
+    UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(nameFieldX, nameFieldY, nameFieldWidth, cellHeight)];
     nameField.text = cell.textLabel.text;
+    nameField.font = cell.textLabel.font;
     nameField.textColor = [UIColor whiteColor];
     nameField.alpha = 0;
     nameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -162,55 +183,59 @@
     _nameField = nameField;
     [shadowboxView addSubview:nameField];
 
-    CGFloat destinationX = 30;
-    CGFloat destinationY = 50;
-    CGFloat destinationWidth = self.view.bounds.size.width - 60;
-    CGFloat destinationHeight = cell.bounds.size.height;
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        tempLabel.frame = CGRectMake(destinationX, destinationY, destinationWidth, destinationHeight);
+    [UIView animateWithDuration:0.2 animations:^{
         shadowboxView.alpha = 0.8;
+        tempLabel.textColor = [UIColor whiteColor];
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.5 animations:^{
-            nameFieldBackground.alpha = 1;
-            nameField.alpha = 1;
-            tempLabel.alpha = 0;
+        cell.textLabel.hidden = YES;
+        [UIView animateWithDuration:0.2 animations:^{
+            tempLabel.frame = CGRectMake(nameFieldX, nameFieldY, nameFieldWidth, cellHeight);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.2 animations:^{
+                nameFieldBackground.alpha = 1;
+                nameField.alpha = 1;
+                tempLabel.alpha = 0;
+            }];
+            [nameField becomeFirstResponder];
         }];
-        [nameField becomeFirstResponder];
     }];
 }
 
 - (void)endEditingName {
     UITableViewCell *cell = [_tableView cellForRowAtIndexPath:_indexPathBeingEdited];
-    NSLog(@"returning: %@", NSStringFromCGRect(cell.frame));
     [_nameField resignFirstResponder];
     NSString *newName = _nameField.text;
     _tempLabel.text = newName;
-    [UIView animateWithDuration:0.5 animations:^{
+    cell.textLabel.text = newName;
+    [UIView animateWithDuration:0.2 animations:^{
         _nameFieldBackground.alpha = 0;
         _nameField.alpha = 0;
-        _tempLabel.alpha = 1;
+        _tempLabel.alpha = 1;        
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.5 animations:^{
-            CGFloat destinationX = cell.frame.origin.x + 54;
-            CGFloat destinationY = cell.frame.origin.y + 50;
-            CGFloat destinationWidth = cell.frame.size.width - 64;
-            CGFloat destinationHeight = cell.frame.size.height;
-            _tempLabel.frame = CGRectMake(destinationX, destinationY, destinationWidth, destinationHeight);
-            _shadowboxView.alpha = 0;
+        [UIView animateWithDuration:0.2 animations:^{
+            CGFloat cellY = cell.frame.origin.y + 50 - _tableView.contentOffset.y;
+            _tempLabel.frame = CGRectMake(cellX, cellY, cellWidth, cellHeight);
         } completion:^(BOOL finished) {
-            cell.textLabel.text = newName;
             cell.textLabel.hidden = NO;
-            [_shadowboxView removeFromSuperview];
-            _shadowboxView = nil;
-            _nameField = nil;
-            _nameFieldBackground = nil;
-            _tempLabel = nil;
-            _indexPathBeingEdited = nil;
+            [UIView animateWithDuration:0.2 animations:^{
+                _shadowboxView.alpha = 0;
+                _tempLabel.textColor = [UIColor blackColor];
+            } completion:^(BOOL finished) {
+                [_shadowboxView removeFromSuperview];
+                _shadowboxView = nil;
+                _nameField = nil;
+                _nameFieldBackground = nil;
+                _tempLabel = nil;
+                _indexPathBeingEdited = nil;
+            }];
         }];
     }];
     CRBItem *item = [self.dataSource itemAtIndex:[[_tableView indexPathForCell:cell] row]];
     item.name = newName;
+}
+
+- (void)didSwipeDownOnShadowbox:(UISwipeGestureRecognizer *)sender {
+    [self endEditingName];
 }
 
 @end
