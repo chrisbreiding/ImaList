@@ -57,6 +57,7 @@
     [self styleButton:self.listsButton icon:@"icon-list"];
     [self styleButton:self.addItemButton icon:@"icon-add"];
     [self styleButton:self.clearCompletedButton icon:@"icon-clear"];
+    [self styleButton:self.sortItemsButton icon:@"icon-sort"];
 }
 
 - (void)styleButton:(UIButton *)button icon:(NSString *)iconName {
@@ -119,6 +120,11 @@
     [_tableView scrollToRowAtIndexPath:indexPath
                       atScrollPosition:UITableViewScrollPositionBottom
                               animated:YES];
+}
+
+- (IBAction)sortItems:(id)sender {
+    [self.dataSource sortItems];
+    [_tableView reloadData];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -100,12 +100,30 @@
                                     <action selector="clearCompleted:" destination="2" eventType="touchUpInside" id="vMD-UH-RaB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1B-SM-aMD" userLabel="Sort Button">
+                                <accessibility key="accessibilityConfiguration" label="Sort Items"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" type="user" id="XsS-m1-FJD"/>
+                                    <constraint firstAttribute="height" constant="36" type="user" id="efG-uh-lDc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title=" ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sortItems:" destination="2" eventType="touchUpInside" id="wEO-8x-zjj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.15541389454400609" green="0.25751355229591832" blue="0.01885351777641768" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="3k3-l7-ZEX"/>
                             <constraint firstItem="0Yf-Rr-5rS" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="6oj-J8-n2w"/>
                             <constraint firstItem="0Yf-Rr-5rS" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="Bth-MB-xXx"/>
+                            <constraint firstAttribute="trailing" secondItem="C1B-SM-aMD" secondAttribute="trailing" constant="50" type="user" id="G3K-D9-PVW"/>
                             <constraint firstAttribute="trailing" secondItem="KFd-kg-pp0" secondAttribute="trailing" constant="7" type="user" id="LKl-oR-NxC"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="PVU-W0-51a"/>
                             <constraint firstAttribute="bottom" secondItem="0Yf-Rr-5rS" secondAttribute="bottom" constant="50" type="user" id="Vlh-5d-rgg"/>
@@ -114,6 +132,7 @@
                             <constraint firstItem="fB8-1s-A4x" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="7" type="user" id="ZBu-cl-2lI"/>
                             <constraint firstAttribute="bottom" secondItem="IGG-wI-KFr" secondAttribute="bottom" constant="7" type="user" id="blu-7B-NSS"/>
                             <constraint firstItem="fB8-1s-A4x" firstAttribute="top" secondItem="3" secondAttribute="top" constant="7" type="user" id="lv8-Gc-9QI"/>
+                            <constraint firstAttribute="bottom" secondItem="C1B-SM-aMD" secondAttribute="bottom" constant="7" type="user" id="n2Z-Zx-Bie"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="p4G-jc-rue"/>
                             <constraint firstAttribute="trailing" secondItem="IGG-wI-KFr" secondAttribute="trailing" constant="7" type="user" id="plC-J4-TBN"/>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="q7Q-De-Uzv"/>
@@ -127,6 +146,7 @@
                         <outlet property="footerView" destination="5zG-jM-14w" id="vkF-Zx-fBm"/>
                         <outlet property="listsButton" destination="fB8-1s-A4x" id="DYd-rC-ymt"/>
                         <outlet property="navBarView" destination="qwF-lj-WTI" id="EBF-bZ-UW1"/>
+                        <outlet property="sortItemsButton" destination="C1B-SM-aMD" id="10c-th-nhx"/>
                         <outlet property="tableView" destination="0Yf-Rr-5rS" id="Gag-Lt-Qfd"/>
                     </connections>
                 </viewController>
@@ -140,11 +160,13 @@
             <relationships>
                 <relationship kind="action" name="addItem:"/>
                 <relationship kind="action" name="clearCompleted:"/>
+                <relationship kind="action" name="sortItems:"/>
                 <relationship kind="outlet" name="addItemButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="clearCompletedButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="footerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="listsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="navBarView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="sortItemsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>

@@ -52,6 +52,10 @@
 		4BCC99D6175289D000C3D825 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCC99D5175289D000C3D825 /* QuartzCore.framework */; };
 		4BCC99D91752F88100C3D825 /* CRBEditItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCC99D81752F88100C3D825 /* CRBEditItemView.m */; };
 		4BCC99DA1752F88100C3D825 /* CRBEditItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCC99D81752F88100C3D825 /* CRBEditItemView.m */; };
+		4BCC99DD175816C100C3D825 /* icon-sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99DB175816C100C3D825 /* icon-sort.png */; };
+		4BCC99DE175816C100C3D825 /* icon-sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99DB175816C100C3D825 /* icon-sort.png */; };
+		4BCC99DF175816C100C3D825 /* icon-sort@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99DC175816C100C3D825 /* icon-sort@2x.png */; };
+		4BCC99E0175816C100C3D825 /* icon-sort@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99DC175816C100C3D825 /* icon-sort@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +113,8 @@
 		4BCC99D5175289D000C3D825 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4BCC99D71752F88100C3D825 /* CRBEditItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBEditItemView.h; sourceTree = "<group>"; };
 		4BCC99D81752F88100C3D825 /* CRBEditItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBEditItemView.m; sourceTree = "<group>"; };
+		4BCC99DB175816C100C3D825 /* icon-sort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-sort.png"; path = "UI/icon-sort.png"; sourceTree = "<group>"; };
+		4BCC99DC175816C100C3D825 /* icon-sort@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-sort@2x.png"; path = "UI/icon-sort@2x.png"; sourceTree = "<group>"; };
 		F75EF69AC1CE4BD882710606 /* Pods-ImaListTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImaListTests.xcconfig"; path = "Pods/Pods-ImaListTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -178,12 +184,12 @@
 				4B534058172CBA54003F9AE2 /* Models */,
 				4B534040172B66C3003F9AE2 /* CRBAppDelegate.h */,
 				4B534041172B66C3003F9AE2 /* CRBAppDelegate.m */,
+				4BCC99D71752F88100C3D825 /* CRBEditItemView.h */,
+				4BCC99D81752F88100C3D825 /* CRBEditItemView.m */,
 				4B53404C172B66C3003F9AE2 /* CRBViewController.h */,
 				4B53404D172B66C3003F9AE2 /* CRBViewController.m */,
 				4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */,
 				4B534038172B66C3003F9AE2 /* Supporting Files */,
-				4BCC99D71752F88100C3D825 /* CRBEditItemView.h */,
-				4BCC99D81752F88100C3D825 /* CRBEditItemView.m */,
 			);
 			path = ImaList;
 			sourceTree = "<group>";
@@ -217,6 +223,8 @@
 		4B53405C172CD0F5003F9AE2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4BCC99DB175816C100C3D825 /* icon-sort.png */,
+				4BCC99DC175816C100C3D825 /* icon-sort@2x.png */,
 				4BCC99D117527B7500C3D825 /* icon-add.png */,
 				4BCC99D217527B7500C3D825 /* icon-add@2x.png */,
 				4BCC99CD1750641900C3D825 /* icon-clear.png */,
@@ -363,6 +371,8 @@
 				4BCC99D01750641900C3D825 /* icon-clear@2x.png in Resources */,
 				4BCC99D317527B7500C3D825 /* icon-add.png in Resources */,
 				4BCC99D417527B7500C3D825 /* icon-add@2x.png in Resources */,
+				4BCC99DD175816C100C3D825 /* icon-sort.png in Resources */,
+				4BCC99DF175816C100C3D825 /* icon-sort@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +381,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B534094172F59F2003F9AE2 /* InfoPlist.strings in Resources */,
+				4BCC99DE175816C100C3D825 /* icon-sort.png in Resources */,
+				4BCC99E0175816C100C3D825 /* icon-sort@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
