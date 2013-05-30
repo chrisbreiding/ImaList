@@ -1,7 +1,8 @@
 #import <UIKit/UIKit.h>
 #import "CRBItemListDataSource.h"
+#import "CRBEditItemView.h"
 
-@interface CRBViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface CRBViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CRBEditItemViewDelegate>
 
 @property (nonatomic, strong) id<CRBItemListDataSource> dataSource;
 
