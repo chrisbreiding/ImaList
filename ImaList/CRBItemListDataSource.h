@@ -10,7 +10,6 @@
 - (void)deleteItemAtIndex:(NSInteger)index;
 - (CRBItem *)createCountDownWithName:(NSString *)name checked:(NSNumber *)isChecked;
 - (void)sortItems;
-- (void)itemsChanged;
 - (void)clear;
 - (void)clearCompleted;
 

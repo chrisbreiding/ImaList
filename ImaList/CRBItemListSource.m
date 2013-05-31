@@ -75,10 +75,6 @@
     }];
 }
 
-- (void)itemsChanged {
-    // persist data
-}
-
 - (void)clear {
     _items = [NSMutableArray array];
 }

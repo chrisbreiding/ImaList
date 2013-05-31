@@ -145,7 +145,6 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [_tableView reloadRowsAtIndexPaths:@[indexPath]
                         withRowAnimation:UITableViewRowAnimationLeft];
-    [self.dataSource itemsChanged];
 }
 
 #pragma mark - edit mode
