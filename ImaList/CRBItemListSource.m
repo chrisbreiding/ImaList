@@ -76,7 +76,6 @@
 }
 
 - (void)itemsChanged {
-    [self sortItems];
     // persist data
 }
 

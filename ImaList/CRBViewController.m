@@ -93,6 +93,9 @@
     NSString *checkImageName = @"unchecked.png";
     if ([item.isChecked boolValue]) {
         checkImageName = @"checked.png";
+        cell.textLabel.textColor = [UIColor lightGrayColor];
+    } else {
+        cell.textLabel.textColor = [UIColor blackColor];
     }
     
     cell.imageView.image = [UIImage imageNamed:checkImageName];
@@ -135,12 +138,14 @@
 }
 
 - (void)checkmarkTapped:(id)gesture {
-    CRBItem *item = [self.dataSource itemAtIndex:[[gesture view] tag]];
+    int index = [[gesture view] tag];
+    CRBItem *item = [self.dataSource itemAtIndex:index];
     BOOL isChecked = [item.isChecked boolValue];
     item.isChecked = @(!isChecked);
-
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [_tableView reloadRowsAtIndexPaths:@[indexPath]
+                        withRowAnimation:UITableViewRowAnimationLeft];
     [self.dataSource itemsChanged];
-    [self.tableView reloadData];
 }
 
 #pragma mark - edit mode

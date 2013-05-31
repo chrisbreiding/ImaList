@@ -20,7 +20,6 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0Yf-Rr-5rS">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="separatorColor" red="0.76470595600000002" green="0.79607850309999995" blue="0.83137261870000001" alpha="1" colorSpace="deviceRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemCell" textLabel="rER-4k-9SA" style="IBUITableViewCellStyleDefault" id="7Y9-V3-Omy">
                                         <rect key="frame" x="0.0" y="22" width="320" height="50"/>
@@ -123,7 +122,7 @@
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="3k3-l7-ZEX"/>
                             <constraint firstItem="0Yf-Rr-5rS" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="6oj-J8-n2w"/>
                             <constraint firstItem="0Yf-Rr-5rS" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="Bth-MB-xXx"/>
-                            <constraint firstAttribute="trailing" secondItem="C1B-SM-aMD" secondAttribute="trailing" constant="50" type="user" id="G3K-D9-PVW"/>
+                            <constraint firstAttribute="trailing" secondItem="C1B-SM-aMD" secondAttribute="trailing" constant="57" type="user" id="G3K-D9-PVW"/>
                             <constraint firstAttribute="trailing" secondItem="KFd-kg-pp0" secondAttribute="trailing" constant="7" type="user" id="LKl-oR-NxC"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="PVU-W0-51a"/>
                             <constraint firstAttribute="bottom" secondItem="0Yf-Rr-5rS" secondAttribute="bottom" constant="50" type="user" id="Vlh-5d-rgg"/>
