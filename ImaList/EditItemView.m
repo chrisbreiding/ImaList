@@ -1,20 +1,21 @@
-#import "CRBEditItemView.h"
+#import "EditItemView.h"
+#import "ItemTableCell.h"
 
-static CGFloat itemX = 60;
-static CGFloat itemWidth = 260;
-static CGFloat itemHeight = 50;
+static CGFloat itemX = 75;
+static CGFloat itemWidth = 250;
+static CGFloat itemHeight = 60;
 
 static CGFloat nameFieldX = 30;
 static CGFloat nameFieldY = 50;
 static CGFloat nameFieldWidth = 260;
 
-@implementation CRBEditItemView {
+@implementation EditItemView {
     UIView *_shadowboxView;
     UILabel *_tempLabel;
     UITextField *_nameField;
     UIImageView *_nameFieldBackground;
     
-    UITableViewCell *_cellBeingEdited;
+    ItemTableCell *_cellBeingEdited;
     CGFloat _itemY;
 }
 
@@ -35,13 +36,13 @@ static CGFloat nameFieldWidth = 260;
     UILabel *tempLabel = [[UILabel alloc] init];
     tempLabel.backgroundColor = [UIColor clearColor];
     tempLabel.textColor = [UIColor whiteColor];
-    tempLabel.font = [UIFont systemFontOfSize:15.0];
+    tempLabel.font = [UIFont systemFontOfSize:16];
     _tempLabel = tempLabel;
     [self addSubview:tempLabel];
 }
 
 - (void)addBackground {
-    UIImageView *nameFieldBackground = [[UIImageView alloc] initWithFrame:CGRectMake(nameFieldX - 10, nameFieldY, nameFieldWidth + 20, itemHeight)];
+    UIImageView *nameFieldBackground = [[UIImageView alloc] initWithFrame:CGRectMake(nameFieldX - 15, nameFieldY, nameFieldWidth + 30, itemHeight)];
     nameFieldBackground.image = [[UIImage imageNamed:@"textfield"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     nameFieldBackground.alpha = 0;
     _nameFieldBackground = nameFieldBackground;
@@ -50,7 +51,7 @@ static CGFloat nameFieldWidth = 260;
 
 - (void)addNameField {
     UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(nameFieldX, nameFieldY, nameFieldWidth, itemHeight)];
-    nameField.font = [UIFont systemFontOfSize:15.0];
+    nameField.font = [UIFont systemFontOfSize:16];
     nameField.textColor = [UIColor whiteColor];
     nameField.alpha = 0;
     nameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -60,21 +61,21 @@ static CGFloat nameFieldWidth = 260;
     [self addSubview:nameField];
 }
 
-- (void)showWithCell:(UITableViewCell *)cell offset:(CGFloat)offset isNew:(BOOL)isNew {
+- (void)showWithCell:(ItemTableCell *)cell offset:(CGFloat)offset isNew:(BOOL)isNew {
     _cellBeingEdited = cell;
     if (isNew) {
         _itemY = 360;
     } else {
         _itemY = _cellBeingEdited.frame.origin.y + 50 - offset;
     }
-    _tempLabel.text = cell.textLabel.text;
-    _nameField.text = cell.textLabel.text;
+    _tempLabel.text = cell.itemNameLabel.text;
+    _nameField.text = cell.itemNameLabel.text;
     _tempLabel.frame = CGRectMake(itemX, _itemY, itemWidth, itemHeight);
     [UIView animateWithDuration:0.2 animations:^{
         self.alpha = 0.8;
         _tempLabel.alpha = 1;
     } completion:^(BOOL finished) {
-        cell.textLabel.hidden = YES;
+        cell.itemNameLabel.hidden = YES;
         [UIView animateWithDuration:0.2 animations:^{
             _tempLabel.frame = CGRectMake(nameFieldX, nameFieldY, nameFieldWidth, itemHeight);
         } completion:^(BOOL finished) {
@@ -92,7 +93,7 @@ static CGFloat nameFieldWidth = 260;
     [_nameField resignFirstResponder];
     NSString *newName = _nameField.text;
     _tempLabel.text = newName;
-    _cellBeingEdited.textLabel.text = newName;
+    _cellBeingEdited.itemNameLabel.text = newName;
     [UIView animateWithDuration:0.2 animations:^{
         _nameFieldBackground.alpha = 0;
         _nameField.alpha = 0;
@@ -104,7 +105,7 @@ static CGFloat nameFieldWidth = 260;
             _tempLabel.alpha = 0;
             [UIView animateWithDuration:0.2 animations:^{
                 self.alpha = 0;
-                _cellBeingEdited.textLabel.hidden = NO;
+                _cellBeingEdited.itemNameLabel.hidden = NO;
             } completion:^(BOOL finished) {
             }];
         }];

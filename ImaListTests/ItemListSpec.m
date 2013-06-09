@@ -1,14 +1,14 @@
 #import "Kiwi.h"
-#import "CRBItemListSource.h"
-#import "CRBItem.h"
+#import "ItemListSource.h"
+#import "Item.h"
 
 SPEC_BEGIN(ItemListSpec)
 
 describe(@"Item List", ^{
-    __block CRBItemListSource *dataSource;
+    __block ItemListSource *dataSource;
     
     beforeEach(^{
-        dataSource = [[CRBItemListSource alloc] init];
+        dataSource = [[ItemListSource alloc] init];
     });
     
     describe(@"on initialization", ^{
@@ -22,7 +22,7 @@ describe(@"Item List", ^{
     });
     
     describe(@"creating an item", ^{
-        __block CRBItem *item;
+        __block Item *item;
         
         beforeEach(^{
             item = [dataSource createCountDownWithName:@"beef" checked:@(NO)];
@@ -34,9 +34,9 @@ describe(@"Item List", ^{
     });
     
     describe(@"after creating 3 items", ^{
-        __block CRBItem *item1;
-        __block CRBItem *item2;
-        __block CRBItem *item3;
+        __block Item *item1;
+        __block Item *item2;
+        __block Item *item3;
         
         beforeEach(^{
             [dataSource clear];

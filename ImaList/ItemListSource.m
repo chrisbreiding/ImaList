@@ -1,11 +1,11 @@
-#import "CRBItemListSource.h"
-#import "CRBItem.h"
+#import "ItemListSource.h"
+#import "Item.h"
 
-@implementation CRBItemListSource {
+@implementation ItemListSource {
     NSMutableArray *_items;
 }
 
-- (CRBItemListSource *)init {
+- (ItemListSource *)init {
     NSArray *fixtureItems = @[
         @{ @"name": @"eggs",         @"isChecked": @(NO)  },
         @{ @"name": @"bread",        @"isChecked": @(YES) },
@@ -42,11 +42,11 @@
     return _items.count;
 }
 
-- (CRBItem *)itemAtIndex:(NSInteger)index {
+- (Item *)itemAtIndex:(NSInteger)index {
     return [_items objectAtIndex:index];
 }
 
-- (NSInteger)indexOfItem:(CRBItem *)item {
+- (NSInteger)indexOfItem:(Item *)item {
     return [_items indexOfObject:item];
 }
 
@@ -54,8 +54,8 @@
     [_items removeObjectAtIndex:index];
 }
 
-- (CRBItem *)createCountDownWithName:(NSString *)name checked:(NSNumber *)isChecked {
-    CRBItem *newItem = [[CRBItem alloc] init];
+- (Item *)createCountDownWithName:(NSString *)name checked:(NSNumber *)isChecked {
+    Item *newItem = [[Item alloc] init];
     newItem.name = name;
     newItem.isChecked = isChecked;
     [_items addObject:newItem];
@@ -63,7 +63,7 @@
 }
 
 - (void)sortItems {
-    [_items sortUsingComparator:^NSComparisonResult(CRBItem *item1, CRBItem *item2) {
+    [_items sortUsingComparator:^NSComparisonResult(Item *item1, Item *item2) {
         if ([item1.isChecked boolValue] != [item2.isChecked boolValue]) {
             if ([item1.isChecked boolValue]) {
                 return NSOrderedDescending;

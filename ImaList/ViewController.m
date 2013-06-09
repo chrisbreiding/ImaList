@@ -1,15 +1,13 @@
 #import <QuartzCore/QuartzCore.h>
-#import "CRBViewController.h"
-#import "CRBItemListSource.h"
-#import "CRBItem.h"
-#import "CRBEditItemView.h"
+#import "ViewController.h"
+#import "ItemTableCell.h"
+#import "ItemListSource.h"
+#import "Item.h"
+#import "EditItemView.h"
 
-@implementation CRBViewController {
+@implementation ViewController {
     NSIndexPath *_indexPathBeingEdited;
-    CRBEditItemView *_editItemView;
-    UILabel *_tempLabel;
-    UIImageView *_nameFieldBackground;
-    UITextField *_nameField;
+    EditItemView *_editItemView;
 }
 
 # pragma mark - view lifecycle
@@ -19,9 +17,10 @@
     [self styleViews];
     [self styleButtons];
     [self addEditItemView];
+    [self configureNotifications];
 }
 
-# pragma mark - tableview delegate
+#pragma mark - tableview delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.dataSource itemCount];
@@ -29,16 +28,31 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"ItemCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    [self styleCell:cell];
-    [self giveAttributesToCell:cell atIndexPath:indexPath];
-
+    ItemTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    [cell configureCellWithItem:[self.dataSource itemAtIndex:indexPath.row] index:indexPath.row];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [self editNameForCell:cell isNew:NO];
+}
+
+#pragma mark - cell notifications
+
+-(void)configureNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadItemRow:)
+                                                 name:@"reloadItemRow"
+                                               object:nil];
+}
+
+-(void)reloadItemRow:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.dataSource indexOfItem:userInfo[@"item"]]
+                                                inSection:0];
+    [_tableView reloadRowsAtIndexPaths:@[indexPath]
+                      withRowAnimation:UITableViewRowAnimationMiddle];
 }
 
 #pragma mark - appearance
@@ -61,49 +75,8 @@
 }
 
 - (void)styleButton:(UIButton *)button icon:(NSString *)iconName {
-    [button setBackgroundImage:[[UIImage imageNamed:@"nav-bar-button"]
-                                          resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)]
-                                forState:UIControlStateNormal];
-    
-    CALayer *iconLayer = [CALayer layer];
-    iconLayer.frame = CGRectMake(0, 0, 36, 36);
-    [iconLayer setContents:(id)[[UIImage imageNamed:iconName] CGImage]];
-    [button.layer addSublayer:iconLayer];
-    
+    [button setBackgroundImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
     button.titleLabel.text = @"";
-}
-
-- (void)styleCell:(UITableViewCell *)cell {
-    UIImage *cellBackgroundImage = [[UIImage imageNamed:@"item-cell.png"]
-                                    resizableImageWithCapInsets:UIEdgeInsetsMake(0, 51, 1, 0)];
-    UIImageView *cellBackgroundView = [[UIImageView alloc] initWithFrame:cell.frame];
-    cellBackgroundView.image = cellBackgroundImage;
-    cell.backgroundView = cellBackgroundView;
-    
-    cell.textLabel.font = [UIFont systemFontOfSize:15.0];
-}
-
-#pragma mark - cell setup
-
-- (void)giveAttributesToCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    CRBItem *item = [self.dataSource itemAtIndex:indexPath.row];
-    
-    cell.textLabel.text = item.name;
-    
-    NSString *checkImageName = @"unchecked.png";
-    if ([item.isChecked boolValue]) {
-        checkImageName = @"checked.png";
-        cell.textLabel.textColor = [UIColor lightGrayColor];
-    } else {
-        cell.textLabel.textColor = [UIColor blackColor];
-    }
-    
-    cell.imageView.image = [UIImage imageNamed:checkImageName];
-    cell.imageView.userInteractionEnabled = YES;
-    cell.imageView.tag = indexPath.row;
-
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkmarkTapped:)];
-    [cell.imageView setGestureRecognizers:@[gestureRecognizer]];
 }
 
 #pragma mark - user actions
@@ -114,7 +87,7 @@
 }
 
 - (IBAction)addItem:(id)sender {
-    CRBItem *newItem = [self.dataSource createCountDownWithName:@" " checked:NO];
+    Item *newItem = [self.dataSource createCountDownWithName:@" " checked:NO];
     NSUInteger row = [self.dataSource indexOfItem:newItem];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     [_tableView insertRowsAtIndexPaths:@[indexPath]
@@ -137,20 +110,10 @@
     }
 }
 
-- (void)checkmarkTapped:(id)gesture {
-    int index = [[gesture view] tag];
-    CRBItem *item = [self.dataSource itemAtIndex:index];
-    BOOL isChecked = [item.isChecked boolValue];
-    item.isChecked = @(!isChecked);
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [_tableView reloadRowsAtIndexPaths:@[indexPath]
-                        withRowAnimation:UITableViewRowAnimationLeft];
-}
-
 #pragma mark - edit mode
 
 - (void)addEditItemView {
-    _editItemView = [[CRBEditItemView alloc] initWithFrame:self.view.bounds];
+    _editItemView = [[EditItemView alloc] initWithFrame:self.view.bounds];
     _editItemView.delegate = self;
     [self.view addSubview:_editItemView];
 }
@@ -162,7 +125,7 @@
 }
 
 - (void)didFinisheditingItemForCell:(UITableViewCell *)cell {
-    CRBItem *item = [self.dataSource itemAtIndex:[[_tableView indexPathForCell:cell] row]];
+    Item *item = [self.dataSource itemAtIndex:[[_tableView indexPathForCell:cell] row]];
     item.name = cell.textLabel.text;
 }
 

@@ -1,13 +1,13 @@
 #import "Kiwi.h"
-#import "CRBItem.h"
+#import "Item.h"
 
 SPEC_BEGIN(ItemSpec)
 
 describe(@"Item Model", ^{
-    __block CRBItem *item;
+    __block Item *item;
     
     beforeEach(^{
-        item = [[CRBItem alloc] init];
+        item = [[Item alloc] init];
     });
     
     it(@"is not nil", ^{
