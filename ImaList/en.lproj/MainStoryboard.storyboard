@@ -107,7 +107,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="clearCompleted:" destination="2" eventType="touchUpInside" id="vMD-UH-RaB"/>
+                                    <action selector="didTapClearCompleted:" destination="2" eventType="touchUpInside" id="mME-FN-whl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1B-SM-aMD" userLabel="Sort Button">
@@ -179,6 +179,7 @@
             <relationships>
                 <relationship kind="action" name="addItem:"/>
                 <relationship kind="action" name="clearCompleted:"/>
+                <relationship kind="action" name="didTapClearCompleted:"/>
                 <relationship kind="action" name="sortItems:"/>
                 <relationship kind="outlet" name="addItemButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="clearCompletedButton" candidateClass="UIButton"/>

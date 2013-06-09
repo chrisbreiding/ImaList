@@ -80,9 +80,26 @@
 
 #pragma mark - user actions
 
-- (IBAction)clearCompleted:(id)sender {
+- (IBAction)didTapClearCompleted:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:nil
+                                  delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  destructiveButtonTitle:@"Clear Completed"
+                                  otherButtonTitles:nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if ([buttonTitle isEqualToString:@"Clear Completed"]) {
+        [self clearCompleted];
+    }
+}
+
+- (void)clearCompleted {
     [self.dataSource clearCompleted];
-    [self.tableView reloadData];
+    [self.tableView reloadData];    
 }
 
 - (IBAction)addItem:(id)sender {

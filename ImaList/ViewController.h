@@ -2,7 +2,7 @@
 #import "ItemListDataSource.h"
 #import "EditItemView.h"
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, EditItemViewDelegate>
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, EditItemViewDelegate>
 
 @property (nonatomic, strong) id<ItemListDataSource> dataSource;
 
@@ -14,7 +14,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *sortItemsButton;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-- (IBAction) clearCompleted:(id)sender;
+- (IBAction) didTapClearCompleted:(id)sender;
 - (IBAction) addItem:(id)sender;
 - (IBAction) sortItems:(id)sender;
 
