@@ -16,6 +16,7 @@ static CGFloat nameFieldWidth = 260;
     UIImageView *_nameFieldBackground;
     
     ItemTableCell *_cellBeingEdited;
+    Item *_itemBeingEdited;
     CGFloat _itemY;
 }
 
@@ -61,13 +62,9 @@ static CGFloat nameFieldWidth = 260;
     [self addSubview:nameField];
 }
 
-- (void)showWithCell:(ItemTableCell *)cell offset:(CGFloat)offset isNew:(BOOL)isNew {
+- (void)showWithCell:(ItemTableCell *)cell offset:(CGFloat)offset {
     _cellBeingEdited = cell;
-    if (isNew) {
-        _itemY = 360;
-    } else {
-        _itemY = _cellBeingEdited.frame.origin.y + 50 - offset;
-    }
+    _itemY = _cellBeingEdited.frame.origin.y + 50 - offset;
     _tempLabel.text = cell.itemNameLabel.text;
     _nameField.text = cell.itemNameLabel.text;
     _tempLabel.frame = CGRectMake(itemX, _itemY, itemWidth, itemHeight);
@@ -89,11 +86,32 @@ static CGFloat nameFieldWidth = 260;
     }];
 }
 
+- (void)showForNewItem {
+    _nameField.text = @"";
+    [UIView animateWithDuration:0.2 animations:^{
+        self.alpha = 0.8;
+        _nameFieldBackground.alpha = 1;
+        _nameField.alpha = 1;
+    } completion:^(BOOL finished) {
+        [_nameField becomeFirstResponder];
+    }];
+}
+
 - (void)hide {
+    if (_cellBeingEdited) {
+        [self hideWithCell];
+    } else {
+        [self hideWithItem];
+    }
+}
+
+- (void)hideWithCell {
     [_nameField resignFirstResponder];
     NSString *newName = _nameField.text;
     _tempLabel.text = newName;
     _cellBeingEdited.itemNameLabel.text = newName;
+    [self.delegate didFinishEditingItemForCell:_cellBeingEdited];
+
     [UIView animateWithDuration:0.2 animations:^{
         _nameFieldBackground.alpha = 0;
         _nameField.alpha = 0;
@@ -106,11 +124,22 @@ static CGFloat nameFieldWidth = 260;
             [UIView animateWithDuration:0.2 animations:^{
                 self.alpha = 0;
                 _cellBeingEdited.itemNameLabel.hidden = NO;
+            } completion:^(BOOL finished) {
+                _cellBeingEdited = nil;
             }];
         }];
-    }];
+    }];    
+}
+
+- (void)hideWithItem {
+    [_nameField resignFirstResponder];
+    [self.delegate didFinishAddingItem:_nameField.text];
     
-    [self.delegate didFinisheditingItemForCell:_cellBeingEdited];
+    [UIView animateWithDuration:0.2 animations:^{
+        self.alpha = 0;
+        _nameFieldBackground.alpha = 0;
+        _nameField.alpha = 0;
+    }];
 }
 
 #pragma mark - textfield delegate

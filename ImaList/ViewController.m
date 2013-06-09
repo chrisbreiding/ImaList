@@ -6,7 +6,6 @@
 #import "EditItemView.h"
 
 @implementation ViewController {
-    NSIndexPath *_indexPathBeingEdited;
     EditItemView *_editItemView;
 }
 
@@ -87,27 +86,12 @@
 }
 
 - (IBAction)addItem:(id)sender {
-    Item *newItem = [self.dataSource createCountDownWithName:@"" checked:NO];
-    NSUInteger row = [self.dataSource indexOfItem:newItem];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    [_tableView insertRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationNone];
-    _indexPathBeingEdited = indexPath;
-    [_tableView scrollToRowAtIndexPath:indexPath
-                      atScrollPosition:UITableViewScrollPositionBottom
-                              animated:YES];
+    [_editItemView showForNewItem];
 }
 
 - (IBAction)sortItems:(id)sender {
     [self.dataSource sortItems];
     [_tableView reloadData];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (_indexPathBeingEdited && _indexPathBeingEdited.row == indexPath.row) {
-        [self editNameForCell:(ItemTableCell *)cell isNew:YES];
-        _indexPathBeingEdited = nil;
-    }
 }
 
 #pragma mark - edit mode
@@ -120,13 +104,23 @@
 
 - (void)editNameForCell:(ItemTableCell *)cell isNew:(BOOL)isNew {
     [_editItemView showWithCell:cell
-                         offset:_tableView.contentOffset.y
-                          isNew:isNew];
+                         offset:_tableView.contentOffset.y];
 }
 
-- (void)didFinisheditingItemForCell:(ItemTableCell *)cell {
+- (void)didFinishEditingItemForCell:(ItemTableCell *)cell {
     Item *item = [self.dataSource itemAtIndex:[[_tableView indexPathForCell:cell] row]];
     item.name = cell.itemNameLabel.text;
+}
+
+- (void)didFinishAddingItem:(NSString *)itemName {
+    Item *newItem = [self.dataSource createCountDownWithName:itemName checked:NO];
+    NSUInteger row = [self.dataSource indexOfItem:newItem];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    [_tableView insertRowsAtIndexPaths:@[indexPath]
+                      withRowAnimation:UITableViewRowAnimationNone];
+    [_tableView scrollToRowAtIndexPath:indexPath
+                      atScrollPosition:UITableViewScrollPositionBottom
+                              animated:YES];
 }
 
 @end
