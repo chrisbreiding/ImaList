@@ -134,7 +134,7 @@
     NSUInteger row = [self.dataSource indexOfItem:newItem];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     [_tableView insertRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationNone];
+                      withRowAnimation:UITableViewRowAnimationRight];
     [_tableView scrollToRowAtIndexPath:indexPath
                       atScrollPosition:UITableViewScrollPositionBottom
                               animated:YES];
