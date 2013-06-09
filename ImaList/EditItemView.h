@@ -8,6 +8,7 @@
 
 - (void)showWithCell:(UITableViewCell *)cell offset:(CGFloat)offset;
 - (void)showForNewItem;
+- (void)showForMultipleNewItems;
 
 @end
 
@@ -15,5 +16,6 @@
 
 - (void)didFinishEditingItemForCell:(UITableViewCell *)cell;
 - (void)didFinishAddingItem:(NSString *)itemName;
+- (void)didFinishAddingMultipleItems:(NSArray *)itemNames;
 
 @end

@@ -51,7 +51,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.dataSource indexOfItem:userInfo[@"item"]]
                                                 inSection:0];
     [_tableView reloadRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationMiddle];
+                      withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - appearance
@@ -69,6 +69,7 @@
 - (void)styleButtons {
     [self styleButton:self.listsButton icon:@"icon-list"];
     [self styleButton:self.addItemButton icon:@"icon-add"];
+    [self styleButton:self.addMultipleItemsButton icon:@"icon-add-multiple"];
     [self styleButton:self.clearCompletedButton icon:@"icon-clear"];
     [self styleButton:self.sortItemsButton icon:@"icon-sort"];
 }
@@ -106,6 +107,10 @@
     [_editItemView showForNewItem];
 }
 
+- (IBAction)addMultipleItems:(id)sender {
+    [_editItemView showForMultipleNewItems];
+}
+
 - (IBAction)sortItems:(id)sender {
     [self.dataSource sortItems];
     [_tableView reloadData];
@@ -138,6 +143,25 @@
     [_tableView scrollToRowAtIndexPath:indexPath
                       atScrollPosition:UITableViewScrollPositionBottom
                               animated:YES];
+}
+
+- (void)didFinishAddingMultipleItems:(NSArray *)itemNames {
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    Item *newItem;
+    NSUInteger row;
+    NSIndexPath *indexPath;
+    for (NSString *itemName in itemNames) {
+        newItem = [self.dataSource createCountDownWithName:itemName checked:NO];
+        row = [self.dataSource indexOfItem:newItem];
+        indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        [indexPaths addObject:indexPath];
+    }
+    [_tableView insertRowsAtIndexPaths:indexPaths
+                      withRowAnimation:UITableViewRowAnimationRight];
+    [_tableView scrollToRowAtIndexPath:indexPath
+                      atScrollPosition:UITableViewScrollPositionBottom
+                              animated:YES];
+    
 }
 
 @end
