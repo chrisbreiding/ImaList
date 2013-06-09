@@ -34,7 +34,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    ItemTableCell *cell = (ItemTableCell *)[tableView cellForRowAtIndexPath:indexPath];
     [self editNameForCell:cell isNew:NO];
 }
 
@@ -87,7 +87,7 @@
 }
 
 - (IBAction)addItem:(id)sender {
-    Item *newItem = [self.dataSource createCountDownWithName:@" " checked:NO];
+    Item *newItem = [self.dataSource createCountDownWithName:@"" checked:NO];
     NSUInteger row = [self.dataSource indexOfItem:newItem];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     [_tableView insertRowsAtIndexPaths:@[indexPath]
@@ -105,7 +105,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_indexPathBeingEdited && _indexPathBeingEdited.row == indexPath.row) {
-        [self editNameForCell:cell isNew:YES];
+        [self editNameForCell:(ItemTableCell *)cell isNew:YES];
         _indexPathBeingEdited = nil;
     }
 }
@@ -118,15 +118,15 @@
     [self.view addSubview:_editItemView];
 }
 
-- (void)editNameForCell:(UITableViewCell *)cell isNew:(BOOL)isNew {
+- (void)editNameForCell:(ItemTableCell *)cell isNew:(BOOL)isNew {
     [_editItemView showWithCell:cell
                          offset:_tableView.contentOffset.y
                           isNew:isNew];
 }
 
-- (void)didFinisheditingItemForCell:(UITableViewCell *)cell {
+- (void)didFinisheditingItemForCell:(ItemTableCell *)cell {
     Item *item = [self.dataSource itemAtIndex:[[_tableView indexPathForCell:cell] row]];
-    item.name = cell.textLabel.text;
+    item.name = cell.itemNameLabel.text;
 }
 
 @end

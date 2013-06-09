@@ -106,7 +106,6 @@ static CGFloat nameFieldWidth = 260;
             [UIView animateWithDuration:0.2 animations:^{
                 self.alpha = 0;
                 _cellBeingEdited.itemNameLabel.hidden = NO;
-            } completion:^(BOOL finished) {
             }];
         }];
     }];
