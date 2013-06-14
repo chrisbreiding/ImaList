@@ -34,7 +34,7 @@ static CGFloat nameFieldWidth = 260;
         [self addNameField];
         [self addNameViewBackground];
         [self addNameView];
-        [self addMultipleDoneButton];
+        [self addDoneButton];
         [self addActions];
     }
     return self;
@@ -74,7 +74,7 @@ static CGFloat nameFieldWidth = 260;
     nameViewBackground.image = [[UIImage imageNamed:@"textfield"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     nameViewBackground.alpha = 0;
     _nameViewBackground = nameViewBackground;
-    [self addSubview:nameViewBackground];
+    [self addSubview:nameViewBackground];    
 }
 
 - (void)addNameView {
@@ -87,13 +87,13 @@ static CGFloat nameFieldWidth = 260;
     [self addSubview:nameView];    
 }
 
-- (void)addMultipleDoneButton {
+- (void)addDoneButton {
     CGFloat width = 70;
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(320 - width - 15,
                                                                       nameFieldY + itemHeight * 2 + 25,
                                                                       width,
                                                                       40)];
-    [doneButton setBackgroundImage:[[UIImage imageNamed:@"button"] resizableImageWithCapInsets:UIEdgeInsetsMake(3, 3, 3, 3)] forState:UIControlStateNormal];
+    [doneButton setBackgroundImage:[[UIImage imageNamed:@"button"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 8, 0, 8)] forState:UIControlStateNormal];
     doneButton.titleLabel.textColor = [UIColor whiteColor];
     [doneButton setTitle:@"Done" forState:UIControlStateNormal];
     doneButton.alpha = 0;

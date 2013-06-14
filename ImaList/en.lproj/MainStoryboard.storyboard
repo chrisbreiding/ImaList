@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <development version="4600" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.6"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -13,12 +15,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwF-lj-WTI" userLabel="Nav Bar">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                 <color key="backgroundColor" red="0.15686274509803921" green="0.25882352941176473" blue="0.019607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" type="user" id="fLL-Yx-jGa"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0Yf-Rr-5rS">
+                                <rect key="frame" x="0.0" y="50" width="320" height="448"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemCell" id="7Y9-V3-Omy" customClass="ItemTableCell">
@@ -29,6 +33,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYD-Gj-L1D">
+                                                    <rect key="frame" x="75" y="0.0" width="245" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="245" type="user" id="2eE-Xd-ORw"/>
                                                         <constraint firstAttribute="height" constant="60" type="user" id="7D7-tL-Ord"/>
@@ -56,12 +61,14 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zG-jM-14w" userLabel="Footer">
+                                <rect key="frame" x="0.0" y="498" width="320" height="50"/>
                                 <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" type="user" id="Bja-nh-sRg"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fB8-1s-A4x" userLabel="List Button">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <accessibility key="accessibilityConfiguration" label="Lists"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="3HO-jC-hS0"/>
@@ -77,6 +84,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFd-kg-pp0" userLabel="Add Button">
+                                <rect key="frame" x="270" y="0.0" width="50" height="50"/>
                                 <accessibility key="accessibilityConfiguration" label="Add Item"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" type="user" id="DKW-2b-yDO"/>
@@ -94,6 +102,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovs-g5-4ro" userLabel="Add Multiple Button">
+                                <rect key="frame" x="220" y="0.0" width="50" height="50"/>
                                 <accessibility key="accessibilityConfiguration" label="Add Item"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" type="user" id="Qfj-tw-z9v"/>
@@ -111,6 +120,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGG-wI-KFr" userLabel="Clear Button">
+                                <rect key="frame" x="270" y="498" width="50" height="50"/>
                                 <accessibility key="accessibilityConfiguration" label="Clear Completed"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" type="user" id="QZX-tt-2b5"/>
@@ -128,6 +138,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1B-SM-aMD" userLabel="Sort Button">
+                                <rect key="frame" x="220" y="498" width="50" height="50"/>
                                 <accessibility key="accessibilityConfiguration" label="Sort Items"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" type="user" id="AOr-HP-6JE"/>
@@ -169,6 +180,7 @@
                             <constraint firstItem="5zG-jM-14w" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="user" id="x7c-hA-Fld"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="addItemButton" destination="KFd-kg-pp0" id="OVU-vl-0AT"/>
                         <outlet property="addMultipleItemsButton" destination="Ovs-g5-4ro" id="UsN-Fj-ZxB"/>
@@ -184,34 +196,6 @@
             </objects>
         </scene>
     </scenes>
-    <classes>
-        <class className="ItemTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ItemTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="itemNameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addItem:"/>
-                <relationship kind="action" name="addMultipleItems:"/>
-                <relationship kind="action" name="didTapClearCompleted:"/>
-                <relationship kind="action" name="sortItems:"/>
-                <relationship kind="outlet" name="addItemButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="addMultipleItemsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="clearCompletedButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="footerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="listsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="navBarView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="sortItemsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

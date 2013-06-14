@@ -4,6 +4,7 @@
 #import "ItemListSource.h"
 #import "Item.h"
 #import "EditItemView.h"
+#import "EditItemViewController.h"
 
 @implementation ViewController {
     EditItemView *_editItemView;
@@ -119,9 +120,9 @@
 #pragma mark - edit mode
 
 - (void)addEditItemView {
-    _editItemView = [[EditItemView alloc] initWithFrame:self.view.bounds];
-    _editItemView.delegate = self;
-    [self.view addSubview:_editItemView];
+    EditItemViewController *editItemVC = [[EditItemViewController alloc] init];
+    editItemVC.view.frame = self.view.bounds;
+    [self.view addSubview:editItemVC.view];
 }
 
 - (void)editNameForCell:(ItemTableCell *)cell isNew:(BOOL)isNew {
