@@ -10,7 +10,6 @@
     [super viewDidLoad];
     
     [self hideAll];
-    self.wrapView.translatesAutoresizingMaskIntoConstraints = YES;
     self.singleTextField.delegate = self;
     
     [self styleBackgrounds];
@@ -157,11 +156,18 @@
 - (void)keyboardWillShow:(NSNotification *)notification {
     if (!sizeSet) {
         NSDictionary* info = [notification userInfo];
-        CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+        CGFloat kbHeight = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
 
-        CGSize size = self.view.frame.size;
-        self.wrapView.frame = CGRectMake(0, 0, size.width, size.height - kbSize.height);
-        NSLog(@"%@", NSStringFromCGRect(self.doneButton.frame));
+        NSString *constraintString = [NSString stringWithFormat:@"V:[view]-%f-|", kbHeight];
+        UIView *view = self.wrapView;
+        NSDictionary *views = NSDictionaryOfVariableBindings(view);
+        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:constraintString
+                                                                       options:NSLayoutFormatAlignAllBaseline
+                                                                       metrics:nil
+                                                                         views:views];
+        
+        [self.view removeConstraint:self.wrapViewBottomConstraint];
+        [self.view addConstraints:constraints];
 
         sizeSet = YES;
     }

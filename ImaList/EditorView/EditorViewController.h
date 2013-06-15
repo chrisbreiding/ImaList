@@ -7,6 +7,7 @@
 @property(nonatomic, weak) id<EditorDelegate> delegate;
 
 @property (nonatomic, weak) IBOutlet UIView *wrapView;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *wrapViewBottomConstraint;
 @property (nonatomic, weak) IBOutlet UIImageView *multipleBackgroundImageView;
 @property (nonatomic, weak) IBOutlet UITextView *multipleTextView;
 @property (nonatomic, weak) IBOutlet UIImageView *singleBackgroundImageView;

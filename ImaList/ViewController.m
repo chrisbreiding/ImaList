@@ -122,7 +122,6 @@
 - (void)addEditItemView {
     editItemVC = [[EditorViewController alloc] init];
     editItemVC.view.frame = self.view.bounds;
-    editItemVC.wrapView.frame = self.view.bounds;
     editItemVC.delegate = self;
     [self.view addSubview:editItemVC.view];
 }
