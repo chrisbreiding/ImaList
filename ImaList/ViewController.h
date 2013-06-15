@@ -1,8 +1,8 @@
 #import <UIKit/UIKit.h>
 #import "ItemListDataSource.h"
-#import "EditItemView.h"
+#import "EditorViewController.h"
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, EditItemViewDelegate>
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, EditorDelegate>
 
 @property (nonatomic, strong) id<ItemListDataSource> dataSource;
 

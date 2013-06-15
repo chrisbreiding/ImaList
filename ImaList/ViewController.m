@@ -3,11 +3,11 @@
 #import "ItemTableCell.h"
 #import "ItemListSource.h"
 #import "Item.h"
-#import "EditItemView.h"
-#import "EditItemViewController.h"
+#import "EditorViewController.h"
 
 @implementation ViewController {
-    EditItemView *_editItemView;
+    EditorViewController *editItemVC;
+    ItemTableCell *cellBeingEdited;
 }
 
 # pragma mark - view lifecycle
@@ -35,7 +35,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ItemTableCell *cell = (ItemTableCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [self editNameForCell:cell isNew:NO];
+    [self editNameForCell:cell];
 }
 
 #pragma mark - cell notifications
@@ -105,11 +105,11 @@
 }
 
 - (IBAction)addItem:(id)sender {
-    [_editItemView showForNewItem];
+    [editItemVC beginAddingSingleItem];
 }
 
 - (IBAction)addMultipleItems:(id)sender {
-    [_editItemView showForMultipleNewItems];
+    [editItemVC beginAddingMultipleItems];
 }
 
 - (IBAction)sortItems:(id)sender {
@@ -120,19 +120,23 @@
 #pragma mark - edit mode
 
 - (void)addEditItemView {
-    EditItemViewController *editItemVC = [[EditItemViewController alloc] init];
+    editItemVC = [[EditorViewController alloc] init];
     editItemVC.view.frame = self.view.bounds;
+    editItemVC.wrapView.frame = self.view.bounds;
+    editItemVC.delegate = self;
     [self.view addSubview:editItemVC.view];
 }
 
-- (void)editNameForCell:(ItemTableCell *)cell isNew:(BOOL)isNew {
-    [_editItemView showWithCell:cell
-                         offset:_tableView.contentOffset.y];
+- (void)editNameForCell:(ItemTableCell *)cell {
+    cellBeingEdited = cell;
+    [editItemVC beginEditingSingleItem:cell.itemNameLabel.text];
 }
 
-- (void)didFinishEditingItemForCell:(ItemTableCell *)cell {
-    Item *item = [self.dataSource itemAtIndex:[[_tableView indexPathForCell:cell] row]];
-    item.name = cell.itemNameLabel.text;
+- (void)didFinishEditingItem:(NSString *)itemName {
+    Item *item = [self.dataSource itemAtIndex:[[_tableView indexPathForCell:cellBeingEdited] row]];
+    item.name = itemName;
+    cellBeingEdited.itemNameLabel.text = itemName;
+    cellBeingEdited = nil;
 }
 
 - (void)didFinishAddingItem:(NSString *)itemName {
@@ -152,13 +156,16 @@
     NSUInteger row;
     NSIndexPath *indexPath;
     for (NSString *itemName in itemNames) {
-        newItem = [self.dataSource createCountDownWithName:itemName checked:NO];
-        row = [self.dataSource indexOfItem:newItem];
-        indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-        [indexPaths addObject:indexPath];
+        NSString *trimmedName = [itemName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if (![trimmedName isEqualToString:@""]) {
+            newItem = [self.dataSource createCountDownWithName:itemName checked:NO];
+            row = [self.dataSource indexOfItem:newItem];
+            indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+            [indexPaths addObject:indexPath];            
+        }
     }
     [_tableView insertRowsAtIndexPaths:indexPaths
-                      withRowAnimation:UITableViewRowAnimationRight];
+                      withRowAnimation:UITableViewRowAnimationTop];
     [_tableView scrollToRowAtIndexPath:indexPath
                       atScrollPosition:UITableViewScrollPositionBottom
                               animated:YES];

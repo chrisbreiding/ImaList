@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		18A0A26FBBC444A18E65BACF /* libPods-ImaListTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31595206A7E041189CC67E84 /* libPods-ImaListTests.a */; };
-		4B2D4120176AC92200C6CDE6 /* EditItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D411C176AC92200C6CDE6 /* EditItemView.m */; };
-		4B2D4121176AC92200C6CDE6 /* EditItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D411C176AC92200C6CDE6 /* EditItemView.m */; };
-		4B2D4122176AC92200C6CDE6 /* EditItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D411E176AC92200C6CDE6 /* EditItemViewController.m */; };
-		4B2D4123176AC92200C6CDE6 /* EditItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D411E176AC92200C6CDE6 /* EditItemViewController.m */; };
-		4B2D4124176AC92200C6CDE6 /* EditItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D411F176AC92200C6CDE6 /* EditItemViewController.xib */; };
-		4B2D4125176AC92200C6CDE6 /* EditItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D411F176AC92200C6CDE6 /* EditItemViewController.xib */; };
 		4B2D412A176AC94400C6CDE6 /* cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D4126176AC94400C6CDE6 /* cancel-button.png */; };
 		4B2D412B176AC94400C6CDE6 /* cancel-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D4127176AC94400C6CDE6 /* cancel-button@2x.png */; };
 		4B2D412C176AC94400C6CDE6 /* done-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D4128176AC94400C6CDE6 /* done-button.png */; };
@@ -51,6 +45,10 @@
 		4B72D82C1764E3EF002FAA8B /* icon-unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B72D8281764E3EF002FAA8B /* icon-unchecked@2x.png */; };
 		4B72D82F176515D1002FAA8B /* icon-add-multiple.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B72D82D176515D1002FAA8B /* icon-add-multiple.png */; };
 		4B72D830176515D1002FAA8B /* icon-add-multiple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B72D82E176515D1002FAA8B /* icon-add-multiple@2x.png */; };
+		4B7E85B1176C177900DAF07E /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85AF176C177900DAF07E /* EditorViewController.m */; };
+		4B7E85B2176C177900DAF07E /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85AF176C177900DAF07E /* EditorViewController.m */; };
+		4B7E85B3176C177900DAF07E /* EditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85B0176C177900DAF07E /* EditorViewController.xib */; };
+		4B7E85B4176C177900DAF07E /* EditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85B0176C177900DAF07E /* EditorViewController.xib */; };
 		4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA2879517357D160041BB2D /* ItemListSpec.m */; };
 		4BA8B8BA176412CB004A0A65 /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA8B8B9176412CB004A0A65 /* ItemTableCell.m */; };
 		4BA8B8BB176412CB004A0A65 /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA8B8B9176412CB004A0A65 /* ItemTableCell.m */; };
@@ -67,15 +65,11 @@
 		4BCC99DE175816C100C3D825 /* icon-sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99DB175816C100C3D825 /* icon-sort.png */; };
 		4BCC99DF175816C100C3D825 /* icon-sort@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99DC175816C100C3D825 /* icon-sort@2x.png */; };
 		4BCC99E0175816C100C3D825 /* icon-sort@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99DC175816C100C3D825 /* icon-sort@2x.png */; };
+		DD6007FF2E294ABDB593D137 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B636D51C3F404AB85E3302 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		31595206A7E041189CC67E84 /* libPods-ImaListTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImaListTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B2D411B176AC92200C6CDE6 /* EditItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditItemView.h; sourceTree = "<group>"; };
-		4B2D411C176AC92200C6CDE6 /* EditItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditItemView.m; sourceTree = "<group>"; };
-		4B2D411D176AC92200C6CDE6 /* EditItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditItemViewController.h; sourceTree = "<group>"; };
-		4B2D411E176AC92200C6CDE6 /* EditItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditItemViewController.m; sourceTree = "<group>"; };
-		4B2D411F176AC92200C6CDE6 /* EditItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditItemViewController.xib; sourceTree = "<group>"; };
 		4B2D4126176AC94400C6CDE6 /* cancel-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cancel-button.png"; path = "UI/cancel-button.png"; sourceTree = "<group>"; };
 		4B2D4127176AC94400C6CDE6 /* cancel-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cancel-button@2x.png"; path = "UI/cancel-button@2x.png"; sourceTree = "<group>"; };
 		4B2D4128176AC94400C6CDE6 /* done-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "done-button.png"; path = "UI/done-button.png"; sourceTree = "<group>"; };
@@ -121,6 +115,9 @@
 		4B72D8281764E3EF002FAA8B /* icon-unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-unchecked@2x.png"; path = "UI/icon-unchecked@2x.png"; sourceTree = "<group>"; };
 		4B72D82D176515D1002FAA8B /* icon-add-multiple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-add-multiple.png"; path = "UI/icon-add-multiple.png"; sourceTree = "<group>"; };
 		4B72D82E176515D1002FAA8B /* icon-add-multiple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-add-multiple@2x.png"; path = "UI/icon-add-multiple@2x.png"; sourceTree = "<group>"; };
+		4B7E85AE176C177900DAF07E /* EditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorViewController.h; sourceTree = "<group>"; };
+		4B7E85AF176C177900DAF07E /* EditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorViewController.m; sourceTree = "<group>"; };
+		4B7E85B0176C177900DAF07E /* EditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorViewController.xib; sourceTree = "<group>"; };
 		4BA2879517357D160041BB2D /* ItemListSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListSpec.m; path = ImaListTests/ItemListSpec.m; sourceTree = SOURCE_ROOT; };
 		4BA8B8B8176412CB004A0A65 /* ItemTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableCell.h; sourceTree = "<group>"; };
 		4BA8B8B9176412CB004A0A65 /* ItemTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableCell.m; sourceTree = "<group>"; };
@@ -135,6 +132,8 @@
 		4BCC99D5175289D000C3D825 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4BCC99DB175816C100C3D825 /* icon-sort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-sort.png"; path = "UI/icon-sort.png"; sourceTree = "<group>"; };
 		4BCC99DC175816C100C3D825 /* icon-sort@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-sort@2x.png"; path = "UI/icon-sort@2x.png"; sourceTree = "<group>"; };
+		7FE7D16BF8E648C0848B0712 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		E9B636D51C3F404AB85E3302 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75EF69AC1CE4BD882710606 /* Pods-ImaListTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImaListTests.xcconfig"; path = "Pods/Pods-ImaListTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -147,6 +146,7 @@
 				4B534032172B66C3003F9AE2 /* UIKit.framework in Frameworks */,
 				4B534034172B66C3003F9AE2 /* Foundation.framework in Frameworks */,
 				4B534036172B66C3003F9AE2 /* CoreGraphics.framework in Frameworks */,
+				DD6007FF2E294ABDB593D137 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,18 +164,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4B2D411A176AC92200C6CDE6 /* EditItemView */ = {
-			isa = PBXGroup;
-			children = (
-				4B2D411B176AC92200C6CDE6 /* EditItemView.h */,
-				4B2D411C176AC92200C6CDE6 /* EditItemView.m */,
-				4B2D411D176AC92200C6CDE6 /* EditItemViewController.h */,
-				4B2D411E176AC92200C6CDE6 /* EditItemViewController.m */,
-				4B2D411F176AC92200C6CDE6 /* EditItemViewController.xib */,
-			);
-			path = EditItemView;
-			sourceTree = "<group>";
-		};
 		4B534025172B66C3003F9AE2 = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +172,7 @@
 				4B534030172B66C3003F9AE2 /* Frameworks */,
 				4B53402F172B66C3003F9AE2 /* Products */,
 				F75EF69AC1CE4BD882710606 /* Pods-ImaListTests.xcconfig */,
+				7FE7D16BF8E648C0848B0712 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -205,6 +194,7 @@
 				4B534035172B66C3003F9AE2 /* CoreGraphics.framework */,
 				4B53408B172F59F2003F9AE2 /* SenTestingKit.framework */,
 				31595206A7E041189CC67E84 /* libPods-ImaListTests.a */,
+				E9B636D51C3F404AB85E3302 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -215,7 +205,7 @@
 				4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */,
 				4B534040172B66C3003F9AE2 /* AppDelegate.h */,
 				4B534041172B66C3003F9AE2 /* AppDelegate.m */,
-				4B2D411A176AC92200C6CDE6 /* EditItemView */,
+				4B7E85AD176C177900DAF07E /* EditorView */,
 				4BA8B8B8176412CB004A0A65 /* ItemTableCell.h */,
 				4BA8B8B9176412CB004A0A65 /* ItemTableCell.m */,
 				4B534058172CBA54003F9AE2 /* Models */,
@@ -308,6 +298,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4B7E85AD176C177900DAF07E /* EditorView */ = {
+			isa = PBXGroup;
+			children = (
+				4B7E85AE176C177900DAF07E /* EditorViewController.h */,
+				4B7E85AF176C177900DAF07E /* EditorViewController.m */,
+				4B7E85B0176C177900DAF07E /* EditorViewController.xib */,
+			);
+			path = EditorView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -315,9 +315,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4B534051172B66C3003F9AE2 /* Build configuration list for PBXNativeTarget "ImaList" */;
 			buildPhases = (
+				1CC94E467DF344A783A83D6A /* Check Pods Manifest.lock */,
 				4B53402A172B66C3003F9AE2 /* Sources */,
 				4B53402B172B66C3003F9AE2 /* Frameworks */,
 				4B53402C172B66C3003F9AE2 /* Resources */,
+				9E333C7308964F249D7BDD8A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -410,11 +412,11 @@
 				4B72D82C1764E3EF002FAA8B /* icon-unchecked@2x.png in Resources */,
 				4B72D82F176515D1002FAA8B /* icon-add-multiple.png in Resources */,
 				4B72D830176515D1002FAA8B /* icon-add-multiple@2x.png in Resources */,
-				4B2D4124176AC92200C6CDE6 /* EditItemViewController.xib in Resources */,
 				4B2D412A176AC94400C6CDE6 /* cancel-button.png in Resources */,
 				4B2D412B176AC94400C6CDE6 /* cancel-button@2x.png in Resources */,
 				4B2D412C176AC94400C6CDE6 /* done-button.png in Resources */,
 				4B2D412D176AC94400C6CDE6 /* done-button@2x.png in Resources */,
+				4B7E85B3176C177900DAF07E /* EditorViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,13 +427,27 @@
 				4B534094172F59F2003F9AE2 /* InfoPlist.strings in Resources */,
 				4BCC99DE175816C100C3D825 /* icon-sort.png in Resources */,
 				4BCC99E0175816C100C3D825 /* icon-sort@2x.png in Resources */,
-				4B2D4125176AC92200C6CDE6 /* EditItemViewController.xib in Resources */,
+				4B7E85B4176C177900DAF07E /* EditorViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1CC94E467DF344A783A83D6A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+		};
 		2112D09E8AA54C78BDF59415 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -459,6 +475,20 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		9E333C7308964F249D7BDD8A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
 		A8E98CB5442542AB94865370 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -485,9 +515,8 @@
 				4B53404E172B66C3003F9AE2 /* ViewController.m in Sources */,
 				4B534057172CBA4D003F9AE2 /* Item.m in Sources */,
 				4BA8B8BA176412CB004A0A65 /* ItemTableCell.m in Sources */,
-				4B2D4120176AC92200C6CDE6 /* EditItemView.m in Sources */,
-				4B2D4122176AC92200C6CDE6 /* EditItemViewController.m in Sources */,
 				4B2D4131176AC96500C6CDE6 /* ItemListSource.m in Sources */,
+				4B7E85B1176C177900DAF07E /* EditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,9 +527,8 @@
 				4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */,
 				4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */,
 				4BA8B8BB176412CB004A0A65 /* ItemTableCell.m in Sources */,
-				4B2D4121176AC92200C6CDE6 /* EditItemView.m in Sources */,
-				4B2D4123176AC92200C6CDE6 /* EditItemViewController.m in Sources */,
 				4B2D4132176AC96500C6CDE6 /* ItemListSource.m in Sources */,
+				4B7E85B2176C177900DAF07E /* EditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,7 +634,7 @@
 		};
 		4B534052172B66C3003F9AE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F75EF69AC1CE4BD882710606 /* Pods-ImaListTests.xcconfig */;
+			baseConfigurationReference = 7FE7D16BF8E648C0848B0712 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImaList/ImaList-Prefix.pch";
@@ -618,7 +646,7 @@
 		};
 		4B534053172B66C3003F9AE2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F75EF69AC1CE4BD882710606 /* Pods-ImaListTests.xcconfig */;
+			baseConfigurationReference = 7FE7D16BF8E648C0848B0712 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImaList/ImaList-Prefix.pch";
