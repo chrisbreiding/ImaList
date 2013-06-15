@@ -19,7 +19,6 @@
 - (IBAction)didTapCancel:(id)sender;
 
 - (void)beginAddingMultipleItems;
-- (void)beginAddingSingleItem;
 - (void)beginEditingSingleItem:(NSString *)itemName;
 
 @end
@@ -27,7 +26,6 @@
 @protocol EditorDelegate <NSObject>
 
 - (void)didFinishEditingItem:(NSString *)itemName;
-- (void)didFinishAddingItem:(NSString *)itemName;
-- (void)didFinishAddingMultipleItems:(NSArray *)itemNames;
+- (void)didFinishAddingItems:(NSArray *)itemNames;
 
 @end

@@ -2,7 +2,6 @@
 
 @implementation EditorViewController {
     BOOL addingMultiple;
-    BOOL addingSingle;
     BOOL sizeSet;
 }
 
@@ -61,12 +60,7 @@
 
 - (void)commitMultiple {
     NSArray *nameArray = [self.multipleTextView.text componentsSeparatedByString:@"\n"];
-    [self.delegate didFinishAddingMultipleItems:nameArray];
-}
-
-- (void)beginAddingSingleItem {
-    addingSingle = YES;
-    [self beginEditingSingleItem:@""];
+    [self.delegate didFinishAddingItems:nameArray];
 }
 
 - (void)beginEditingSingleItem:(NSString *)itemName {
@@ -83,7 +77,6 @@
 - (void)endEditingSingleItem {
     self.singleTextField.text = @"";
     [self setSingleHidden:YES];
-    addingSingle = NO;
     [self.singleTextField resignFirstResponder];
 }
 
@@ -100,11 +93,7 @@
 }
 
 - (void)commitSingle {
-    if (addingSingle) {
-        [self.delegate didFinishAddingItem:self.singleTextField.text];
-    } else {
-        [self.delegate didFinishEditingItem:self.singleTextField.text];
-    }
+    [self.delegate didFinishEditingItem:self.singleTextField.text];
 }
 
 #pragma mark - user actions

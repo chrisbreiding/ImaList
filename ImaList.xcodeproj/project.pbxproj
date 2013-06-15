@@ -43,8 +43,6 @@
 		4B72D82A1764E3EF002FAA8B /* icon-checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B72D8261764E3EF002FAA8B /* icon-checked@2x.png */; };
 		4B72D82B1764E3EF002FAA8B /* icon-unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B72D8271764E3EF002FAA8B /* icon-unchecked.png */; };
 		4B72D82C1764E3EF002FAA8B /* icon-unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B72D8281764E3EF002FAA8B /* icon-unchecked@2x.png */; };
-		4B72D82F176515D1002FAA8B /* icon-add-multiple.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B72D82D176515D1002FAA8B /* icon-add-multiple.png */; };
-		4B72D830176515D1002FAA8B /* icon-add-multiple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B72D82E176515D1002FAA8B /* icon-add-multiple@2x.png */; };
 		4B7E85B1176C177900DAF07E /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85AF176C177900DAF07E /* EditorViewController.m */; };
 		4B7E85B2176C177900DAF07E /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85AF176C177900DAF07E /* EditorViewController.m */; };
 		4B7E85B3176C177900DAF07E /* EditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85B0176C177900DAF07E /* EditorViewController.xib */; };
@@ -113,8 +111,6 @@
 		4B72D8261764E3EF002FAA8B /* icon-checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-checked@2x.png"; path = "UI/icon-checked@2x.png"; sourceTree = "<group>"; };
 		4B72D8271764E3EF002FAA8B /* icon-unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-unchecked.png"; path = "UI/icon-unchecked.png"; sourceTree = "<group>"; };
 		4B72D8281764E3EF002FAA8B /* icon-unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-unchecked@2x.png"; path = "UI/icon-unchecked@2x.png"; sourceTree = "<group>"; };
-		4B72D82D176515D1002FAA8B /* icon-add-multiple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-add-multiple.png"; path = "UI/icon-add-multiple.png"; sourceTree = "<group>"; };
-		4B72D82E176515D1002FAA8B /* icon-add-multiple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-add-multiple@2x.png"; path = "UI/icon-add-multiple@2x.png"; sourceTree = "<group>"; };
 		4B7E85AE176C177900DAF07E /* EditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorViewController.h; sourceTree = "<group>"; };
 		4B7E85AF176C177900DAF07E /* EditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorViewController.m; sourceTree = "<group>"; };
 		4B7E85B0176C177900DAF07E /* EditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorViewController.xib; sourceTree = "<group>"; };
@@ -254,8 +250,6 @@
 				4B2D4129176AC94400C6CDE6 /* done-button@2x.png */,
 				4BCC99C517505C4000C3D825 /* footer.png */,
 				4BCC99C617505C4000C3D825 /* footer@2x.png */,
-				4B72D82D176515D1002FAA8B /* icon-add-multiple.png */,
-				4B72D82E176515D1002FAA8B /* icon-add-multiple@2x.png */,
 				4BCC99D117527B7500C3D825 /* icon-add.png */,
 				4BCC99D217527B7500C3D825 /* icon-add@2x.png */,
 				4B72D8251764E3EF002FAA8B /* icon-checked.png */,
@@ -410,8 +404,6 @@
 				4B72D82A1764E3EF002FAA8B /* icon-checked@2x.png in Resources */,
 				4B72D82B1764E3EF002FAA8B /* icon-unchecked.png in Resources */,
 				4B72D82C1764E3EF002FAA8B /* icon-unchecked@2x.png in Resources */,
-				4B72D82F176515D1002FAA8B /* icon-add-multiple.png in Resources */,
-				4B72D830176515D1002FAA8B /* icon-add-multiple@2x.png in Resources */,
 				4B2D412A176AC94400C6CDE6 /* cancel-button.png in Resources */,
 				4B2D412B176AC94400C6CDE6 /* cancel-button@2x.png in Resources */,
 				4B2D412C176AC94400C6CDE6 /* done-button.png in Resources */,

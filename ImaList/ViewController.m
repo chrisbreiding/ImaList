@@ -70,7 +70,6 @@
 - (void)styleButtons {
     [self styleButton:self.listsButton icon:@"icon-list"];
     [self styleButton:self.addItemButton icon:@"icon-add"];
-    [self styleButton:self.addMultipleItemsButton icon:@"icon-add-multiple"];
     [self styleButton:self.clearCompletedButton icon:@"icon-clear"];
     [self styleButton:self.sortItemsButton icon:@"icon-sort"];
 }
@@ -105,10 +104,6 @@
 }
 
 - (IBAction)addItem:(id)sender {
-    [editItemVC beginAddingSingleItem];
-}
-
-- (IBAction)addMultipleItems:(id)sender {
     [editItemVC beginAddingMultipleItems];
 }
 
@@ -138,18 +133,7 @@
     cellBeingEdited = nil;
 }
 
-- (void)didFinishAddingItem:(NSString *)itemName {
-    Item *newItem = [self.dataSource createCountDownWithName:itemName checked:NO];
-    NSUInteger row = [self.dataSource indexOfItem:newItem];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    [_tableView insertRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationRight];
-    [_tableView scrollToRowAtIndexPath:indexPath
-                      atScrollPosition:UITableViewScrollPositionBottom
-                              animated:YES];
-}
-
-- (void)didFinishAddingMultipleItems:(NSArray *)itemNames {
+- (void)didFinishAddingItems:(NSArray *)itemNames {
     NSMutableArray *indexPaths = [NSMutableArray array];
     Item *newItem;
     NSUInteger row;

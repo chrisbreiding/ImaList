@@ -11,13 +11,11 @@
 @property (nonatomic, weak) IBOutlet UIButton *listsButton;
 @property (nonatomic, weak) IBOutlet UIButton *clearCompletedButton;
 @property (nonatomic, weak) IBOutlet UIButton *addItemButton;
-@property (nonatomic, weak) IBOutlet UIButton *addMultipleItemsButton;
 @property (nonatomic, weak) IBOutlet UIButton *sortItemsButton;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 - (IBAction) didTapClearCompleted:(id)sender;
 - (IBAction) addItem:(id)sender;
-- (IBAction) addMultipleItems:(id)sender;
 - (IBAction) sortItems:(id)sender;
 
 @end
