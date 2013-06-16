@@ -12,8 +12,6 @@
 		4B2D412B176AC94400C6CDE6 /* cancel-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D4127176AC94400C6CDE6 /* cancel-button@2x.png */; };
 		4B2D412C176AC94400C6CDE6 /* done-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D4128176AC94400C6CDE6 /* done-button.png */; };
 		4B2D412D176AC94400C6CDE6 /* done-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B2D4129176AC94400C6CDE6 /* done-button@2x.png */; };
-		4B2D4131176AC96500C6CDE6 /* ItemListSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D4130176AC96500C6CDE6 /* ItemListSource.m */; };
-		4B2D4132176AC96500C6CDE6 /* ItemListSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D4130176AC96500C6CDE6 /* ItemListSource.m */; };
 		4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3693BA172F6D7C00C81D9F /* ItemSpec.m */; };
 		4B3717C81748604C0068366B /* textfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B3717C61748604C0068366B /* textfield.png */; };
 		4B3717C91748604C0068366B /* textfield@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B3717C71748604C0068366B /* textfield@2x.png */; };
@@ -47,6 +45,8 @@
 		4B7E85B2176C177900DAF07E /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85AF176C177900DAF07E /* EditorViewController.m */; };
 		4B7E85B3176C177900DAF07E /* EditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85B0176C177900DAF07E /* EditorViewController.xib */; };
 		4B7E85B4176C177900DAF07E /* EditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85B0176C177900DAF07E /* EditorViewController.xib */; };
+		4B7E85B7176E226A00DAF07E /* ItemListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85B6176E226A00DAF07E /* ItemListDocument.m */; };
+		4B7E85B8176E226A00DAF07E /* ItemListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85B6176E226A00DAF07E /* ItemListDocument.m */; };
 		4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA2879517357D160041BB2D /* ItemListSpec.m */; };
 		4BA8B8BA176412CB004A0A65 /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA8B8B9176412CB004A0A65 /* ItemTableCell.m */; };
 		4BA8B8BB176412CB004A0A65 /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA8B8B9176412CB004A0A65 /* ItemTableCell.m */; };
@@ -73,8 +73,6 @@
 		4B2D4128176AC94400C6CDE6 /* done-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "done-button.png"; path = "UI/done-button.png"; sourceTree = "<group>"; };
 		4B2D4129176AC94400C6CDE6 /* done-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "done-button@2x.png"; path = "UI/done-button@2x.png"; sourceTree = "<group>"; };
 		4B2D412E176AC96500C6CDE6 /* ItemListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemListDataSource.h; path = Models/ItemListDataSource.h; sourceTree = "<group>"; };
-		4B2D412F176AC96500C6CDE6 /* ItemListSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemListSource.h; path = Models/ItemListSource.h; sourceTree = "<group>"; };
-		4B2D4130176AC96500C6CDE6 /* ItemListSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListSource.m; path = Models/ItemListSource.m; sourceTree = "<group>"; };
 		4B3693BA172F6D7C00C81D9F /* ItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemSpec.m; sourceTree = "<group>"; };
 		4B3717C61748604C0068366B /* textfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textfield.png; path = UI/textfield.png; sourceTree = "<group>"; };
 		4B3717C71748604C0068366B /* textfield@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "textfield@2x.png"; path = "UI/textfield@2x.png"; sourceTree = "<group>"; };
@@ -114,6 +112,8 @@
 		4B7E85AE176C177900DAF07E /* EditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorViewController.h; sourceTree = "<group>"; };
 		4B7E85AF176C177900DAF07E /* EditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorViewController.m; sourceTree = "<group>"; };
 		4B7E85B0176C177900DAF07E /* EditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorViewController.xib; sourceTree = "<group>"; };
+		4B7E85B5176E226900DAF07E /* ItemListDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemListDocument.h; path = Models/ItemListDocument.h; sourceTree = "<group>"; };
+		4B7E85B6176E226A00DAF07E /* ItemListDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListDocument.m; path = Models/ItemListDocument.m; sourceTree = "<group>"; };
 		4BA2879517357D160041BB2D /* ItemListSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListSpec.m; path = ImaListTests/ItemListSpec.m; sourceTree = SOURCE_ROOT; };
 		4BA8B8B8176412CB004A0A65 /* ItemTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableCell.h; sourceTree = "<group>"; };
 		4BA8B8B9176412CB004A0A65 /* ItemTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableCell.m; sourceTree = "<group>"; };
@@ -233,8 +233,8 @@
 				4B534055172CBA4D003F9AE2 /* Item.h */,
 				4B534056172CBA4D003F9AE2 /* Item.m */,
 				4B2D412E176AC96500C6CDE6 /* ItemListDataSource.h */,
-				4B2D412F176AC96500C6CDE6 /* ItemListSource.h */,
-				4B2D4130176AC96500C6CDE6 /* ItemListSource.m */,
+				4B7E85B5176E226900DAF07E /* ItemListDocument.h */,
+				4B7E85B6176E226A00DAF07E /* ItemListDocument.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -507,8 +507,8 @@
 				4B53404E172B66C3003F9AE2 /* ViewController.m in Sources */,
 				4B534057172CBA4D003F9AE2 /* Item.m in Sources */,
 				4BA8B8BA176412CB004A0A65 /* ItemTableCell.m in Sources */,
-				4B2D4131176AC96500C6CDE6 /* ItemListSource.m in Sources */,
 				4B7E85B1176C177900DAF07E /* EditorViewController.m in Sources */,
+				4B7E85B7176E226A00DAF07E /* ItemListDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,8 +519,8 @@
 				4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */,
 				4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */,
 				4BA8B8BB176412CB004A0A65 /* ItemTableCell.m in Sources */,
-				4B2D4132176AC96500C6CDE6 /* ItemListSource.m in Sources */,
 				4B7E85B2176C177900DAF07E /* EditorViewController.m in Sources */,
+				4B7E85B8176E226A00DAF07E /* ItemListDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

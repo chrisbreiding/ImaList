@@ -1,13 +1,9 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "ItemListSource.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    ViewController *viewController = (ViewController *)self.window.rootViewController;
-    viewController.dataSource = [[ItemListSource alloc] init];
-    
     return YES;
 }
 

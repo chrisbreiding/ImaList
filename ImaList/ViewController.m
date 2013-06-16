@@ -1,7 +1,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ViewController.h"
 #import "ItemTableCell.h"
-#import "ItemListSource.h"
+#import "ItemListDocument.h"
 #import "Item.h"
 #import "EditorViewController.h"
 
@@ -14,10 +14,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadData];
     [self styleViews];
     [self styleButtons];
     [self addEditItemView];
     [self configureNotifications];
+}
+
+#pragma mark - data
+
+- (void)loadData {
+    NSURL *docDir = [[[NSFileManager defaultManager]
+                      URLsForDirectory:NSDocumentDirectory
+                      inDomains:NSUserDomainMask] lastObject];
+    NSURL *docURL = [docDir URLByAppendingPathComponent:@"ImaList.items"];
+    ItemListDocument *doc = [[ItemListDocument alloc] initWithFileURL:docURL];
+    self.dataSource = doc;
+    [doc openWithCompletionHandler:^(BOOL success) {
+        if(success) {
+            [_tableView reloadData];
+        } else {
+            NSLog(@"Failed to open document");
+        }
+    }];
 }
 
 #pragma mark - tableview delegate
