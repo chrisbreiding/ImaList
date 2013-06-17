@@ -8,6 +8,8 @@
 
 @implementation ViewController {
     ListsViewController *listsVC;
+    BOOL listsShown;
+    NSLayoutConstraint *listsHeightConstraint;
     EditorViewController *editItemVC;
     ItemTableCell *cellBeingEdited;
 }
@@ -50,20 +52,55 @@
     listsVC = [[ListsViewController alloc] init];
     UIView *listsView = listsVC.view;
     listsView.translatesAutoresizingMaskIntoConstraints = NO;
+    listsView.hidden = YES;
     [self.view addSubview:listsView];
     NSDictionary *views = NSDictionaryOfVariableBindings(listsView);
-    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-50-[listsView(120)]"
+    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-50-[listsView]"
                                                                    options:NSLayoutFormatAlignAllBaseline
                                                                    metrics:nil
                                                                      views:views];
-    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[listsView]|"
-                                                                    options:NSLayoutFormatAlignAllBaseline
-                                                                    metrics:nil
-                                                                      views:views];
-    constraints = [constraints arrayByAddingObjectsFromArray:hConstraints];
-    self.tableViewTopConstraint.constant = 170;
+    NSArray *heightConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[listsView(0)]"
+                                                                         options:NSLayoutFormatAlignAllBaseline
+                                                                         metrics:nil
+                                                                           views:views];
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[listsView]|"
+                                                                             options:NSLayoutFormatAlignAllBaseline
+                                                                             metrics:nil
+                                                                               views:views];
+    listsHeightConstraint = heightConstraints[0];
+    constraints = [constraints arrayByAddingObjectsFromArray:heightConstraints];
+    constraints = [constraints arrayByAddingObjectsFromArray:horizontalConstraints];
     [self.view addConstraints:constraints];
     [self.view layoutIfNeeded];
+}
+
+- (IBAction)toggleLists:(id)sender {
+    if (listsShown) {
+        [self hideLists];
+    } else {
+        [self showLists];
+    }
+}
+
+- (void)showLists {
+    listsVC.view.hidden = NO;
+    listsShown = YES;
+    listsHeightConstraint.constant = 120;
+    self.tableViewTopConstraint.constant = 170;
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)hideLists {
+    listsHeightConstraint.constant = 0;
+    self.tableViewTopConstraint.constant = 50;
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        listsVC.view.hidden = YES;
+    }];
+    listsShown = NO;
 }
 
 #pragma mark - tableview delegate

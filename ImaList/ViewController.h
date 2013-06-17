@@ -18,5 +18,6 @@
 - (IBAction) didTapClearCompleted:(id)sender;
 - (IBAction) addItem:(id)sender;
 - (IBAction) sortItems:(id)sender;
+- (IBAction) toggleLists:(id)sender;
 
 @end

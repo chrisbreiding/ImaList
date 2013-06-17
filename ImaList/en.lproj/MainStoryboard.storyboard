@@ -47,6 +47,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="toggleLists:" destination="2" eventType="touchUpInside" id="yUM-We-PeP"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFd-kg-pp0" userLabel="Add Button">
                                 <accessibility key="accessibilityConfiguration" label="Add Item"/>
@@ -147,6 +150,7 @@
                 <relationship kind="action" name="addItem:"/>
                 <relationship kind="action" name="didTapClearCompleted:"/>
                 <relationship kind="action" name="sortItems:"/>
+                <relationship kind="action" name="toggleLists:"/>
                 <relationship kind="outlet" name="addItemButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="clearCompletedButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="footerView" candidateClass="UIView"/>

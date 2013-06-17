@@ -229,7 +229,6 @@
 		4B534037172B66C3003F9AE2 /* ImaList */ = {
 			isa = PBXGroup;
 			children = (
-				4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */,
 				4B534040172B66C3003F9AE2 /* AppDelegate.h */,
 				4B534041172B66C3003F9AE2 /* AppDelegate.m */,
 				4B7E85AD176C177900DAF07E /* EditorView */,
@@ -240,6 +239,7 @@
 				4BC7EC56176F81160040E9FB /* ListsView */,
 				4B53404C172B66C3003F9AE2 /* ViewController.h */,
 				4B53404D172B66C3003F9AE2 /* ViewController.m */,
+				4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */,
 				4B53405C172CD0F5003F9AE2 /* UI */,
 				4B534038172B66C3003F9AE2 /* Supporting Files */,
 			);
