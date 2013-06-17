@@ -4,8 +4,10 @@
 #import "ItemListDocument.h"
 #import "Item.h"
 #import "EditorViewController.h"
+#import "ListsViewController.h"
 
 @implementation ViewController {
+    ListsViewController *listsVC;
     EditorViewController *editItemVC;
     ItemTableCell *cellBeingEdited;
 }
@@ -15,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadData];
+    [self addListsView];
     [self styleViews];
     [self styleButtons];
     [self addEditItemView];
@@ -39,6 +42,28 @@
             NSLog(@"Failed to open document");
         }
     }];
+}
+
+#pragma mark - lists
+
+- (void)addListsView {
+    listsVC = [[ListsViewController alloc] init];
+    UIView *listsView = listsVC.view;
+    listsView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:listsView];
+    NSDictionary *views = NSDictionaryOfVariableBindings(listsView);
+    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-50-[listsView(120)]"
+                                                                   options:NSLayoutFormatAlignAllBaseline
+                                                                   metrics:nil
+                                                                     views:views];
+    NSArray *hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[listsView]|"
+                                                                    options:NSLayoutFormatAlignAllBaseline
+                                                                    metrics:nil
+                                                                      views:views];
+    constraints = [constraints arrayByAddingObjectsFromArray:hConstraints];
+    self.tableViewTopConstraint.constant = 170;
+    [self.view addConstraints:constraints];
+    [self.view layoutIfNeeded];
 }
 
 #pragma mark - tableview delegate
@@ -78,7 +103,7 @@
     int index = [self.dataSource indexOfItem:userInfo[@"item"] ];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [_tableView reloadRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationBottom];
+                      withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)deleteItem:(NSNotification *)notification {
@@ -176,7 +201,7 @@
     for (NSString *itemName in itemNames) {
         NSString *trimmedName = [itemName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if (![trimmedName isEqualToString:@""]) {
-            newItem = [self.dataSource createCountDownWithName:itemName checked:NO];
+            newItem = [self.dataSource createItemWithName:itemName checked:NO];
             row = [self.dataSource indexOfItem:newItem];
             indexPath = [NSIndexPath indexPathForRow:row inSection:0];
             [indexPaths addObject:indexPath];            

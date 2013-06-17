@@ -26,7 +26,6 @@
 		4B534048172B66C3003F9AE2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B534047172B66C3003F9AE2 /* Default-568h@2x.png */; };
 		4B53404B172B66C3003F9AE2 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */; };
 		4B53404E172B66C3003F9AE2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53404D172B66C3003F9AE2 /* ViewController.m */; };
-		4B534057172CBA4D003F9AE2 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B534056172CBA4D003F9AE2 /* Item.m */; };
 		4B53405F172CD0FF003F9AE2 /* item-cell.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B53405D172CD0FF003F9AE2 /* item-cell.png */; };
 		4B534060172CD0FF003F9AE2 /* item-cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B53405E172CD0FF003F9AE2 /* item-cell@2x.png */; };
 		4B534078172DFEED003F9AE2 /* nav-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B534076172DFEED003F9AE2 /* nav-bar.png */; };
@@ -45,8 +44,6 @@
 		4B7E85B2176C177900DAF07E /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85AF176C177900DAF07E /* EditorViewController.m */; };
 		4B7E85B3176C177900DAF07E /* EditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85B0176C177900DAF07E /* EditorViewController.xib */; };
 		4B7E85B4176C177900DAF07E /* EditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85B0176C177900DAF07E /* EditorViewController.xib */; };
-		4B7E85B7176E226A00DAF07E /* ItemListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85B6176E226A00DAF07E /* ItemListDocument.m */; };
-		4B7E85B8176E226A00DAF07E /* ItemListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85B6176E226A00DAF07E /* ItemListDocument.m */; };
 		4B7E85C2176E7E2600DAF07E /* icon-delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85C0176E7E2600DAF07E /* icon-delete.png */; };
 		4B7E85C3176E7E2600DAF07E /* icon-delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85C1176E7E2600DAF07E /* icon-delete@2x.png */; };
 		4B7E85C8176E882C00DAF07E /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85C6176E882C00DAF07E /* ItemTableCell.m */; };
@@ -54,6 +51,22 @@
 		4B7E85CA176E882C00DAF07E /* ItemTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */; };
 		4B7E85CB176E882C00DAF07E /* ItemTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */; };
 		4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA2879517357D160041BB2D /* ItemListSpec.m */; };
+		4BAD0998176F8534000D74D5 /* ListListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAD0997176F8534000D74D5 /* ListListDocument.m */; };
+		4BAD0999176F8534000D74D5 /* ListListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAD0997176F8534000D74D5 /* ListListDocument.m */; };
+		4BAD099D176F8E3B000D74D5 /* ListCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */; };
+		4BAD099E176F8E3B000D74D5 /* ListCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */; };
+		4BAD09A0176F8E76000D74D5 /* ListCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */; };
+		4BAD09A1176F8E76000D74D5 /* ListCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */; };
+		4BC7EC5A176F81300040E9FB /* ListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC58176F81300040E9FB /* ListsViewController.m */; };
+		4BC7EC5B176F81300040E9FB /* ListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC58176F81300040E9FB /* ListsViewController.m */; };
+		4BC7EC5C176F81300040E9FB /* ListsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BC7EC59176F81300040E9FB /* ListsViewController.xib */; };
+		4BC7EC5D176F81300040E9FB /* ListsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BC7EC59176F81300040E9FB /* ListsViewController.xib */; };
+		4BC7EC64176F829E0040E9FB /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC60176F829E0040E9FB /* Item.m */; };
+		4BC7EC65176F829E0040E9FB /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC60176F829E0040E9FB /* Item.m */; };
+		4BC7EC66176F829E0040E9FB /* ItemListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC63176F829E0040E9FB /* ItemListDocument.m */; };
+		4BC7EC67176F829E0040E9FB /* ItemListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC63176F829E0040E9FB /* ItemListDocument.m */; };
+		4BC7EC6B176F82DA0040E9FB /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC6A176F82DA0040E9FB /* List.m */; };
+		4BC7EC6C176F82DA0040E9FB /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC6A176F82DA0040E9FB /* List.m */; };
 		4BCC99C717505C4000C3D825 /* footer.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99C517505C4000C3D825 /* footer.png */; };
 		4BCC99C817505C4000C3D825 /* footer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99C617505C4000C3D825 /* footer@2x.png */; };
 		4BCC99CB17505E9B00C3D825 /* icon-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99C917505E9B00C3D825 /* icon-list.png */; };
@@ -76,7 +89,6 @@
 		4B2D4127176AC94400C6CDE6 /* cancel-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cancel-button@2x.png"; path = "UI/cancel-button@2x.png"; sourceTree = "<group>"; };
 		4B2D4128176AC94400C6CDE6 /* done-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "done-button.png"; path = "UI/done-button.png"; sourceTree = "<group>"; };
 		4B2D4129176AC94400C6CDE6 /* done-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "done-button@2x.png"; path = "UI/done-button@2x.png"; sourceTree = "<group>"; };
-		4B2D412E176AC96500C6CDE6 /* ItemListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemListDataSource.h; path = Models/ItemListDataSource.h; sourceTree = "<group>"; };
 		4B3693BA172F6D7C00C81D9F /* ItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemSpec.m; sourceTree = "<group>"; };
 		4B3717C61748604C0068366B /* textfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = textfield.png; path = UI/textfield.png; sourceTree = "<group>"; };
 		4B3717C71748604C0068366B /* textfield@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "textfield@2x.png"; path = "UI/textfield@2x.png"; sourceTree = "<group>"; };
@@ -96,8 +108,6 @@
 		4B53404A172B66C3003F9AE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		4B53404C172B66C3003F9AE2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4B53404D172B66C3003F9AE2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		4B534055172CBA4D003F9AE2 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = Models/Item.h; sourceTree = "<group>"; };
-		4B534056172CBA4D003F9AE2 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = Models/Item.m; sourceTree = "<group>"; };
 		4B53405D172CD0FF003F9AE2 /* item-cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "item-cell.png"; path = "UI/item-cell.png"; sourceTree = "<group>"; };
 		4B53405E172CD0FF003F9AE2 /* item-cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "item-cell@2x.png"; path = "UI/item-cell@2x.png"; sourceTree = "<group>"; };
 		4B534076172DFEED003F9AE2 /* nav-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "nav-bar.png"; path = "UI/nav-bar.png"; sourceTree = "<group>"; };
@@ -116,14 +126,28 @@
 		4B7E85AE176C177900DAF07E /* EditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorViewController.h; sourceTree = "<group>"; };
 		4B7E85AF176C177900DAF07E /* EditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorViewController.m; sourceTree = "<group>"; };
 		4B7E85B0176C177900DAF07E /* EditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorViewController.xib; sourceTree = "<group>"; };
-		4B7E85B5176E226900DAF07E /* ItemListDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemListDocument.h; path = Models/ItemListDocument.h; sourceTree = "<group>"; };
-		4B7E85B6176E226A00DAF07E /* ItemListDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListDocument.m; path = Models/ItemListDocument.m; sourceTree = "<group>"; };
 		4B7E85C0176E7E2600DAF07E /* icon-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-delete.png"; path = "UI/icon-delete.png"; sourceTree = "<group>"; };
 		4B7E85C1176E7E2600DAF07E /* icon-delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-delete@2x.png"; path = "UI/icon-delete@2x.png"; sourceTree = "<group>"; };
 		4B7E85C5176E882C00DAF07E /* ItemTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableCell.h; sourceTree = "<group>"; };
 		4B7E85C6176E882C00DAF07E /* ItemTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableCell.m; sourceTree = "<group>"; };
 		4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemTableCell.xib; sourceTree = "<group>"; };
 		4BA2879517357D160041BB2D /* ItemListSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListSpec.m; path = ImaListTests/ItemListSpec.m; sourceTree = SOURCE_ROOT; };
+		4BAD0996176F8534000D74D5 /* ListListDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListListDocument.h; sourceTree = "<group>"; };
+		4BAD0997176F8534000D74D5 /* ListListDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListListDocument.m; sourceTree = "<group>"; };
+		4BAD099B176F8E3B000D74D5 /* ListCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionCell.h; sourceTree = "<group>"; };
+		4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionCell.m; sourceTree = "<group>"; };
+		4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCollectionCell.xib; sourceTree = "<group>"; };
+		4BC7EC57176F81300040E9FB /* ListsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListsViewController.h; sourceTree = "<group>"; };
+		4BC7EC58176F81300040E9FB /* ListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListsViewController.m; sourceTree = "<group>"; };
+		4BC7EC59176F81300040E9FB /* ListsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListsViewController.xib; sourceTree = "<group>"; };
+		4BC7EC5F176F829E0040E9FB /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		4BC7EC60176F829E0040E9FB /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		4BC7EC61176F829E0040E9FB /* ItemListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListDataSource.h; sourceTree = "<group>"; };
+		4BC7EC62176F829E0040E9FB /* ItemListDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListDocument.h; sourceTree = "<group>"; };
+		4BC7EC63176F829E0040E9FB /* ItemListDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListDocument.m; sourceTree = "<group>"; };
+		4BC7EC69176F82DA0040E9FB /* List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = List.h; sourceTree = "<group>"; };
+		4BC7EC6A176F82DA0040E9FB /* List.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = List.m; sourceTree = "<group>"; };
+		4BC7EC6D176F84340040E9FB /* ListListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListListDataSource.h; sourceTree = "<group>"; };
 		4BCC99C517505C4000C3D825 /* footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = footer.png; path = UI/footer.png; sourceTree = "<group>"; };
 		4BCC99C617505C4000C3D825 /* footer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "footer@2x.png"; path = "UI/footer@2x.png"; sourceTree = "<group>"; };
 		4BCC99C917505E9B00C3D825 /* icon-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-list.png"; path = "UI/icon-list.png"; sourceTree = "<group>"; };
@@ -209,8 +233,11 @@
 				4B534040172B66C3003F9AE2 /* AppDelegate.h */,
 				4B534041172B66C3003F9AE2 /* AppDelegate.m */,
 				4B7E85AD176C177900DAF07E /* EditorView */,
+				4BC7EC5E176F829E0040E9FB /* ItemModel */,
 				4B7E85C4176E882C00DAF07E /* ItemTableCell */,
-				4B534058172CBA54003F9AE2 /* Models */,
+				4BAD099A176F8E17000D74D5 /* ListCollectionCell */,
+				4BC7EC68176F82C70040E9FB /* ListModel */,
+				4BC7EC56176F81160040E9FB /* ListsView */,
 				4B53404C172B66C3003F9AE2 /* ViewController.h */,
 				4B53404D172B66C3003F9AE2 /* ViewController.m */,
 				4B53405C172CD0F5003F9AE2 /* UI */,
@@ -231,18 +258,6 @@
 				4B534047172B66C3003F9AE2 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		4B534058172CBA54003F9AE2 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				4B534055172CBA4D003F9AE2 /* Item.h */,
-				4B534056172CBA4D003F9AE2 /* Item.m */,
-				4B2D412E176AC96500C6CDE6 /* ItemListDataSource.h */,
-				4B7E85B5176E226900DAF07E /* ItemListDocument.h */,
-				4B7E85B6176E226A00DAF07E /* ItemListDocument.m */,
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 		4B53405C172CD0F5003F9AE2 /* UI */ = {
@@ -318,6 +333,50 @@
 				4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */,
 			);
 			path = ItemTableCell;
+			sourceTree = "<group>";
+		};
+		4BAD099A176F8E17000D74D5 /* ListCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				4BAD099B176F8E3B000D74D5 /* ListCollectionCell.h */,
+				4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */,
+				4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */,
+			);
+			path = ListCollectionCell;
+			sourceTree = "<group>";
+		};
+		4BC7EC56176F81160040E9FB /* ListsView */ = {
+			isa = PBXGroup;
+			children = (
+				4BC7EC57176F81300040E9FB /* ListsViewController.h */,
+				4BC7EC58176F81300040E9FB /* ListsViewController.m */,
+				4BC7EC59176F81300040E9FB /* ListsViewController.xib */,
+			);
+			path = ListsView;
+			sourceTree = "<group>";
+		};
+		4BC7EC5E176F829E0040E9FB /* ItemModel */ = {
+			isa = PBXGroup;
+			children = (
+				4BC7EC5F176F829E0040E9FB /* Item.h */,
+				4BC7EC60176F829E0040E9FB /* Item.m */,
+				4BC7EC61176F829E0040E9FB /* ItemListDataSource.h */,
+				4BC7EC62176F829E0040E9FB /* ItemListDocument.h */,
+				4BC7EC63176F829E0040E9FB /* ItemListDocument.m */,
+			);
+			path = ItemModel;
+			sourceTree = "<group>";
+		};
+		4BC7EC68176F82C70040E9FB /* ListModel */ = {
+			isa = PBXGroup;
+			children = (
+				4BC7EC69176F82DA0040E9FB /* List.h */,
+				4BC7EC6A176F82DA0040E9FB /* List.m */,
+				4BC7EC6D176F84340040E9FB /* ListListDataSource.h */,
+				4BAD0996176F8534000D74D5 /* ListListDocument.h */,
+				4BAD0997176F8534000D74D5 /* ListListDocument.m */,
+			);
+			path = ListModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +489,8 @@
 				4B7E85C2176E7E2600DAF07E /* icon-delete.png in Resources */,
 				4B7E85C3176E7E2600DAF07E /* icon-delete@2x.png in Resources */,
 				4B7E85CA176E882C00DAF07E /* ItemTableCell.xib in Resources */,
+				4BC7EC5C176F81300040E9FB /* ListsViewController.xib in Resources */,
+				4BAD09A0176F8E76000D74D5 /* ListCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +503,8 @@
 				4BCC99E0175816C100C3D825 /* icon-sort@2x.png in Resources */,
 				4B7E85B4176C177900DAF07E /* EditorViewController.xib in Resources */,
 				4B7E85CB176E882C00DAF07E /* ItemTableCell.xib in Resources */,
+				4BC7EC5D176F81300040E9FB /* ListsViewController.xib in Resources */,
+				4BAD09A1176F8E76000D74D5 /* ListCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,10 +590,14 @@
 				4B53403E172B66C3003F9AE2 /* main.m in Sources */,
 				4B534042172B66C3003F9AE2 /* AppDelegate.m in Sources */,
 				4B53404E172B66C3003F9AE2 /* ViewController.m in Sources */,
-				4B534057172CBA4D003F9AE2 /* Item.m in Sources */,
 				4B7E85B1176C177900DAF07E /* EditorViewController.m in Sources */,
-				4B7E85B7176E226A00DAF07E /* ItemListDocument.m in Sources */,
 				4B7E85C8176E882C00DAF07E /* ItemTableCell.m in Sources */,
+				4BC7EC5A176F81300040E9FB /* ListsViewController.m in Sources */,
+				4BC7EC64176F829E0040E9FB /* Item.m in Sources */,
+				4BC7EC66176F829E0040E9FB /* ItemListDocument.m in Sources */,
+				4BC7EC6B176F82DA0040E9FB /* List.m in Sources */,
+				4BAD0998176F8534000D74D5 /* ListListDocument.m in Sources */,
+				4BAD099D176F8E3B000D74D5 /* ListCollectionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,8 +608,13 @@
 				4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */,
 				4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */,
 				4B7E85B2176C177900DAF07E /* EditorViewController.m in Sources */,
-				4B7E85B8176E226A00DAF07E /* ItemListDocument.m in Sources */,
 				4B7E85C9176E882C00DAF07E /* ItemTableCell.m in Sources */,
+				4BC7EC5B176F81300040E9FB /* ListsViewController.m in Sources */,
+				4BC7EC65176F829E0040E9FB /* Item.m in Sources */,
+				4BC7EC67176F829E0040E9FB /* ItemListDocument.m in Sources */,
+				4BC7EC6C176F82DA0040E9FB /* List.m in Sources */,
+				4BAD0999176F8534000D74D5 /* ListListDocument.m in Sources */,
+				4BAD099E176F8E3B000D74D5 /* ListCollectionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

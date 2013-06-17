@@ -25,39 +25,6 @@
     return self;
 }
 
-//- (instancetype)init {
-//    NSArray *fixtureItems = @[
-//                              @{ @"name": @"eggs",         @"isChecked": @(NO)  },
-//                              @{ @"name": @"bread",        @"isChecked": @(YES) },
-//                              @{ @"name": @"milk",         @"isChecked": @(NO)  },
-//                              @{ @"name": @"potato chips", @"isChecked": @(YES) },
-//                              @{ @"name": @"butter",       @"isChecked": @(YES) },
-//                              @{ @"name": @"orange juice", @"isChecked": @(NO)  },
-//                              @{ @"name": @"turkey",       @"isChecked": @(NO)  },
-//                              @{ @"name": @"bacon",        @"isChecked": @(YES) },
-//                              @{ @"name": @"mustard",      @"isChecked": @(YES) },
-//                              @{ @"name": @"cheese",       @"isChecked": @(NO)  },
-//                              @{ @"name": @"jelly",        @"isChecked": @(YES) },
-//                              @{ @"name": @"strawberries", @"isChecked": @(NO)  },
-//                              @{ @"name": @"yogurt",       @"isChecked": @(NO)  },
-//                              @{ @"name": @"carrots",      @"isChecked": @(NO)  },
-//                              @{ @"name": @"tomatoes",     @"isChecked": @(NO)  }
-//                              ];
-//    
-//    self = [super init];
-//    if (self) {
-//        if (!_items) {
-//            _items = [NSMutableArray array];
-//            for (NSDictionary *item in fixtureItems) {
-//                [self createCountDownWithName:item[@"name"] checked:item[@"isChecked"]];
-//            }
-//        }
-//        
-//        [self sortItems];
-//    }
-//    return self;
-//}
-
 #pragma mark - persistence
 
 - (BOOL)loadFromContents:(id)contents ofType:(NSString *)typeName error:(NSError **)outError {
@@ -111,7 +78,7 @@
     [self commitChanges];
 }
 
-- (Item *)createCountDownWithName:(NSString *)name checked:(NSNumber *)isChecked {
+- (Item *)createItemWithName:(NSString *)name checked:(NSNumber *)isChecked {
     Item *newItem = [[Item alloc] init];
     newItem.name = name;
     newItem.isChecked = isChecked;

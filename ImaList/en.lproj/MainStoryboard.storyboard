@@ -130,6 +130,7 @@
                         <outlet property="navBarView" destination="qwF-lj-WTI" id="EBF-bZ-UW1"/>
                         <outlet property="sortItemsButton" destination="C1B-SM-aMD" id="10c-th-nhx"/>
                         <outlet property="tableView" destination="0Yf-Rr-5rS" id="Gag-Lt-Qfd"/>
+                        <outlet property="tableViewTopConstraint" destination="sdP-zD-cf5" id="T94-w4-9p5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -153,6 +154,7 @@
                 <relationship kind="outlet" name="navBarView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="sortItemsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="tableViewTopConstraint" candidateClass="NSLayoutConstraint"/>
             </relationships>
         </class>
     </classes>

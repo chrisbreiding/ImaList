@@ -13,6 +13,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *addItemButton;
 @property (nonatomic, weak) IBOutlet UIButton *sortItemsButton;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
 
 - (IBAction) didTapClearCompleted:(id)sender;
 - (IBAction) addItem:(id)sender;

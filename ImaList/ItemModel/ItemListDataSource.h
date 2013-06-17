@@ -8,7 +8,7 @@
 - (Item *)itemAtIndex:(NSInteger)index;
 - (NSInteger)indexOfItem:(Item *)item;
 - (void)deleteItemAtIndex:(NSInteger)index;
-- (Item *)createCountDownWithName:(NSString *)name checked:(NSNumber *)isChecked;
+- (Item *)createItemWithName:(NSString *)name checked:(NSNumber *)isChecked;
 - (void)sortItems;
 - (void)clear;
 - (void)clearCompleted;
