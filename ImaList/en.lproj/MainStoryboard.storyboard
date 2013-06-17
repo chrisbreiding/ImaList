@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -22,36 +21,7 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0Yf-Rr-5rS">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemCell" id="7Y9-V3-Omy" customClass="ItemTableCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYD-Gj-L1D">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="245" type="user" id="2eE-Xd-ORw"/>
-                                                        <constraint firstAttribute="height" constant="60" type="user" id="7D7-tL-Ord"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="pYD-Gj-L1D" firstAttribute="leading" secondItem="7Y9-V3-Omy" secondAttribute="leading" constant="75" type="user" id="3d3-Gx-4HI"/>
-                                            <constraint firstItem="pYD-Gj-L1D" firstAttribute="top" secondItem="7Y9-V3-Omy" secondAttribute="top" type="default" id="vca-iV-bG5"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="itemNameLabel" destination="pYD-Gj-L1D" id="wal-mT-eJB"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
+                                <sections/>
                                 <connections>
                                     <outlet property="dataSource" destination="2" id="wHv-en-1Ku"/>
                                     <outlet property="delegate" destination="2" id="aHa-8t-tvw"/>
@@ -167,12 +137,6 @@
         </scene>
     </scenes>
     <classes>
-        <class className="ItemTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ItemTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="itemNameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
@@ -180,11 +144,9 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
             <relationships>
                 <relationship kind="action" name="addItem:"/>
-                <relationship kind="action" name="addMultipleItems:"/>
                 <relationship kind="action" name="didTapClearCompleted:"/>
                 <relationship kind="action" name="sortItems:"/>
                 <relationship kind="outlet" name="addItemButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="addMultipleItemsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="clearCompletedButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="footerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="listsButton" candidateClass="UIButton"/>

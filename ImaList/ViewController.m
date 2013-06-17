@@ -19,6 +19,8 @@
     [self styleButtons];
     [self addEditItemView];
     [self configureNotifications];
+    UINib *cellNib = [UINib nibWithNibName:@"ItemTableCell" bundle:nil];
+    [_tableView registerNib:cellNib forCellReuseIdentifier:@"ItemTableCell"];
 }
 
 #pragma mark - data
@@ -46,7 +48,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"ItemCell";
+    static NSString *cellIdentifier = @"ItemTableCell";
     ItemTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     [cell configureCellWithItem:[self.dataSource itemAtIndex:indexPath.row] index:indexPath.row];
     return cell;
@@ -64,14 +66,28 @@
                                              selector:@selector(reloadItemRow:)
                                                  name:@"reloadItemRow"
                                                object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(deleteItem:)
+                                                 name:@"deleteItem"
+                                               object:nil];
 }
 
 -(void)reloadItemRow:(NSNotification *)notification {
     NSDictionary *userInfo = [notification userInfo];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.dataSource indexOfItem:userInfo[@"item"]]
-                                                inSection:0];
+    int index = [self.dataSource indexOfItem:userInfo[@"item"] ];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [_tableView reloadRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationNone];
+                      withRowAnimation:UITableViewRowAnimationBottom];
+}
+
+- (void)deleteItem:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    int index = [self.dataSource indexOfItem:userInfo[@"item"] ];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.dataSource deleteItemAtIndex:index];
+    [_tableView deleteRowsAtIndexPaths:@[indexPath]
+                      withRowAnimation:UITableViewRowAnimationBottom];
 }
 
 #pragma mark - appearance

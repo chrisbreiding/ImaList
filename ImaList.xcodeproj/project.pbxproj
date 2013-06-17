@@ -47,9 +47,13 @@
 		4B7E85B4176C177900DAF07E /* EditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85B0176C177900DAF07E /* EditorViewController.xib */; };
 		4B7E85B7176E226A00DAF07E /* ItemListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85B6176E226A00DAF07E /* ItemListDocument.m */; };
 		4B7E85B8176E226A00DAF07E /* ItemListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85B6176E226A00DAF07E /* ItemListDocument.m */; };
+		4B7E85C2176E7E2600DAF07E /* icon-delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85C0176E7E2600DAF07E /* icon-delete.png */; };
+		4B7E85C3176E7E2600DAF07E /* icon-delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85C1176E7E2600DAF07E /* icon-delete@2x.png */; };
+		4B7E85C8176E882C00DAF07E /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85C6176E882C00DAF07E /* ItemTableCell.m */; };
+		4B7E85C9176E882C00DAF07E /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85C6176E882C00DAF07E /* ItemTableCell.m */; };
+		4B7E85CA176E882C00DAF07E /* ItemTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */; };
+		4B7E85CB176E882C00DAF07E /* ItemTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */; };
 		4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA2879517357D160041BB2D /* ItemListSpec.m */; };
-		4BA8B8BA176412CB004A0A65 /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA8B8B9176412CB004A0A65 /* ItemTableCell.m */; };
-		4BA8B8BB176412CB004A0A65 /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA8B8B9176412CB004A0A65 /* ItemTableCell.m */; };
 		4BCC99C717505C4000C3D825 /* footer.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99C517505C4000C3D825 /* footer.png */; };
 		4BCC99C817505C4000C3D825 /* footer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99C617505C4000C3D825 /* footer@2x.png */; };
 		4BCC99CB17505E9B00C3D825 /* icon-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCC99C917505E9B00C3D825 /* icon-list.png */; };
@@ -114,9 +118,12 @@
 		4B7E85B0176C177900DAF07E /* EditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorViewController.xib; sourceTree = "<group>"; };
 		4B7E85B5176E226900DAF07E /* ItemListDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemListDocument.h; path = Models/ItemListDocument.h; sourceTree = "<group>"; };
 		4B7E85B6176E226A00DAF07E /* ItemListDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListDocument.m; path = Models/ItemListDocument.m; sourceTree = "<group>"; };
+		4B7E85C0176E7E2600DAF07E /* icon-delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-delete.png"; path = "UI/icon-delete.png"; sourceTree = "<group>"; };
+		4B7E85C1176E7E2600DAF07E /* icon-delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-delete@2x.png"; path = "UI/icon-delete@2x.png"; sourceTree = "<group>"; };
+		4B7E85C5176E882C00DAF07E /* ItemTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableCell.h; sourceTree = "<group>"; };
+		4B7E85C6176E882C00DAF07E /* ItemTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableCell.m; sourceTree = "<group>"; };
+		4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemTableCell.xib; sourceTree = "<group>"; };
 		4BA2879517357D160041BB2D /* ItemListSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListSpec.m; path = ImaListTests/ItemListSpec.m; sourceTree = SOURCE_ROOT; };
-		4BA8B8B8176412CB004A0A65 /* ItemTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableCell.h; sourceTree = "<group>"; };
-		4BA8B8B9176412CB004A0A65 /* ItemTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableCell.m; sourceTree = "<group>"; };
 		4BCC99C517505C4000C3D825 /* footer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = footer.png; path = UI/footer.png; sourceTree = "<group>"; };
 		4BCC99C617505C4000C3D825 /* footer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "footer@2x.png"; path = "UI/footer@2x.png"; sourceTree = "<group>"; };
 		4BCC99C917505E9B00C3D825 /* icon-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-list.png"; path = "UI/icon-list.png"; sourceTree = "<group>"; };
@@ -202,8 +209,7 @@
 				4B534040172B66C3003F9AE2 /* AppDelegate.h */,
 				4B534041172B66C3003F9AE2 /* AppDelegate.m */,
 				4B7E85AD176C177900DAF07E /* EditorView */,
-				4BA8B8B8176412CB004A0A65 /* ItemTableCell.h */,
-				4BA8B8B9176412CB004A0A65 /* ItemTableCell.m */,
+				4B7E85C4176E882C00DAF07E /* ItemTableCell */,
 				4B534058172CBA54003F9AE2 /* Models */,
 				4B53404C172B66C3003F9AE2 /* ViewController.h */,
 				4B53404D172B66C3003F9AE2 /* ViewController.m */,
@@ -256,6 +262,8 @@
 				4B72D8261764E3EF002FAA8B /* icon-checked@2x.png */,
 				4BCC99CD1750641900C3D825 /* icon-clear.png */,
 				4BCC99CE1750641900C3D825 /* icon-clear@2x.png */,
+				4B7E85C0176E7E2600DAF07E /* icon-delete.png */,
+				4B7E85C1176E7E2600DAF07E /* icon-delete@2x.png */,
 				4BCC99C917505E9B00C3D825 /* icon-list.png */,
 				4BCC99CA17505E9B00C3D825 /* icon-list@2x.png */,
 				4BCC99DB175816C100C3D825 /* icon-sort.png */,
@@ -300,6 +308,16 @@
 				4B7E85B0176C177900DAF07E /* EditorViewController.xib */,
 			);
 			path = EditorView;
+			sourceTree = "<group>";
+		};
+		4B7E85C4176E882C00DAF07E /* ItemTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				4B7E85C5176E882C00DAF07E /* ItemTableCell.h */,
+				4B7E85C6176E882C00DAF07E /* ItemTableCell.m */,
+				4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */,
+			);
+			path = ItemTableCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,6 +427,9 @@
 				4B2D412C176AC94400C6CDE6 /* done-button.png in Resources */,
 				4B2D412D176AC94400C6CDE6 /* done-button@2x.png in Resources */,
 				4B7E85B3176C177900DAF07E /* EditorViewController.xib in Resources */,
+				4B7E85C2176E7E2600DAF07E /* icon-delete.png in Resources */,
+				4B7E85C3176E7E2600DAF07E /* icon-delete@2x.png in Resources */,
+				4B7E85CA176E882C00DAF07E /* ItemTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +441,7 @@
 				4BCC99DE175816C100C3D825 /* icon-sort.png in Resources */,
 				4BCC99E0175816C100C3D825 /* icon-sort@2x.png in Resources */,
 				4B7E85B4176C177900DAF07E /* EditorViewController.xib in Resources */,
+				4B7E85CB176E882C00DAF07E /* ItemTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,9 +528,9 @@
 				4B534042172B66C3003F9AE2 /* AppDelegate.m in Sources */,
 				4B53404E172B66C3003F9AE2 /* ViewController.m in Sources */,
 				4B534057172CBA4D003F9AE2 /* Item.m in Sources */,
-				4BA8B8BA176412CB004A0A65 /* ItemTableCell.m in Sources */,
 				4B7E85B1176C177900DAF07E /* EditorViewController.m in Sources */,
 				4B7E85B7176E226A00DAF07E /* ItemListDocument.m in Sources */,
+				4B7E85C8176E882C00DAF07E /* ItemTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,9 +540,9 @@
 			files = (
 				4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */,
 				4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */,
-				4BA8B8BB176412CB004A0A65 /* ItemTableCell.m in Sources */,
 				4B7E85B2176C177900DAF07E /* EditorViewController.m in Sources */,
 				4B7E85B8176E226A00DAF07E /* ItemListDocument.m in Sources */,
+				4B7E85C9176E882C00DAF07E /* ItemTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
