@@ -8,11 +8,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadData];
+    [self style];
     UINib *cellNib = [UINib nibWithNibName:@"ListCollectionCell" bundle:nil];
     [_collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ListCell"];
     UINib *addCellNib = [UINib nibWithNibName:@"ListAddCell" bundle:nil];
     [_collectionView registerNib:addCellNib forCellWithReuseIdentifier:@"ListAddCell"];
-    _collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 0);
+    _collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
+}
+
+#pragma mark - style
+
+- (void)style {
+    self.backgroundImageView.image = [[UIImage imageNamed:@"lists-background"]
+                                      resizableImageWithCapInsets:UIEdgeInsetsMake(12, 12, 12, 12)
+                                      resizingMode:UIImageResizingModeStretch];
 }
 
 #pragma mark - data

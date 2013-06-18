@@ -1,3 +1,4 @@
+#import <QuartzCore/QuartzCore.h>
 #import "ListCollectionCell.h"
 #import "List.h"
 
@@ -8,10 +9,20 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.listNameTextField.delegate = self;
+    [self style];
 }
 
 - (void)configureCellWithList:(List *)list {
     self.listNameLabel.text = list.name;
+}
+
+- (void)style {
+    CALayer *layer = self.layer;
+    layer.masksToBounds = NO;
+    layer.shadowOffset = CGSizeMake(0, 0);
+    layer.shadowColor = [[UIColor blackColor] CGColor];
+    layer.shadowRadius = 2;
+    layer.shadowOpacity = 0.8;
 }
 
 - (void)enterEditMode {
