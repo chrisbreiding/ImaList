@@ -51,6 +51,24 @@
                                     <action selector="toggleLists:" destination="2" eventType="touchUpInside" id="yUM-We-PeP"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qK-jv-sk3" userLabel="Edit Lists Button">
+                                <accessibility key="accessibilityConfiguration" label="Edit Lists"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" type="user" id="7U1-CA-01G"/>
+                                    <constraint firstAttribute="height" constant="50" type="user" id="iCs-rm-axh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title=" ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleListEditingMode:" destination="2" eventType="touchUpInside" id="54s-AH-m29"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFd-kg-pp0" userLabel="Add Button">
                                 <accessibility key="accessibilityConfiguration" label="Add Item"/>
                                 <constraints>
@@ -106,17 +124,19 @@
                         <color key="backgroundColor" red="0.15541389454400609" green="0.25751355229591832" blue="0.01885351777641768" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="3k3-l7-ZEX"/>
+                            <constraint firstItem="2qK-jv-sk3" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="50" type="user" id="4dR-MU-SDK"/>
                             <constraint firstItem="fB8-1s-A4x" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="55R-qN-YTj"/>
                             <constraint firstItem="0Yf-Rr-5rS" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="6oj-J8-n2w"/>
                             <constraint firstItem="0Yf-Rr-5rS" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="Bth-MB-xXx"/>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="top" secondItem="3" secondAttribute="top" type="user" id="Dzw-fE-YgV"/>
-                            <constraint firstItem="KFd-kg-pp0" firstAttribute="top" secondItem="3" secondAttribute="top" type="user" id="EMx-g1-wfi"/>
-                            <constraint firstItem="fB8-1s-A4x" firstAttribute="top" secondItem="3" secondAttribute="top" type="user" id="InJ-BF-Mo7"/>
+                            <constraint firstAttribute="bottom" secondItem="KFd-kg-pp0" secondAttribute="bottom" type="user" id="Fik-Kn-yDd"/>
                             <constraint firstAttribute="trailing" secondItem="KFd-kg-pp0" secondAttribute="trailing" type="user" id="JvN-eW-lFK"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="PVU-W0-51a"/>
                             <constraint firstAttribute="bottom" secondItem="0Yf-Rr-5rS" secondAttribute="bottom" constant="50" type="user" id="Vlh-5d-rgg"/>
-                            <constraint firstItem="IGG-wI-KFr" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="W2y-Qn-PlD"/>
-                            <constraint firstItem="qwF-lj-WTI" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="WuC-EW-cT0"/>
+                            <constraint firstItem="IGG-wI-KFr" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" constant="-100" type="user" id="W2y-Qn-PlD"/>
+                            <constraint firstItem="qwF-lj-WTI" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="WuC-EW-cT0"/>
+                            <constraint firstAttribute="bottom" secondItem="fB8-1s-A4x" secondAttribute="bottom" type="user" id="XDN-hU-Cnn"/>
+                            <constraint firstAttribute="bottom" secondItem="2qK-jv-sk3" secondAttribute="bottom" type="user" id="Zw1-uG-YfP"/>
                             <constraint firstItem="C1B-SM-aMD" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="user" id="cI0-KI-cJ0"/>
                             <constraint firstAttribute="bottom" secondItem="IGG-wI-KFr" secondAttribute="bottom" type="user" id="cxf-k1-17k"/>
                             <constraint firstAttribute="trailing" secondItem="C1B-SM-aMD" secondAttribute="trailing" constant="50" type="user" id="eJ9-qG-KgT"/>
@@ -128,12 +148,13 @@
                     <connections>
                         <outlet property="addItemButton" destination="KFd-kg-pp0" id="OVU-vl-0AT"/>
                         <outlet property="clearCompletedButton" destination="IGG-wI-KFr" id="TmN-6r-7oF"/>
+                        <outlet property="editListsButton" destination="2qK-jv-sk3" id="uWj-Ju-RIm"/>
                         <outlet property="footerView" destination="5zG-jM-14w" id="vkF-Zx-fBm"/>
                         <outlet property="listsButton" destination="fB8-1s-A4x" id="DYd-rC-ymt"/>
                         <outlet property="navBarView" destination="qwF-lj-WTI" id="EBF-bZ-UW1"/>
                         <outlet property="sortItemsButton" destination="C1B-SM-aMD" id="10c-th-nhx"/>
                         <outlet property="tableView" destination="0Yf-Rr-5rS" id="Gag-Lt-Qfd"/>
-                        <outlet property="tableViewTopConstraint" destination="sdP-zD-cf5" id="T94-w4-9p5"/>
+                        <outlet property="tableViewBottomConstraint" destination="Vlh-5d-rgg" id="6HU-mK-gLW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -150,15 +171,17 @@
                 <relationship kind="action" name="addItem:"/>
                 <relationship kind="action" name="didTapClearCompleted:"/>
                 <relationship kind="action" name="sortItems:"/>
+                <relationship kind="action" name="toggleListEditingMode:"/>
                 <relationship kind="action" name="toggleLists:"/>
                 <relationship kind="outlet" name="addItemButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="clearCompletedButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="editListsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="footerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="listsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="navBarView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="sortItemsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tableViewTopConstraint" candidateClass="NSLayoutConstraint"/>
+                <relationship kind="outlet" name="tableViewBottomConstraint" candidateClass="NSLayoutConstraint"/>
             </relationships>
         </class>
     </classes>

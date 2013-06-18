@@ -54,9 +54,11 @@
     listsView.translatesAutoresizingMaskIntoConstraints = NO;
     listsView.hidden = YES;
     listsVC.collectionView.alpha = 0;
+    self.editListsButton.hidden = YES;
+    self.editListsButton.alpha = 0;
     [self.view addSubview:listsView];
     NSDictionary *views = NSDictionaryOfVariableBindings(listsView);
-    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-50-[listsView]"
+    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[listsView]-50-|"
                                                                    options:NSLayoutFormatAlignAllBaseline
                                                                    metrics:nil
                                                                      views:views];
@@ -85,11 +87,13 @@
 
 - (void)showLists {
     listsVC.view.hidden = NO;
+    self.editListsButton.hidden = NO;
     listsShown = YES;
     listsHeightConstraint.constant = 120;
-    self.tableViewTopConstraint.constant = 170;
+    self.tableViewBottomConstraint.constant = 170;
     [UIView animateWithDuration:0.2 animations:^{
         [self.view layoutIfNeeded];
+        self.editListsButton.alpha = 1;
     } completion:^(BOOL finished) {
         listsVC.view.hidden = NO;
         [UIView animateWithDuration:0.2 animations:^{
@@ -101,16 +105,22 @@
 - (void)hideLists {
     [UIView animateWithDuration:0.2 animations:^{
         listsVC.collectionView.alpha = 0;
+        self.editListsButton.alpha = 0;
     } completion:^(BOOL finished) {
         listsHeightConstraint.constant = 0;
-        self.tableViewTopConstraint.constant = 50;
-        [UIView animateWithDuration:0.3 animations:^{
+        self.tableViewBottomConstraint.constant = 50;
+        self.editListsButton.hidden = YES;
+        [UIView animateWithDuration:0.2 animations:^{
             [self.view layoutIfNeeded];
         } completion:^(BOOL finished) {
             listsVC.view.hidden = YES;
             listsShown = NO;
         }];
     }];
+}
+
+- (IBAction)toggleListEditingMode:(id)sender {
+    NSLog(@"toggle list editing mode");
 }
 
 #pragma mark - tableview delegate
@@ -176,6 +186,7 @@
 
 - (void)styleButtons {
     [self styleButton:self.listsButton icon:@"icon-list"];
+    [self styleButton:self.editListsButton icon:@"icon-edit-lists"];
     [self styleButton:self.addItemButton icon:@"icon-add"];
     [self styleButton:self.clearCompletedButton icon:@"icon-clear"];
     [self styleButton:self.sortItemsButton icon:@"icon-sort"];

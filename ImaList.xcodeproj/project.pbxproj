@@ -61,6 +61,8 @@
 		4BAD099E176F8E3B000D74D5 /* ListCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */; };
 		4BAD09A0176F8E76000D74D5 /* ListCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */; };
 		4BAD09A1176F8E76000D74D5 /* ListCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */; };
+		4BAD09A81770D3DA000D74D5 /* icon-edit-lists.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BAD09A61770D3DA000D74D5 /* icon-edit-lists.png */; };
+		4BAD09A91770D3DA000D74D5 /* icon-edit-lists@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BAD09A71770D3DA000D74D5 /* icon-edit-lists@2x.png */; };
 		4BC7EC5A176F81300040E9FB /* ListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC58176F81300040E9FB /* ListsViewController.m */; };
 		4BC7EC5B176F81300040E9FB /* ListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC58176F81300040E9FB /* ListsViewController.m */; };
 		4BC7EC5C176F81300040E9FB /* ListsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BC7EC59176F81300040E9FB /* ListsViewController.xib */; };
@@ -144,6 +146,8 @@
 		4BAD099B176F8E3B000D74D5 /* ListCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionCell.h; sourceTree = "<group>"; };
 		4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionCell.m; sourceTree = "<group>"; };
 		4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCollectionCell.xib; sourceTree = "<group>"; };
+		4BAD09A61770D3DA000D74D5 /* icon-edit-lists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-edit-lists.png"; path = "UI/icon-edit-lists.png"; sourceTree = "<group>"; };
+		4BAD09A71770D3DA000D74D5 /* icon-edit-lists@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-edit-lists@2x.png"; path = "UI/icon-edit-lists@2x.png"; sourceTree = "<group>"; };
 		4BC7EC57176F81300040E9FB /* ListsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListsViewController.h; sourceTree = "<group>"; };
 		4BC7EC58176F81300040E9FB /* ListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListsViewController.m; sourceTree = "<group>"; };
 		4BC7EC59176F81300040E9FB /* ListsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListsViewController.xib; sourceTree = "<group>"; };
@@ -286,6 +290,8 @@
 				4BCC99CE1750641900C3D825 /* icon-clear@2x.png */,
 				4B7E85C0176E7E2600DAF07E /* icon-delete.png */,
 				4B7E85C1176E7E2600DAF07E /* icon-delete@2x.png */,
+				4BAD09A61770D3DA000D74D5 /* icon-edit-lists.png */,
+				4BAD09A71770D3DA000D74D5 /* icon-edit-lists@2x.png */,
 				4BCC99C917505E9B00C3D825 /* icon-list.png */,
 				4BCC99CA17505E9B00C3D825 /* icon-list@2x.png */,
 				4BCC99DB175816C100C3D825 /* icon-sort.png */,
@@ -504,6 +510,8 @@
 				4B7E85CD176FD5D200DAF07E /* ListAddCell.xib in Resources */,
 				4B7E85D5176FF96D00DAF07E /* lists-background.png in Resources */,
 				4B7E85D6176FF96D00DAF07E /* lists-background@2x.png in Resources */,
+				4BAD09A81770D3DA000D74D5 /* icon-edit-lists.png in Resources */,
+				4BAD09A91770D3DA000D74D5 /* icon-edit-lists@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
