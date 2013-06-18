@@ -185,7 +185,7 @@
 }
 
 - (void)styleButtons {
-    [self styleButton:self.listsButton icon:@"icon-list"];
+    [self styleButton:self.listsButton icon:@"icon-lists"];
     [self styleButton:self.editListsButton icon:@"icon-edit-lists"];
     [self styleButton:self.addItemButton icon:@"icon-add"];
     [self styleButton:self.clearCompletedButton icon:@"icon-clear"];

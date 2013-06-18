@@ -9,11 +9,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.listNameTextField.delegate = self;
-    [self style];
 }
 
 - (void)configureCellWithList:(List *)list {
     self.listNameLabel.text = list.name;
+    [self style];
 }
 
 - (void)style {
