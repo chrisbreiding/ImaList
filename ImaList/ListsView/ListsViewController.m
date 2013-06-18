@@ -1,6 +1,7 @@
 #import "ListsViewController.h"
 #import "ListListDocument.h"
 #import "ListCollectionCell.h"
+#import "List.h"
 
 @implementation ListsViewController
 
@@ -45,8 +46,24 @@
     } else {
         cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"ListCell" forIndexPath:indexPath];
         [cell configureCellWithList:[self.dataSource listAtIndex:indexPath.row]];
+        cell.delegate = self;
+        cell.tag = indexPath.row;
     }
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == [self.dataSource listCount]) {
+        [self.dataSource createListWithName:@""];
+        NSIndexPath *newAddIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + 1) inSection:0];
+        [_collectionView insertItemsAtIndexPaths:@[indexPath]];
+        [_collectionView reloadItemsAtIndexPaths:@[newAddIndexPath]];
+        ListCollectionCell *cell = (ListCollectionCell *)[_collectionView cellForItemAtIndexPath:indexPath];
+        [cell enterEditMode];
+        [cell.listNameTextField becomeFirstResponder];
+    } else {
+        
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -55,6 +72,15 @@
     } else {
         return CGSizeMake(100, 100);
     }
+}
+
+#pragma mark - list editor delegate
+
+- (void)didFinishEditingList:(NSString *)listName cell:(ListCollectionCell *)cell {
+    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
+    List *list = [self.dataSource listAtIndex:indexPath.row];
+    list.name = listName;
+    [self.dataSource commitChanges];
 }
 
 @end
