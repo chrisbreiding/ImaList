@@ -9,6 +9,8 @@
     [self loadData];
     UINib *cellNib = [UINib nibWithNibName:@"ListCollectionCell" bundle:nil];
     [_collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ListCell"];
+    UINib *addCellNib = [UINib nibWithNibName:@"ListAddCell" bundle:nil];
+    [_collectionView registerNib:addCellNib forCellWithReuseIdentifier:@"ListAddCell"];
     _collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 0);
 }
 
@@ -33,13 +35,26 @@
 #pragma mark - collection view delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.dataSource listCount];
+    return [self.dataSource listCount] + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ListCollectionCell *cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"ListCell" forIndexPath:indexPath];
-    [cell configureCellWithList:[self.dataSource listAtIndex:indexPath.row]];
+    ListCollectionCell *cell;
+    if (indexPath.row == [self.dataSource listCount]) {
+        cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"ListAddCell" forIndexPath:indexPath];        
+    } else {
+        cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"ListCell" forIndexPath:indexPath];
+        [cell configureCellWithList:[self.dataSource listAtIndex:indexPath.row]];
+    }
     return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == [self.dataSource listCount]) {
+        return CGSizeMake(50, 100);
+    } else {
+        return CGSizeMake(100, 100);
+    }
 }
 
 @end

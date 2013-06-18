@@ -47,6 +47,10 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<object class="NSColor" key="IBUIBackgroundColor" id="421215382">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MCAwAA</bytes>
+						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -58,7 +62,7 @@
 						<object class="IBUICollectionViewFlowLayout" key="IBUICollectionViewLayout" id="339858554">
 							<reference key="IBUICollectionView" ref="1294449"/>
 							<int key="IBUIScrollDirection">1</int>
-							<string key="IBUIItemSize">{130, 100}</string>
+							<string key="IBUIItemSize">{100, 100}</string>
 							<float key="IBUIMinimumLineSpacing">10</float>
 							<float key="IBUIMinimumInteritemSpacing">10</float>
 							<double key="IBUISectionInset.top">10</double>
@@ -74,11 +78,7 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="1294449"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
-				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MCAwIDAAA</bytes>
-					<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
-				</object>
+				<reference key="IBUIBackgroundColor" ref="421215382"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 		</array>

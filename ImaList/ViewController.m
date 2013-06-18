@@ -53,6 +53,7 @@
     UIView *listsView = listsVC.view;
     listsView.translatesAutoresizingMaskIntoConstraints = NO;
     listsView.hidden = YES;
+    listsVC.collectionView.alpha = 0;
     [self.view addSubview:listsView];
     NSDictionary *views = NSDictionaryOfVariableBindings(listsView);
     NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-50-[listsView]"
@@ -87,20 +88,29 @@
     listsShown = YES;
     listsHeightConstraint.constant = 120;
     self.tableViewTopConstraint.constant = 170;
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.2 animations:^{
         [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        listsVC.view.hidden = NO;
+        [UIView animateWithDuration:0.2 animations:^{
+            listsVC.collectionView.alpha = 1;
+        }];
     }];
 }
 
 - (void)hideLists {
-    listsHeightConstraint.constant = 0;
-    self.tableViewTopConstraint.constant = 50;
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.view layoutIfNeeded];
+    [UIView animateWithDuration:0.2 animations:^{
+        listsVC.collectionView.alpha = 0;
     } completion:^(BOOL finished) {
-        listsVC.view.hidden = YES;
+        listsHeightConstraint.constant = 0;
+        self.tableViewTopConstraint.constant = 50;
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            listsVC.view.hidden = YES;
+            listsShown = NO;
+        }];
     }];
-    listsShown = NO;
 }
 
 #pragma mark - tableview delegate
