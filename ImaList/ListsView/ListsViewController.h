@@ -8,4 +8,6 @@
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 
+- (void)toggleEditingMode;
+
 @end

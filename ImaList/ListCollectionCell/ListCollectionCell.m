@@ -4,6 +4,8 @@
 
 @implementation ListCollectionCell {
     List *_list;
+    BOOL _editing;
+    BOOL allExitEditing;
 }
 
 - (void)awakeFromNib {
@@ -11,8 +13,16 @@
     self.listNameTextField.delegate = self;
 }
 
-- (void)configureCellWithList:(List *)list {
+- (void)configureCellWithList:(List *)list editing:(BOOL)editing {
     self.listNameLabel.text = list.name;
+    if (editing) {
+        [self enterEditingMode];
+        _editing = YES;
+    }
+    if (!editing && _editing) {
+        [self exitEditingMode];
+        _editing = NO;
+    }
     [self style];
 }
 
@@ -25,24 +35,35 @@
     layer.shadowOpacity = 0.8;
 }
 
-- (void)enterEditMode {
+- (void)enterEditingMode {
     self.listNameTextField.text = self.listNameLabel.text;
     self.listNameTextField.hidden = NO;
+    self.deleteButton.hidden = NO;
     self.listNameLabel.hidden = YES;
 }
 
-- (void)exitEditMode {
+- (void)exitEditingMode {
+    NSLog(@"exit editing");
     NSString *listName = self.listNameTextField.text;
-    self.listNameLabel.text = listName;
-    self.listNameTextField.hidden = YES;
-    self.listNameLabel.hidden = NO;
+    self.listNameLabel.text = listName;        
     [self.delegate didFinishEditingList:listName cell:self];
+    self.listNameTextField.hidden = YES;
+    self.deleteButton.hidden = YES;
+    self.listNameLabel.hidden = NO;
+}
+
+#pragma mark - user actions
+
+- (IBAction)deleteList:(id)sender {
+    [self.delegate deleteListForCell:self];
 }
 
 #pragma mark - text field delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self exitEditMode];
+    if (!_editing) {
+        [self exitEditingMode];        
+    }
     [self.listNameTextField resignFirstResponder];
     return YES;
 }

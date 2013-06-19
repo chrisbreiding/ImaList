@@ -16,7 +16,7 @@
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
 
-- (IBAction) didTapClearCompleted:(id)sender;
+- (IBAction) clearCompleted:(id)sender;
 - (IBAction) addItem:(id)sender;
 - (IBAction) sortItems:(id)sender;
 - (IBAction) toggleLists:(id)sender;

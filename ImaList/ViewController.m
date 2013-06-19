@@ -120,7 +120,7 @@
 }
 
 - (IBAction)toggleListEditingMode:(id)sender {
-    NSLog(@"toggle list editing mode");
+    [listsVC toggleEditingMode];
 }
 
 #pragma mark - tableview delegate
@@ -199,7 +199,7 @@
 
 #pragma mark - user actions
 
-- (IBAction)didTapClearCompleted:(id)sender {
+- (IBAction)clearCompleted:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                   initWithTitle:nil
                                   delegate:self
