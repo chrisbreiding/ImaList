@@ -32,8 +32,6 @@
 		4B7E85C9176E882C00DAF07E /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85C6176E882C00DAF07E /* ItemTableCell.m */; };
 		4B7E85CA176E882C00DAF07E /* ItemTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */; };
 		4B7E85CB176E882C00DAF07E /* ItemTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */; };
-		4B7E85CD176FD5D200DAF07E /* ListAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85CC176FD5D200DAF07E /* ListAddCell.xib */; };
-		4B7E85CE176FD5D200DAF07E /* ListAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85CC176FD5D200DAF07E /* ListAddCell.xib */; };
 		4B7E85D91771315F00DAF07E /* icon-delete-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85D71771315F00DAF07E /* icon-delete-list.png */; };
 		4B7E85DA1771316000DAF07E /* icon-delete-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85D81771315F00DAF07E /* icon-delete-list@2x.png */; };
 		4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA2879517357D160041BB2D /* ItemListSpec.m */; };
@@ -119,7 +117,6 @@
 		4B7E85C5176E882C00DAF07E /* ItemTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableCell.h; sourceTree = "<group>"; };
 		4B7E85C6176E882C00DAF07E /* ItemTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableCell.m; sourceTree = "<group>"; };
 		4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemTableCell.xib; sourceTree = "<group>"; };
-		4B7E85CC176FD5D200DAF07E /* ListAddCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListAddCell.xib; sourceTree = "<group>"; };
 		4B7E85D71771315F00DAF07E /* icon-delete-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-delete-list.png"; sourceTree = "<group>"; };
 		4B7E85D81771315F00DAF07E /* icon-delete-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-delete-list@2x.png"; sourceTree = "<group>"; };
 		4BA2879517357D160041BB2D /* ItemListSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListSpec.m; path = ImaListTests/ItemListSpec.m; sourceTree = SOURCE_ROOT; };
@@ -319,7 +316,6 @@
 				4BAD099B176F8E3B000D74D5 /* ListCollectionCell.h */,
 				4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */,
 				4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */,
-				4B7E85CC176FD5D200DAF07E /* ListAddCell.xib */,
 			);
 			path = ListCollectionCell;
 			sourceTree = "<group>";
@@ -507,7 +503,6 @@
 				4B7E85CA176E882C00DAF07E /* ItemTableCell.xib in Resources */,
 				4BC7EC5C176F81300040E9FB /* ListsViewController.xib in Resources */,
 				4BAD09A0176F8E76000D74D5 /* ListCollectionCell.xib in Resources */,
-				4B7E85CD176FD5D200DAF07E /* ListAddCell.xib in Resources */,
 				4BAD09E81770F32A000D74D5 /* icon-checked.png in Resources */,
 				4BAD09E91770F32A000D74D5 /* icon-checked@2x.png in Resources */,
 				4BAD09EA1770F32A000D74D5 /* icon-clear.png in Resources */,
@@ -554,7 +549,6 @@
 				4B7E85CB176E882C00DAF07E /* ItemTableCell.xib in Resources */,
 				4BC7EC5D176F81300040E9FB /* ListsViewController.xib in Resources */,
 				4BAD09A1176F8E76000D74D5 /* ListCollectionCell.xib in Resources */,
-				4B7E85CE176FD5D200DAF07E /* ListAddCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

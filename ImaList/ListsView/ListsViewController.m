@@ -1,3 +1,4 @@
+#import <QuartzCore/QuartzCore.h>
 #import "ListsViewController.h"
 #import "ListListDocument.h"
 #import "ListCollectionCell.h"
@@ -11,6 +12,9 @@
     [super viewDidLoad];
     [self loadData];
     [self style];
+//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.addButton.translatesAutoresizingMaskIntoConstraints = NO;
     UINib *cellNib = [UINib nibWithNibName:@"ListCollectionCell" bundle:nil];
     [_collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ListCell"];
     UINib *addCellNib = [UINib nibWithNibName:@"ListAddCell" bundle:nil];
@@ -24,6 +28,12 @@
     self.backgroundImageView.image = [[UIImage imageNamed:@"lists-background"]
                                       resizableImageWithCapInsets:UIEdgeInsetsMake(12, 12, 12, 12)
                                       resizingMode:UIImageResizingModeStretch];
+    CALayer *layer = self.addButton.layer;
+    layer.masksToBounds = NO;
+    layer.shadowOffset = CGSizeMake(0, 0);
+    layer.shadowColor = [[UIColor blackColor] CGColor];
+    layer.shadowRadius = 2;
+    layer.shadowOpacity = 0.8;
 }
 
 #pragma mark - data
@@ -47,46 +57,26 @@
 #pragma mark - collection view delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.dataSource listCount] + 1;
+    return [self.dataSource listCount];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"loading cell #%@", @(indexPath.row));
-    ListCollectionCell *cell;
-    if (indexPath.row == [self.dataSource listCount]) {
-        cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"ListAddCell" forIndexPath:indexPath];        
-    } else {
-        cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"ListCell" forIndexPath:indexPath];
-        [cell configureCellWithList:[self.dataSource listAtIndex:indexPath.row] editing:editing];
-        NSLog(@"cell with item: %@", [[self.dataSource listAtIndex:indexPath.row] name]);
-        cell.delegate = self;
-    }
+    ListCollectionCell *cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"ListCell" forIndexPath:indexPath];
+    [cell configureCellWithList:[self.dataSource listAtIndex:indexPath.row] editing:editing];
+    cell.delegate = self;
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == [self.dataSource listCount]) {
-        [self createCellAtIndexPath:indexPath];
-    } else {
-        
-    }
+    // go to list of items
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == [self.dataSource listCount]) {
-        return CGSizeMake(50, 100);
-    } else {
-        return CGSizeMake(100, 100);
-    }
-}
+#pragma mark - user actions
 
-#pragma mark - actions on cells
-
-- (void)createCellAtIndexPath:(NSIndexPath *)indexPath {
+- (IBAction)addList:(id)sender {
     [self.dataSource createListWithName:@""];
-    NSIndexPath *newAddIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + 1) inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.dataSource listCount] - 1) inSection:0];
     [_collectionView insertItemsAtIndexPaths:@[indexPath]];
-    [_collectionView reloadItemsAtIndexPaths:@[newAddIndexPath]];
     ListCollectionCell *cell = (ListCollectionCell *)[_collectionView cellForItemAtIndexPath:indexPath];
     [cell enterEditingMode];
     [cell.listNameTextField becomeFirstResponder];
@@ -97,16 +87,36 @@
 - (void)toggleEditingMode {
     editing = !editing;
 //    [_collectionView reloadItemsAtIndexPaths:_collectionView.indexPathsForVisibleItems];
-    [_collectionView reloadData];
+    if (editing) {
+        [self showAddButton];
+    } else {
+        [self hideAddButton];
+    }
+//    [_collectionView reloadData];
+}
+
+- (void)showAddButton {
+    _collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 60);
+    self.addButtonTrailingConstraint.constant = 0;
+    [UIView animateWithDuration:0.2 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)hideAddButton {
+    self.addButtonTrailingConstraint.constant = -50;
+    [UIView animateWithDuration:0.2 animations:^{
+        _collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (void)didFinishEditingList:(NSString *)listName cell:(ListCollectionCell *)cell {
-    NSLog(@"finished editing cell: %@", cell);
-    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
-    List *list = [self.dataSource listAtIndex:indexPath.row];
-    [_collectionView reloadItemsAtIndexPaths:@[indexPath]];
-    list.name = listName;
-    [self.dataSource commitChanges];
+//    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
+//    List *list = [self.dataSource listAtIndex:indexPath.row];
+//    [_collectionView reloadItemsAtIndexPaths:@[indexPath]];
+//    list.name = listName;
+//    [self.dataSource commitChanges];
 }
 
 - (void)deleteListForCell:(ListCollectionCell *)cell {
