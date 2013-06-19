@@ -14,6 +14,7 @@
     [super viewDidLoad];
     [self loadData];
     [self style];
+    [self configureNotifications];
     editedLists = @[];
     UINib *cellNib = [UINib nibWithNibName:@"ListCollectionCell" bundle:nil];
     [_collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ListCell"];
@@ -90,15 +91,15 @@
 - (void)toggleEditingMode {
     editing = !editing;
     if (editing) {
-        [self showAddButton];
+        [self showAddButton:nil];
     } else {
-        [self hideAddButton];
+        [self hideAddButton:nil];
         [self finishEditing];
     }
     [_collectionView reloadData];
 }
 
-- (void)showAddButton {
+- (void)showAddButton:(NSNotification *)notification {
     _collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 60);
     self.addButtonTrailingConstraint.constant = 0;
     [UIView animateWithDuration:0.2 animations:^{
@@ -106,7 +107,7 @@
     }];
 }
 
-- (void)hideAddButton {
+- (void)hideAddButton:(NSNotification *)notification {
     self.addButtonTrailingConstraint.constant = -50;
     [UIView animateWithDuration:0.2 animations:^{
         _collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
@@ -129,6 +130,19 @@
     [self.dataSource deleteListAtIndex:indexPath.row];
     [self.dataSource commitChanges];
     [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
+}
+
+#pragma mark - notifications
+
+- (void)configureNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showAddButton:)
+                                                 name:@"finishEditingList"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideAddButton:)
+                                                 name:@"beginEditingList"
+                                               object:nil];
 }
 
 @end
