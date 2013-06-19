@@ -9,6 +9,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    [self configureNotifications];
     self.listNameTextField.delegate = self;
 }
 
@@ -48,6 +49,27 @@
     self.listNameLabel.hidden = NO;
 }
 
+#pragma mark - notifications
+
+- (void)configureNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showDeleteButton:)
+                                                 name:@"finishEditingList"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideDeleteButton:)
+                                                 name:@"beginEditingList"
+                                               object:nil];
+}
+
+- (void)showDeleteButton:(NSNotification *)notification {
+    self.deleteButton.hidden = NO;
+}
+
+- (void)hideDeleteButton:(NSNotification *)notification {
+    self.deleteButton.hidden = YES;
+}
+
 #pragma mark - user actions
 
 - (IBAction)deleteList:(id)sender {
@@ -56,8 +78,13 @@
 
 #pragma mark - text field delegate
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"beginEditingList" object:nil];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.delegate didFinishEditingList:self.listNameTextField.text cell:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"finishEditingList" object:nil];
     [textField resignFirstResponder];
     return YES;
 }

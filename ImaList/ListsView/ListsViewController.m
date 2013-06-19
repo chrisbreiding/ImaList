@@ -6,6 +6,7 @@
 
 @implementation ListsViewController {
     BOOL editing;
+    BOOL keyboardSizeSet;
     NSArray *editedLists;
 }
 

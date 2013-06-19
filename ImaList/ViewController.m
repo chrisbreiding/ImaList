@@ -9,6 +9,8 @@
 @implementation ViewController {
     ListsViewController *listsVC;
     BOOL listsShown;
+    BOOL editingList;
+    NSLayoutConstraint *listsBottomConstraint;
     NSLayoutConstraint *listsHeightConstraint;
     EditorViewController *editItemVC;
     ItemTableCell *cellBeingEdited;
@@ -58,7 +60,8 @@
     self.editListsButton.alpha = 0;
     [self.view addSubview:listsView];
     NSDictionary *views = NSDictionaryOfVariableBindings(listsView);
-    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[listsView]-50-|"
+    NSArray *constraints = @[];
+    NSArray *bottomConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[listsView]-50-|"
                                                                    options:NSLayoutFormatAlignAllBaseline
                                                                    metrics:nil
                                                                      views:views];
@@ -70,7 +73,9 @@
                                                                              options:NSLayoutFormatAlignAllBaseline
                                                                              metrics:nil
                                                                                views:views];
+    listsBottomConstraint = bottomConstraints[0];
     listsHeightConstraint = heightConstraints[0];
+    constraints = [constraints arrayByAddingObjectsFromArray:bottomConstraints];
     constraints = [constraints arrayByAddingObjectsFromArray:heightConstraints];
     constraints = [constraints arrayByAddingObjectsFromArray:horizontalConstraints];
     [self.view addConstraints:constraints];
@@ -141,17 +146,20 @@
     [self editNameForCell:cell];
 }
 
-#pragma mark - cell notifications
+#pragma mark - notifications
 
 -(void)configureNotifications {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadItemRow:)
-                                                 name:@"reloadItemRow"
-                                               object:nil];
+    [self observeNotificationName:@"reloadItemRow" selector:@selector(reloadItemRow:)];
+    [self observeNotificationName:@"deleteItem" selector:@selector(deleteItem:)];
+    [self observeNotificationName:@"beginEditingList" selector:@selector(beginEditingList:)];
+    [self observeNotificationName:@"finishEditingList" selector:@selector(finishEditingList:)];
+    [self observeNotificationName:UIKeyboardWillShowNotification selector:@selector(keyboardWillShow:)];
+}
 
+- (void)observeNotificationName:(NSString *)name selector:(SEL)selector {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(deleteItem:)
-                                                 name:@"deleteItem"
+                                             selector:selector
+                                                 name:name
                                                object:nil];
 }
 
@@ -170,6 +178,29 @@
     [self.dataSource deleteItemAtIndex:index];
     [_tableView deleteRowsAtIndexPaths:@[indexPath]
                       withRowAnimation:UITableViewRowAnimationBottom];
+}
+
+- (void)beginEditingList:(NSNotification *)notification {
+    editingList = YES;
+}
+
+- (void)finishEditingList:(NSNotification *)notification {
+    editingList = NO;
+    listsBottomConstraint.constant = 50;
+    [UIView animateWithDuration:0.2 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    NSDictionary* info = [notification userInfo];
+    int keyboardHeight = (int)[info[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    if (editingList) {
+        listsBottomConstraint.constant = keyboardHeight;
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.view layoutIfNeeded];
+        }];
+    }
 }
 
 #pragma mark - appearance
