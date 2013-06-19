@@ -23,6 +23,10 @@
     _collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
 }
 
+- (void)willExit {
+    editing = NO;
+}
+
 #pragma mark - style
 
 - (void)style {

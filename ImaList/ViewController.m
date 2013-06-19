@@ -108,6 +108,7 @@
 }
 
 - (void)hideLists {
+    [listsVC willExit];
     [UIView animateWithDuration:0.2 animations:^{
         listsVC.collectionView.alpha = 0;
         self.editListsButton.alpha = 0;

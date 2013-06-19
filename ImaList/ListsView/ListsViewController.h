@@ -12,5 +12,6 @@
 
 - (IBAction)addList:(id)sender;
 - (void)toggleEditingMode;
+- (void)willExit;
 
 @end
