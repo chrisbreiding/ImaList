@@ -12,8 +12,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *deleteButton;
 
 - (IBAction)deleteList:(id)sender;
-- (void)configureCellWithList:(List *)list editing:(BOOL)editing;
-- (void)enterEditingMode;
+- (void)configureCellWithList:(List *)list editing:(BOOL)isEditing;
 
 @end
 

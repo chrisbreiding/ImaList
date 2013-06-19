@@ -2,7 +2,7 @@
 #import "List.h"
 
 @implementation ListListDocument {
-    NSMutableArray *_lists;
+    NSMutableArray *lists;
 }
 
 - (id)initWithFileURL:(NSURL *)url {
@@ -31,9 +31,9 @@
     BOOL success = NO;
     if([contents isKindOfClass:[NSData class]] && [contents length] > 0) {
         NSData *data = (NSData *)contents;
-        _lists = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        if (!_lists) {
-            _lists = [NSMutableArray array];
+        lists = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (!lists) {
+            lists = [NSMutableArray array];
             [self createListWithName:@"Grocery"];
             [self commitChanges];
         }
@@ -43,7 +43,7 @@
 }
 
 - (id)contentsForType:(NSString *)typeName error:(NSError **)outError {
-    return [NSKeyedArchiver archivedDataWithRootObject:_lists];
+    return [NSKeyedArchiver archivedDataWithRootObject:lists];
 }
 
 - (void)handleError:(NSError *)error userInteractionPermitted:(BOOL)userInteractionPermitted {
@@ -64,19 +64,19 @@
 #pragma mark - list list data source
 
 - (NSInteger)listCount {
-    return _lists.count;
+    return lists.count;
 }
 
 - (List *)listAtIndex:(NSInteger)index {
-    return [_lists objectAtIndex:index];
+    return [lists objectAtIndex:index];
 }
 
 - (NSInteger)indexOfList:(List *)list {
-    return [_lists indexOfObject:list];
+    return [lists indexOfObject:list];
 }
 
 - (void)deleteListAtIndex:(NSInteger)index {
-    [_lists removeObjectAtIndex:index];
+    [lists removeObjectAtIndex:index];
     [self commitChanges];
 }
 
@@ -84,7 +84,7 @@
     List *newList = [[List alloc] init];
     newList.name = name;
     newList.items = @[];
-    [_lists addObject:newList];
+    [lists addObject:newList];
     [self commitChanges];
     return newList;
 }

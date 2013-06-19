@@ -6,15 +6,14 @@
 
 @implementation ListsViewController {
     BOOL editing;
+    NSArray *editedLists;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadData];
     [self style];
-//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
-//    self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-//    self.addButton.translatesAutoresizingMaskIntoConstraints = NO;
+    editedLists = @[];
     UINib *cellNib = [UINib nibWithNibName:@"ListCollectionCell" bundle:nil];
     [_collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ListCell"];
     UINib *addCellNib = [UINib nibWithNibName:@"ListAddCell" bundle:nil];
@@ -61,8 +60,9 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    List *list = [self.dataSource listAtIndex:indexPath.row];
     ListCollectionCell *cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"ListCell" forIndexPath:indexPath];
-    [cell configureCellWithList:[self.dataSource listAtIndex:indexPath.row] editing:editing];
+    [cell configureCellWithList:list editing:editing];
     cell.delegate = self;
     return cell;
 }
@@ -78,7 +78,9 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.dataSource listCount] - 1) inSection:0];
     [_collectionView insertItemsAtIndexPaths:@[indexPath]];
     ListCollectionCell *cell = (ListCollectionCell *)[_collectionView cellForItemAtIndexPath:indexPath];
-    [cell enterEditingMode];
+    [_collectionView scrollToItemAtIndexPath:indexPath
+                            atScrollPosition:UICollectionViewScrollPositionRight
+                                    animated:YES];
     [cell.listNameTextField becomeFirstResponder];
 }
 
@@ -86,13 +88,13 @@
 
 - (void)toggleEditingMode {
     editing = !editing;
-//    [_collectionView reloadItemsAtIndexPaths:_collectionView.indexPathsForVisibleItems];
     if (editing) {
         [self showAddButton];
     } else {
         [self hideAddButton];
+        [self finishEditing];
     }
-//    [_collectionView reloadData];
+    [_collectionView reloadData];
 }
 
 - (void)showAddButton {
@@ -112,11 +114,13 @@
 }
 
 - (void)didFinishEditingList:(NSString *)listName cell:(ListCollectionCell *)cell {
-//    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
-//    List *list = [self.dataSource listAtIndex:indexPath.row];
-//    [_collectionView reloadItemsAtIndexPaths:@[indexPath]];
-//    list.name = listName;
-//    [self.dataSource commitChanges];
+    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
+    List *list = [self.dataSource listAtIndex:indexPath.row];
+    list.name = listName;
+}
+
+- (void)finishEditing {
+    [self.dataSource commitChanges];
 }
 
 - (void)deleteListForCell:(ListCollectionCell *)cell {

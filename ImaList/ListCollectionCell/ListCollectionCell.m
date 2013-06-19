@@ -3,9 +3,8 @@
 #import "List.h"
 
 @implementation ListCollectionCell {
-    List *_list;
-    BOOL _editing;
-    BOOL allExitEditing;
+    NSString *name;
+    BOOL editing;
 }
 
 - (void)awakeFromNib {
@@ -13,15 +12,17 @@
     self.listNameTextField.delegate = self;
 }
 
-- (void)configureCellWithList:(List *)list editing:(BOOL)editing {
-    self.listNameLabel.text = list.name;
-    if (editing) {
+- (void)configureCellWithList:(List *)list editing:(BOOL)isEditing {
+    if (isEditing) {
+        self.listNameTextField.text = list.name;
         [self enterEditingMode];
-        _editing = YES;
+        editing = YES;
+    } else {
+        self.listNameLabel.text = list.name;
     }
-    if (!editing && _editing) {
+    if (!isEditing && editing) {
         [self exitEditingMode];
-        _editing = NO;
+        editing = NO;
     }
     [self style];
 }
@@ -36,17 +37,12 @@
 }
 
 - (void)enterEditingMode {
-    self.listNameTextField.text = self.listNameLabel.text;
     self.listNameTextField.hidden = NO;
     self.deleteButton.hidden = NO;
     self.listNameLabel.hidden = YES;
 }
 
 - (void)exitEditingMode {
-    NSLog(@"exit editing");
-    NSString *listName = self.listNameTextField.text;
-    self.listNameLabel.text = listName;        
-    [self.delegate didFinishEditingList:listName cell:self];
     self.listNameTextField.hidden = YES;
     self.deleteButton.hidden = YES;
     self.listNameLabel.hidden = NO;
@@ -61,10 +57,8 @@
 #pragma mark - text field delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (!_editing) {
-        [self exitEditingMode];        
-    }
-    [self.listNameTextField resignFirstResponder];
+    [self.delegate didFinishEditingList:self.listNameTextField.text cell:self];
+    [textField resignFirstResponder];
     return YES;
 }
 
