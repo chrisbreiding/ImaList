@@ -8,6 +8,7 @@
     BOOL editing;
     BOOL keyboardSizeSet;
     NSArray *editedLists;
+    ListCollectionCell *cellToDelete;
 }
 
 - (void)viewDidLoad {
@@ -90,6 +91,28 @@
     [cell.listNameTextField becomeFirstResponder];
 }
 
+- (void)deleteListForCell:(ListCollectionCell *)cell {
+    cellToDelete = cell;
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:@"Delete list and all its items?"
+                                  delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  destructiveButtonTitle:@"Delete List"
+                                  otherButtonTitles:nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if ([buttonTitle isEqualToString:@"Delete List"]) {
+        NSIndexPath *indexPath = [_collectionView indexPathForCell:cellToDelete];
+        [self.dataSource deleteListAtIndex:indexPath.row];
+        [self.dataSource commitChanges];
+        [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
+        cellToDelete = nil;
+    }
+}
+
 #pragma mark - editing
 
 - (void)toggleEditingMode {
@@ -127,13 +150,6 @@
 
 - (void)finishEditing {
     [self.dataSource commitChanges];
-}
-
-- (void)deleteListForCell:(ListCollectionCell *)cell {
-    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
-    [self.dataSource deleteListAtIndex:indexPath.row];
-    [self.dataSource commitChanges];
-    [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
 }
 
 #pragma mark - notifications

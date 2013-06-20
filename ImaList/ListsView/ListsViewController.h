@@ -2,7 +2,7 @@
 #import "ListListDataSource.h"
 #import "ListCollectionCell.h"
 
-@interface ListsViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, ListEditorDelegate>
+@interface ListsViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIActionSheetDelegate, ListEditorDelegate>
 
 @property (nonatomic, strong) id<ListListDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
