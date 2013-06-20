@@ -91,6 +91,7 @@
 }
 
 - (void)showLists {
+    [self toggleItemButtonsHidden:YES];
     listsVC.view.hidden = NO;
     self.editListsButton.hidden = NO;
     listsShown = YES;
@@ -108,6 +109,7 @@
 }
 
 - (void)hideLists {
+    [self toggleItemButtonsHidden:NO];
     [listsVC willExit];
     [UIView animateWithDuration:0.2 animations:^{
         listsVC.collectionView.alpha = 0;
@@ -123,6 +125,12 @@
             listsShown = NO;
         }];
     }];
+}
+
+- (void)toggleItemButtonsHidden:(BOOL)hidden {
+    self.clearCompletedButton.hidden = hidden;
+    self.sortItemsButton.hidden = hidden;
+    self.addItemButton.hidden = hidden;
 }
 
 - (IBAction)toggleListEditingMode:(id)sender {
