@@ -103,8 +103,7 @@
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    if ([buttonTitle isEqualToString:@"Delete List"]) {
+    if (buttonIndex == actionSheet.destructiveButtonIndex ) {
         NSIndexPath *indexPath = [_collectionView indexPathForCell:cellToDelete];
         [self.dataSource deleteListAtIndex:indexPath.row];
         [self.dataSource commitChanges];

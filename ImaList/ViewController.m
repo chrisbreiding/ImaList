@@ -250,8 +250,7 @@
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    if ([buttonTitle isEqualToString:@"Clear Completed"]) {
+    if (buttonIndex == actionSheet.destructiveButtonIndex ) {
         [self clearCompleted];
     }
 }
