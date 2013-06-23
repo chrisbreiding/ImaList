@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		18A0A26FBBC444A18E65BACF /* libPods-ImaListTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31595206A7E041189CC67E84 /* libPods-ImaListTests.a */; };
+		4B08844117778BE600BF2A25 /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B08844017778BE600BF2A25 /* app-icon.png */; };
+		4B08844317778BEB00BF2A25 /* app-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B08844217778BEB00BF2A25 /* app-icon@2x.png */; };
 		4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3693BA172F6D7C00C81D9F /* ItemSpec.m */; };
 		4B534032172B66C3003F9AE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534031172B66C3003F9AE2 /* UIKit.framework */; };
 		4B534034172B66C3003F9AE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534033172B66C3003F9AE2 /* Foundation.framework */; };
@@ -87,6 +89,8 @@
 
 /* Begin PBXFileReference section */
 		31595206A7E041189CC67E84 /* libPods-ImaListTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImaListTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B08844017778BE600BF2A25 /* app-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon.png"; path = "../../app-icon.png"; sourceTree = "<group>"; };
+		4B08844217778BEB00BF2A25 /* app-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon@2x.png"; path = "../../app-icon@2x.png"; sourceTree = "<group>"; };
 		4B3693BA172F6D7C00C81D9F /* ItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemSpec.m; sourceTree = "<group>"; };
 		4B53402E172B66C3003F9AE2 /* ImaList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImaList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B534031172B66C3003F9AE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -319,6 +323,8 @@
 		4BAD09AB1770F32A000D74D5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4B08844017778BE600BF2A25 /* app-icon.png */,
+				4B08844217778BEB00BF2A25 /* app-icon@2x.png */,
 				4BAD09BB1770F32A000D74D5 /* items */,
 				4BAD09C81770F32A000D74D5 /* lists */,
 				4BAD09CF1770F32A000D74D5 /* shared */,
@@ -531,6 +537,8 @@
 				4BAD0A071770F32B000D74D5 /* textfield@2x.png in Resources */,
 				4B7E85D91771315F00DAF07E /* icon-delete-list.png in Resources */,
 				4B7E85DA1771316000DAF07E /* icon-delete-list@2x.png in Resources */,
+				4B08844117778BE600BF2A25 /* app-icon.png in Resources */,
+				4B08844317778BEB00BF2A25 /* app-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
