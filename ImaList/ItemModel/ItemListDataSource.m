@@ -99,11 +99,12 @@
 }
 
 - (void)clearCompleted {
-    [_items filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id obj, NSDictionary *bindings) {
+    [_items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         Item *item = (Item *)obj;
-        return !item.isChecked;
-    }]];
-    // remove from firebase
+        if (item.isChecked) {
+            [self removeItem:item];
+        }
+    }];
 }
 
 #pragma mark - private

@@ -252,7 +252,6 @@
 
 - (void)clearCompleted {
     [self.dataSource clearCompleted];
-    [self.tableView reloadData];    
 }
 
 - (IBAction)addItem:(id)sender {
