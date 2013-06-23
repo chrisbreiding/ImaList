@@ -32,7 +32,9 @@
 #pragma mark - data
 
 - (void)loadData {
-    self.dataSource = [[ItemListDataSource alloc] init];
+    ItemListDataSource *dataSource = [[ItemListDataSource alloc] init];
+    self.dataSource = dataSource;
+    dataSource.delegate = self;
 }
 
 #pragma mark - lists
@@ -146,10 +148,6 @@
 #pragma mark - notifications
 
 -(void)configureNotifications {
-    [self observeNotificationName:@"itemCreated" selector:@selector(itemCreated:)];
-    [self observeNotificationName:@"itemChanged" selector:@selector(itemChanged:)];
-    [self observeNotificationName:@"itemRemoved" selector:@selector(itemRemoved:)];
-    
     [self observeNotificationName:@"beginEditingList" selector:@selector(beginEditingList:)];
     [self observeNotificationName:@"finishEditingList" selector:@selector(finishEditingList:)];
     [self observeNotificationName:UIKeyboardWillShowNotification selector:@selector(keyboardWillShow:)];
@@ -160,28 +158,6 @@
                                              selector:selector
                                                  name:name
                                                object:nil];
-}
-
-- (void)itemCreated:(NSNotification *)notification {
-    int row = [[notification userInfo][@"index"] intValue];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    [_tableView insertRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationTop];
-}
-
-- (void)itemChanged:(NSNotification *)notification {
-    int row = [[notification userInfo][@"index"] intValue];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    [_tableView reloadRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationMiddle];
-
-}
-
-- (void)itemRemoved:(NSNotification *)notification {
-    int row = [[notification userInfo][@"index"] intValue];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-    [_tableView deleteRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationBottom];
 }
 
 - (void)beginEditingList:(NSNotification *)notification {
@@ -205,6 +181,31 @@
             [self.view layoutIfNeeded];
         }];
     }
+}
+
+#pragma mark - item list data source delegate
+
+- (void)didCreateItemAtIndex:(int)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [_tableView insertRowsAtIndexPaths:@[indexPath]
+                      withRowAnimation:UITableViewRowAnimationTop];
+}
+
+- (void)didUpdateItemAtIndex:(int)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [_tableView reloadRowsAtIndexPaths:@[indexPath]
+                      withRowAnimation:UITableViewRowAnimationMiddle];
+    
+}
+
+- (void)didRemoveItemAtIndex:(int)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [_tableView deleteRowsAtIndexPaths:@[indexPath]
+                      withRowAnimation:UITableViewRowAnimationBottom];
+}
+
+- (void)didSortItems {
+    [_tableView reloadData];
 }
 
 #pragma mark - appearance
@@ -260,7 +261,6 @@
 
 - (IBAction)sortItems:(id)sender {
     [self.dataSource sortItems];
-    [_tableView reloadData];
 }
 
 #pragma mark - item cell delegate

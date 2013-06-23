@@ -3,23 +3,17 @@
 #import "Item.h"
 
 @implementation ItemListDataSource {
-    NSMutableArray *_items;
+    NSMutableArray *items;
     Firebase *itemsRef;
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _items = [NSMutableArray array];
+        items = [NSMutableArray array];
         itemsRef = [[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com/items"];
-//        [itemsRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-//            for (FDataSnapshot *childSnapshot in snapshot.children) {
-//                [_items addObject:childSnapshot.ref];
-//            }
-//        }];
         
         [itemsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-            NSLog(@"item added: %@", snapshot.value[@"name"]);
             [self itemCreatedWithValues:@{
                 @"_id": snapshot.name,
                 @"name": snapshot.value[@"name"],
@@ -29,7 +23,6 @@
         }];
         
         [itemsRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-            NSLog(@"item changed: %@", snapshot.value[@"name"]);
             [self itemChangedWithValues:@{
                  @"_id": snapshot.name,
                  @"name": snapshot.value[@"name"],
@@ -37,14 +30,11 @@
              }];
         }];
         
-        [itemsRef observeEventType:FEventTypeChildMoved withBlock:^(FDataSnapshot *snapshot) {
-            NSLog(@"item moved: %@", snapshot.value[@"name"]);
-            NSLog(@"moved: %@", snapshot);
+        [itemsRef observeEventType:FEventTypeChildMoved andPreviousSiblingNameWithBlock:^(FDataSnapshot *snapshot, NSString *prevName) {
+            [self itemsSorted];
         }];
         
         [itemsRef observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
-            NSLog(@"item removed: %@", snapshot.value[@"name"]);
-            NSLog(@"removed: %@", snapshot);
             [self itemRemovedWithId:snapshot.name];
         }];
     }
@@ -54,22 +44,22 @@
 #pragma mark - public - info
 
 - (NSInteger)itemCount {
-    return _items.count;
+    return items.count;
 }
 
 - (Item *)itemAtIndex:(NSInteger)index {
-    return [_items objectAtIndex:index];
+    return [items objectAtIndex:index];
 }
 
 - (NSInteger)indexOfItem:(Item *)item {
-    return [_items indexOfObject:item];
+    return [items indexOfObject:item];
 }
 
 #pragma mark - public - actions
 
 - (void)createItemWithValues:(NSDictionary *)values {
     Firebase *newItem = [itemsRef childByAutoId];
-    [newItem setValue:values andPriority:@(_items.count)];
+    [newItem setValue:values andPriority:@(items.count)];
 }
 
 - (void)updateItem:(Item *)item name:(NSString *)name {
@@ -85,7 +75,7 @@
 }
 
 - (void)sortItems {
-    [_items sortUsingComparator:^NSComparisonResult(Item *item1, Item *item2) {
+    [items sortUsingComparator:^NSComparisonResult(Item *item1, Item *item2) {
         if (item1.isChecked != item2.isChecked) {
             if (item1.isChecked) {
                 return NSOrderedDescending;
@@ -95,11 +85,14 @@
         }
         return NSOrderedSame;
     }];
-    // sort in firebase
+    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        Item *item = (Item *)obj;
+        [item.ref setPriority:@(idx)];
+    }];
 }
 
 - (void)clearCompleted {
-    [_items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         Item *item = (Item *)obj;
         if (item.isChecked) {
             [self removeItem:item];
@@ -111,7 +104,7 @@
 
 - (Item *)itemWithId:(NSString *)_id {
     __block Item *foundItem = nil;
-    [_items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         Item *item = (Item *)obj;
         if ([item._id isEqualToString:_id]) {
             foundItem = item;
@@ -122,35 +115,27 @@
 }
 
 - (void)itemCreatedWithValues:(NSDictionary *)values {
-    Item *item = [[Item alloc] init];
-    item._id = values[@"_id"];
-    item.name = values[@"name"];
-    item.isChecked = [values[@"isChecked"] boolValue];
-    item.ref = values[@"ref"];
-    [_items addObject:item];
-    int index = [self indexOfItem:item];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"itemCreated"
-                                                        object:nil
-                                                      userInfo:@{ @"index": @(index) }];
+    Item *item = [[Item alloc] initWithValues:values];
+    [items addObject:item];
+    [self.delegate didCreateItemAtIndex:[self indexOfItem:item]];
 }
 
 - (void)itemChangedWithValues:(NSDictionary *)values {
     Item *item = [self itemWithId:values[@"_id"]];
     item.name = values[@"name"];
     item.isChecked = [values[@"isChecked"] boolValue];
-    int index = [self indexOfItem:item];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"itemChanged"
-                                                        object:nil
-                                                      userInfo:@{ @"index": @(index) }];
+    [self.delegate didUpdateItemAtIndex:[self indexOfItem:item]];
+}
+
+- (void)itemsSorted {
+    [self.delegate didSortItems];
 }
 
 - (void)itemRemovedWithId:(NSString *)_id {
     Item *item = [self itemWithId:_id];
     int index = [self indexOfItem:item];
-    [_items removeObjectAtIndex:index];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"itemRemoved"
-                                                        object:nil
-                                                      userInfo:@{ @"index": @(index) }];
+    [items removeObjectAtIndex:index];
+    [self.delegate didRemoveItemAtIndex:index];
 }
 
 @end

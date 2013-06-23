@@ -3,7 +3,7 @@
 #import "EditorViewController.h"
 #import "ItemTableCell.h"
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, EditorDelegate, ItemCellDelegate>
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, EditorDelegate, ItemCellDelegate, ItemListDataSourceDelegate>
 
 @property (nonatomic, strong) ItemListDataSource *dataSource;
 

@@ -9,4 +9,6 @@
 @property (nonatomic) BOOL isChecked;
 @property (nonatomic, strong) Firebase *ref;
 
+- (instancetype)initWithValues:(NSDictionary *)values;
+
 @end
