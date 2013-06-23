@@ -2,13 +2,12 @@
 
 @class List;
 
-@protocol ListListDataSource <NSObject>
+@interface ListListDataSource : NSObject
 
 - (NSInteger)listCount;
 - (List *)listAtIndex:(NSInteger)index;
 - (NSInteger)indexOfList:(List *)list;
-- (void)deleteListAtIndex:(NSInteger)index;
+- (void)removeListAtIndex:(NSInteger)index;
 - (List *)createListWithName:(NSString *)name;
-- (void)commitChanges;
 
 @end

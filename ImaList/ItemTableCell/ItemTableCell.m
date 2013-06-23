@@ -15,8 +15,6 @@ static void destroy_cache() {
 }
 
 @implementation ItemTableCell {
-    Item *_item;
-    int _index;
     BOOL deleteButtonShown;
     NSLayoutConstraint *deleteButtonShownConstraint;
     NSLayoutConstraint *deleteButtonHiddenConstraint;
@@ -29,9 +27,8 @@ static void destroy_cache() {
     deleteButtonHiddenConstraint = self.deleteButtonTrailingConstraint;
 }
 
--(void)configureCellWithItem:(Item *)item index:(int)index {
+-(void)configureCellWithItem:(Item *)item {
     _item = item;
-    _index = index;
     [self addAttributes];
     if (deleteButtonShown) {
         [self hideDeleteButtonAnimated:NO];
@@ -48,7 +45,7 @@ static void destroy_cache() {
     self.itemNameLabel.text = _item.name;
     
     NSString *checkImageName = @"icon-unchecked.png";
-    if ([_item.isChecked boolValue]) {
+    if (_item.isChecked) {
         checkImageName = @"icon-checked.png";
         self.itemNameLabel.textColor = [UIColor lightGrayColor];
     } else {
@@ -63,11 +60,7 @@ static void destroy_cache() {
 }
 
 - (void)checkmarkTapped:(id)gesture {
-    BOOL isChecked = [_item.isChecked boolValue];
-    _item.isChecked = @(!isChecked);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadItemRow"
-                                                        object:self
-                                                      userInfo:@{ @"item": _item }];
+    [self.delegate didUpdateItem:_item isChecked:!_item.isChecked];
 }
 
 #pragma mark - swipes
@@ -130,8 +123,7 @@ static void destroy_cache() {
 }
 
 - (IBAction)didTapDelete:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteItem"
-                                                        object:self
-                                                      userInfo:@{ @"item": _item }];}
+    [self.delegate didDeleteItem:_item];
+}
 
 @end

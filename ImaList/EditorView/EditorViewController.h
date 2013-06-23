@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 
+@class Item;
 @protocol EditorDelegate;
 
 @interface EditorViewController : UIViewController <UITextFieldDelegate>
@@ -19,13 +20,13 @@
 - (IBAction)didTapCancel:(id)sender;
 
 - (void)beginAddingMultipleItems;
-- (void)beginEditingSingleItem:(NSString *)itemName;
+- (void)beginEditingSingleItem:(Item *)item;
 
 @end
 
 @protocol EditorDelegate <NSObject>
 
-- (void)didFinishEditingItem:(NSString *)itemName;
+- (void)didFinishEditingItem:(Item *)item name:(NSString *)name;
 - (void)didFinishAddingItems:(NSArray *)itemNames;
 
 @end

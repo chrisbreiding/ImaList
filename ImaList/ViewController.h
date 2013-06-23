@@ -1,10 +1,11 @@
 #import <UIKit/UIKit.h>
 #import "ItemListDataSource.h"
 #import "EditorViewController.h"
+#import "ItemTableCell.h"
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, EditorDelegate>
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, EditorDelegate, ItemCellDelegate>
 
-@property (nonatomic, strong) id<ItemListDataSource> dataSource;
+@property (nonatomic, strong) ItemListDataSource *dataSource;
 
 @property (nonatomic, weak) IBOutlet UIView *navBarView;
 @property (nonatomic, weak) IBOutlet UIView *footerView;

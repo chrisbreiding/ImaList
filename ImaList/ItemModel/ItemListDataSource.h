@@ -2,16 +2,16 @@
 
 @class Item;
 
-@protocol ItemListDataSource <NSObject>
+@interface ItemListDataSource : NSObject
 
 - (NSInteger)itemCount;
 - (Item *)itemAtIndex:(NSInteger)index;
 - (NSInteger)indexOfItem:(Item *)item;
-- (void)deleteItemAtIndex:(NSInteger)index;
-- (Item *)createItemWithName:(NSString *)name checked:(NSNumber *)isChecked;
+- (void)createItemWithValues:(NSDictionary *)values;
+- (void)updateItem:(Item *)item name:(NSString *)name;
+- (void)updateItem:(Item *)item isChecked:(BOOL)isChecked;
+- (void)removeItem:(Item *)item;
 - (void)sortItems;
-- (void)clear;
 - (void)clearCompleted;
-- (void)commitChanges;
 
 @end

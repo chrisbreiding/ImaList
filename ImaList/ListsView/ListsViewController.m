@@ -1,6 +1,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ListsViewController.h"
-#import "ListListDocument.h"
+#import "ListListDataSource.h"
 #import "ListCollectionCell.h"
 #import "List.h"
 
@@ -45,19 +45,7 @@
 #pragma mark - data
 
 - (void)loadData {
-    NSURL *docDir = [[[NSFileManager defaultManager]
-                      URLsForDirectory:NSDocumentDirectory
-                      inDomains:NSUserDomainMask] lastObject];
-    NSURL *docURL = [docDir URLByAppendingPathComponent:@"ImaList.lists"];
-    ListListDocument *doc = [[ListListDocument alloc] initWithFileURL:docURL];
-    self.dataSource = doc;
-    [doc openWithCompletionHandler:^(BOOL success) {
-        if(success) {
-            [_collectionView reloadData];
-        } else {
-            NSLog(@"Failed to open document");
-        }
-    }];
+    self.dataSource = [[ListListDataSource alloc] init];
 }
 
 #pragma mark - collection view delegate
@@ -105,8 +93,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == actionSheet.destructiveButtonIndex ) {
         NSIndexPath *indexPath = [_collectionView indexPathForCell:cellToDelete];
-        [self.dataSource deleteListAtIndex:indexPath.row];
-        [self.dataSource commitChanges];
+        [self.dataSource removeListAtIndex:indexPath.row];
         [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
         cellToDelete = nil;
     }
@@ -148,7 +135,7 @@
 }
 
 - (void)finishEditing {
-    [self.dataSource commitChanges];
+//    [self.dataSource commitChanges];
 }
 
 #pragma mark - notifications

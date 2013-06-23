@@ -4,7 +4,7 @@
 
 @interface ListsViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIActionSheetDelegate, ListEditorDelegate>
 
-@property (nonatomic, strong) id<ListListDataSource> dataSource;
+@property (nonatomic, strong) ListListDataSource *dataSource;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, weak) IBOutlet UIButton *addButton;

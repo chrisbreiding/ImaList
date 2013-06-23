@@ -1,7 +1,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ViewController.h"
 #import "ItemTableCell.h"
-#import "ItemListDocument.h"
+#import "ItemListDataSource.h"
 #import "Item.h"
 #import "EditorViewController.h"
 #import "ListsViewController.h"
@@ -13,7 +13,6 @@
     NSLayoutConstraint *listsBottomConstraint;
     NSLayoutConstraint *listsHeightConstraint;
     EditorViewController *editItemVC;
-    ItemTableCell *cellBeingEdited;
 }
 
 # pragma mark - view lifecycle
@@ -33,19 +32,7 @@
 #pragma mark - data
 
 - (void)loadData {
-    NSURL *docDir = [[[NSFileManager defaultManager]
-                      URLsForDirectory:NSDocumentDirectory
-                      inDomains:NSUserDomainMask] lastObject];
-    NSURL *docURL = [docDir URLByAppendingPathComponent:@"ImaList.items"];
-    ItemListDocument *doc = [[ItemListDocument alloc] initWithFileURL:docURL];
-    self.dataSource = doc;
-    [doc openWithCompletionHandler:^(BOOL success) {
-        if(success) {
-            [_tableView reloadData];
-        } else {
-            NSLog(@"Failed to open document");
-        }
-    }];
+    self.dataSource = [[ItemListDataSource alloc] init];
 }
 
 #pragma mark - lists
@@ -146,7 +133,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"ItemTableCell";
     ItemTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    [cell configureCellWithItem:[self.dataSource itemAtIndex:indexPath.row] index:indexPath.row];
+    cell.delegate = self;
+    [cell configureCellWithItem:[self.dataSource itemAtIndex:indexPath.row]];
     return cell;
 }
 
@@ -158,8 +146,10 @@
 #pragma mark - notifications
 
 -(void)configureNotifications {
-    [self observeNotificationName:@"reloadItemRow" selector:@selector(reloadItemRow:)];
-    [self observeNotificationName:@"deleteItem" selector:@selector(deleteItem:)];
+    [self observeNotificationName:@"itemCreated" selector:@selector(itemCreated:)];
+    [self observeNotificationName:@"itemChanged" selector:@selector(itemChanged:)];
+    [self observeNotificationName:@"itemRemoved" selector:@selector(itemRemoved:)];
+    
     [self observeNotificationName:@"beginEditingList" selector:@selector(beginEditingList:)];
     [self observeNotificationName:@"finishEditingList" selector:@selector(finishEditingList:)];
     [self observeNotificationName:UIKeyboardWillShowNotification selector:@selector(keyboardWillShow:)];
@@ -172,19 +162,24 @@
                                                object:nil];
 }
 
--(void)reloadItemRow:(NSNotification *)notification {
-    NSDictionary *userInfo = [notification userInfo];
-    int index = [self.dataSource indexOfItem:userInfo[@"item"] ];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [_tableView reloadRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationNone];
+- (void)itemCreated:(NSNotification *)notification {
+    int row = [[notification userInfo][@"index"] intValue];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    [_tableView insertRowsAtIndexPaths:@[indexPath]
+                      withRowAnimation:UITableViewRowAnimationTop];
 }
 
-- (void)deleteItem:(NSNotification *)notification {
-    NSDictionary *userInfo = [notification userInfo];
-    int index = [self.dataSource indexOfItem:userInfo[@"item"] ];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [self.dataSource deleteItemAtIndex:index];
+- (void)itemChanged:(NSNotification *)notification {
+    int row = [[notification userInfo][@"index"] intValue];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    [_tableView reloadRowsAtIndexPaths:@[indexPath]
+                      withRowAnimation:UITableViewRowAnimationMiddle];
+
+}
+
+- (void)itemRemoved:(NSNotification *)notification {
+    int row = [[notification userInfo][@"index"] intValue];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
     [_tableView deleteRowsAtIndexPaths:@[indexPath]
                       withRowAnimation:UITableViewRowAnimationBottom];
 }
@@ -269,7 +264,26 @@
     [_tableView reloadData];
 }
 
+#pragma mark - item cell delegate
+
+- (void)didUpdateItem:(Item *)item isChecked:(BOOL)isChecked {
+    [self.dataSource updateItem:item isChecked:isChecked];
+}
+
+- (void)didDeleteItem:(Item *)item {
+    [self.dataSource removeItem:item];
+}
+
 #pragma mark - edit mode
+
+- (void)didFinishAddingItems:(NSArray *)itemNames {
+    for (NSString *itemName in itemNames) {
+        NSString *trimmedName = [itemName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if (![trimmedName isEqualToString:@""]) {
+            [self.dataSource createItemWithValues:@{ @"name": itemName, @"isChecked": @(NO) }];
+        }
+    }
+}
 
 - (void)addEditItemView {
     editItemVC = [[EditorViewController alloc] init];
@@ -279,37 +293,11 @@
 }
 
 - (void)editNameForCell:(ItemTableCell *)cell {
-    cellBeingEdited = cell;
-    [editItemVC beginEditingSingleItem:cell.itemNameLabel.text];
+    [editItemVC beginEditingSingleItem:cell.item];
 }
 
-- (void)didFinishEditingItem:(NSString *)itemName {
-    Item *item = [self.dataSource itemAtIndex:[[_tableView indexPathForCell:cellBeingEdited] row]];
-    item.name = itemName;
-    cellBeingEdited.itemNameLabel.text = itemName;
-    cellBeingEdited = nil;
-}
-
-- (void)didFinishAddingItems:(NSArray *)itemNames {
-    NSMutableArray *indexPaths = [NSMutableArray array];
-    Item *newItem;
-    NSUInteger row;
-    NSIndexPath *indexPath;
-    for (NSString *itemName in itemNames) {
-        NSString *trimmedName = [itemName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if (![trimmedName isEqualToString:@""]) {
-            newItem = [self.dataSource createItemWithName:itemName checked:NO];
-            row = [self.dataSource indexOfItem:newItem];
-            indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-            [indexPaths addObject:indexPath];            
-        }
-    }
-    [_tableView insertRowsAtIndexPaths:indexPaths
-                      withRowAnimation:UITableViewRowAnimationTop];
-    [_tableView scrollToRowAtIndexPath:indexPath
-                      atScrollPosition:UITableViewScrollPositionBottom
-                              animated:YES];
-    
+- (void)didFinishEditingItem:(Item *)item name:(NSString *)name {
+    [self.dataSource updateItem:item name:name];
 }
 
 @end

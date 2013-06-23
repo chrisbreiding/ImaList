@@ -1,6 +1,8 @@
 #import "EditorViewController.h"
+#import "Item.h"
 
 @implementation EditorViewController {
+    Item *itemBeingEdited;
     BOOL addingMultiple;
     BOOL sizeSet;
 }
@@ -63,8 +65,9 @@
     [self.delegate didFinishAddingItems:nameArray];
 }
 
-- (void)beginEditingSingleItem:(NSString *)itemName {
-    self.singleTextField.text = itemName;
+- (void)beginEditingSingleItem:(Item *)item {
+    itemBeingEdited = item;
+    self.singleTextField.text = item.name;
     [self setSingleAlpha:0];
     [self setSingleHidden:NO];
     [self.singleTextField becomeFirstResponder];
@@ -93,7 +96,7 @@
 }
 
 - (void)commitSingle {
-    [self.delegate didFinishEditingItem:self.singleTextField.text];
+    [self.delegate didFinishEditingItem:itemBeingEdited name:self.singleTextField.text];
 }
 
 #pragma mark - user actions

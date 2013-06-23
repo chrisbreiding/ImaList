@@ -34,9 +34,9 @@
 		4B7E85CB176E882C00DAF07E /* ItemTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */; };
 		4B7E85D91771315F00DAF07E /* icon-delete-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85D71771315F00DAF07E /* icon-delete-list.png */; };
 		4B7E85DA1771316000DAF07E /* icon-delete-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85D81771315F00DAF07E /* icon-delete-list@2x.png */; };
+		4B7E85DC1776357000DAF07E /* ItemListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85DB1776357000DAF07E /* ItemListDataSource.m */; };
+		4B7E85DE17765FB100DAF07E /* ListListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85DD17765FB100DAF07E /* ListListDataSource.m */; };
 		4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA2879517357D160041BB2D /* ItemListSpec.m */; };
-		4BAD0998176F8534000D74D5 /* ListListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAD0997176F8534000D74D5 /* ListListDocument.m */; };
-		4BAD0999176F8534000D74D5 /* ListListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAD0997176F8534000D74D5 /* ListListDocument.m */; };
 		4BAD099D176F8E3B000D74D5 /* ListCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */; };
 		4BAD099E176F8E3B000D74D5 /* ListCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */; };
 		4BAD09A0176F8E76000D74D5 /* ListCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */; };
@@ -79,8 +79,6 @@
 		4BC7EC5D176F81300040E9FB /* ListsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BC7EC59176F81300040E9FB /* ListsViewController.xib */; };
 		4BC7EC64176F829E0040E9FB /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC60176F829E0040E9FB /* Item.m */; };
 		4BC7EC65176F829E0040E9FB /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC60176F829E0040E9FB /* Item.m */; };
-		4BC7EC66176F829E0040E9FB /* ItemListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC63176F829E0040E9FB /* ItemListDocument.m */; };
-		4BC7EC67176F829E0040E9FB /* ItemListDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC63176F829E0040E9FB /* ItemListDocument.m */; };
 		4BC7EC6B176F82DA0040E9FB /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC6A176F82DA0040E9FB /* List.m */; };
 		4BC7EC6C176F82DA0040E9FB /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC6A176F82DA0040E9FB /* List.m */; };
 		4BCC99D6175289D000C3D825 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCC99D5175289D000C3D825 /* QuartzCore.framework */; };
@@ -119,9 +117,9 @@
 		4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemTableCell.xib; sourceTree = "<group>"; };
 		4B7E85D71771315F00DAF07E /* icon-delete-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-delete-list.png"; sourceTree = "<group>"; };
 		4B7E85D81771315F00DAF07E /* icon-delete-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-delete-list@2x.png"; sourceTree = "<group>"; };
+		4B7E85DB1776357000DAF07E /* ItemListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListDataSource.m; sourceTree = "<group>"; };
+		4B7E85DD17765FB100DAF07E /* ListListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListListDataSource.m; sourceTree = "<group>"; };
 		4BA2879517357D160041BB2D /* ItemListSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListSpec.m; path = ImaListTests/ItemListSpec.m; sourceTree = SOURCE_ROOT; };
-		4BAD0996176F8534000D74D5 /* ListListDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListListDocument.h; sourceTree = "<group>"; };
-		4BAD0997176F8534000D74D5 /* ListListDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListListDocument.m; sourceTree = "<group>"; };
 		4BAD099B176F8E3B000D74D5 /* ListCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionCell.h; sourceTree = "<group>"; };
 		4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionCell.m; sourceTree = "<group>"; };
 		4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCollectionCell.xib; sourceTree = "<group>"; };
@@ -163,8 +161,6 @@
 		4BC7EC5F176F829E0040E9FB /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		4BC7EC60176F829E0040E9FB /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		4BC7EC61176F829E0040E9FB /* ItemListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListDataSource.h; sourceTree = "<group>"; };
-		4BC7EC62176F829E0040E9FB /* ItemListDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListDocument.h; sourceTree = "<group>"; };
-		4BC7EC63176F829E0040E9FB /* ItemListDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListDocument.m; sourceTree = "<group>"; };
 		4BC7EC69176F82DA0040E9FB /* List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = List.h; sourceTree = "<group>"; };
 		4BC7EC6A176F82DA0040E9FB /* List.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = List.m; sourceTree = "<group>"; };
 		4BC7EC6D176F84340040E9FB /* ListListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListListDataSource.h; sourceTree = "<group>"; };
@@ -401,8 +397,7 @@
 				4BC7EC5F176F829E0040E9FB /* Item.h */,
 				4BC7EC60176F829E0040E9FB /* Item.m */,
 				4BC7EC61176F829E0040E9FB /* ItemListDataSource.h */,
-				4BC7EC62176F829E0040E9FB /* ItemListDocument.h */,
-				4BC7EC63176F829E0040E9FB /* ItemListDocument.m */,
+				4B7E85DB1776357000DAF07E /* ItemListDataSource.m */,
 			);
 			path = ItemModel;
 			sourceTree = "<group>";
@@ -413,8 +408,7 @@
 				4BC7EC69176F82DA0040E9FB /* List.h */,
 				4BC7EC6A176F82DA0040E9FB /* List.m */,
 				4BC7EC6D176F84340040E9FB /* ListListDataSource.h */,
-				4BAD0996176F8534000D74D5 /* ListListDocument.h */,
-				4BAD0997176F8534000D74D5 /* ListListDocument.m */,
+				4B7E85DD17765FB100DAF07E /* ListListDataSource.m */,
 			);
 			path = ListModel;
 			sourceTree = "<group>";
@@ -638,10 +632,10 @@
 				4B7E85C8176E882C00DAF07E /* ItemTableCell.m in Sources */,
 				4BC7EC5A176F81300040E9FB /* ListsViewController.m in Sources */,
 				4BC7EC64176F829E0040E9FB /* Item.m in Sources */,
-				4BC7EC66176F829E0040E9FB /* ItemListDocument.m in Sources */,
 				4BC7EC6B176F82DA0040E9FB /* List.m in Sources */,
-				4BAD0998176F8534000D74D5 /* ListListDocument.m in Sources */,
 				4BAD099D176F8E3B000D74D5 /* ListCollectionCell.m in Sources */,
+				4B7E85DC1776357000DAF07E /* ItemListDataSource.m in Sources */,
+				4B7E85DE17765FB100DAF07E /* ListListDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,9 +649,7 @@
 				4B7E85C9176E882C00DAF07E /* ItemTableCell.m in Sources */,
 				4BC7EC5B176F81300040E9FB /* ListsViewController.m in Sources */,
 				4BC7EC65176F829E0040E9FB /* Item.m in Sources */,
-				4BC7EC67176F829E0040E9FB /* ItemListDocument.m in Sources */,
 				4BC7EC6C176F82DA0040E9FB /* List.m in Sources */,
-				4BAD0999176F8534000D74D5 /* ListListDocument.m in Sources */,
 				4BAD099E176F8E3B000D74D5 /* ListCollectionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
