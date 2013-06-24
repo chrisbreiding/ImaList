@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="5">
             <objects>
-                <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="2" customClass="MainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -19,14 +19,6 @@
                                     <constraint firstAttribute="height" constant="50" type="user" id="fLL-Yx-jGa"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0Yf-Rr-5rS">
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <sections/>
-                                <connections>
-                                    <outlet property="dataSource" destination="2" id="wHv-en-1Ku"/>
-                                    <outlet property="delegate" destination="2" id="aHa-8t-tvw"/>
-                                </connections>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zG-jM-14w" userLabel="Footer">
                                 <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -126,13 +118,10 @@
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="3k3-l7-ZEX"/>
                             <constraint firstItem="2qK-jv-sk3" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="50" type="user" id="4dR-MU-SDK"/>
                             <constraint firstItem="fB8-1s-A4x" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="55R-qN-YTj"/>
-                            <constraint firstItem="0Yf-Rr-5rS" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="6oj-J8-n2w"/>
-                            <constraint firstItem="0Yf-Rr-5rS" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="Bth-MB-xXx"/>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="top" secondItem="3" secondAttribute="top" type="user" id="Dzw-fE-YgV"/>
                             <constraint firstAttribute="bottom" secondItem="KFd-kg-pp0" secondAttribute="bottom" type="user" id="Fik-Kn-yDd"/>
                             <constraint firstAttribute="trailing" secondItem="KFd-kg-pp0" secondAttribute="trailing" type="user" id="JvN-eW-lFK"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="PVU-W0-51a"/>
-                            <constraint firstAttribute="bottom" secondItem="0Yf-Rr-5rS" secondAttribute="bottom" constant="50" type="user" id="Vlh-5d-rgg"/>
                             <constraint firstItem="IGG-wI-KFr" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" constant="-100" type="user" id="W2y-Qn-PlD"/>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="WuC-EW-cT0"/>
                             <constraint firstAttribute="bottom" secondItem="fB8-1s-A4x" secondAttribute="bottom" type="user" id="XDN-hU-Cnn"/>
@@ -141,7 +130,6 @@
                             <constraint firstAttribute="bottom" secondItem="IGG-wI-KFr" secondAttribute="bottom" type="user" id="cxf-k1-17k"/>
                             <constraint firstAttribute="trailing" secondItem="C1B-SM-aMD" secondAttribute="trailing" constant="50" type="user" id="eJ9-qG-KgT"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="p4G-jc-rue"/>
-                            <constraint firstItem="0Yf-Rr-5rS" firstAttribute="top" secondItem="3" secondAttribute="top" constant="50" type="user" id="sdP-zD-cf5"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="user" id="x7c-hA-Fld"/>
                         </constraints>
                     </view>
@@ -149,12 +137,10 @@
                         <outlet property="addItemButton" destination="KFd-kg-pp0" id="OVU-vl-0AT"/>
                         <outlet property="clearCompletedButton" destination="IGG-wI-KFr" id="TmN-6r-7oF"/>
                         <outlet property="editListsButton" destination="2qK-jv-sk3" id="uWj-Ju-RIm"/>
-                        <outlet property="footerView" destination="5zG-jM-14w" id="vkF-Zx-fBm"/>
+                        <outlet property="footerView" destination="5zG-jM-14w" id="S1T-fB-hs1"/>
                         <outlet property="listsButton" destination="fB8-1s-A4x" id="DYd-rC-ymt"/>
                         <outlet property="navBarView" destination="qwF-lj-WTI" id="EBF-bZ-UW1"/>
                         <outlet property="sortItemsButton" destination="C1B-SM-aMD" id="10c-th-nhx"/>
-                        <outlet property="tableView" destination="0Yf-Rr-5rS" id="Gag-Lt-Qfd"/>
-                        <outlet property="tableViewBottomConstraint" destination="Vlh-5d-rgg" id="6HU-mK-gLW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -162,11 +148,8 @@
         </scene>
     </scenes>
     <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
             <relationships>
                 <relationship kind="action" name="addItem:"/>
                 <relationship kind="action" name="clearCompleted:"/>
@@ -177,12 +160,15 @@
                 <relationship kind="outlet" name="clearCompletedButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="editListsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="footerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="itemsView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="itemsViewBottomConstraint" candidateClass="NSLayoutConstraint"/>
                 <relationship kind="outlet" name="listsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="navBarView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="sortItemsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="tableViewBottomConstraint" candidateClass="NSLayoutConstraint"/>
             </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

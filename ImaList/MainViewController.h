@@ -1,11 +1,10 @@
 #import <UIKit/UIKit.h>
 #import "ItemListDataSource.h"
 #import "EditorViewController.h"
+#import "ItemsViewController.h"
 #import "ItemTableCell.h"
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, EditorDelegate, ItemCellDelegate, ItemListDataSourceDelegate>
-
-@property (nonatomic, strong) ItemListDataSource *dataSource;
+@interface MainViewController : UIViewController <UIActionSheetDelegate, ItemsDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *navBarView;
 @property (nonatomic, weak) IBOutlet UIView *footerView;
@@ -14,8 +13,6 @@
 @property (nonatomic, weak) IBOutlet UIButton *clearCompletedButton;
 @property (nonatomic, weak) IBOutlet UIButton *addItemButton;
 @property (nonatomic, weak) IBOutlet UIButton *sortItemsButton;
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
 
 - (IBAction) clearCompleted:(id)sender;
 - (IBAction) addItem:(id)sender;

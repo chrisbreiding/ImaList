@@ -1,5 +1,5 @@
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "MainViewController.h"
 
 @implementation AppDelegate
 

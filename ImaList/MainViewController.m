@@ -1,40 +1,34 @@
 #import <QuartzCore/QuartzCore.h>
-#import "ViewController.h"
-#import "ItemTableCell.h"
+#import "MainViewController.h"
+#import "ItemsViewController.h"
 #import "ItemListDataSource.h"
 #import "Item.h"
 #import "EditorViewController.h"
 #import "ListsViewController.h"
 
-@implementation ViewController {
+@implementation MainViewController {
     ListsViewController *listsVC;
+    ItemsViewController *itemsVC;
+    EditorViewController *editorVC;
     BOOL listsShown;
     BOOL editingList;
     NSLayoutConstraint *listsBottomConstraint;
     NSLayoutConstraint *listsHeightConstraint;
-    EditorViewController *editItemVC;
+    NSLayoutConstraint *itemsBottomConstraint;
 }
 
 # pragma mark - view lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadData];
+
     [self addListsView];
+    [self addItemsView];
+    [self addEditItemView];
+    
     [self styleViews];
     [self styleButtons];
-    [self addEditItemView];
     [self configureNotifications];
-    UINib *cellNib = [UINib nibWithNibName:@"ItemTableCell" bundle:nil];
-    [_tableView registerNib:cellNib forCellReuseIdentifier:@"ItemTableCell"];
-}
-
-#pragma mark - data
-
-- (void)loadData {
-    ItemListDataSource *dataSource = [[ItemListDataSource alloc] init];
-    self.dataSource = dataSource;
-    dataSource.delegate = self;
 }
 
 #pragma mark - lists
@@ -50,18 +44,9 @@
     [self.view addSubview:listsView];
     NSDictionary *views = NSDictionaryOfVariableBindings(listsView);
     NSArray *constraints = @[];
-    NSArray *bottomConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[listsView]-50-|"
-                                                                   options:NSLayoutFormatAlignAllBaseline
-                                                                   metrics:nil
-                                                                     views:views];
-    NSArray *heightConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[listsView(0)]"
-                                                                         options:NSLayoutFormatAlignAllBaseline
-                                                                         metrics:nil
-                                                                           views:views];
-    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[listsView]|"
-                                                                             options:NSLayoutFormatAlignAllBaseline
-                                                                             metrics:nil
-                                                                               views:views];
+    NSArray *bottomConstraints = [self constraintWithString:@"V:[listsView]-50-|" views:views];
+    NSArray *heightConstraints = [self constraintWithString:@"V:[listsView(0)]" views:views];
+    NSArray *horizontalConstraints = [self constraintWithString:@"H:|[listsView]|" views:views];
     listsBottomConstraint = bottomConstraints[0];
     listsHeightConstraint = heightConstraints[0];
     constraints = [constraints arrayByAddingObjectsFromArray:bottomConstraints];
@@ -80,13 +65,13 @@
 }
 
 - (void)showLists {
-    [self toggleItemButtonsHidden:YES];
     listsVC.view.hidden = NO;
     self.editListsButton.hidden = NO;
     listsShown = YES;
     listsHeightConstraint.constant = 120;
-    self.tableViewBottomConstraint.constant = 170;
+    itemsBottomConstraint.constant = 170;
     [UIView animateWithDuration:0.2 animations:^{
+        [self toggleItemButtonsHidden:YES];
         [self.view layoutIfNeeded];
         self.editListsButton.alpha = 1;
     } completion:^(BOOL finished) {
@@ -98,16 +83,16 @@
 }
 
 - (void)hideLists {
-    [self toggleItemButtonsHidden:NO];
     [listsVC willExit];
     [UIView animateWithDuration:0.2 animations:^{
         listsVC.collectionView.alpha = 0;
         self.editListsButton.alpha = 0;
     } completion:^(BOOL finished) {
         listsHeightConstraint.constant = 0;
-        self.tableViewBottomConstraint.constant = 50;
+        itemsBottomConstraint.constant = 50;
         self.editListsButton.hidden = YES;
         [UIView animateWithDuration:0.2 animations:^{
+            [self toggleItemButtonsHidden:NO];
             [self.view layoutIfNeeded];
         } completion:^(BOOL finished) {
             listsVC.view.hidden = YES;
@@ -117,32 +102,35 @@
 }
 
 - (void)toggleItemButtonsHidden:(BOOL)hidden {
-    self.clearCompletedButton.hidden = hidden;
-    self.sortItemsButton.hidden = hidden;
-    self.addItemButton.hidden = hidden;
+    int alpha = hidden ? 0 : 1;
+    self.clearCompletedButton.alpha = alpha;
+    self.sortItemsButton.alpha = alpha;
+    self.addItemButton.alpha = alpha;
 }
 
 - (IBAction)toggleListEditingMode:(id)sender {
     [listsVC toggleEditingMode];
 }
 
-#pragma mark - tableview delegate
+#pragma mark - items
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.dataSource itemCount];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"ItemTableCell";
-    ItemTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.delegate = self;
-    [cell configureCellWithItem:[self.dataSource itemAtIndex:indexPath.row]];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ItemTableCell *cell = (ItemTableCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [self editNameForCell:cell];
+- (void)addItemsView {
+    itemsVC = [[ItemsViewController alloc] init];
+    itemsVC.delegate = self;
+    UITableView *itemsView = itemsVC.tableView;
+    itemsView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:itemsView];
+    NSDictionary *views = NSDictionaryOfVariableBindings(itemsView);
+    NSArray *constraints = @[];
+    NSArray *bottomConstraints = [self constraintWithString:@"V:[itemsView]-50-|" views:views];
+    NSArray *heightConstraints = [self constraintWithString:@"V:|-50-[itemsView]" views:views];
+    NSArray *horizontalConstraints = [self constraintWithString:@"H:|[itemsView]|" views:views];
+    itemsBottomConstraint = bottomConstraints[0];
+    constraints = [constraints arrayByAddingObjectsFromArray:bottomConstraints];
+    constraints = [constraints arrayByAddingObjectsFromArray:heightConstraints];
+    constraints = [constraints arrayByAddingObjectsFromArray:horizontalConstraints];
+    [self.view addConstraints:constraints];
+    [self.view layoutIfNeeded];
 }
 
 #pragma mark - notifications
@@ -181,31 +169,6 @@
             [self.view layoutIfNeeded];
         }];
     }
-}
-
-#pragma mark - item list data source delegate
-
-- (void)didCreateItemAtIndex:(int)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [_tableView insertRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationTop];
-}
-
-- (void)didUpdateItemAtIndex:(int)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [_tableView reloadRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationMiddle];
-    
-}
-
-- (void)didRemoveItemAtIndex:(int)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [_tableView deleteRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationBottom];
-}
-
-- (void)didSortItems {
-    [_tableView reloadData];
 }
 
 #pragma mark - appearance
@@ -247,56 +210,39 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == actionSheet.destructiveButtonIndex ) {
-        [self clearCompleted];
+        [itemsVC clearCompleted];
     }
-}
-
-- (void)clearCompleted {
-    [self.dataSource clearCompleted];
-}
-
-- (IBAction)addItem:(id)sender {
-    [editItemVC beginAddingMultipleItems];
 }
 
 - (IBAction)sortItems:(id)sender {
-    [self.dataSource sortItems];
+    [itemsVC sortItems];
 }
 
-#pragma mark - item cell delegate
+#pragma mark - item editing
 
-- (void)didUpdateItem:(Item *)item isChecked:(BOOL)isChecked {
-    [self.dataSource updateItem:item isChecked:isChecked];
-}
-
-- (void)didDeleteItem:(Item *)item {
-    [self.dataSource removeItem:item];
-}
-
-#pragma mark - edit mode
-
-- (void)didFinishAddingItems:(NSArray *)itemNames {
-    for (NSString *itemName in itemNames) {
-        NSString *trimmedName = [itemName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if (![trimmedName isEqualToString:@""]) {
-            [self.dataSource createItemWithValues:@{ @"name": itemName, @"isChecked": @(NO) }];
-        }
-    }
+- (IBAction)addItem:(id)sender {
+    [editorVC beginAddingMultipleItems];
 }
 
 - (void)addEditItemView {
-    editItemVC = [[EditorViewController alloc] init];
-    editItemVC.view.frame = self.view.bounds;
-    editItemVC.delegate = self;
-    [self.view addSubview:editItemVC.view];
+    editorVC = [[EditorViewController alloc] init];
+    editorVC.view.frame = self.view.bounds;
+    editorVC.delegate = itemsVC;
+    [self.view addSubview:editorVC.view];
 }
 
 - (void)editNameForCell:(ItemTableCell *)cell {
-    [editItemVC beginEditingSingleItem:cell.item];
+    [editorVC beginEditingSingleItem:cell.item];
 }
 
-- (void)didFinishEditingItem:(Item *)item name:(NSString *)name {
-    [self.dataSource updateItem:item name:name];
+#pragma mark - convenience
+
+- (NSArray *)constraintWithString:(NSString *)constraintString views:(NSDictionary *)views {
+    return [NSLayoutConstraint constraintsWithVisualFormat:constraintString
+                                                   options:NSLayoutFormatAlignAllBaseline
+                                                   metrics:nil
+                                                     views:views];
+
 }
 
 @end

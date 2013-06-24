@@ -10,6 +10,8 @@
 		18A0A26FBBC444A18E65BACF /* libPods-ImaListTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31595206A7E041189CC67E84 /* libPods-ImaListTests.a */; };
 		4B08844117778BE600BF2A25 /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B08844017778BE600BF2A25 /* app-icon.png */; };
 		4B08844317778BEB00BF2A25 /* app-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B08844217778BEB00BF2A25 /* app-icon@2x.png */; };
+		4B0884481777AE1D00BF2A25 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0884461777AE1D00BF2A25 /* ItemsViewController.m */; };
+		4B0884491777AE1D00BF2A25 /* ItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B0884471777AE1D00BF2A25 /* ItemsViewController.xib */; };
 		4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3693BA172F6D7C00C81D9F /* ItemSpec.m */; };
 		4B534032172B66C3003F9AE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534031172B66C3003F9AE2 /* UIKit.framework */; };
 		4B534034172B66C3003F9AE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534033172B66C3003F9AE2 /* Foundation.framework */; };
@@ -21,7 +23,7 @@
 		4B534046172B66C3003F9AE2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B534045172B66C3003F9AE2 /* Default@2x.png */; };
 		4B534048172B66C3003F9AE2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B534047172B66C3003F9AE2 /* Default-568h@2x.png */; };
 		4B53404B172B66C3003F9AE2 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */; };
-		4B53404E172B66C3003F9AE2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53404D172B66C3003F9AE2 /* ViewController.m */; };
+		4B53404E172B66C3003F9AE2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53404D172B66C3003F9AE2 /* MainViewController.m */; };
 		4B53408C172F59F2003F9AE2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B53408B172F59F2003F9AE2 /* SenTestingKit.framework */; };
 		4B53408D172F59F2003F9AE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534031172B66C3003F9AE2 /* UIKit.framework */; };
 		4B53408E172F59F2003F9AE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534033172B66C3003F9AE2 /* Foundation.framework */; };
@@ -91,6 +93,9 @@
 		31595206A7E041189CC67E84 /* libPods-ImaListTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImaListTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B08844017778BE600BF2A25 /* app-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon.png"; path = "../../app-icon.png"; sourceTree = "<group>"; };
 		4B08844217778BEB00BF2A25 /* app-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon@2x.png"; path = "../../app-icon@2x.png"; sourceTree = "<group>"; };
+		4B0884451777AE1D00BF2A25 /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
+		4B0884461777AE1D00BF2A25 /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
+		4B0884471777AE1D00BF2A25 /* ItemsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemsViewController.xib; sourceTree = "<group>"; };
 		4B3693BA172F6D7C00C81D9F /* ItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemSpec.m; sourceTree = "<group>"; };
 		4B53402E172B66C3003F9AE2 /* ImaList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImaList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B534031172B66C3003F9AE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -106,8 +111,8 @@
 		4B534045172B66C3003F9AE2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4B534047172B66C3003F9AE2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4B53404A172B66C3003F9AE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		4B53404C172B66C3003F9AE2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		4B53404D172B66C3003F9AE2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4B53404C172B66C3003F9AE2 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		4B53404D172B66C3003F9AE2 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		4B53408A172F59F2003F9AE2 /* ImaListTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImaListTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B53408B172F59F2003F9AE2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		4B534091172F59F2003F9AE2 /* ImaListTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImaListTests-Info.plist"; sourceTree = "<group>"; };
@@ -201,6 +206,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B0884441777ADE200BF2A25 /* ItemsView */ = {
+			isa = PBXGroup;
+			children = (
+				4B0884451777AE1D00BF2A25 /* ItemsViewController.h */,
+				4B0884461777AE1D00BF2A25 /* ItemsViewController.m */,
+				4B0884471777AE1D00BF2A25 /* ItemsViewController.xib */,
+			);
+			path = ItemsView;
+			sourceTree = "<group>";
+		};
 		4B534025172B66C3003F9AE2 = {
 			isa = PBXGroup;
 			children = (
@@ -244,11 +259,12 @@
 				4B7E85AD176C177900DAF07E /* EditorView */,
 				4BC7EC5E176F829E0040E9FB /* ItemModel */,
 				4B7E85C4176E882C00DAF07E /* ItemTableCell */,
+				4B0884441777ADE200BF2A25 /* ItemsView */,
 				4BAD099A176F8E17000D74D5 /* ListCollectionCell */,
 				4BC7EC68176F82C70040E9FB /* ListModel */,
 				4BC7EC56176F81160040E9FB /* ListsView */,
-				4B53404C172B66C3003F9AE2 /* ViewController.h */,
-				4B53404D172B66C3003F9AE2 /* ViewController.m */,
+				4B53404C172B66C3003F9AE2 /* MainViewController.h */,
+				4B53404D172B66C3003F9AE2 /* MainViewController.m */,
 				4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */,
 				4BAD09AB1770F32A000D74D5 /* UI */,
 				4B534038172B66C3003F9AE2 /* Supporting Files */,
@@ -539,6 +555,7 @@
 				4B7E85DA1771316000DAF07E /* icon-delete-list@2x.png in Resources */,
 				4B08844117778BE600BF2A25 /* app-icon.png in Resources */,
 				4B08844317778BEB00BF2A25 /* app-icon@2x.png in Resources */,
+				4B0884491777AE1D00BF2A25 /* ItemsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,7 +652,7 @@
 			files = (
 				4B53403E172B66C3003F9AE2 /* main.m in Sources */,
 				4B534042172B66C3003F9AE2 /* AppDelegate.m in Sources */,
-				4B53404E172B66C3003F9AE2 /* ViewController.m in Sources */,
+				4B53404E172B66C3003F9AE2 /* MainViewController.m in Sources */,
 				4B7E85B1176C177900DAF07E /* EditorViewController.m in Sources */,
 				4B7E85C8176E882C00DAF07E /* ItemTableCell.m in Sources */,
 				4BC7EC5A176F81300040E9FB /* ListsViewController.m in Sources */,
@@ -644,6 +661,7 @@
 				4BAD099D176F8E3B000D74D5 /* ListCollectionCell.m in Sources */,
 				4B7E85DC1776357000DAF07E /* ItemListDataSource.m in Sources */,
 				4B7E85DE17765FB100DAF07E /* ListListDataSource.m in Sources */,
+				4B0884481777AE1D00BF2A25 /* ItemsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
