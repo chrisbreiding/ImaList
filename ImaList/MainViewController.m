@@ -22,8 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self addListsView];
     [self addItemsView];
+    [self addListsView];
     [self addEditItemView];
     
     [self styleViews];

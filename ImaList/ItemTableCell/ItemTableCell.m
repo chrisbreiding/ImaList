@@ -6,7 +6,7 @@ static UIImage *cellBackgroundImage;
 __attribute__((constructor))
 static void initialize_cache() {
     cellBackgroundImage = [[UIImage imageNamed:@"item-cell.png"]
-                           resizableImageWithCapInsets:UIEdgeInsetsMake(0, 61, 1, 0)];
+                           resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 1, 0)];
 }
 
 __attribute__((destructor))
@@ -80,11 +80,11 @@ static void destroy_cache() {
 }
 
 - (void)didSwipeRight:(UIGestureRecognizer *)sender {
-    [self showDeleteButtonAnimated:YES];
+    [self hideDeleteButtonAnimated:YES];
 }
 
 - (void)didSwipeLeft:(UIGestureRecognizer *)sender {
-    [self hideDeleteButtonAnimated:YES];
+    [self showDeleteButtonAnimated:YES];
 }
 
 #pragma mark - deletion

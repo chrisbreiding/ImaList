@@ -11,10 +11,9 @@
     [super viewDidLoad];
     
     [self hideAll];
-    self.singleTextField.delegate = self;
-    
-    [self styleBackgrounds];
     [self styleButtons];
+    
+    self.singleTextField.delegate = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -25,9 +24,7 @@
 - (void)hideAll {
     self.view.hidden = YES;
     self.multipleTextView.hidden = YES;
-    self.multipleBackgroundImageView.hidden = YES;
     self.singleTextField.hidden = YES;
-    self.singleBackgroundImageView.hidden = YES;
 }
 
 - (void)beginAddingMultipleItems {
@@ -51,13 +48,11 @@
 - (void)setMultipleAlpha:(int)alpha {
     self.view.alpha = alpha;
     self.multipleTextView.alpha = alpha;
-    self.multipleBackgroundImageView.alpha = alpha;
 }
 
 - (void)setMultipleHidden:(BOOL)hidden {
     self.view.hidden = hidden;
     self.multipleTextView.hidden = hidden;
-    self.multipleBackgroundImageView.hidden = hidden;
 }
 
 - (void)commitMultiple {
@@ -86,13 +81,11 @@
 - (void)setSingleAlpha:(int)alpha {
     self.view.alpha = alpha;
     self.singleTextField.alpha = alpha;
-    self.singleBackgroundImageView.alpha = alpha;
 }
 
 - (void)setSingleHidden:(BOOL)hidden {
     self.view.hidden = hidden;
     self.singleTextField.hidden = hidden;
-    self.singleBackgroundImageView.hidden = hidden;
 }
 
 - (void)commitSingle {
@@ -128,23 +121,6 @@
 
 #pragma mark - private methods
 
-- (void)styleBackgrounds {
-    UIImage *background = [[UIImage imageNamed:@"textfield"]
-                           resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
-    self.multipleBackgroundImageView.image = background;
-    self.singleBackgroundImageView.image = background;
-}
-
-- (void)styleButtons {
-    [self styleButton:self.doneButton imageName:@"done-button"];
-    [self styleButton:self.cancelButton imageName:@"cancel-button"];
-}
-
-- (void)styleButton:(UIButton *)button imageName:(NSString *)imageName {
-    UIImage *bgImage = [[UIImage imageNamed:imageName] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-    [button setBackgroundImage:bgImage forState:UIControlStateNormal];
-}
-
 - (void)keyboardWillShow:(NSNotification *)notification {
     if (!sizeSet) {
         NSDictionary* info = [notification userInfo];
@@ -163,6 +139,15 @@
 
         sizeSet = YES;
     }
+}
+
+#pragma mark - appearance
+
+- (void)styleButtons {
+//    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel-button"] forState:UIControlStateNormal];
+//    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel-button-highlighted"] forState:UIControlStateHighlighted];
+//    [self.doneButton setBackgroundImage:[UIImage imageNamed:@"done-button"] forState:UIControlStateNormal];
+//    [self.doneButton setBackgroundImage:[UIImage imageNamed:@"done-button-highlighted"] forState:UIControlStateHighlighted];
 }
 
 @end

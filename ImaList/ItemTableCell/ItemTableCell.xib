@@ -82,6 +82,7 @@
 								<string key="NSFrame">{{320, 0}, {60, 60}}</string>
 								<reference key="NSSuperview" ref="692311635"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -102,7 +103,7 @@
 								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">icon-delete.png</string>
+									<string key="NSResourceName">icon-delete-item.png</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
@@ -136,6 +137,10 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="692311635"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">1</int>
+					<bytes key="NSRGB">MC45NzI1NDkwMTk2IDAuOTcyNTQ5MDE5NiAwLjk3MjU0OTAxOTYAA</bytes>
+				</object>
 				<reference key="IBUIGestureRecognizers" ref="0"/>
 				<string key="IBUIRestorationIdentifier">ItemTableCell</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -485,7 +490,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">icon-delete.png</string>
+			<string key="NS.key.0">icon-delete-item.png</string>
 			<string key="NS.object.0">{60, 60}</string>
 		</object>
 		<bool key="IBDocument.UseAutolayout">YES</bool>

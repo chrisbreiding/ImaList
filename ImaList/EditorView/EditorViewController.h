@@ -9,9 +9,7 @@
 
 @property (nonatomic, weak) IBOutlet UIView *wrapView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *wrapViewBottomConstraint;
-@property (nonatomic, weak) IBOutlet UIImageView *multipleBackgroundImageView;
 @property (nonatomic, weak) IBOutlet UITextView *multipleTextView;
-@property (nonatomic, weak) IBOutlet UIImageView *singleBackgroundImageView;
 @property (nonatomic, weak) IBOutlet UITextField *singleTextField;
 @property (nonatomic, weak) IBOutlet UIButton *doneButton;
 @property (nonatomic, weak) IBOutlet UIButton *cancelButton;
