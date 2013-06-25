@@ -11,8 +11,6 @@
     [super viewDidLoad];
     
     [self hideAll];
-    [self styleButtons];
-    
     self.singleTextField.delegate = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -27,7 +25,7 @@
     self.singleTextField.hidden = YES;
 }
 
-- (void)beginAddingMultipleItems {
+- (void)beginEditingMultiple {
     [self setMultipleAlpha:0];
     [self setMultipleHidden:NO];
     addingMultiple = YES;
@@ -38,7 +36,7 @@
                      }];
 }
 
-- (void)endAddingMultipleItems {
+- (void)endEditingMultipleItems {
     self.multipleTextView.text = @"";
     [self setMultipleHidden:YES];
     addingMultiple = NO;
@@ -57,12 +55,11 @@
 
 - (void)commitMultiple {
     NSArray *nameArray = [self.multipleTextView.text componentsSeparatedByString:@"\n"];
-    [self.delegate didFinishAddingItems:nameArray];
+    [self.delegate didFinishEditingMultiple:nameArray];
 }
 
-- (void)beginEditingSingleItem:(Item *)item {
-    itemBeingEdited = item;
-    self.singleTextField.text = item.name;
+- (void)beginEditingSingle:(NSString *)text {
+    self.singleTextField.text = text;
     [self setSingleAlpha:0];
     [self setSingleHidden:NO];
     [self.singleTextField becomeFirstResponder];
@@ -89,7 +86,7 @@
 }
 
 - (void)commitSingle {
-    [self.delegate didFinishEditingItem:itemBeingEdited name:self.singleTextField.text];
+    [self.delegate didFinishEditingSingle:self.singleTextField.text];
 }
 
 #pragma mark - user actions
@@ -97,7 +94,7 @@
 - (IBAction)didTapDone:(id)sender {
     if (addingMultiple) {
         [self commitMultiple];
-        [self endAddingMultipleItems];
+        [self endEditingMultipleItems];
     } else {
         [self commitSingle];
         [self endEditingSingleItem];
@@ -106,7 +103,7 @@
 
 - (IBAction)didTapCancel:(id)sender {
     if (addingMultiple) {
-        [self endAddingMultipleItems];
+        [self endEditingMultipleItems];
     } else {
         [self endEditingSingleItem];
     }
@@ -139,15 +136,6 @@
 
         sizeSet = YES;
     }
-}
-
-#pragma mark - appearance
-
-- (void)styleButtons {
-//    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel-button"] forState:UIControlStateNormal];
-//    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"cancel-button-highlighted"] forState:UIControlStateHighlighted];
-//    [self.doneButton setBackgroundImage:[UIImage imageNamed:@"done-button"] forState:UIControlStateNormal];
-//    [self.doneButton setBackgroundImage:[UIImage imageNamed:@"done-button-highlighted"] forState:UIControlStateHighlighted];
 }
 
 @end

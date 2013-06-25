@@ -9,22 +9,23 @@
 
 @property (nonatomic, weak) IBOutlet UIView *wrapView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *wrapViewBottomConstraint;
-@property (nonatomic, weak) IBOutlet UITextView *multipleTextView;
 @property (nonatomic, weak) IBOutlet UITextField *singleTextField;
+@property (nonatomic, weak) IBOutlet UITextView *multipleTextView;
 @property (nonatomic, weak) IBOutlet UIButton *doneButton;
 @property (nonatomic, weak) IBOutlet UIButton *cancelButton;
 
 - (IBAction)didTapDone:(id)sender;
 - (IBAction)didTapCancel:(id)sender;
 
-- (void)beginAddingMultipleItems;
-- (void)beginEditingSingleItem:(Item *)item;
+- (void)beginEditingSingle:(NSString *)text;
+- (void)beginEditingMultiple;
 
 @end
 
 @protocol EditorDelegate <NSObject>
 
-- (void)didFinishEditingItem:(Item *)item name:(NSString *)name;
-- (void)didFinishAddingItems:(NSArray *)itemNames;
+@optional
+- (void)didFinishEditingSingle:(NSString *)text;
+- (void)didFinishEditingMultiple:(NSArray *)textArray;
 
 @end

@@ -2,18 +2,15 @@
 
 @implementation List
 
-- (id)initWithCoder:(NSCoder *)coder {
+- (instancetype)initWithValues:(NSDictionary *)values {
     self = [super init];
     if (self) {
-        self.name = [coder decodeObjectForKey:@"name"];
-        self.items = [coder decodeObjectForKey:@"items"];
+        self._id = values[@"_id"];
+        self.name = values[@"name"];
+        self.ref = values[@"ref"];
     }
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeObject:self.name forKey:@"name"];
-    [coder encodeObject:self.items forKey:@"items"];
-}
 
 @end

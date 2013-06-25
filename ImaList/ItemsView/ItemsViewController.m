@@ -1,7 +1,10 @@
 #import "ItemsViewController.h"
 #import "ItemListDataSource.h"
+#import "Item.h"
 
-@implementation ItemsViewController
+@implementation ItemsViewController {
+    Item *itemBeingEdited;
+}
 
 - (instancetype)initWithFirebaseRef:(Firebase *)ref {
     self = [super init];
@@ -36,7 +39,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ItemTableCell *cell = (ItemTableCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [self.delegate editNameForCell:cell];
+    itemBeingEdited = cell.item;
+    [self.delegate editItemName:cell.item.name];
 }
 
 #pragma mark - item list data source delegate
@@ -76,7 +80,7 @@
 
 #pragma mark - edit mode
 
-- (void)didFinishAddingItems:(NSArray *)itemNames {
+- (void)didFinishEditingMultiple:(NSArray *)itemNames {
     for (NSString *itemName in itemNames) {
         NSString *trimmedName = [itemName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if (![trimmedName isEqualToString:@""]) {
@@ -85,8 +89,8 @@
     }
 }
 
-- (void)didFinishEditingItem:(Item *)item name:(NSString *)name {
-    [self.dataSource updateItem:item name:name];
+- (void)didFinishEditingSingle:(NSString *)name {
+    [self.dataSource updateItem:itemBeingEdited name:name];
 }
 
 #pragma mark - user actions

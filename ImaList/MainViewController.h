@@ -1,10 +1,9 @@
 #import <UIKit/UIKit.h>
-#import "ItemListDataSource.h"
-#import "EditorViewController.h"
+#import "ListsViewController.h"
 #import "ItemsViewController.h"
-#import "ItemTableCell.h"
+#import "EditorViewController.h"
 
-@interface MainViewController : UIViewController <UIActionSheetDelegate, ItemsDelegate>
+@interface MainViewController : UIViewController <UIActionSheetDelegate, ItemsDelegate, ListsDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *navBarView;
 @property (nonatomic, weak) IBOutlet UIView *footerView;

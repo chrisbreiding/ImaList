@@ -20,6 +20,6 @@
 
 @protocol ItemsDelegate <NSObject>
 
-- (void)editNameForCell:(ItemTableCell *)cell;
+- (void)editItemName:(NSString *)name;
 
 @end

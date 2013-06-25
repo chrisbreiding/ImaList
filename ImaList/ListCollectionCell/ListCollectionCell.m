@@ -7,22 +7,15 @@
     BOOL editing;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    [self configureNotifications];
-    self.listNameTextField.delegate = self;
-}
-
 - (void)configureCellWithList:(List *)list editing:(BOOL)isEditing {
+    self.list = list;
+    self.listNameLabel.text = list.name;
     if (isEditing) {
-        self.listNameTextField.text = list.name;
-        [self enterEditingMode];
+        self.deleteButton.hidden = NO;
         editing = YES;
-    } else {
-        self.listNameLabel.text = list.name;
     }
     if (!isEditing && editing) {
-        [self exitEditingMode];
+        self.deleteButton.hidden = YES;
         editing = NO;
     }
     [self style];
@@ -37,56 +30,10 @@
     layer.shadowOpacity = 0.8;
 }
 
-- (void)enterEditingMode {
-    self.listNameTextField.hidden = NO;
-    self.deleteButton.hidden = NO;
-    self.listNameLabel.hidden = YES;
-}
-
-- (void)exitEditingMode {
-    self.listNameTextField.hidden = YES;
-    self.deleteButton.hidden = YES;
-    self.listNameLabel.hidden = NO;
-}
-
-#pragma mark - notifications
-
-- (void)configureNotifications {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showDeleteButton:)
-                                                 name:@"finishEditingList"
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(hideDeleteButton:)
-                                                 name:@"beginEditingList"
-                                               object:nil];
-}
-
-- (void)showDeleteButton:(NSNotification *)notification {
-    self.deleteButton.hidden = NO;
-}
-
-- (void)hideDeleteButton:(NSNotification *)notification {
-    self.deleteButton.hidden = YES;
-}
-
 #pragma mark - user actions
 
-- (IBAction)deleteList:(id)sender {
-    [self.delegate deleteListForCell:self];
-}
-
-#pragma mark - text field delegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"beginEditingList" object:nil];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.delegate didFinishEditingList:self.listNameTextField.text cell:self];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"finishEditingList" object:nil];
-    [textField resignFirstResponder];
-    return YES;
+- (IBAction)didTapDelete:(id)sender {
+    [self.delegate deleteList:self.list];
 }
 
 @end

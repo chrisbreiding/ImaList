@@ -1,11 +1,11 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Firebase/Firebase.h>
 #import "MainViewController.h"
+#import "ListsViewController.h"
+#import "List.h"
 #import "ItemsViewController.h"
-#import "ItemListDataSource.h"
 #import "Item.h"
 #import "EditorViewController.h"
-#import "ListsViewController.h"
 
 @implementation MainViewController {
     ListsViewController *listsVC;
@@ -13,7 +13,6 @@
     EditorViewController *editorVC;
     BOOL listsShown;
     BOOL editingList;
-    NSLayoutConstraint *listsBottomConstraint;
     NSLayoutConstraint *listsHeightConstraint;
     NSLayoutConstraint *itemsBottomConstraint;
 }
@@ -25,30 +24,31 @@
 
     [self addItemsView];
     [self addListsView];
-    [self addEditItemView];
+    [self addEditorView];
     
     [self styleViews];
     [self styleButtons];
-    [self configureNotifications];
 }
 
 #pragma mark - lists
 
 - (void)addListsView {
-    listsVC = [[ListsViewController alloc] init];
+    listsVC = [[ListsViewController alloc] initWithFirebaseRef:[[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com/lists"]];
+    listsVC.delegate = self;
     UIView *listsView = listsVC.view;
     listsView.translatesAutoresizingMaskIntoConstraints = NO;
-    listsView.hidden = YES;
-    listsVC.collectionView.alpha = 0;
-    self.editListsButton.hidden = YES;
-    self.editListsButton.alpha = 0;
+//    listsView.hidden = YES;
+//    listsVC.collectionView.alpha = 0;
+//    self.editListsButton.hidden = YES;
+//    self.editListsButton.alpha = 0;
     [self.view addSubview:listsView];
     NSDictionary *views = NSDictionaryOfVariableBindings(listsView);
     NSArray *constraints = @[];
     NSArray *bottomConstraints = [self constraintWithString:@"V:[listsView]-50-|" views:views];
-    NSArray *heightConstraints = [self constraintWithString:@"V:[listsView(0)]" views:views];
+    NSArray *heightConstraints = [self constraintWithString:@"V:[listsView(120)]" views:views];
+    [self toggleLists:nil];
+//    NSArray *heightConstraints = [self constraintWithString:@"V:[listsView(0)]" views:views];
     NSArray *horizontalConstraints = [self constraintWithString:@"H:|[listsView]|" views:views];
-    listsBottomConstraint = bottomConstraints[0];
     listsHeightConstraint = heightConstraints[0];
     constraints = [constraints arrayByAddingObjectsFromArray:bottomConstraints];
     constraints = [constraints arrayByAddingObjectsFromArray:heightConstraints];
@@ -134,44 +134,6 @@
     [self.view layoutIfNeeded];
 }
 
-#pragma mark - notifications
-
--(void)configureNotifications {
-    [self observeNotificationName:@"beginEditingList" selector:@selector(beginEditingList:)];
-    [self observeNotificationName:@"finishEditingList" selector:@selector(finishEditingList:)];
-    [self observeNotificationName:UIKeyboardWillShowNotification selector:@selector(keyboardWillShow:)];
-}
-
-- (void)observeNotificationName:(NSString *)name selector:(SEL)selector {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:selector
-                                                 name:name
-                                               object:nil];
-}
-
-- (void)beginEditingList:(NSNotification *)notification {
-    editingList = YES;
-}
-
-- (void)finishEditingList:(NSNotification *)notification {
-    editingList = NO;
-    listsBottomConstraint.constant = 50;
-    [UIView animateWithDuration:0.2 animations:^{
-        [self.view layoutIfNeeded];
-    }];
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification {
-    NSDictionary* info = [notification userInfo];
-    int keyboardHeight = (int)[info[UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
-    if (editingList) {
-        listsBottomConstraint.constant = keyboardHeight;
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.view layoutIfNeeded];
-        }];
-    }
-}
-
 #pragma mark - appearance
 
 - (void)styleViews {
@@ -219,21 +181,33 @@
     [itemsVC sortItems];
 }
 
-#pragma mark - item editing
+#pragma mark - editor
 
-- (IBAction)addItem:(id)sender {
-    [editorVC beginAddingMultipleItems];
-}
-
-- (void)addEditItemView {
+-(void)addEditorView {
     editorVC = [[EditorViewController alloc] init];
     editorVC.view.frame = self.view.bounds;
     editorVC.delegate = itemsVC;
     [self.view addSubview:editorVC.view];
 }
 
-- (void)editNameForCell:(ItemTableCell *)cell {
-    [editorVC beginEditingSingleItem:cell.item];
+- (void)addList {
+    editorVC.delegate = listsVC;
+    [editorVC beginEditingSingle:@""];
+}
+
+- (void)editListName:(NSString *)name {
+    editorVC.delegate = listsVC;
+    [editorVC beginEditingSingle:name];
+}
+
+- (IBAction)addItem:(id)sender {
+    editorVC.delegate = itemsVC;
+    [editorVC beginEditingMultiple];
+}
+
+- (void)editItemName:(NSString *)name {
+    editorVC.delegate = itemsVC;
+    [editorVC beginEditingSingle:name];
 }
 
 #pragma mark - convenience

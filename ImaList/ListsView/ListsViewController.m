@@ -5,23 +5,31 @@
 #import "List.h"
 
 @implementation ListsViewController {
+    BOOL adding;
     BOOL editing;
     BOOL keyboardSizeSet;
-    NSArray *editedLists;
-    ListCollectionCell *cellToDelete;
+    List *listBeingEdited;
+    List *listToDelete;
+}
+
+- (instancetype)initWithFirebaseRef:(Firebase *)ref {
+    self = [super init];
+    if (self) {
+        ListListDataSource *dataSource = [[ListListDataSource alloc] initWithFirebaseRef:ref];
+        _dataSource = dataSource;
+        dataSource.delegate = self;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadData];
+    
     [self style];
-    [self configureNotifications];
-    editedLists = @[];
+    
     UINib *cellNib = [UINib nibWithNibName:@"ListCollectionCell" bundle:nil];
-    [_collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ListCell"];
-    UINib *addCellNib = [UINib nibWithNibName:@"ListAddCell" bundle:nil];
-    [_collectionView registerNib:addCellNib forCellWithReuseIdentifier:@"ListAddCell"];
-    _collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ListCell"];
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
 }
 
 - (void)willExit {
@@ -42,12 +50,6 @@
     layer.shadowOpacity = 0.8;
 }
 
-#pragma mark - data
-
-- (void)loadData {
-    self.dataSource = [[ListListDataSource alloc] init];
-}
-
 #pragma mark - collection view delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -57,30 +59,49 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     List *list = [self.dataSource listAtIndex:indexPath.row];
     ListCollectionCell *cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"ListCell" forIndexPath:indexPath];
-    [cell configureCellWithList:list editing:editing];
     cell.delegate = self;
+    [cell configureCellWithList:list editing:editing];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // go to list of items
+    if (editing) {
+        List *list = [self.dataSource listAtIndex:indexPath.row];
+        listBeingEdited = list;
+        [self.delegate editListName:list.name];
+    } else {
+        // go to list of items
+    }
+}
+
+#pragma mark - list list data source delegate
+
+- (void)didCreateListAtIndex:(int)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
+}
+
+- (void)didUpdateListAtIndex:(int)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+}
+
+- (void)didRemoveListAtIndex:(int)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
 }
 
 #pragma mark - user actions
 
 - (IBAction)addList:(id)sender {
-    [self.dataSource createListWithName:@""];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:([self.dataSource listCount] - 1) inSection:0];
-    [_collectionView insertItemsAtIndexPaths:@[indexPath]];
-    ListCollectionCell *cell = (ListCollectionCell *)[_collectionView cellForItemAtIndexPath:indexPath];
-    [_collectionView scrollToItemAtIndexPath:indexPath
-                            atScrollPosition:UICollectionViewScrollPositionRight
-                                    animated:YES];
-    [cell.listNameTextField becomeFirstResponder];
+    adding = YES;
+    [self.delegate addList];
 }
 
-- (void)deleteListForCell:(ListCollectionCell *)cell {
-    cellToDelete = cell;
+#pragma mark - list cell delegate
+
+- (void)deleteList:(List *)list {
+    listToDelete = list;
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                   initWithTitle:@"Delete list and all its items?"
                                   delegate:self
@@ -92,10 +113,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == actionSheet.destructiveButtonIndex ) {
-        NSIndexPath *indexPath = [_collectionView indexPathForCell:cellToDelete];
-        [self.dataSource removeListAtIndex:indexPath.row];
-        [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
-        cellToDelete = nil;
+        [self.dataSource removeList:listToDelete];
     }
 }
 
@@ -107,7 +125,6 @@
         [self showAddButton:nil];
     } else {
         [self hideAddButton:nil];
-        [self finishEditing];
     }
     [_collectionView reloadData];
 }
@@ -128,27 +145,13 @@
     }];
 }
 
-- (void)didFinishEditingList:(NSString *)listName cell:(ListCollectionCell *)cell {
-    NSIndexPath *indexPath = [_collectionView indexPathForCell:cell];
-    List *list = [self.dataSource listAtIndex:indexPath.row];
-    list.name = listName;
-}
-
-- (void)finishEditing {
-//    [self.dataSource commitChanges];
-}
-
-#pragma mark - notifications
-
-- (void)configureNotifications {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showAddButton:)
-                                                 name:@"finishEditingList"
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(hideAddButton:)
-                                                 name:@"beginEditingList"
-                                               object:nil];
+- (void)didFinishEditingSingle:(NSString *)name {
+    if (adding) {
+        [self.dataSource createListWithName:name];
+        adding = NO;
+    } else {
+        [self.dataSource updateList:listBeingEdited name:name];
+    }
 }
 
 @end

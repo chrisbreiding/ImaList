@@ -1,24 +1,23 @@
 #import <UIKit/UIKit.h>
 
 @class List;
-@protocol ListEditorDelegate;
+@protocol ListCellDelegate;
 
-@interface ListCollectionCell : UICollectionViewCell <UITextFieldDelegate>
+@interface ListCollectionCell : UICollectionViewCell
 
-@property(nonatomic, weak) id<ListEditorDelegate> delegate;
+@property(nonatomic, weak) id<ListCellDelegate> delegate;
 
 @property (nonatomic, weak) IBOutlet UILabel *listNameLabel;
-@property (nonatomic, weak) IBOutlet UITextField *listNameTextField;
 @property (nonatomic, weak) IBOutlet UIButton *deleteButton;
+@property (nonatomic, strong) List *list;
 
-- (IBAction)deleteList:(id)sender;
+- (IBAction)didTapDelete:(id)sender;
 - (void)configureCellWithList:(List *)list editing:(BOOL)isEditing;
 
 @end
 
-@protocol ListEditorDelegate <NSObject>
+@protocol ListCellDelegate <NSObject>
 
-- (void)didFinishEditingList:(NSString *)listName cell:(ListCollectionCell *)cell;
-- (void)deleteListForCell:(ListCollectionCell *)cell;
+- (void)deleteList:(List *)list;
 
 @end
