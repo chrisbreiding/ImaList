@@ -37,17 +37,15 @@
     listsVC.delegate = self;
     UIView *listsView = listsVC.view;
     listsView.translatesAutoresizingMaskIntoConstraints = NO;
-//    listsView.hidden = YES;
-//    listsVC.collectionView.alpha = 0;
-//    self.editListsButton.hidden = YES;
-//    self.editListsButton.alpha = 0;
+    listsView.hidden = YES;
+    listsVC.collectionView.alpha = 0;
+    self.editListsButton.hidden = YES;
+    self.editListsButton.alpha = 0;
     [self.view addSubview:listsView];
     NSDictionary *views = NSDictionaryOfVariableBindings(listsView);
     NSArray *constraints = @[];
     NSArray *bottomConstraints = [self constraintWithString:@"V:[listsView]-50-|" views:views];
-    NSArray *heightConstraints = [self constraintWithString:@"V:[listsView(120)]" views:views];
-    [self toggleLists:nil];
-//    NSArray *heightConstraints = [self constraintWithString:@"V:[listsView(0)]" views:views];
+    NSArray *heightConstraints = [self constraintWithString:@"V:[listsView(0)]" views:views];
     NSArray *horizontalConstraints = [self constraintWithString:@"H:|[listsView]|" views:views];
     listsHeightConstraint = heightConstraints[0];
     constraints = [constraints arrayByAddingObjectsFromArray:bottomConstraints];
@@ -79,12 +77,14 @@
         listsVC.view.hidden = NO;
         [UIView animateWithDuration:0.2 animations:^{
             listsVC.collectionView.alpha = 1;
+        } completion:^(BOOL finished) {
+            [listsVC didShow];
         }];
     }];
 }
 
 - (void)hideLists {
-    [listsVC willExit];
+    [listsVC willHide];
     [UIView animateWithDuration:0.2 animations:^{
         listsVC.collectionView.alpha = 0;
         self.editListsButton.alpha = 0;

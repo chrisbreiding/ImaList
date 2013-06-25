@@ -5,6 +5,7 @@
 #import "List.h"
 
 @implementation ListsViewController {
+    BOOL isShown;
     BOOL adding;
     BOOL editing;
     BOOL keyboardSizeSet;
@@ -32,7 +33,13 @@
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
 }
 
-- (void)willExit {
+- (void)didShow {
+    isShown = YES;
+    [self.collectionView reloadData];
+}
+
+- (void)willHide {
+    isShown = NO;
     editing = NO;
 }
 
@@ -77,18 +84,24 @@
 #pragma mark - list list data source delegate
 
 - (void)didCreateListAtIndex:(int)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-    [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
+    if (isShown) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+        [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
+    }
 }
 
 - (void)didUpdateListAtIndex:(int)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-    [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+    if (isShown) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+        [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+    }
 }
 
 - (void)didRemoveListAtIndex:(int)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-    [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+    if (isShown) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+        [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+    }
 }
 
 #pragma mark - user actions

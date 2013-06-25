@@ -20,7 +20,8 @@
 
 - (IBAction)addList:(id)sender;
 - (void)toggleEditingMode;
-- (void)willExit;
+- (void)didShow;
+- (void)willHide;
 
 @end
 
