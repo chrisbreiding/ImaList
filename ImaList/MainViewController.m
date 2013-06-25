@@ -1,4 +1,5 @@
 #import <QuartzCore/QuartzCore.h>
+#import <Firebase/Firebase.h>
 #import "MainViewController.h"
 #import "ItemsViewController.h"
 #import "ItemListDataSource.h"
@@ -115,7 +116,7 @@
 #pragma mark - items
 
 - (void)addItemsView {
-    itemsVC = [[ItemsViewController alloc] init];
+    itemsVC = [[ItemsViewController alloc] initWithFirebaseRef:[[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com/items"]];
     itemsVC.delegate = self;
     UITableView *itemsView = itemsVC.tableView;
     itemsView.translatesAutoresizingMaskIntoConstraints = NO;

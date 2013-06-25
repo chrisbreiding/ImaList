@@ -3,13 +3,19 @@
 
 @implementation ItemsViewController
 
+- (instancetype)initWithFirebaseRef:(Firebase *)ref {
+    self = [super init];
+    if (self) {
+        ItemListDataSource *dataSource = [[ItemListDataSource alloc] initWithFirebaseRef:ref];
+        _dataSource = dataSource;
+        dataSource.delegate = self;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    ItemListDataSource *dataSource = [[ItemListDataSource alloc] init];
-    self.dataSource = dataSource;
-    dataSource.delegate = self;
-    
     UINib *cellNib = [UINib nibWithNibName:@"ItemTableCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:@"ItemTableCell"];
 }

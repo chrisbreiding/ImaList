@@ -1,11 +1,14 @@
 #import <Foundation/Foundation.h>
 
 @class Item;
+@class Firebase;
 @protocol ItemListDataSourceDelegate;
 
 @interface ItemListDataSource : NSObject
 
 @property (nonatomic, weak) id<ItemListDataSourceDelegate> delegate;
+
+- (instancetype)initWithFirebaseRef:(Firebase *)ref;
 
 - (NSInteger)itemCount;
 - (Item *)itemAtIndex:(NSInteger)index;

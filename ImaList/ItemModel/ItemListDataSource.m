@@ -7,11 +7,11 @@
     Firebase *itemsRef;
 }
 
-- (instancetype)init {
+- (instancetype)initWithFirebaseRef:(Firebase *)ref {
     self = [super init];
     if (self) {
         items = [NSMutableArray array];
-        itemsRef = [[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com/items"];
+        itemsRef = ref;
         
         [itemsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
             [self itemCreatedWithValues:@{
