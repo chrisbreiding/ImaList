@@ -21,6 +21,8 @@
 
     UINib *cellNib = [UINib nibWithNibName:@"ItemTableCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:@"ItemTableCell"];
+    
+    self.noItemsTextView.text = @"No Items Here!\n\nTap [+] to add items.";
 }
 
 - (void)updateItemsRef:(Firebase *)itemsRef {
@@ -49,6 +51,10 @@
 }
 
 #pragma mark - item list data source delegate
+
+- (void)didLoadItemsNonZero:(BOOL)nonZero {
+    self.noItemsTextView.hidden = nonZero;
+}
 
 - (void)didCreateItemAtIndex:(int)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];

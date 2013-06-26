@@ -6,10 +6,12 @@
 @class Firebase;
 @protocol ItemsDelegate;
 
-@interface ItemsViewController : UITableViewController <ItemCellDelegate, ItemListDataSourceDelegate, EditorDelegate>
+@interface ItemsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ItemCellDelegate, ItemListDataSourceDelegate, EditorDelegate>
 
 @property (nonatomic, weak) id<ItemsDelegate> delegate;
 @property (nonatomic, strong) ItemListDataSource *dataSource;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITextView *noItemsTextView;
 
 - (void)updateItemsRef:(Firebase *)itemsRef;
 - (void)clearCompleted;

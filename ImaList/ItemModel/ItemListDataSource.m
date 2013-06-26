@@ -19,6 +19,10 @@
     [_itemsRef removeAllObservers];
     _itemsRef = itemsRef;
     
+    [_itemsRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        [self.delegate didLoadItemsNonZero:(snapshot.value != (id)[NSNull null])];
+    }];
+    
     [_itemsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
         [self itemCreatedWithValues:@{
              @"_id": snapshot.name,

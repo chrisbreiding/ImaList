@@ -119,7 +119,7 @@
 - (void)addItemsView {
     itemsVC = [[ItemsViewController alloc] init];
     itemsVC.delegate = self;
-    UITableView *itemsView = itemsVC.tableView;
+    UIView *itemsView = itemsVC.view;
     itemsView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:itemsView];
     NSDictionary *views = NSDictionaryOfVariableBindings(itemsView);
