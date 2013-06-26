@@ -12,5 +12,8 @@
     return self;
 }
 
+- (BOOL)isEqualToList:(List *)list {
+    return [self._id isEqualToString:list._id];
+}
 
 @end

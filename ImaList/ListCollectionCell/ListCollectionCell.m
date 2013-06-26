@@ -7,7 +7,7 @@
     BOOL editing;
 }
 
-- (void)configureCellWithList:(List *)list editing:(BOOL)isEditing {
+- (void)configureCellWithList:(List *)list editing:(BOOL)isEditing current:(BOOL)isCurrent {
     self.list = list;
     self.listNameLabel.text = list.name;
     if (isEditing) {
@@ -19,6 +19,7 @@
         editing = NO;
     }
     [self style];
+    self.highlighted = isCurrent;
 }
 
 - (void)style {
@@ -28,6 +29,16 @@
     layer.shadowColor = [[UIColor blackColor] CGColor];
     layer.shadowRadius = 2;
     layer.shadowOpacity = 0.8;
+}
+
+- (void)setHighlighted:(BOOL)highlighted {
+    if (highlighted) {
+        self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.75];
+        self.listNameLabel.textColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+    } else {
+        self.backgroundColor = [UIColor colorWithWhite:0.6 alpha:0.25];
+        self.listNameLabel.textColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+    }
 }
 
 #pragma mark - user actions

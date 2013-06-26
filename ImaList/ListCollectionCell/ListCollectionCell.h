@@ -12,7 +12,7 @@
 @property (nonatomic, strong) List *list;
 
 - (IBAction)didTapDelete:(id)sender;
-- (void)configureCellWithList:(List *)list editing:(BOOL)isEditing;
+- (void)configureCellWithList:(List *)list editing:(BOOL)isEditing current:(BOOL)isCurrent;
 
 @end
 

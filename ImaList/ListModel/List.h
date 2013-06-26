@@ -9,5 +9,6 @@
 @property (nonatomic, strong) Firebase *ref;
 
 - (instancetype)initWithValues:(NSDictionary *)values;
+- (BOOL)isEqualToList:(List *)list;
 
 @end

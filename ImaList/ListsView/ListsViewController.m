@@ -69,7 +69,7 @@
     List *list = [self.dataSource listAtIndex:indexPath.row];
     ListCollectionCell *cell = [_collectionView dequeueReusableCellWithReuseIdentifier:@"ListCell" forIndexPath:indexPath];
     cell.delegate = self;
-    [cell configureCellWithList:list editing:editing];
+    [cell configureCellWithList:list editing:editing current:[list isEqualToList:currentList]];
     return cell;
 }
 
@@ -90,7 +90,7 @@
 }
 
 - (void)updateCurrentList:(List *)list {
-    if (![currentList._id isEqualToString:list._id]) {
+    if (![currentList isEqualToList:list]) {
         currentList = list;
         [self.delegate displayItemsForList:list];
     }
@@ -189,7 +189,7 @@
         adding = NO;
     } else {
         [self.dataSource updateList:listBeingEdited name:name];
-        if ([currentList._id isEqualToString:listBeingEdited._id]) {
+        if ([currentList isEqualToList:listBeingEdited]) {
             [self.delegate didChangeListName:name];
         }
     }
