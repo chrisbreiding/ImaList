@@ -57,7 +57,7 @@
 
 - (IBAction)toggleLists:(id)sender {
     if (listsShown) {
-        [self hideLists];
+        [self hideListsCompletion:nil];
     } else {
         [self showLists];
     }
@@ -83,7 +83,7 @@
     }];
 }
 
-- (void)hideLists {
+- (void)hideListsCompletion:(void (^)())completion {
     [listsVC willHide];
     [UIView animateWithDuration:0.2 animations:^{
         listsVC.collectionView.alpha = 0;
@@ -98,6 +98,7 @@
         } completion:^(BOOL finished) {
             listsVC.view.hidden = YES;
             listsShown = NO;
+            if (completion) completion();
         }];
     }];
 }
@@ -183,8 +184,9 @@
 
 - (void)displayItemsForList:(List *)list {
     self.listNameLabel.text = list.name;
-    [self hideLists];
-    [itemsVC updateItemsRef:[list.ref childByAppendingPath:@"items"]];
+    [self hideListsCompletion:^{
+        [itemsVC updateItemsRef:[list.ref childByAppendingPath:@"items"]];
+    }];
 }
 
 #pragma mark - editor

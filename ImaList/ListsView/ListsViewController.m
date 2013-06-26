@@ -90,8 +90,10 @@
 }
 
 - (void)updateCurrentList:(List *)list {
-    currentList = list;
-    [self.delegate displayItemsForList:list];
+    if (![currentList._id isEqualToString:list._id]) {
+        currentList = list;
+        [self.delegate displayItemsForList:list];
+    }
 }
 
 - (void)didCreateListAtIndex:(int)index {
