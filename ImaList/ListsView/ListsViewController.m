@@ -72,16 +72,20 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    List *list = [self.dataSource listAtIndex:indexPath.row];
     if (editing) {
-        List *list = [self.dataSource listAtIndex:indexPath.row];
         listBeingEdited = list;
         [self.delegate editListName:list.name];
     } else {
-        // go to list of items
+        [self.delegate displayItemsForList:list];
     }
 }
 
 #pragma mark - list list data source delegate
+
+- (void)didLoadLists {
+    [self.delegate displayItemsForList:[self.dataSource listAtIndex:0]];
+}
 
 - (void)didCreateListAtIndex:(int)index {
     if (isShown) {
@@ -121,7 +125,7 @@
                                   cancelButtonTitle:@"Cancel"
                                   destructiveButtonTitle:@"Delete List"
                                   otherButtonTitles:nil];
-    [actionSheet showInView:self.view];
+    [actionSheet showInView:self.view.superview];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {

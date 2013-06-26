@@ -6,10 +6,10 @@
     Item *itemBeingEdited;
 }
 
-- (instancetype)initWithFirebaseRef:(Firebase *)ref {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        ItemListDataSource *dataSource = [[ItemListDataSource alloc] initWithFirebaseRef:ref];
+        ItemListDataSource *dataSource = [[ItemListDataSource alloc] init];
         _dataSource = dataSource;
         dataSource.delegate = self;
     }
@@ -21,6 +21,11 @@
 
     UINib *cellNib = [UINib nibWithNibName:@"ItemTableCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:@"ItemTableCell"];
+}
+
+- (void)updateItemsRef:(Firebase *)itemsRef {
+    self.dataSource.itemsRef = itemsRef;
+    [self.tableView reloadData];
 }
 
 #pragma mark - tableview delegate

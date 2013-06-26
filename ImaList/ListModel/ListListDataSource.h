@@ -21,6 +21,7 @@
 
 @protocol ListListDataSourceDelegate <NSObject>
 
+- (void)didLoadLists;
 - (void)didCreateListAtIndex:(int)index;
 - (void)didUpdateListAtIndex:(int)index;
 - (void)didRemoveListAtIndex:(int)index;

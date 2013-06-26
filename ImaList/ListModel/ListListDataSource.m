@@ -13,6 +13,14 @@
         lists = [NSMutableArray array];
         listsRef = ref;
         
+        [listsRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            if (snapshot.value == (id)[NSNull null]) {
+                [self createListWithName:@"Grocery"];
+            } else {
+                [self.delegate didLoadLists];
+            }
+        }];
+        
         [listsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
             [self listCreatedWithValues:@{
                  @"_id": snapshot.name,

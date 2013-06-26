@@ -11,8 +11,7 @@
 @property (nonatomic, weak) id<ItemsDelegate> delegate;
 @property (nonatomic, strong) ItemListDataSource *dataSource;
 
-- (instancetype)initWithFirebaseRef:(Firebase *)ref;
-
+- (void)updateItemsRef:(Firebase *)itemsRef;
 - (void)clearCompleted;
 - (void)sortItems;
 

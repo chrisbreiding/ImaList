@@ -29,5 +29,6 @@
 
 - (void)addList;
 - (void)editListName:(NSString *)name;
+- (void)displayItemsForList:(List *)list;
 
 @end

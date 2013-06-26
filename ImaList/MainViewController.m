@@ -116,7 +116,7 @@
 #pragma mark - items
 
 - (void)addItemsView {
-    itemsVC = [[ItemsViewController alloc] initWithFirebaseRef:[[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com/items"]];
+    itemsVC = [[ItemsViewController alloc] init];
     itemsVC.delegate = self;
     UITableView *itemsView = itemsVC.tableView;
     itemsView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -179,6 +179,12 @@
 
 - (IBAction)sortItems:(id)sender {
     [itemsVC sortItems];
+}
+
+- (void)displayItemsForList:(List *)list {
+    self.listNameLabel.text = list.name;
+    [self hideLists];
+    [itemsVC updateItemsRef:[list.ref childByAppendingPath:@"items"]];
 }
 
 #pragma mark - editor

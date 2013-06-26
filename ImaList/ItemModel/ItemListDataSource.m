@@ -4,41 +4,45 @@
 
 @implementation ItemListDataSource {
     NSMutableArray *items;
-    Firebase *itemsRef;
 }
 
-- (instancetype)initWithFirebaseRef:(Firebase *)ref {
+- (instancetype)init {
     self = [super init];
     if (self) {
         items = [NSMutableArray array];
-        itemsRef = ref;
-        
-        [itemsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-            [self itemCreatedWithValues:@{
-                @"_id": snapshot.name,
-                @"name": snapshot.value[@"name"],
-                @"isChecked": snapshot.value[@"isChecked"],
-                @"ref": snapshot.ref
-             }];
-        }];
-        
-        [itemsRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-            [self itemChangedWithValues:@{
-                 @"_id": snapshot.name,
-                 @"name": snapshot.value[@"name"],
-                 @"isChecked": snapshot.value[@"isChecked"]
-             }];
-        }];
-        
-        [itemsRef observeEventType:FEventTypeChildMoved andPreviousSiblingNameWithBlock:^(FDataSnapshot *snapshot, NSString *prevName) {
-            [self itemsSorted];
-        }];
-        
-        [itemsRef observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
-            [self itemRemovedWithId:snapshot.name];
-        }];
     }
     return self;
+}
+
+- (void)setItemsRef:(Firebase *)itemsRef {
+    items = [NSMutableArray array];
+    [_itemsRef removeAllObservers];
+    _itemsRef = itemsRef;
+    
+    [_itemsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        [self itemCreatedWithValues:@{
+             @"_id": snapshot.name,
+             @"name": snapshot.value[@"name"],
+             @"isChecked": snapshot.value[@"isChecked"],
+             @"ref": snapshot.ref
+         }];
+    }];
+    
+    [_itemsRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
+        [self itemChangedWithValues:@{
+             @"_id": snapshot.name,
+             @"name": snapshot.value[@"name"],
+             @"isChecked": snapshot.value[@"isChecked"]
+         }];
+    }];
+    
+    [_itemsRef observeEventType:FEventTypeChildMoved andPreviousSiblingNameWithBlock:^(FDataSnapshot *snapshot, NSString *prevName) {
+        [self itemsSorted];
+    }];
+    
+    [_itemsRef observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
+        [self itemRemovedWithId:snapshot.name];
+    }];
 }
 
 #pragma mark - public - info
@@ -58,7 +62,7 @@
 #pragma mark - public - actions
 
 - (void)createItemWithValues:(NSDictionary *)values {
-    Firebase *newItem = [itemsRef childByAutoId];
+    Firebase *newItem = [_itemsRef childByAutoId];
     [newItem setValue:values andPriority:@(items.count)];
 }
 

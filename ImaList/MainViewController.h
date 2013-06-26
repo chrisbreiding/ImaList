@@ -6,6 +6,7 @@
 @interface MainViewController : UIViewController <UIActionSheetDelegate, ItemsDelegate, ListsDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *navBarView;
+@property (nonatomic, weak) IBOutlet UILabel *listNameLabel;
 @property (nonatomic, weak) IBOutlet UIView *footerView;
 @property (nonatomic, weak) IBOutlet UIButton *listsButton;
 @property (nonatomic, weak) IBOutlet UIButton *editListsButton;

@@ -7,8 +7,7 @@
 @interface ItemListDataSource : NSObject
 
 @property (nonatomic, weak) id<ItemListDataSourceDelegate> delegate;
-
-- (instancetype)initWithFirebaseRef:(Firebase *)ref;
+@property (nonatomic, strong) Firebase *itemsRef;
 
 - (NSInteger)itemCount;
 - (Item *)itemAtIndex:(NSInteger)index;
