@@ -112,6 +112,8 @@
     if (isShown) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
         [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+        int switchTo = index > 0 ? index - 1 : 0;
+        [self updateCurrentList:[self.dataSource listAtIndex:switchTo]];
     }
 }
 
