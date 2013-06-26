@@ -91,6 +91,7 @@
     if (isShown) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
         [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
+        [self.delegate displayItemsForList:[self.dataSource listAtIndex:index]];
     }
 }
 

@@ -4,6 +4,7 @@
 
 @implementation ListListDataSource {
     NSMutableArray *lists;
+    BOOL initialized;
     Firebase *listsRef;
 }
 
@@ -17,7 +18,10 @@
             if (snapshot.value == (id)[NSNull null]) {
                 [self createListWithName:@"Grocery"];
             } else {
-                [self.delegate didLoadLists];
+                if (!initialized) {
+                    [self.delegate didLoadLists];
+                    initialized = YES;
+                }
             }
         }];
         
