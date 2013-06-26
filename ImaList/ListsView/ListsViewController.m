@@ -42,6 +42,7 @@
 - (void)willHide {
     isShown = NO;
     editing = NO;
+    [self hideAddButton:nil];
 }
 
 #pragma mark - style
