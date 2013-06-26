@@ -206,6 +206,10 @@
     [editorVC beginEditingSingle:name];
 }
 
+- (void)didChangeListName:(NSString *)name {
+    self.listNameLabel.text = name;
+}
+
 - (IBAction)addItem:(id)sender {
     editorVC.delegate = itemsVC;
     [editorVC beginEditingMultiple];

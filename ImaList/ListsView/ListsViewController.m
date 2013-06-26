@@ -9,6 +9,7 @@
     BOOL adding;
     BOOL editing;
     BOOL keyboardSizeSet;
+    List *currentList;
     List *listBeingEdited;
     List *listToDelete;
 }
@@ -77,21 +78,26 @@
         listBeingEdited = list;
         [self.delegate editListName:list.name];
     } else {
-        [self.delegate displayItemsForList:list];
+        [self updateCurrentList:list];
     }
 }
 
 #pragma mark - list list data source delegate
 
 - (void)didLoadLists {
-    [self.delegate displayItemsForList:[self.dataSource listAtIndex:0]];
+    [self updateCurrentList:[self.dataSource listAtIndex:0]];
+}
+
+- (void)updateCurrentList:(List *)list {
+    currentList = list;
+    [self.delegate displayItemsForList:list];
 }
 
 - (void)didCreateListAtIndex:(int)index {
     if (isShown) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
         [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
-        [self.delegate displayItemsForList:[self.dataSource listAtIndex:index]];
+        [self updateCurrentList:[self.dataSource listAtIndex:index]];
     }
 }
 
@@ -178,6 +184,9 @@
         adding = NO;
     } else {
         [self.dataSource updateList:listBeingEdited name:name];
+        if ([currentList._id isEqualToString:listBeingEdited._id]) {
+            [self.delegate didChangeListName:name];
+        }
     }
 }
 
