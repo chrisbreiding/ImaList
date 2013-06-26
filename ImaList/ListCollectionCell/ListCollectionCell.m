@@ -5,6 +5,7 @@
 @implementation ListCollectionCell {
     NSString *name;
     BOOL editing;
+    BOOL current;
 }
 
 - (void)configureCellWithList:(List *)list editing:(BOOL)isEditing current:(BOOL)isCurrent {
@@ -19,7 +20,7 @@
         editing = NO;
     }
     [self style];
-    self.highlighted = isCurrent;
+    self.highlighted = current = isCurrent;
 }
 
 - (void)style {
@@ -32,7 +33,7 @@
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
-    if (highlighted) {
+    if (highlighted || current) {
         self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.75];
         self.listNameLabel.textColor = [UIColor colorWithWhite:0.2 alpha:1.0];
     } else {
