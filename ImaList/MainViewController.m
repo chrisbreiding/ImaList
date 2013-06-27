@@ -13,6 +13,7 @@
     ListsViewController *listsVC;
     ItemsViewController *itemsVC;
     EditorViewController *editorVC;
+    BOOL initialAuthCheck;
     BOOL listsShown;
     BOOL editingList;
     NSLayoutConstraint *listsHeightConstraint;
@@ -23,33 +24,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self styleViews];
+    [self styleButtons];
 
     [self addItemsView];
     [self addListsView];
     [self addEditorView];
-    
-    [self styleViews];
-    [self styleButtons];
-    
+
     Firebase* ref = [[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com"];
     FirebaseAuthClient* authClient = [[FirebaseAuthClient alloc] initWithRef:ref];
-    [authClient logout];
     [authClient checkAuthStatusWithBlock:^(NSError* error, FAUser* user) {
         if (error != nil) {
             NSLog(@"error while checking authentication: %@"
                   , error);
         } else if (user == nil) {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-            LoginViewController *loginVC = (LoginViewController *)[storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-            [self presentViewController:loginVC animated:YES completion:nil];
+            [self openLogin];
         }
     }];
+    
+    Firebase* authRef = [ref.root childByAppendingPath:@".info/authenticated"];
+    [authRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* authenticated) {
+        if ([authenticated.value boolValue]) {
+            [self closeLogin];
+        } else {
+            if (initialAuthCheck) {
+                [self openLogin];
+            } else {
+                initialAuthCheck = YES;
+            }
+        }
+    }];
+}
+
+- (void)openLogin {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    LoginViewController *loginVC = (LoginViewController *)[storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [self presentViewController:loginVC animated:YES completion:nil];
+}
+
+- (void)closeLogin {
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    [listsVC updateListsRef:[[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com/lists"]];
 }
 
 #pragma mark - lists
 
 - (void)addListsView {
-    listsVC = [[ListsViewController alloc] initWithFirebaseRef:[[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com/lists"]];
+    listsVC = [[ListsViewController alloc] init];
     listsVC.delegate = self;
     UIView *listsView = listsVC.view;
     listsView.translatesAutoresizingMaskIntoConstraints = NO;

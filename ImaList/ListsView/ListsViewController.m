@@ -14,16 +14,6 @@
     List *listToDelete;
 }
 
-- (instancetype)initWithFirebaseRef:(Firebase *)ref {
-    self = [super init];
-    if (self) {
-        ListListDataSource *dataSource = [[ListListDataSource alloc] initWithFirebaseRef:ref];
-        _dataSource = dataSource;
-        dataSource.delegate = self;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -32,6 +22,12 @@
     UINib *cellNib = [UINib nibWithNibName:@"ListCollectionCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ListCell"];
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
+}
+
+- (void)updateListsRef:(Firebase *)listsRef {
+    ListListDataSource *dataSource = [[ListListDataSource alloc] initWithFirebaseRef:listsRef];
+    _dataSource = dataSource;
+    dataSource.delegate = self;
 }
 
 - (void)didShow {

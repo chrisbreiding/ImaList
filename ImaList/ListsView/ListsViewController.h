@@ -16,8 +16,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *addButton;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *addButtonTrailingConstraint;
 
-- (instancetype)initWithFirebaseRef:(Firebase *)ref;
-
+- (void)updateListsRef:(Firebase *)itemsRef;
 - (IBAction)addList:(id)sender;
 - (void)toggleEditingMode;
 - (void)didShow;

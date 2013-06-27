@@ -27,7 +27,6 @@
                        self.invalidLoginLabel.hidden = NO;
                    } else {
                        self.invalidLoginLabel.hidden = YES;
-                       [self dismissViewControllerAnimated:YES completion:nil];
                    }
                }];
     } @catch (NSException *exception) {
@@ -39,7 +38,6 @@
 #pragma mark - text field delegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"text field return");
     if (textField == self.emailTextField) {
         [self.passwordTextField becomeFirstResponder];
     } else {
