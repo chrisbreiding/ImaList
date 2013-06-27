@@ -33,9 +33,11 @@
     
     Firebase* ref = [[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com"];
     FirebaseAuthClient* authClient = [[FirebaseAuthClient alloc] initWithRef:ref];
+    [authClient logout];
     [authClient checkAuthStatusWithBlock:^(NSError* error, FAUser* user) {
         if (error != nil) {
-            NSLog(@"error while checking authentication");
+            NSLog(@"error while checking authentication: %@"
+                  , error);
         } else if (user == nil) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
             LoginViewController *loginVC = (LoginViewController *)[storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];

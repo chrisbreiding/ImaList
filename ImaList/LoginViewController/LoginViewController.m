@@ -18,15 +18,22 @@
 - (IBAction)attemptLogin:(id)sender {
     Firebase* ref = [[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com"];
     FirebaseAuthClient* authClient = [[FirebaseAuthClient alloc] initWithRef:ref];
-    [authClient loginWithEmail:self.emailTextField.text
-                   andPassword:self.passwordTextField.text
-           withCompletionBlock:^(NSError* error, FAUser* user) {
-               if (error != nil) {
-                   NSLog(@"error logging in");
-               } else {
-                   [self dismissViewControllerAnimated:YES completion:nil];
-               }
-           }];
+    @try {
+        [authClient loginWithEmail:self.emailTextField.text
+                       andPassword:self.passwordTextField.text
+               withCompletionBlock:^(NSError* error, FAUser* user) {
+                   if (error != nil) {
+                       NSLog(@"error logging in: %@", error);
+                       self.invalidLoginLabel.hidden = NO;
+                   } else {
+                       self.invalidLoginLabel.hidden = YES;
+                       [self dismissViewControllerAnimated:YES completion:nil];
+                   }
+               }];
+    } @catch (NSException *exception) {
+        NSLog(@"exception thrown while logging in: %@", exception);
+        self.invalidLoginLabel.hidden = NO;
+    }
 }
 
 #pragma mark - text field delegate
