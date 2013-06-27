@@ -1,6 +1,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Firebase/Firebase.h>
+#import <FirebaseAuthClient/FirebaseAuthClient.h>
 #import "MainViewController.h"
+#import "LoginViewController.h"
 #import "ListsViewController.h"
 #import "List.h"
 #import "ItemsViewController.h"
@@ -28,6 +30,18 @@
     
     [self styleViews];
     [self styleButtons];
+    
+    Firebase* ref = [[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com"];
+    FirebaseAuthClient* authClient = [[FirebaseAuthClient alloc] initWithRef:ref];
+    [authClient checkAuthStatusWithBlock:^(NSError* error, FAUser* user) {
+        if (error != nil) {
+            NSLog(@"error while checking authentication");
+        } else if (user == nil) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+            LoginViewController *loginVC = (LoginViewController *)[storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            [self presentViewController:loginVC animated:YES completion:nil];
+        }
+    }];
 }
 
 #pragma mark - lists
