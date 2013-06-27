@@ -111,15 +111,8 @@
 #pragma mark - private
 
 - (Item *)itemWithId:(NSString *)_id {
-    __block Item *foundItem = nil;
-    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        Item *item = (Item *)obj;
-        if ([item._id isEqualToString:_id]) {
-            foundItem = item;
-            *stop = YES;
-        }
-    }];
-    return foundItem;
+    NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"id == %@", _id];
+    return [items filteredArrayUsingPredicate:idPredicate][0];
 }
 
 - (void)itemCreatedWithValues:(NSDictionary *)values {

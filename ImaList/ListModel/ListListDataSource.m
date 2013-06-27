@@ -79,15 +79,8 @@
 #pragma mark = private
 
 - (List *)listWithId:(NSString *)_id {
-    __block List *foundList = nil;
-    [lists enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        List *list = (List *)obj;
-        if ([list._id isEqualToString:_id]) {
-            foundList = list;
-            *stop = YES;
-        }
-    }];
-    return foundList;
+    NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"id == %@", _id];
+    return [lists filteredArrayUsingPredicate:idPredicate][0];
 }
 
 - (void)listCreatedWithValues:(NSDictionary *)values {
