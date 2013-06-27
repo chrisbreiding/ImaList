@@ -16,13 +16,8 @@
 		4B534032172B66C3003F9AE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534031172B66C3003F9AE2 /* UIKit.framework */; };
 		4B534034172B66C3003F9AE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534033172B66C3003F9AE2 /* Foundation.framework */; };
 		4B534036172B66C3003F9AE2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534035172B66C3003F9AE2 /* CoreGraphics.framework */; };
-		4B53403C172B66C3003F9AE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B53403A172B66C3003F9AE2 /* InfoPlist.strings */; };
 		4B53403E172B66C3003F9AE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53403D172B66C3003F9AE2 /* main.m */; };
 		4B534042172B66C3003F9AE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B534041172B66C3003F9AE2 /* AppDelegate.m */; };
-		4B534044172B66C3003F9AE2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B534043172B66C3003F9AE2 /* Default.png */; };
-		4B534046172B66C3003F9AE2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B534045172B66C3003F9AE2 /* Default@2x.png */; };
-		4B534048172B66C3003F9AE2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B534047172B66C3003F9AE2 /* Default-568h@2x.png */; };
-		4B53404B172B66C3003F9AE2 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */; };
 		4B53404E172B66C3003F9AE2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53404D172B66C3003F9AE2 /* MainViewController.m */; };
 		4B53408C172F59F2003F9AE2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B53408B172F59F2003F9AE2 /* SenTestingKit.framework */; };
 		4B53408D172F59F2003F9AE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534031172B66C3003F9AE2 /* UIKit.framework */; };
@@ -80,9 +75,13 @@
 		4BC641CE1779314100C06E90 /* cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641CC1779314100C06E90 /* cancel-button.png */; };
 		4BC641CF1779314100C06E90 /* done-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641CD1779314100C06E90 /* done-button.png */; };
 		4BC641D4177BB29E00C06E90 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC641D2177BB29E00C06E90 /* LoginViewController.m */; };
-		4BC641D7177BBEAF00C06E90 /* FirebaseAuthClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641D6177BBEAF00C06E90 /* FirebaseAuthClient.framework */; };
 		4BC641D9177BBEEF00C06E90 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641D8177BBEEF00C06E90 /* Accounts.framework */; };
 		4BC641DB177BBEF600C06E90 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641DA177BBEF600C06E90 /* Social.framework */; };
+		4BC641DD177CF4D400C06E90 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641DC177CF4D400C06E90 /* MainStoryboard.storyboard */; };
+		4BC641E9177CF62100C06E90 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641E6177CF62100C06E90 /* Default-568h@2x.png */; };
+		4BC641EA177CF62100C06E90 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641E7177CF62100C06E90 /* Default.png */; };
+		4BC641EB177CF62100C06E90 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641E8177CF62100C06E90 /* Default@2x.png */; };
+		4BC641ED177CF6D100C06E90 /* FirebaseAuthClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641EC177CF6D100C06E90 /* FirebaseAuthClient.framework */; };
 		4BC7EC5A176F81300040E9FB /* ListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC58176F81300040E9FB /* ListsViewController.m */; };
 		4BC7EC5B176F81300040E9FB /* ListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC58176F81300040E9FB /* ListsViewController.m */; };
 		4BC7EC5C176F81300040E9FB /* ListsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BC7EC59176F81300040E9FB /* ListsViewController.xib */; };
@@ -107,16 +106,9 @@
 		4B534031172B66C3003F9AE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4B534033172B66C3003F9AE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4B534035172B66C3003F9AE2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		4B534039172B66C3003F9AE2 /* ImaList-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImaList-Info.plist"; sourceTree = "<group>"; };
-		4B53403B172B66C3003F9AE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4B53403D172B66C3003F9AE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4B53403F172B66C3003F9AE2 /* ImaList-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImaList-Prefix.pch"; sourceTree = "<group>"; };
 		4B534040172B66C3003F9AE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4B534041172B66C3003F9AE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4B534043172B66C3003F9AE2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		4B534045172B66C3003F9AE2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		4B534047172B66C3003F9AE2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		4B53404A172B66C3003F9AE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		4B53404C172B66C3003F9AE2 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		4B53404D172B66C3003F9AE2 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		4B53408A172F59F2003F9AE2 /* ImaListTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImaListTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,9 +166,16 @@
 		4BC641CD1779314100C06E90 /* done-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-button.png"; sourceTree = "<group>"; };
 		4BC641D1177BB29E00C06E90 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		4BC641D2177BB29E00C06E90 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		4BC641D6177BBEAF00C06E90 /* FirebaseAuthClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAuthClient.framework; sourceTree = "<group>"; };
 		4BC641D8177BBEEF00C06E90 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		4BC641DA177BBEF600C06E90 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		4BC641DC177CF4D400C06E90 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		4BC641DE177CF53B00C06E90 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = "Supporting Files/InfoPlist.strings"; sourceTree = "<group>"; };
+		4BC641E3177CF5CC00C06E90 /* ImaList-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ImaList-Info.plist"; sourceTree = "<group>"; };
+		4BC641E5177CF5F400C06E90 /* ImaList-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImaList-Prefix.pch"; sourceTree = "<group>"; };
+		4BC641E6177CF62100C06E90 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Supporting Files/Default-568h@2x.png"; sourceTree = "<group>"; };
+		4BC641E7177CF62100C06E90 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = "Supporting Files/Default.png"; sourceTree = "<group>"; };
+		4BC641E8177CF62100C06E90 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Supporting Files/Default@2x.png"; sourceTree = "<group>"; };
+		4BC641EC177CF6D100C06E90 /* FirebaseAuthClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuthClient.framework; path = Frameworks/FirebaseAuthClient.framework; sourceTree = "<group>"; };
 		4BC7EC57176F81300040E9FB /* ListsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListsViewController.h; sourceTree = "<group>"; };
 		4BC7EC58176F81300040E9FB /* ListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListsViewController.m; sourceTree = "<group>"; };
 		4BC7EC59176F81300040E9FB /* ListsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListsViewController.xib; sourceTree = "<group>"; };
@@ -204,7 +203,7 @@
 				4B534034172B66C3003F9AE2 /* Foundation.framework in Frameworks */,
 				4B534036172B66C3003F9AE2 /* CoreGraphics.framework in Frameworks */,
 				DD6007FF2E294ABDB593D137 /* libPods.a in Frameworks */,
-				4BC641D7177BBEAF00C06E90 /* FirebaseAuthClient.framework in Frameworks */,
+				4BC641ED177CF6D100C06E90 /* FirebaseAuthClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,8 +234,6 @@
 		4B534025172B66C3003F9AE2 = {
 			isa = PBXGroup;
 			children = (
-				4BC641DA177BBEF600C06E90 /* Social.framework */,
-				4BC641D8177BBEEF00C06E90 /* Accounts.framework */,
 				4B534037172B66C3003F9AE2 /* ImaList */,
 				4B53408F172F59F2003F9AE2 /* ImaListTests */,
 				4B534030172B66C3003F9AE2 /* Frameworks */,
@@ -258,9 +255,11 @@
 		4B534030172B66C3003F9AE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4BC641EC177CF6D100C06E90 /* FirebaseAuthClient.framework */,
+				4BC641DA177BBEF600C06E90 /* Social.framework */,
+				4BC641D8177BBEEF00C06E90 /* Accounts.framework */,
 				4BCC99D5175289D000C3D825 /* QuartzCore.framework */,
 				4B534031172B66C3003F9AE2 /* UIKit.framework */,
-				4BC641D6177BBEAF00C06E90 /* FirebaseAuthClient.framework */,
 				4B534033172B66C3003F9AE2 /* Foundation.framework */,
 				4B534035172B66C3003F9AE2 /* CoreGraphics.framework */,
 				4B53408B172F59F2003F9AE2 /* SenTestingKit.framework */,
@@ -285,7 +284,7 @@
 				4BC641D0177BB27100C06E90 /* LoginViewController */,
 				4B53404C172B66C3003F9AE2 /* MainViewController.h */,
 				4B53404D172B66C3003F9AE2 /* MainViewController.m */,
-				4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */,
+				4BC641DC177CF4D400C06E90 /* MainStoryboard.storyboard */,
 				4BAD09AB1770F32A000D74D5 /* UI */,
 				4B534038172B66C3003F9AE2 /* Supporting Files */,
 			);
@@ -295,13 +294,13 @@
 		4B534038172B66C3003F9AE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4B534039172B66C3003F9AE2 /* ImaList-Info.plist */,
-				4B53403A172B66C3003F9AE2 /* InfoPlist.strings */,
+				4BC641E6177CF62100C06E90 /* Default-568h@2x.png */,
+				4BC641E7177CF62100C06E90 /* Default.png */,
+				4BC641E8177CF62100C06E90 /* Default@2x.png */,
+				4BC641E3177CF5CC00C06E90 /* ImaList-Info.plist */,
+				4BC641E5177CF5F400C06E90 /* ImaList-Prefix.pch */,
+				4BC641DE177CF53B00C06E90 /* InfoPlist.strings */,
 				4B53403D172B66C3003F9AE2 /* main.m */,
-				4B53403F172B66C3003F9AE2 /* ImaList-Prefix.pch */,
-				4B534043172B66C3003F9AE2 /* Default.png */,
-				4B534045172B66C3003F9AE2 /* Default@2x.png */,
-				4B534047172B66C3003F9AE2 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -541,11 +540,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B53403C172B66C3003F9AE2 /* InfoPlist.strings in Resources */,
-				4B534044172B66C3003F9AE2 /* Default.png in Resources */,
-				4B534046172B66C3003F9AE2 /* Default@2x.png in Resources */,
-				4B534048172B66C3003F9AE2 /* Default-568h@2x.png in Resources */,
-				4B53404B172B66C3003F9AE2 /* MainStoryboard.storyboard in Resources */,
 				4B7E85B3176C177900DAF07E /* EditorViewController.xib in Resources */,
 				4B7E85CA176E882C00DAF07E /* ItemTableCell.xib in Resources */,
 				4BC7EC5C176F81300040E9FB /* ListsViewController.xib in Resources */,
@@ -589,6 +583,10 @@
 				4BC641CF1779314100C06E90 /* done-button.png in Resources */,
 				4BAD0A41177C9D5A000D74D5 /* icon-login.png in Resources */,
 				4BAD0A42177C9D5A000D74D5 /* icon-login@2x.png in Resources */,
+				4BC641DD177CF4D400C06E90 /* MainStoryboard.storyboard in Resources */,
+				4BC641E9177CF62100C06E90 /* Default-568h@2x.png in Resources */,
+				4BC641EA177CF62100C06E90 /* Default.png in Resources */,
+				4BC641EB177CF62100C06E90 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,22 +715,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4B53403A172B66C3003F9AE2 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4B53403B172B66C3003F9AE2 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		4B534049172B66C3003F9AE2 /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4B53404A172B66C3003F9AE2 /* en */,
-			);
-			name = MainStoryboard.storyboard;
-			sourceTree = "<group>";
-		};
 		4B534092172F59F2003F9AE2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -821,6 +803,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImaList/ImaList-Prefix.pch";
@@ -837,6 +820,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImaList/ImaList-Prefix.pch";
