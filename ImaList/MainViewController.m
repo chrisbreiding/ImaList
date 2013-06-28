@@ -25,19 +25,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self styleViews];
     [self styleButtons];
 
     [self addItemsView];
     [self addListsView];
     [self addEditorView];
 
+    [self checkAuthentication];
+}
+
+- (void)checkAuthentication {
     Firebase* ref = [[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com"];
     FirebaseAuthClient* authClient = [[FirebaseAuthClient alloc] initWithRef:ref];
     [authClient checkAuthStatusWithBlock:^(NSError* error, FAUser* user) {
         if (error != nil) {
-            NSLog(@"error while checking authentication: %@"
-                  , error);
+            NSLog(@"error while checking authentication: %@", error);
         } else if (user == nil) {
             [self openLogin];
         }
@@ -97,47 +99,43 @@
     if (listsShown) {
         [self hideListsCompletion:nil];
     } else {
-        [self showLists];
+        [self showLists:nil];
     }
 }
 
-- (void)showLists {
+- (void)showLists:(id)sender {
+    listsVC.collectionView.alpha = 1;
     listsVC.view.hidden = NO;
     self.editListsButton.hidden = NO;
     listsShown = YES;
     listsHeightConstraint.constant = 120;
     itemsBottomConstraint.constant = 170;
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         [self toggleItemButtonsHidden:YES];
         [self.view layoutIfNeeded];
         self.editListsButton.alpha = 1;
     } completion:^(BOOL finished) {
-        listsVC.view.hidden = NO;
-        [UIView animateWithDuration:0.2 animations:^{
-            listsVC.collectionView.alpha = 1;
-        } completion:^(BOOL finished) {
-            [listsVC didShow];
-        }];
+        [listsVC didShow];
     }];
+}
+
+- (void)hideLists {
+    [self hideListsCompletion:nil];
 }
 
 - (void)hideListsCompletion:(void (^)())completion {
     [listsVC willHide];
-    [UIView animateWithDuration:0.2 animations:^{
-        listsVC.collectionView.alpha = 0;
+    listsHeightConstraint.constant = 0;
+    itemsBottomConstraint.constant = 50;
+    self.editListsButton.hidden = YES;
+    [UIView animateWithDuration:0.3 animations:^{
         self.editListsButton.alpha = 0;
+        [self toggleItemButtonsHidden:NO];
+        [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-        listsHeightConstraint.constant = 0;
-        itemsBottomConstraint.constant = 50;
-        self.editListsButton.hidden = YES;
-        [UIView animateWithDuration:0.2 animations:^{
-            [self toggleItemButtonsHidden:NO];
-            [self.view layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            listsVC.view.hidden = YES;
-            listsShown = NO;
-            if (completion) completion();
-        }];
+        listsVC.view.hidden = YES;
+        listsShown = NO;
+        if (completion) completion();
     }];
 }
 
@@ -174,16 +172,6 @@
 }
 
 #pragma mark - appearance
-
-- (void)styleViews {
-    UIImage *navbarBackground = [[UIImage imageNamed:@"nav-bar"] resizableImageWithCapInsets:UIEdgeInsetsZero];
-    [self.navBarView.layer setContents:(id)[navbarBackground CGImage]];
-
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
-
-    UIImage *footerBackground = [[UIImage imageNamed:@"footer"] resizableImageWithCapInsets:UIEdgeInsetsZero];
-    [self.footerView.layer setContents:(id)[footerBackground CGImage]];
-}
 
 - (void)styleButtons {
     [self styleButton:self.listsButton icon:@"icon-lists"];

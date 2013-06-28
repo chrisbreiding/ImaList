@@ -14,10 +14,11 @@
 @property (nonatomic, weak) IBOutlet UIButton *addItemButton;
 @property (nonatomic, weak) IBOutlet UIButton *sortItemsButton;
 
-- (IBAction) clearCompleted:(id)sender;
-- (IBAction) addItem:(id)sender;
-- (IBAction) sortItems:(id)sender;
-- (IBAction) toggleLists:(id)sender;
-- (IBAction) toggleListEditingMode:(id)sender;
+- (IBAction)clearCompleted:(id)sender;
+- (IBAction)addItem:(id)sender;
+- (IBAction)sortItems:(id)sender;
+- (IBAction)toggleLists:(id)sender;
+- (IBAction)showLists:(id)sender;
+- (IBAction)toggleListEditingMode:(id)sender;
 
 @end

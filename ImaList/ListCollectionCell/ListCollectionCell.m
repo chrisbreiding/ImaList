@@ -19,26 +19,16 @@
         self.deleteButton.hidden = YES;
         editing = NO;
     }
-    [self style];
     self.highlighted = current = isCurrent;
-}
-
-- (void)style {
-    CALayer *layer = self.layer;
-    layer.masksToBounds = NO;
-    layer.shadowOffset = CGSizeMake(0, 0);
-    layer.shadowColor = [[UIColor blackColor] CGColor];
-    layer.shadowRadius = 2;
-    layer.shadowOpacity = 0.8;
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
     if (highlighted || current) {
-        self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.75];
-        self.listNameLabel.textColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+        self.backgroundColor = [UIColor whiteColor];
+        self.listNameLabel.textColor = [UIColor colorWithWhite:0.208 alpha:1];
     } else {
-        self.backgroundColor = [UIColor colorWithWhite:0.6 alpha:0.25];
-        self.listNameLabel.textColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+        self.backgroundColor = [UIColor colorWithRed:0.439 green:0.553 blue:0.145 alpha:1];
+        self.listNameLabel.textColor = [UIColor whiteColor];
     }
 }
 

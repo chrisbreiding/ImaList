@@ -65,7 +65,7 @@
 - (void)didUpdateItemAtIndex:(int)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationMiddle];
+                      withRowAnimation:UITableViewRowAnimationLeft];
     
 }
 

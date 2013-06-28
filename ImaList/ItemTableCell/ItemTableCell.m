@@ -16,15 +16,12 @@ static void destroy_cache() {
 
 @implementation ItemTableCell {
     BOOL deleteButtonShown;
-    NSLayoutConstraint *deleteButtonShownConstraint;
-    NSLayoutConstraint *deleteButtonHiddenConstraint;
 }
 
 -(void)awakeFromNib {
     [super awakeFromNib];
     [self style];
     [self addSwipeGestures];
-    deleteButtonHiddenConstraint = self.deleteButtonTrailingConstraint;
 }
 
 -(void)configureCellWithItem:(Item *)item {
@@ -91,31 +88,25 @@ static void destroy_cache() {
 
 - (void)showDeleteButtonAnimated:(BOOL)animated {
     deleteButtonShown = YES;
-    if (!deleteButtonShownConstraint) {
-        UIButton *deleteButton = self.deleteButton;
-        NSDictionary *views = NSDictionaryOfVariableBindings(deleteButton);
-        NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[deleteButton]-0-|"
-                                                                       options:NSLayoutFormatAlignAllBaseline
-                                                                       metrics:nil
-                                                                         views:views];
-        deleteButtonShownConstraint = constraints[0];
-    }
-    [self removeConstraint:deleteButtonHiddenConstraint];
-    [self addConstraint:deleteButtonShownConstraint];
-    [self relayoutAnimate:animated];
+    self.deleteButton.hidden = NO;
+    self.deleteButtonTrailingConstraint.constant = 0;
+    [self relayoutAnimate:animated completion:nil];
 }
 
 - (void)hideDeleteButtonAnimated:(BOOL)animated {
     deleteButtonShown = NO;
-    [self removeConstraint:deleteButtonShownConstraint];
-    [self addConstraint:deleteButtonHiddenConstraint];
-    [self relayoutAnimate:animated];
+    self.deleteButtonTrailingConstraint.constant = -60;
+    [self relayoutAnimate:animated completion:^{
+        self.deleteButton.hidden = YES;
+    }];
 }
 
-- (void)relayoutAnimate:(BOOL)animated {
+- (void)relayoutAnimate:(BOOL)animated completion:(void (^)())completion {
     if (animated) {
         [UIView animateWithDuration:0.3 animations:^{
             [self layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            if (completion) completion();
         }];
     } else {
         [self layoutIfNeeded];

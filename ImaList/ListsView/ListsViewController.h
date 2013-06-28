@@ -12,12 +12,12 @@
 @property (nonatomic, strong) ListListDataSource *dataSource;
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, weak) IBOutlet UIButton *addButton;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *addButtonTrailingConstraint;
 
 - (void)updateListsRef:(Firebase *)itemsRef;
 - (IBAction)addList:(id)sender;
+- (IBAction)hide:(id)sender;
 - (void)toggleEditingMode;
 - (void)didShow;
 - (void)willHide;
@@ -27,6 +27,7 @@
 @protocol ListsDelegate <NSObject>
 
 - (void)addList;
+- (void)hideLists;
 - (void)editListName:(NSString *)name;
 - (void)didChangeListName:(NSString *)name;
 - (void)displayItemsForList:(List *)list;

@@ -5,14 +5,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self style];
     [self.emailTextField becomeFirstResponder];
-}
-
-- (void)style {
-    UIImage *textFieldBg = [[UIImage imageNamed:@"textfield"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    self.emailBackground.image = textFieldBg;
-    self.passwordBackground.image = textFieldBg;
 }
 
 - (IBAction)attemptLogin:(id)sender {

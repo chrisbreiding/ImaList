@@ -16,9 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self style];
-    
+        
     UINib *cellNib = [UINib nibWithNibName:@"ListCollectionCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ListCell"];
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
@@ -39,20 +37,6 @@
     isShown = NO;
     editing = NO;
     [self hideAddButton:nil];
-}
-
-#pragma mark - style
-
-- (void)style {
-    self.backgroundImageView.image = [[UIImage imageNamed:@"lists-background"]
-                                      resizableImageWithCapInsets:UIEdgeInsetsMake(12, 12, 12, 12)
-                                      resizingMode:UIImageResizingModeStretch];
-    CALayer *layer = self.addButton.layer;
-    layer.masksToBounds = NO;
-    layer.shadowOffset = CGSizeMake(0, 0);
-    layer.shadowColor = [[UIColor blackColor] CGColor];
-    layer.shadowRadius = 2;
-    layer.shadowOpacity = 0.8;
 }
 
 #pragma mark - collection view delegate
@@ -121,6 +105,10 @@
 - (IBAction)addList:(id)sender {
     adding = YES;
     [self.delegate addList];
+}
+
+- (IBAction)hide:(id)sender {
+    [self.delegate hideLists];
 }
 
 #pragma mark - list cell delegate
