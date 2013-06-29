@@ -12,6 +12,7 @@
 @property (nonatomic, strong) ItemListDataSource *dataSource;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UITextView *noItemsTextView;
+@property (nonatomic, weak) IBOutlet UIView *loadingView;
 
 - (IBAction)addItem:(id)sender;
 - (void)updateItemsRef:(Firebase *)itemsRef;

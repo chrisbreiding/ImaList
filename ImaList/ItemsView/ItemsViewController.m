@@ -53,6 +53,7 @@
 #pragma mark - item list data source delegate
 
 - (void)didLoadItemsNonZero:(BOOL)nonZero {
+    self.loadingView.hidden = YES;
     self.noItemsTextView.hidden = nonZero;
     self.tableView.hidden = !nonZero;
 }
