@@ -13,6 +13,7 @@
 - (NSInteger)listCount;
 - (List *)listAtIndex:(NSInteger)index;
 - (NSInteger)indexOfList:(List *)list;
+- (void)storeCurrentList:(List *)list;
 - (void)createListWithName:(NSString *)name;
 - (void)updateList:(List *)list name:(NSString *)name;
 - (void)removeList:(List *)list;
@@ -21,7 +22,7 @@
 
 @protocol ListListDataSourceDelegate <NSObject>
 
-- (void)didLoadLists;
+- (void)updateCurrentList:(List *)list;
 - (void)didCreateListAtIndex:(int)index;
 - (void)didUpdateListAtIndex:(int)index;
 - (void)didRemoveListAtIndex:(int)index;

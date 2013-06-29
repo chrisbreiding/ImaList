@@ -65,14 +65,11 @@
 
 #pragma mark - list list data source delegate
 
-- (void)didLoadLists {
-    [self updateCurrentList:[self.dataSource listAtIndex:0]];
-}
-
 - (void)updateCurrentList:(List *)list {
     if (![currentList isEqualToList:list]) {
         currentList = list;
         [self.delegate displayItemsForList:list];
+        [self.dataSource storeCurrentList:list];
     }
 }
 

@@ -19,7 +19,10 @@
                 [self createListWithName:@"Grocery"];
             } else {
                 if (!initialized) {
-                    [self.delegate didLoadLists];
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    NSString *currentListId = [defaults stringForKey:@"currentList"];
+                    List *list = currentListId ? [self listWithId:currentListId] : [self listAtIndex:0];
+                    [self.delegate updateCurrentList:list];
                     initialized = YES;
                 }
             }
@@ -62,6 +65,11 @@
 }
 
 #pragma mark - public actions
+
+- (void)storeCurrentList:(List *)list {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:list._id forKey:@"currentList"];
+}
 
 - (void)createListWithName:(NSString *)name {
     Firebase *newList = [listsRef childByAutoId];
