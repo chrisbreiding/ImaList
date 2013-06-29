@@ -238,6 +238,10 @@
     self.listNameLabel.text = name;
 }
 
+- (void)addItem {
+    [self addItem:nil];
+}
+
 - (IBAction)addItem:(id)sender {
     editorVC.delegate = itemsVC;
     [editorVC beginEditingMultiple];

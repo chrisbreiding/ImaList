@@ -13,6 +13,7 @@
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UITextView *noItemsTextView;
 
+- (IBAction)addItem:(id)sender;
 - (void)updateItemsRef:(Firebase *)itemsRef;
 - (void)clearCompleted;
 - (void)sortItems;
@@ -21,6 +22,7 @@
 
 @protocol ItemsDelegate <NSObject>
 
+- (void)addItem;
 - (void)editItemName:(NSString *)name;
 
 @end

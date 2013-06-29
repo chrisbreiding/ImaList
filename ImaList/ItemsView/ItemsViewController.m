@@ -22,7 +22,7 @@
     UINib *cellNib = [UINib nibWithNibName:@"ItemTableCell" bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:@"ItemTableCell"];
     
-    self.noItemsTextView.text = @"No Items Here!\n\nTap [+] to add items.";
+    self.noItemsTextView.text = @"\nNo Items Here!\n\nTap anywhere to add items.";
 }
 
 - (void)updateItemsRef:(Firebase *)itemsRef {
@@ -54,6 +54,7 @@
 
 - (void)didLoadItemsNonZero:(BOOL)nonZero {
     self.noItemsTextView.hidden = nonZero;
+    self.tableView.hidden = !nonZero;
 }
 
 - (void)didCreateItemAtIndex:(int)index {
@@ -105,6 +106,10 @@
 }
 
 #pragma mark - user actions
+
+- (IBAction)addItem:(id)sender {
+    [self.delegate addItem];
+}
 
 - (void)clearCompleted {
     [self.dataSource clearCompleted];
