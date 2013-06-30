@@ -74,8 +74,6 @@
     listsVC.delegate = self;
     UIView *listsView = listsVC.view;
     listsView.translatesAutoresizingMaskIntoConstraints = NO;
-    listsVC.collectionView.alpha = 0;
-    self.editListsButton.alpha = 0;
     [self.footerView addSubview:listsView];
     NSDictionary *views = NSDictionaryOfVariableBindings(listsView);
     NSArray *constraints = [self constraintWithString:@"V:|-50-[listsView(120)]" views:views];
@@ -93,20 +91,20 @@
 }
 
 - (void)showLists:(id)sender {
-    listsVC.collectionView.alpha = 1;
     listsShown = YES;
     self.footerBottomConstraint.constant = 0;
     itemsBottomConstraint.constant = 170;
     [UIView animateWithDuration:0.3 animations:^{
-        [self toggleItemButtonsHidden:YES];
+        [self toggleButtonsListShown:YES];
         [self.view layoutIfNeeded];
-        self.editListsButton.alpha = 1;
     } completion:^(BOOL finished) {
         [listsVC didShow];
     }];
 }
 
 - (IBAction)hideLists:(id)sender {
+    editingList = NO;
+    [self toggleEditIcon];
     [self hideListsCompletion:nil];
 }
 
@@ -115,8 +113,7 @@
     self.footerBottomConstraint.constant = -120;
     itemsBottomConstraint.constant = 50;
     [UIView animateWithDuration:0.3 animations:^{
-        self.editListsButton.alpha = 0;
-        [self toggleItemButtonsHidden:NO];
+        [self toggleButtonsListShown:NO];
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         listsShown = NO;
@@ -124,15 +121,30 @@
     }];
 }
 
-- (void)toggleItemButtonsHidden:(BOOL)hidden {
-    int alpha = hidden ? 0 : 1;
-    self.clearCompletedButton.alpha = alpha;
-    self.sortItemsButton.alpha = alpha;
-    self.addItemButton.alpha = alpha;
+- (void)toggleButtonsListShown:(BOOL)shown {
+    int listAlpha = shown ? 1 : 0;
+    self.editListsButton.alpha = listAlpha;
+    self.addListButton.alpha = listAlpha;
+    int itemAlpha = shown ? 0 : 1;
+    self.clearCompletedButton.alpha = itemAlpha;
+    self.sortItemsButton.alpha = itemAlpha;
+    self.addItemButton.alpha = itemAlpha;
 }
 
 - (IBAction)toggleListEditingMode:(id)sender {
+    editingList = !editingList;
     [listsVC toggleEditingMode];
+}
+
+- (void)toggleEditIcon {
+    NSString *editIconName = editingList ? @"icon-editing-lists" : @"icon-edit-lists";
+    [self.editListsButton setBackgroundImage:[UIImage imageNamed:editIconName] forState:UIControlStateNormal];
+}
+
+- (IBAction)addList:(id)sender {
+    listsVC.adding = YES;
+    editorVC.delegate = listsVC;
+    [editorVC beginEditingSingle:@""];
 }
 
 #pragma mark - items
@@ -192,11 +204,6 @@
     editorVC.view.frame = self.view.bounds;
     editorVC.delegate = itemsVC;
     [self.view addSubview:editorVC.view];
-}
-
-- (void)addList {
-    editorVC.delegate = listsVC;
-    [editorVC beginEditingSingle:@""];
 }
 
 - (void)editListName:(NSString *)name {

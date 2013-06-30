@@ -10,6 +10,7 @@
 @property (nonatomic, weak) IBOutlet UIView *footerView;
 @property (nonatomic, weak) IBOutlet UIButton *listsButton;
 @property (nonatomic, weak) IBOutlet UIButton *editListsButton;
+@property (nonatomic, weak) IBOutlet UIButton *addListButton;
 @property (nonatomic, weak) IBOutlet UIButton *clearCompletedButton;
 @property (nonatomic, weak) IBOutlet UIButton *addItemButton;
 @property (nonatomic, weak) IBOutlet UIButton *sortItemsButton;
@@ -21,6 +22,7 @@
 - (IBAction)toggleLists:(id)sender;
 - (IBAction)showLists:(id)sender;
 - (IBAction)hideLists:(id)sender;
+- (IBAction)addList:(id)sender;
 - (IBAction)toggleListEditingMode:(id)sender;
 
 @end

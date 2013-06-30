@@ -72,6 +72,10 @@
 		4BC641EA177CF62100C06E90 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641E7177CF62100C06E90 /* Default.png */; };
 		4BC641EB177CF62100C06E90 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641E8177CF62100C06E90 /* Default@2x.png */; };
 		4BC641ED177CF6D100C06E90 /* FirebaseAuthClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641EC177CF6D100C06E90 /* FirebaseAuthClient.framework */; };
+		4BC641F2177FE75600C06E90 /* icon-add-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F0177FE75600C06E90 /* icon-add-list.png */; };
+		4BC641F3177FE75600C06E90 /* icon-add-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F1177FE75600C06E90 /* icon-add-list@2x.png */; };
+		4BC641F6177FEB3000C06E90 /* icon-editing-lists.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F4177FEB3000C06E90 /* icon-editing-lists.png */; };
+		4BC641F7177FEB3000C06E90 /* icon-editing-lists@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F5177FEB3000C06E90 /* icon-editing-lists@2x.png */; };
 		4BC7EC5A176F81300040E9FB /* ListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC58176F81300040E9FB /* ListsViewController.m */; };
 		4BC7EC5B176F81300040E9FB /* ListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC58176F81300040E9FB /* ListsViewController.m */; };
 		4BC7EC5C176F81300040E9FB /* ListsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BC7EC59176F81300040E9FB /* ListsViewController.xib */; };
@@ -156,6 +160,10 @@
 		4BC641E7177CF62100C06E90 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = "Supporting Files/Default.png"; sourceTree = "<group>"; };
 		4BC641E8177CF62100C06E90 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Supporting Files/Default@2x.png"; sourceTree = "<group>"; };
 		4BC641EC177CF6D100C06E90 /* FirebaseAuthClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuthClient.framework; path = Frameworks/FirebaseAuthClient.framework; sourceTree = "<group>"; };
+		4BC641F0177FE75600C06E90 /* icon-add-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-add-list.png"; sourceTree = "<group>"; };
+		4BC641F1177FE75600C06E90 /* icon-add-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-add-list@2x.png"; sourceTree = "<group>"; };
+		4BC641F4177FEB3000C06E90 /* icon-editing-lists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-editing-lists.png"; sourceTree = "<group>"; };
+		4BC641F5177FEB3000C06E90 /* icon-editing-lists@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-editing-lists@2x.png"; sourceTree = "<group>"; };
 		4BC7EC57176F81300040E9FB /* ListsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListsViewController.h; sourceTree = "<group>"; };
 		4BC7EC58176F81300040E9FB /* ListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListsViewController.m; sourceTree = "<group>"; };
 		4BC7EC59176F81300040E9FB /* ListsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListsViewController.xib; sourceTree = "<group>"; };
@@ -369,10 +377,14 @@
 		4BAD09C81770F32A000D74D5 /* lists */ = {
 			isa = PBXGroup;
 			children = (
+				4BC641F0177FE75600C06E90 /* icon-add-list.png */,
+				4BC641F1177FE75600C06E90 /* icon-add-list@2x.png */,
 				4B7E85D71771315F00DAF07E /* icon-delete-list.png */,
 				4B7E85D81771315F00DAF07E /* icon-delete-list@2x.png */,
 				4BAD09C91770F32A000D74D5 /* icon-edit-lists.png */,
 				4BAD09CA1770F32A000D74D5 /* icon-edit-lists@2x.png */,
+				4BC641F4177FEB3000C06E90 /* icon-editing-lists.png */,
+				4BC641F5177FEB3000C06E90 /* icon-editing-lists@2x.png */,
 				4BAD09CB1770F32A000D74D5 /* icon-lists.png */,
 				4BAD09CC1770F32A000D74D5 /* icon-lists@2x.png */,
 			);
@@ -547,6 +559,10 @@
 				4BC641E9177CF62100C06E90 /* Default-568h@2x.png in Resources */,
 				4BC641EA177CF62100C06E90 /* Default.png in Resources */,
 				4BC641EB177CF62100C06E90 /* Default@2x.png in Resources */,
+				4BC641F2177FE75600C06E90 /* icon-add-list.png in Resources */,
+				4BC641F3177FE75600C06E90 /* icon-add-list@2x.png in Resources */,
+				4BC641F6177FEB3000C06E90 /* icon-editing-lists.png in Resources */,
+				4BC641F7177FEB3000C06E90 /* icon-editing-lists@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

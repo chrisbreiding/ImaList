@@ -51,7 +51,7 @@
                                             <action selector="toggleLists:" destination="2" eventType="touchUpInside" id="yUM-We-PeP"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qK-jv-sk3" userLabel="Edit Lists Button">
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qK-jv-sk3" userLabel="Edit Lists Button">
                                         <accessibility key="accessibilityConfiguration" label="Edit Lists"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" type="user" id="7U1-CA-01G"/>
@@ -67,6 +67,24 @@
                                         </state>
                                         <connections>
                                             <action selector="toggleListEditingMode:" destination="2" eventType="touchUpInside" id="54s-AH-m29"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7B-3K-W0f" userLabel="Add List Button">
+                                        <accessibility key="accessibilityConfiguration" label="Edit Lists"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" type="user" id="9xd-VG-EfO"/>
+                                            <constraint firstAttribute="width" constant="50" type="user" id="QfR-nZ-kNT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title=" " backgroundImage="icon-add-list.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addList:" destination="2" eventType="touchUpInside" id="jma-sK-yE8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGG-wI-KFr" userLabel="Clear Button">
@@ -126,7 +144,9 @@
                                 <constraints>
                                     <constraint firstItem="fB8-1s-A4x" firstAttribute="top" secondItem="5zG-jM-14w" secondAttribute="top" type="user" id="8aW-P0-gFp"/>
                                     <constraint firstAttribute="trailing" secondItem="C1B-SM-aMD" secondAttribute="trailing" constant="50" type="user" id="AL8-Vp-dvi"/>
+                                    <constraint firstItem="W7B-3K-W0f" firstAttribute="top" secondItem="5zG-jM-14w" secondAttribute="top" type="user" id="Iyx-kL-GbX"/>
                                     <constraint firstItem="KFd-kg-pp0" firstAttribute="top" secondItem="5zG-jM-14w" secondAttribute="top" type="user" id="Jjd-1F-i5u"/>
+                                    <constraint firstItem="W7B-3K-W0f" firstAttribute="leading" secondItem="5zG-jM-14w" secondAttribute="leading" constant="100" type="user" id="Q6X-g9-Ma8"/>
                                     <constraint firstAttribute="trailing" secondItem="IGG-wI-KFr" secondAttribute="trailing" constant="100" type="user" id="RZo-ES-4Lu"/>
                                     <constraint firstItem="IGG-wI-KFr" firstAttribute="top" secondItem="5zG-jM-14w" secondAttribute="top" type="user" id="U1e-eG-YLt"/>
                                     <constraint firstItem="2qK-jv-sk3" firstAttribute="leading" secondItem="5zG-jM-14w" secondAttribute="leading" constant="50" type="user" id="e8g-6T-miu"/>
@@ -154,6 +174,7 @@
                     </view>
                     <connections>
                         <outlet property="addItemButton" destination="KFd-kg-pp0" id="OVU-vl-0AT"/>
+                        <outlet property="addListButton" destination="W7B-3K-W0f" id="hwx-4t-iKd"/>
                         <outlet property="clearCompletedButton" destination="IGG-wI-KFr" id="TmN-6r-7oF"/>
                         <outlet property="editListsButton" destination="2qK-jv-sk3" id="uWj-Ju-RIm"/>
                         <outlet property="footerBottomConstraint" destination="1SN-rJ-g6g" id="i3q-bB-rHw"/>
@@ -310,6 +331,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon-add-list.png" width="50" height="50"/>
         <image name="icon-add.png" width="50" height="50"/>
         <image name="icon-clear.png" width="50" height="50"/>
         <image name="icon-edit-lists.png" width="50" height="50"/>
@@ -331,6 +353,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
             <relationships>
                 <relationship kind="action" name="addItem:"/>
+                <relationship kind="action" name="addList:"/>
                 <relationship kind="action" name="clearCompleted:"/>
                 <relationship kind="action" name="hideLists:"/>
                 <relationship kind="action" name="showLists:"/>
@@ -338,6 +361,7 @@
                 <relationship kind="action" name="toggleListEditingMode:"/>
                 <relationship kind="action" name="toggleLists:"/>
                 <relationship kind="outlet" name="addItemButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="addListButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="clearCompletedButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="editListsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="footerBottomConstraint" candidateClass="NSLayoutConstraint"/>

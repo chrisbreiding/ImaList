@@ -6,7 +6,6 @@
 
 @implementation ListsViewController {
     BOOL isShown;
-    BOOL adding;
     BOOL editing;
     BOOL keyboardSizeSet;
     List *currentList;
@@ -36,7 +35,7 @@
 - (void)willHide {
     isShown = NO;
     editing = NO;
-    [self hideAddButton:nil];
+    [self.collectionView reloadData];
 }
 
 #pragma mark - collection view delegate
@@ -98,13 +97,6 @@
     }
 }
 
-#pragma mark - user actions
-
-- (IBAction)addList:(id)sender {
-    adding = YES;
-    [self.delegate addList];
-}
-
 #pragma mark - list cell delegate
 
 - (void)deleteList:(List *)list {
@@ -137,34 +129,13 @@
 
 - (void)toggleEditingMode {
     editing = !editing;
-    if (editing) {
-        [self showAddButton:nil];
-    } else {
-        [self hideAddButton:nil];
-    }
     [_collectionView reloadData];
 }
 
-- (void)showAddButton:(NSNotification *)notification {
-    _collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 60);
-    self.addButtonTrailingConstraint.constant = 0;
-    [UIView animateWithDuration:0.2 animations:^{
-        [self.view layoutIfNeeded];
-    }];
-}
-
-- (void)hideAddButton:(NSNotification *)notification {
-    self.addButtonTrailingConstraint.constant = -50;
-    [UIView animateWithDuration:0.2 animations:^{
-        _collectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
-        [self.view layoutIfNeeded];
-    }];
-}
-
 - (void)didFinishEditingSingle:(NSString *)name {
-    if (adding) {
+    if (self.adding) {
         [self.dataSource createListWithName:name];
-        adding = NO;
+        self.adding = NO;
     } else {
         [self.dataSource updateList:listBeingEdited name:name];
         if ([currentList isEqualToList:listBeingEdited]) {
