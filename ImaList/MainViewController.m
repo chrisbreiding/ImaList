@@ -16,7 +16,6 @@
     BOOL initialAuthCheck;
     BOOL listsShown;
     BOOL editingList;
-    NSLayoutConstraint *listsHeightConstraint;
     NSLayoutConstraint *itemsBottomConstraint;
 }
 
@@ -24,8 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self styleButtons];
 
     [self addItemsView];
     [self addListsView];
@@ -77,22 +74,14 @@
     listsVC.delegate = self;
     UIView *listsView = listsVC.view;
     listsView.translatesAutoresizingMaskIntoConstraints = NO;
-    listsView.hidden = YES;
     listsVC.collectionView.alpha = 0;
-    self.editListsButton.hidden = YES;
     self.editListsButton.alpha = 0;
-    [self.view addSubview:listsView];
+    [self.footerView addSubview:listsView];
     NSDictionary *views = NSDictionaryOfVariableBindings(listsView);
-    NSArray *constraints = @[];
-    NSArray *bottomConstraints = [self constraintWithString:@"V:[listsView]-50-|" views:views];
-    NSArray *heightConstraints = [self constraintWithString:@"V:[listsView(0)]" views:views];
+    NSArray *constraints = [self constraintWithString:@"V:|-50-[listsView(120)]" views:views];
     NSArray *horizontalConstraints = [self constraintWithString:@"H:|[listsView]|" views:views];
-    listsHeightConstraint = heightConstraints[0];
-    constraints = [constraints arrayByAddingObjectsFromArray:bottomConstraints];
-    constraints = [constraints arrayByAddingObjectsFromArray:heightConstraints];
     constraints = [constraints arrayByAddingObjectsFromArray:horizontalConstraints];
-    [self.view addConstraints:constraints];
-    [self.view layoutIfNeeded];
+    [self.footerView addConstraints:constraints];
 }
 
 - (IBAction)toggleLists:(id)sender {
@@ -105,10 +94,8 @@
 
 - (void)showLists:(id)sender {
     listsVC.collectionView.alpha = 1;
-    listsVC.view.hidden = NO;
-    self.editListsButton.hidden = NO;
     listsShown = YES;
-    listsHeightConstraint.constant = 120;
+    self.footerBottomConstraint.constant = 0;
     itemsBottomConstraint.constant = 170;
     [UIView animateWithDuration:0.3 animations:^{
         [self toggleItemButtonsHidden:YES];
@@ -119,21 +106,19 @@
     }];
 }
 
-- (void)hideLists {
+- (IBAction)hideLists:(id)sender {
     [self hideListsCompletion:nil];
 }
 
 - (void)hideListsCompletion:(void (^)())completion {
     [listsVC willHide];
-    listsHeightConstraint.constant = 0;
+    self.footerBottomConstraint.constant = -120;
     itemsBottomConstraint.constant = 50;
-    self.editListsButton.hidden = YES;
     [UIView animateWithDuration:0.3 animations:^{
         self.editListsButton.alpha = 0;
         [self toggleItemButtonsHidden:NO];
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-        listsVC.view.hidden = YES;
         listsShown = NO;
         if (completion) completion();
     }];
@@ -169,21 +154,6 @@
     constraints = [constraints arrayByAddingObjectsFromArray:horizontalConstraints];
     [self.view addConstraints:constraints];
     [self.view layoutIfNeeded];
-}
-
-#pragma mark - appearance
-
-- (void)styleButtons {
-    [self styleButton:self.listsButton icon:@"icon-lists"];
-    [self styleButton:self.editListsButton icon:@"icon-edit-lists"];
-    [self styleButton:self.addItemButton icon:@"icon-add"];
-    [self styleButton:self.clearCompletedButton icon:@"icon-clear"];
-    [self styleButton:self.sortItemsButton icon:@"icon-sort"];
-}
-
-- (void)styleButton:(UIButton *)button icon:(NSString *)iconName {
-    [button setBackgroundImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
-    button.titleLabel.text = @"";
 }
 
 #pragma mark - user actions

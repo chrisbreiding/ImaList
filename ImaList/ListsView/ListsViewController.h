@@ -17,7 +17,6 @@
 
 - (void)updateListsRef:(Firebase *)itemsRef;
 - (IBAction)addList:(id)sender;
-- (IBAction)hide:(id)sender;
 - (void)toggleEditingMode;
 - (void)didShow;
 - (void)willHide;
@@ -27,7 +26,6 @@
 @protocol ListsDelegate <NSObject>
 
 - (void)addList;
-- (void)hideLists;
 - (void)editListName:(NSString *)name;
 - (void)didChangeListName:(NSString *)name;
 - (void)displayItemsForList:(List *)list;

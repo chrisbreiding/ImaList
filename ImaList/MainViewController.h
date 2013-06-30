@@ -13,12 +13,14 @@
 @property (nonatomic, weak) IBOutlet UIButton *clearCompletedButton;
 @property (nonatomic, weak) IBOutlet UIButton *addItemButton;
 @property (nonatomic, weak) IBOutlet UIButton *sortItemsButton;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *footerBottomConstraint;
 
 - (IBAction)clearCompleted:(id)sender;
 - (IBAction)addItem:(id)sender;
 - (IBAction)sortItems:(id)sender;
 - (IBAction)toggleLists:(id)sender;
 - (IBAction)showLists:(id)sender;
+- (IBAction)hideLists:(id)sender;
 - (IBAction)toggleListEditingMode:(id)sender;
 
 @end

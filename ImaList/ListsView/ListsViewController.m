@@ -70,6 +70,7 @@
         currentList = list;
         [self.delegate displayItemsForList:list];
         [self.dataSource storeCurrentList:list];
+        [self.collectionView reloadData];
     }
 }
 
@@ -102,10 +103,6 @@
 - (IBAction)addList:(id)sender {
     adding = YES;
     [self.delegate addList];
-}
-
-- (IBAction)hide:(id)sender {
-    [self.delegate hideLists];
 }
 
 #pragma mark - list cell delegate

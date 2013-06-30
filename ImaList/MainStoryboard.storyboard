@@ -32,127 +32,131 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zG-jM-14w" userLabel="Footer">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fB8-1s-A4x" userLabel="List Button">
+                                        <accessibility key="accessibilityConfiguration" label="Lists"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" type="user" id="3HO-jC-hS0"/>
+                                            <constraint firstAttribute="height" constant="50" type="user" id="42S-MW-bnW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" backgroundImage="icon-lists.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toggleLists:" destination="2" eventType="touchUpInside" id="yUM-We-PeP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qK-jv-sk3" userLabel="Edit Lists Button">
+                                        <accessibility key="accessibilityConfiguration" label="Edit Lists"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" type="user" id="7U1-CA-01G"/>
+                                            <constraint firstAttribute="height" constant="50" type="user" id="iCs-rm-axh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title=" " backgroundImage="icon-edit-lists.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toggleListEditingMode:" destination="2" eventType="touchUpInside" id="54s-AH-m29"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGG-wI-KFr" userLabel="Clear Button">
+                                        <accessibility key="accessibilityConfiguration" label="Clear Completed"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" type="user" id="QZX-tt-2b5"/>
+                                            <constraint firstAttribute="width" constant="50" type="user" id="gvw-uM-Y82"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title=" " backgroundImage="icon-clear.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clearCompleted:" destination="2" eventType="touchUpInside" id="Mpd-Zh-2ch"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1B-SM-aMD" userLabel="Sort Button">
+                                        <accessibility key="accessibilityConfiguration" label="Sort Items"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" type="user" id="AOr-HP-6JE"/>
+                                            <constraint firstAttribute="width" constant="50" type="user" id="a9w-8n-llj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title=" " backgroundImage="icon-sort.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sortItems:" destination="2" eventType="touchUpInside" id="wEO-8x-zjj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFd-kg-pp0" userLabel="Add Button">
+                                        <accessibility key="accessibilityConfiguration" label="Add Item"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" type="user" id="DKW-2b-yDO"/>
+                                            <constraint firstAttribute="height" constant="50" type="user" id="SPx-4r-TI9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title=" " backgroundImage="icon-add.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addItem:" destination="2" eventType="touchUpInside" id="PXV-8w-s61"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.20784313725490197" green="0.20784313725490197" blue="0.20784313725490197" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" type="user" id="Bja-nh-sRg"/>
+                                    <constraint firstItem="fB8-1s-A4x" firstAttribute="top" secondItem="5zG-jM-14w" secondAttribute="top" type="user" id="8aW-P0-gFp"/>
+                                    <constraint firstAttribute="trailing" secondItem="C1B-SM-aMD" secondAttribute="trailing" constant="50" type="user" id="AL8-Vp-dvi"/>
+                                    <constraint firstItem="KFd-kg-pp0" firstAttribute="top" secondItem="5zG-jM-14w" secondAttribute="top" type="user" id="Jjd-1F-i5u"/>
+                                    <constraint firstAttribute="trailing" secondItem="IGG-wI-KFr" secondAttribute="trailing" constant="100" type="user" id="RZo-ES-4Lu"/>
+                                    <constraint firstItem="IGG-wI-KFr" firstAttribute="top" secondItem="5zG-jM-14w" secondAttribute="top" type="user" id="U1e-eG-YLt"/>
+                                    <constraint firstItem="2qK-jv-sk3" firstAttribute="leading" secondItem="5zG-jM-14w" secondAttribute="leading" constant="50" type="user" id="e8g-6T-miu"/>
+                                    <constraint firstItem="2qK-jv-sk3" firstAttribute="top" secondItem="5zG-jM-14w" secondAttribute="top" type="user" id="ePf-ai-fX0"/>
+                                    <constraint firstItem="fB8-1s-A4x" firstAttribute="leading" secondItem="5zG-jM-14w" secondAttribute="leading" type="user" id="f6y-aS-7ij"/>
+                                    <constraint firstAttribute="trailing" secondItem="KFd-kg-pp0" secondAttribute="trailing" type="user" id="kiT-Gd-5Jj"/>
+                                    <constraint firstItem="C1B-SM-aMD" firstAttribute="top" secondItem="5zG-jM-14w" secondAttribute="top" type="user" id="w6W-Im-gf8"/>
+                                    <constraint firstAttribute="height" constant="170" type="user" id="wyt-sr-Mgq"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="HCM-UY-U3H" appends="YES" id="x4d-5U-NTY"/>
+                                    <outletCollection property="gestureRecognizers" destination="B87-l5-72F" appends="YES" id="JYm-ig-h1S"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fB8-1s-A4x" userLabel="List Button">
-                                <accessibility key="accessibilityConfiguration" label="Lists"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="3HO-jC-hS0"/>
-                                    <constraint firstAttribute="height" constant="50" type="user" id="42S-MW-bnW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title=" ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="toggleLists:" destination="2" eventType="touchUpInside" id="yUM-We-PeP"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qK-jv-sk3" userLabel="Edit Lists Button">
-                                <accessibility key="accessibilityConfiguration" label="Edit Lists"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" type="user" id="7U1-CA-01G"/>
-                                    <constraint firstAttribute="height" constant="50" type="user" id="iCs-rm-axh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title=" ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="toggleListEditingMode:" destination="2" eventType="touchUpInside" id="54s-AH-m29"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFd-kg-pp0" userLabel="Add Button">
-                                <accessibility key="accessibilityConfiguration" label="Add Item"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" type="user" id="DKW-2b-yDO"/>
-                                    <constraint firstAttribute="height" constant="50" type="user" id="SPx-4r-TI9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title=" ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="addItem:" destination="2" eventType="touchUpInside" id="PXV-8w-s61"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGG-wI-KFr" userLabel="Clear Button">
-                                <accessibility key="accessibilityConfiguration" label="Clear Completed"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" type="user" id="QZX-tt-2b5"/>
-                                    <constraint firstAttribute="width" constant="50" type="user" id="gvw-uM-Y82"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title=" ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="clearCompleted:" destination="2" eventType="touchUpInside" id="Mpd-Zh-2ch"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1B-SM-aMD" userLabel="Sort Button">
-                                <accessibility key="accessibilityConfiguration" label="Sort Items"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" type="user" id="AOr-HP-6JE"/>
-                                    <constraint firstAttribute="width" constant="50" type="user" id="a9w-8n-llj"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title=" ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="sortItems:" destination="2" eventType="touchUpInside" id="wEO-8x-zjj"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="5zG-jM-14w" secondAttribute="bottom" constant="-120" type="user" id="1SN-rJ-g6g"/>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="3k3-l7-ZEX"/>
-                            <constraint firstItem="2qK-jv-sk3" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="50" type="user" id="4dR-MU-SDK"/>
-                            <constraint firstItem="fB8-1s-A4x" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="55R-qN-YTj"/>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="top" secondItem="3" secondAttribute="top" type="user" id="Dzw-fE-YgV"/>
-                            <constraint firstAttribute="bottom" secondItem="KFd-kg-pp0" secondAttribute="bottom" type="user" id="Fik-Kn-yDd"/>
-                            <constraint firstAttribute="trailing" secondItem="KFd-kg-pp0" secondAttribute="trailing" type="user" id="JvN-eW-lFK"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="PVU-W0-51a"/>
-                            <constraint firstItem="IGG-wI-KFr" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" constant="-100" type="user" id="W2y-Qn-PlD"/>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="WuC-EW-cT0"/>
-                            <constraint firstAttribute="bottom" secondItem="fB8-1s-A4x" secondAttribute="bottom" type="user" id="XDN-hU-Cnn"/>
-                            <constraint firstAttribute="bottom" secondItem="2qK-jv-sk3" secondAttribute="bottom" type="user" id="Zw1-uG-YfP"/>
-                            <constraint firstItem="C1B-SM-aMD" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="user" id="cI0-KI-cJ0"/>
-                            <constraint firstAttribute="bottom" secondItem="IGG-wI-KFr" secondAttribute="bottom" type="user" id="cxf-k1-17k"/>
-                            <constraint firstAttribute="trailing" secondItem="C1B-SM-aMD" secondAttribute="trailing" constant="50" type="user" id="eJ9-qG-KgT"/>
-                            <constraint firstItem="5zG-jM-14w" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="p4G-jc-rue"/>
-                            <constraint firstItem="5zG-jM-14w" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="user" id="x7c-hA-Fld"/>
+                            <constraint firstItem="5zG-jM-14w" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="p4G-jc-rue"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addItemButton" destination="KFd-kg-pp0" id="OVU-vl-0AT"/>
                         <outlet property="clearCompletedButton" destination="IGG-wI-KFr" id="TmN-6r-7oF"/>
                         <outlet property="editListsButton" destination="2qK-jv-sk3" id="uWj-Ju-RIm"/>
+                        <outlet property="footerBottomConstraint" destination="1SN-rJ-g6g" id="i3q-bB-rHw"/>
                         <outlet property="footerView" destination="5zG-jM-14w" id="S1T-fB-hs1"/>
                         <outlet property="listNameLabel" destination="obV-pO-e7U" id="ccI-DU-oe0"/>
                         <outlet property="listsButton" destination="fB8-1s-A4x" id="DYd-rC-ymt"/>
@@ -161,9 +165,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="up" id="HCM-UY-U3H" userLabel="Swipe Up">
+                <swipeGestureRecognizer direction="up" id="HCM-UY-U3H" userLabel="Swipe Up On Footer">
                     <connections>
                         <action selector="showLists:" destination="2" id="T5u-pD-aHF"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="B87-l5-72F" userLabel="Swipe Down On Footer">
+                    <connections>
+                        <action selector="hideLists:" destination="2" id="oY5-dq-hZh"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
@@ -301,7 +310,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon-add.png" width="50" height="50"/>
+        <image name="icon-clear.png" width="50" height="50"/>
+        <image name="icon-edit-lists.png" width="50" height="50"/>
+        <image name="icon-lists.png" width="50" height="50"/>
         <image name="icon-login.png" width="30" height="30"/>
+        <image name="icon-sort.png" width="50" height="50"/>
     </resources>
     <classes>
         <class className="LoginViewController" superclassName="UIViewController">
@@ -318,6 +332,7 @@
             <relationships>
                 <relationship kind="action" name="addItem:"/>
                 <relationship kind="action" name="clearCompleted:"/>
+                <relationship kind="action" name="hideLists:"/>
                 <relationship kind="action" name="showLists:"/>
                 <relationship kind="action" name="sortItems:"/>
                 <relationship kind="action" name="toggleListEditingMode:"/>
@@ -325,6 +340,7 @@
                 <relationship kind="outlet" name="addItemButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="clearCompletedButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="editListsButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="footerBottomConstraint" candidateClass="NSLayoutConstraint"/>
                 <relationship kind="outlet" name="footerView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="listNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="listsButton" candidateClass="UIButton"/>
