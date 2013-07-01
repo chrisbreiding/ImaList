@@ -41,7 +41,7 @@
     }];
     
     [_itemsRef observeEventType:FEventTypeChildMoved andPreviousSiblingNameWithBlock:^(FDataSnapshot *snapshot, NSString *prevName) {
-        [self itemsSorted];
+        [self sortedListAtId:snapshot.name withPreviousId:prevName];
     }];
     
     [_itemsRef observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
@@ -128,7 +128,16 @@
     [self.delegate didUpdateItemAtIndex:[self indexOfItem:item]];
 }
 
-- (void)itemsSorted {
+- (void)sortedListAtId:(NSString *)_id withPreviousId:(NSString *)previousId {
+    Item *item = [self itemWithId:_id];
+    int toIndex = 0;
+    if (previousId) {
+        Item *previousItem = [self itemWithId:previousId];
+        toIndex = [self indexOfItem:previousItem] + 1;
+        if (toIndex >= [self itemCount]) toIndex = [self itemCount] - 1;
+    }
+    [items removeObject:item];
+    [items insertObject:item atIndex:toIndex];
     [self.delegate didSortItems];
 }
 

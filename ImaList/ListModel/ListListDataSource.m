@@ -114,13 +114,6 @@
     [self.delegate didUpdateListAtIndex:[self indexOfList:list]];
 }
 
-- (void)listRemovedWithId:(NSString *)_id {
-    List *list = [self listWithId:_id];
-    int index = [self indexOfList:list];
-    [lists removeObjectAtIndex:index];
-    [self.delegate didRemoveListAtIndex:index];
-}
-
 - (void)sortedListAtId:(NSString *)_id withPreviousId:(NSString *)previousId {
     List *list = [self listWithId:_id];
     int toIndex = 0;
@@ -139,6 +132,13 @@
         List *list = (List *)obj;
         [list.ref setPriority:@(idx)];
     }];
+}
+
+- (void)listRemovedWithId:(NSString *)_id {
+    List *list = [self listWithId:_id];
+    int index = [self indexOfList:list];
+    [lists removeObjectAtIndex:index];
+    [self.delegate didRemoveListAtIndex:index];
 }
 
 @end
