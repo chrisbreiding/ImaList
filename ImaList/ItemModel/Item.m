@@ -13,4 +13,8 @@
     return self;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<Item - name:%@ _id:%@ isChecked:%@>", self.name, self._id, self.isChecked ? @"yes" : @"no"];
+}
+
 @end

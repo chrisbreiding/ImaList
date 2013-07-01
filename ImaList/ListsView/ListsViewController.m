@@ -11,6 +11,7 @@
     List *currentList;
     List *listBeingEdited;
     List *listToDelete;
+    NSNumber *fromIndexForMove;
 }
 
 - (void)viewDidLoad {
@@ -62,6 +63,26 @@
     }
 }
 
+#pragma mark - reorderable data source
+
+- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath {
+}
+
+#pragma mark - reorderable delegate flow layout
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
+    fromIndexForMove = @(indexPath.row);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
+    int fromInt = [fromIndexForMove intValue];
+    int toInt = indexPath.row;
+    if (fromIndexForMove && fromInt != toInt) {
+        [self.dataSource moveListFromIndex:fromInt toIndex:toInt];
+        fromIndexForMove = nil;
+    }
+}
+
 #pragma mark - list list data source delegate
 
 - (void)updateCurrentList:(List *)list {
@@ -86,6 +107,10 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
         [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
     }
+}
+
+- (void)didSortLists {
+    [self.collectionView reloadData];
 }
 
 - (void)didRemoveListAtIndex:(int)index {

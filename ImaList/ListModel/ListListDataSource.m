@@ -43,6 +43,10 @@
              }];
         }];
         
+        [listsRef observeEventType:FEventTypeChildMoved andPreviousSiblingNameWithBlock:^(FDataSnapshot *snapshot, NSString *prevName) {
+            [self sortedListAtId:snapshot.name withPreviousId:prevName];
+        }];
+        
         [listsRef observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
             [self listRemovedWithId:snapshot.name];
         }];
@@ -80,6 +84,13 @@
     [list.ref updateChildValues:@{ @"name": name }];
 }
 
+- (void)moveListFromIndex:(int)fromIndex toIndex:(int)toIndex {
+    List *list = [self listAtIndex:fromIndex];
+    [lists removeObject:list];
+    [lists insertObject:list atIndex:toIndex];
+    [self updatePriorities];
+}
+
 - (void)removeList:(List *)list {
     [list.ref removeValue];
 }
@@ -87,7 +98,7 @@
 #pragma mark = private
 
 - (List *)listWithId:(NSString *)_id {
-    NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"id == %@", _id];
+    NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"_id == %@", _id];
     return [lists filteredArrayUsingPredicate:idPredicate][0];
 }
 
@@ -108,6 +119,26 @@
     int index = [self indexOfList:list];
     [lists removeObjectAtIndex:index];
     [self.delegate didRemoveListAtIndex:index];
+}
+
+- (void)sortedListAtId:(NSString *)_id withPreviousId:(NSString *)previousId {
+    List *list = [self listWithId:_id];
+    int toIndex = 0;
+    if (previousId) {
+        List *previousList = [self listWithId:previousId];
+        toIndex = [self indexOfList:previousList] + 1;
+        if (toIndex >= [self listCount]) toIndex = [self listCount] - 1;
+    }
+    [lists removeObject:list];
+    [lists insertObject:list atIndex:toIndex];
+    [self.delegate didSortLists];
+}
+
+- (void)updatePriorities {
+    [lists enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        List *list = (List *)obj;
+        [list.ref setPriority:@(idx)];
+    }];
 }
 
 @end

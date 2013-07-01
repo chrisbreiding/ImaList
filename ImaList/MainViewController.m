@@ -155,7 +155,6 @@
     itemsVC.delegate = self;
     UIView *itemsView = itemsVC.view;
     itemsView.translatesAutoresizingMaskIntoConstraints = NO;
-//    [self.view addSubview:itemsView];
     [self.view insertSubview:itemsView atIndex:0];
     NSDictionary *views = NSDictionaryOfVariableBindings(itemsView);
     NSArray *constraints = @[];

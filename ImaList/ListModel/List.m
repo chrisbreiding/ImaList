@@ -16,4 +16,8 @@
     return [self._id isEqualToString:list._id];
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<List - name:%@ _id:%@>", self.name, self._id];
+}
+
 @end
