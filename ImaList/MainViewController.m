@@ -81,7 +81,7 @@
 
 - (IBAction)toggleLists:(id)sender {
     if (listsShown) {
-        [self hideListsCompletion:nil];
+        [self hideLists:nil];
     } else {
         [self showLists:nil];
     }
