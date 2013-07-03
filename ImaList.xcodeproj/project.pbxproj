@@ -23,6 +23,7 @@
 		4B53408D172F59F2003F9AE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534031172B66C3003F9AE2 /* UIKit.framework */; };
 		4B53408E172F59F2003F9AE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534033172B66C3003F9AE2 /* Foundation.framework */; };
 		4B534094172F59F2003F9AE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B534092172F59F2003F9AE2 /* InfoPlist.strings */; };
+		4B552E19178465FB00342D70 /* OptionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B552E18178465FB00342D70 /* OptionsView.m */; };
 		4B7E85B1176C177900DAF07E /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85AF176C177900DAF07E /* EditorViewController.m */; };
 		4B7E85B2176C177900DAF07E /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85AF176C177900DAF07E /* EditorViewController.m */; };
 		4B7E85B3176C177900DAF07E /* EditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85B0176C177900DAF07E /* EditorViewController.xib */; };
@@ -110,6 +111,8 @@
 		4B534091172F59F2003F9AE2 /* ImaListTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImaListTests-Info.plist"; sourceTree = "<group>"; };
 		4B534093172F59F2003F9AE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4B534098172F59F2003F9AE2 /* ImaListTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImaListTests-Prefix.pch"; sourceTree = "<group>"; };
+		4B552E17178465FB00342D70 /* OptionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsView.h; sourceTree = "<group>"; };
+		4B552E18178465FB00342D70 /* OptionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsView.m; sourceTree = "<group>"; };
 		4B7E85AE176C177900DAF07E /* EditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorViewController.h; sourceTree = "<group>"; };
 		4B7E85AF176C177900DAF07E /* EditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorViewController.m; sourceTree = "<group>"; };
 		4B7E85B0176C177900DAF07E /* EditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorViewController.xib; sourceTree = "<group>"; };
@@ -273,6 +276,7 @@
 				4B53404C172B66C3003F9AE2 /* MainViewController.h */,
 				4B53404D172B66C3003F9AE2 /* MainViewController.m */,
 				4BC641DC177CF4D400C06E90 /* MainStoryboard.storyboard */,
+				4B552E161784655700342D70 /* OptionsView */,
 				4BAD09AB1770F32A000D74D5 /* UI */,
 				4B534038172B66C3003F9AE2 /* Supporting Files */,
 			);
@@ -311,6 +315,15 @@
 				4B534098172F59F2003F9AE2 /* ImaListTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4B552E161784655700342D70 /* OptionsView */ = {
+			isa = PBXGroup;
+			children = (
+				4B552E17178465FB00342D70 /* OptionsView.h */,
+				4B552E18178465FB00342D70 /* OptionsView.m */,
+			);
+			path = OptionsView;
 			sourceTree = "<group>";
 		};
 		4B7E85AD176C177900DAF07E /* EditorView */ = {
@@ -670,6 +683,7 @@
 				4B7E85DE17765FB100DAF07E /* ListListDataSource.m in Sources */,
 				4B0884481777AE1D00BF2A25 /* ItemsViewController.m in Sources */,
 				4BC641D4177BB29E00C06E90 /* LoginViewController.m in Sources */,
+				4B552E19178465FB00342D70 /* OptionsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

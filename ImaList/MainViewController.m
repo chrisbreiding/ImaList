@@ -3,11 +3,8 @@
 #import <FirebaseAuthClient/FirebaseAuthClient.h>
 #import "MainViewController.h"
 #import "LoginViewController.h"
-#import "ListsViewController.h"
 #import "List.h"
-#import "ItemsViewController.h"
 #import "Item.h"
-#import "EditorViewController.h"
 
 @implementation MainViewController {
     ListsViewController *listsVC;
@@ -172,19 +169,15 @@
 #pragma mark - user actions
 
 - (IBAction)clearCompleted:(id)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle:nil
-                                  delegate:self
-                                  cancelButtonTitle:@"Cancel"
-                                  destructiveButtonTitle:@"Clear Completed"
-                                  otherButtonTitles:nil];
-    [actionSheet showInView:self.view];
+    OptionsView *optionsView = [[OptionsView alloc] initWithTitle:nil
+                                                         delegate:self
+                                               primaryButtonTitle:@"Clear Completed"
+                                                cancelButtonTitle:@"Cancel"];
+    [optionsView showInView:self.view];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == actionSheet.destructiveButtonIndex ) {
-        [itemsVC clearCompleted];
-    }
+- (void)primaryActionChosenForOptionsView:(OptionsView *)optionsView {
+    [itemsVC clearCompleted];
 }
 
 - (IBAction)sortItems:(id)sender {

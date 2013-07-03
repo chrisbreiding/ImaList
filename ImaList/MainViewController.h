@@ -2,8 +2,9 @@
 #import "ListsViewController.h"
 #import "ItemsViewController.h"
 #import "EditorViewController.h"
+#import "OptionsView.h"
 
-@interface MainViewController : UIViewController <UIActionSheetDelegate, ItemsDelegate, ListsDelegate>
+@interface MainViewController : UIViewController <ItemsDelegate, ListsDelegate, OptionsViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *navBarView;
 @property (nonatomic, weak) IBOutlet UILabel *listNameLabel;

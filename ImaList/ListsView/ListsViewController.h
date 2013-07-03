@@ -3,11 +3,12 @@
 #import "ListCollectionCell.h"
 #import "EditorViewController.h"
 #import "LXReorderableCollectionViewFlowLayout.h"
+#import "OptionsView.h"
 
 @class Firebase;
 @protocol ListsDelegate;
 
-@interface ListsViewController : UIViewController <UICollectionViewDelegate, LXReorderableCollectionViewDataSource, LXReorderableCollectionViewDelegateFlowLayout, UIActionSheetDelegate, ListCellDelegate, ListListDataSourceDelegate, EditorDelegate>
+@interface ListsViewController : UIViewController <UICollectionViewDelegate, LXReorderableCollectionViewDataSource, LXReorderableCollectionViewDelegateFlowLayout, ListCellDelegate, ListListDataSourceDelegate, EditorDelegate, OptionsViewDelegate>
 
 @property (nonatomic, weak) id<ListsDelegate> delegate;
 @property (nonatomic, strong) ListListDataSource *dataSource;

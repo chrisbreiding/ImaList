@@ -1,6 +1,5 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ListsViewController.h"
-#import "ListListDataSource.h"
 #import "ListCollectionCell.h"
 #import "List.h"
 
@@ -125,29 +124,25 @@
 #pragma mark - list cell delegate
 
 - (void)deleteList:(List *)list {
-    NSString *actionSheetTitle;
-    NSString *destructiveButtonTitle = nil;
+    NSString *optionsTitle;
+    NSString *primaryButtonTitle = nil;
     if ([self.dataSource listCount] > 1) {
         listToDelete = list;
-        actionSheetTitle = @"Delete list and all its items?";
-        destructiveButtonTitle = @"Delete List";
+        optionsTitle = @"Delete list and all its items?";
+        primaryButtonTitle = @"Delete List";
     } else {
-        actionSheetTitle = @"Cannot delete final list.";
+        optionsTitle = @"Cannot delete final list.";
     }
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle:actionSheetTitle
-                                  delegate:self
-                                  cancelButtonTitle:@"Cancel"
-                                  destructiveButtonTitle:destructiveButtonTitle
-                                  otherButtonTitles:nil];
-    [actionSheet showInView:self.view.superview];
+    OptionsView *optionsView = [[OptionsView alloc] initWithTitle:optionsTitle
+                                                         delegate:self
+                                               primaryButtonTitle:primaryButtonTitle
+                                                cancelButtonTitle:@"Cancel"];
+    [optionsView showInView:self.view.superview.superview];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == actionSheet.destructiveButtonIndex ) {
-        [self.dataSource removeList:listToDelete];
-        listToDelete = nil;
-    }
+- (void)primaryActionChosenForOptionsView:(OptionsView *)optionsView {
+    [self.dataSource removeList:listToDelete];
+    listToDelete = nil;
 }
 
 #pragma mark - editing
