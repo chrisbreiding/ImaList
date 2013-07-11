@@ -1,6 +1,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Firebase/Firebase.h>
 #import <FirebaseAuthClient/FirebaseAuthClient.h>
+#import "Reachability.h"
 #import "MainViewController.h"
 #import "LoginViewController.h"
 #import "List.h"
@@ -24,8 +25,38 @@
     [self addItemsView];
     [self addListsView];
     [self addEditorView];
-
+    
+    [self checkNetworkConnection];
     [self checkAuthentication];
+}
+
+- (void)checkNetworkConnection {
+    Reachability *reachable = [Reachability reachabilityForInternetConnection];
+    
+    reachable.reachableBlock = ^(Reachability*reach) {
+        NSLog(@"reachable: %@", reach);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Yayyy, we have the interwebs!");
+        });
+    };
+
+    reachable.unreachableBlock = ^(Reachability*reach) {
+        NSLog(@"unreachable: %@", reach);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"No, the internets are down!");
+        });
+    };
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(networkConnectionChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+
+    [reachable startNotifier];
+}
+
+- (void)networkConnectionChanged {
+    NSLog(@"network connection changes");
 }
 
 - (void)checkAuthentication {
