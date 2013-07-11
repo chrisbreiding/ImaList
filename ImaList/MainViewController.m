@@ -142,6 +142,7 @@
 - (IBAction)addList:(id)sender {
     listsVC.adding = YES;
     editorVC.delegate = listsVC;
+    editorVC.title = @"Add List";
     [editorVC beginEditingSingle:@""];
 }
 
@@ -202,6 +203,7 @@
 
 - (void)editListName:(NSString *)name {
     editorVC.delegate = listsVC;
+    editorVC.title = @"Edit List";
     [editorVC beginEditingSingle:name];
 }
 
@@ -215,11 +217,13 @@
 
 - (IBAction)addItem:(id)sender {
     editorVC.delegate = itemsVC;
+    editorVC.title = @"Add Items";
     [editorVC beginEditingMultiple];
 }
 
 - (void)editItemName:(NSString *)name {
     editorVC.delegate = itemsVC;
+    editorVC.title = @"Edit Item";
     [editorVC beginEditingSingle:name];
 }
 

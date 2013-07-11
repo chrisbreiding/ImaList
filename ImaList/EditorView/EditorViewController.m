@@ -19,6 +19,10 @@
                                                object:nil];
 }
 
+- (void)setTitle:(NSString *)title {
+    self.titleLabel.text = title;
+}
+
 - (void)hideAll {
     self.view.hidden = YES;
     self.multipleTextView.hidden = YES;
