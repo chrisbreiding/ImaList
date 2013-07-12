@@ -32,31 +32,24 @@
 
 - (void)checkNetworkConnection {
     Reachability *reachable = [Reachability reachabilityForInternetConnection];
+        
+    if ([reachable currentReachabilityStatus] == NotReachable) {
+        self.noConnectionView.hidden = NO;
+    }
     
     reachable.reachableBlock = ^(Reachability*reach) {
-        NSLog(@"reachable: %@", reach);
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Yayyy, we have the interwebs!");
+            self.noConnectionView.hidden = YES;
         });
     };
 
     reachable.unreachableBlock = ^(Reachability*reach) {
-        NSLog(@"unreachable: %@", reach);
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"No, the internets are down!");
+            self.noConnectionView.hidden = NO;
         });
     };
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(networkConnectionChanged:)
-                                                 name:kReachabilityChangedNotification
-                                               object:nil];
-
     [reachable startNotifier];
-}
-
-- (void)networkConnectionChanged {
-    NSLog(@"network connection changes");
 }
 
 - (void)checkAuthentication {

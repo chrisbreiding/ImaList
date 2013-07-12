@@ -161,15 +161,67 @@
                                     <outletCollection property="gestureRecognizers" destination="B87-l5-72F" appends="YES" id="JYm-ig-h1S"/>
                                 </connections>
                             </view>
+                            <view hidden="YES" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8v-bT-Rq9" userLabel="No Connection View">
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Network Connection Unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbl-WX-TW2">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="WMN-KH-jxV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="A Network Connection Is Necessary " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chO-wb-m1p">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="IgX-kk-vG6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="To Run ImaList" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHL-QG-rgY">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="L37-uY-Q3Y"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="no-connection.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q3i-ZN-fZD">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" type="user" id="AP8-7U-jdj"/>
+                                            <constraint firstAttribute="height" constant="80" type="user" id="Vf3-3H-XDu"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="chO-wb-m1p" firstAttribute="centerY" secondItem="o8v-bT-Rq9" secondAttribute="centerY" type="default" id="02J-Sr-VFv"/>
+                                    <constraint firstItem="chO-wb-m1p" firstAttribute="trailing" secondItem="o8v-bT-Rq9" secondAttribute="trailing" type="default" id="8Hm-gk-XPi"/>
+                                    <constraint firstItem="zbl-WX-TW2" firstAttribute="trailing" secondItem="o8v-bT-Rq9" secondAttribute="trailing" type="default" id="Hgb-JI-z53"/>
+                                    <constraint firstItem="uHL-QG-rgY" firstAttribute="trailing" secondItem="o8v-bT-Rq9" secondAttribute="trailing" type="default" id="LLB-fH-gqh"/>
+                                    <constraint firstItem="zbl-WX-TW2" firstAttribute="leading" secondItem="o8v-bT-Rq9" secondAttribute="leading" type="default" id="TwO-mE-giS"/>
+                                    <constraint firstItem="uHL-QG-rgY" firstAttribute="leading" secondItem="o8v-bT-Rq9" secondAttribute="leading" type="default" id="amM-RF-tun"/>
+                                    <constraint firstItem="chO-wb-m1p" firstAttribute="leading" secondItem="o8v-bT-Rq9" secondAttribute="leading" type="default" id="mth-2N-aze"/>
+                                    <constraint firstAttribute="bottom" secondItem="uHL-QG-rgY" secondAttribute="bottom" constant="239" id="pk3-71-mz8"/>
+                                    <constraint firstItem="Q3i-ZN-fZD" firstAttribute="top" secondItem="o8v-bT-Rq9" secondAttribute="top" constant="160" id="tND-hb-tgE"/>
+                                    <constraint firstItem="zbl-WX-TW2" firstAttribute="top" secondItem="o8v-bT-Rq9" secondAttribute="top" constant="120" id="vJs-G7-89d"/>
+                                    <constraint firstItem="Q3i-ZN-fZD" firstAttribute="centerX" secondItem="zbl-WX-TW2" secondAttribute="centerX" type="default" id="yeR-HA-Mvl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="5zG-jM-14w" secondAttribute="bottom" constant="-120" type="user" id="1SN-rJ-g6g"/>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="3k3-l7-ZEX"/>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="top" secondItem="3" secondAttribute="top" type="user" id="Dzw-fE-YgV"/>
+                            <constraint firstItem="o8v-bT-Rq9" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="NtU-Li-FyT"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="user" id="PVU-W0-51a"/>
                             <constraint firstItem="qwF-lj-WTI" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="WuC-EW-cT0"/>
+                            <constraint firstItem="o8v-bT-Rq9" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="eoO-hv-Bqg"/>
+                            <constraint firstItem="o8v-bT-Rq9" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="gGi-iq-zN1"/>
                             <constraint firstItem="5zG-jM-14w" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="user" id="p4G-jc-rue"/>
+                            <constraint firstItem="o8v-bT-Rq9" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="y38-1p-kEA"/>
                         </constraints>
                     </view>
                     <connections>
@@ -182,6 +234,7 @@
                         <outlet property="listNameLabel" destination="obV-pO-e7U" id="ccI-DU-oe0"/>
                         <outlet property="listsButton" destination="fB8-1s-A4x" id="DYd-rC-ymt"/>
                         <outlet property="navBarView" destination="qwF-lj-WTI" id="EBF-bZ-UW1"/>
+                        <outlet property="noConnectionView" destination="o8v-bT-Rq9" id="SI5-WV-syM"/>
                         <outlet property="sortItemsButton" destination="C1B-SM-aMD" id="10c-th-nhx"/>
                     </connections>
                 </viewController>
@@ -338,6 +391,7 @@
         <image name="icon-lists.png" width="50" height="50"/>
         <image name="icon-login.png" width="30" height="30"/>
         <image name="icon-sort.png" width="50" height="50"/>
+        <image name="no-connection.png" width="200" height="80"/>
     </resources>
     <classes>
         <class className="LoginViewController" superclassName="UIViewController">
@@ -369,6 +423,7 @@
                 <relationship kind="outlet" name="listNameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="listsButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="navBarView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="noConnectionView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="sortItemsButton" candidateClass="UIButton"/>
             </relationships>
         </class>

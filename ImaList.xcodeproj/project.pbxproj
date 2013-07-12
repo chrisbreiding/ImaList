@@ -77,6 +77,8 @@
 		4BC641F3177FE75600C06E90 /* icon-add-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F1177FE75600C06E90 /* icon-add-list@2x.png */; };
 		4BC641F6177FEB3000C06E90 /* icon-editing-lists.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F4177FEB3000C06E90 /* icon-editing-lists.png */; };
 		4BC641F7177FEB3000C06E90 /* icon-editing-lists@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F5177FEB3000C06E90 /* icon-editing-lists@2x.png */; };
+		4BC641FA178FAC4400C06E90 /* no-connection.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F8178FAC4400C06E90 /* no-connection.png */; };
+		4BC641FB178FAC4400C06E90 /* no-connection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F9178FAC4400C06E90 /* no-connection@2x.png */; };
 		4BC7EC5A176F81300040E9FB /* ListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC58176F81300040E9FB /* ListsViewController.m */; };
 		4BC7EC5B176F81300040E9FB /* ListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC58176F81300040E9FB /* ListsViewController.m */; };
 		4BC7EC5C176F81300040E9FB /* ListsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BC7EC59176F81300040E9FB /* ListsViewController.xib */; };
@@ -167,6 +169,8 @@
 		4BC641F1177FE75600C06E90 /* icon-add-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-add-list@2x.png"; sourceTree = "<group>"; };
 		4BC641F4177FEB3000C06E90 /* icon-editing-lists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-editing-lists.png"; sourceTree = "<group>"; };
 		4BC641F5177FEB3000C06E90 /* icon-editing-lists@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-editing-lists@2x.png"; sourceTree = "<group>"; };
+		4BC641F8178FAC4400C06E90 /* no-connection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-connection.png"; sourceTree = "<group>"; };
+		4BC641F9178FAC4400C06E90 /* no-connection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-connection@2x.png"; sourceTree = "<group>"; };
 		4BC7EC57176F81300040E9FB /* ListsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListsViewController.h; sourceTree = "<group>"; };
 		4BC7EC58176F81300040E9FB /* ListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListsViewController.m; sourceTree = "<group>"; };
 		4BC7EC59176F81300040E9FB /* ListsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListsViewController.xib; sourceTree = "<group>"; };
@@ -415,6 +419,8 @@
 				4BAD09D91770F32A000D74D5 /* icon-add@2x.png */,
 				4BAD0A3F177C9D59000D74D5 /* icon-login.png */,
 				4BAD0A40177C9D5A000D74D5 /* icon-login@2x.png */,
+				4BC641F8178FAC4400C06E90 /* no-connection.png */,
+				4BC641F9178FAC4400C06E90 /* no-connection@2x.png */,
 			);
 			path = shared;
 			sourceTree = "<group>";
@@ -576,6 +582,8 @@
 				4BC641F3177FE75600C06E90 /* icon-add-list@2x.png in Resources */,
 				4BC641F6177FEB3000C06E90 /* icon-editing-lists.png in Resources */,
 				4BC641F7177FEB3000C06E90 /* icon-editing-lists@2x.png in Resources */,
+				4BC641FA178FAC4400C06E90 /* no-connection.png in Resources */,
+				4BC641FB178FAC4400C06E90 /* no-connection@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
