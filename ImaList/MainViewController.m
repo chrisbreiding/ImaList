@@ -55,10 +55,9 @@
 - (void)checkAuthentication {
     Firebase* ref = [[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com"];
     FirebaseAuthClient* authClient = [[FirebaseAuthClient alloc] initWithRef:ref];
+    
     [authClient checkAuthStatusWithBlock:^(NSError* error, FAUser* user) {
-        if (error != nil) {
-            NSLog(@"error while checking authentication: %@", error);
-        } else if (user == nil) {
+        if (error != nil || user == nil) {
             [self openLogin];
         }
     }];
@@ -84,7 +83,7 @@
 }
 
 - (void)closeLogin {
-    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
     [listsVC updateListsRef:[[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com/lists"]];
 }
 
