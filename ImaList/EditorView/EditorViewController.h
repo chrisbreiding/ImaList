@@ -3,15 +3,14 @@
 @class Item;
 @protocol EditorDelegate;
 
-@interface EditorViewController : UIViewController <UITextFieldDelegate>
+@interface EditorViewController : UIViewController <UITextViewDelegate>
 
 @property(nonatomic, weak) id<EditorDelegate> delegate;
 
 @property (nonatomic, weak) IBOutlet UIView *wrapView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *wrapViewBottomConstraint;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UITextField *singleTextField;
-@property (nonatomic, weak) IBOutlet UITextView *multipleTextView;
+@property (nonatomic, weak) IBOutlet UITextView *textView;
 @property (nonatomic, weak) IBOutlet UIButton *doneButton;
 @property (nonatomic, weak) IBOutlet UIButton *cancelButton;
 

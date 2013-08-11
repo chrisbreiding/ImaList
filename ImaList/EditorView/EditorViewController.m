@@ -3,7 +3,7 @@
 
 @implementation EditorViewController {
     Item *itemBeingEdited;
-    BOOL addingMultiple;
+    BOOL editingSingle;
     BOOL sizeSet;
 }
 
@@ -11,7 +11,7 @@
     [super viewDidLoad];
     
     [self hideAll];
-    self.singleTextField.delegate = self;
+    self.textView.delegate = self;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -25,99 +25,93 @@
 
 - (void)hideAll {
     self.view.hidden = YES;
-    self.multipleTextView.hidden = YES;
-    self.singleTextField.hidden = YES;
+    self.textView.hidden = YES;
 }
 
-- (void)beginEditingMultiple {
-    [self setMultipleAlpha:0];
-    [self setMultipleHidden:NO];
-    addingMultiple = YES;
-    [self.multipleTextView becomeFirstResponder];
+- (void)beginEditing {
+    [self setTextViewAlpha:0];
+    [self setHidden:NO];
+    [self.textView becomeFirstResponder];
     [UIView animateWithDuration:0.4
                      animations:^{
-                         [self setMultipleAlpha:1];
+                         [self setTextViewAlpha:1];
                      }];
 }
 
+- (void)endEditing {
+    self.textView.text = @"";
+    [self setHidden:YES];
+    [self.textView resignFirstResponder];
+}
+
+- (void)beginEditingMultiple {
+    [self beginEditing];
+}
+
 - (void)endEditingMultipleItems {
-    self.multipleTextView.text = @"";
-    [self setMultipleHidden:YES];
-    addingMultiple = NO;
-    [self.multipleTextView resignFirstResponder];
+    [self endEditing];
 }
 
-- (void)setMultipleAlpha:(int)alpha {
+- (void)setTextViewAlpha:(int)alpha {
     self.view.alpha = alpha;
-    self.multipleTextView.alpha = alpha;
+    self.textView.alpha = alpha;
 }
 
-- (void)setMultipleHidden:(BOOL)hidden {
+- (void)setHidden:(BOOL)hidden {
     self.view.hidden = hidden;
-    self.multipleTextView.hidden = hidden;
+    self.textView.hidden = hidden;
 }
 
 - (void)commitMultiple {
-    NSArray *nameArray = [self.multipleTextView.text componentsSeparatedByString:@"\n"];
+    NSArray *nameArray = [self.textView.text componentsSeparatedByString:@"\n"];
     [self.delegate didFinishEditingMultiple:nameArray];
 }
 
 - (void)beginEditingSingle:(NSString *)text {
-    self.singleTextField.text = text;
-    [self setSingleAlpha:0];
-    [self setSingleHidden:NO];
-    [self.singleTextField becomeFirstResponder];
-    [UIView animateWithDuration:0.4
-                     animations:^{
-                         [self setSingleAlpha:1];
-                     }];
+    editingSingle = YES;
+    self.textView.text = text;
+    [self beginEditing];
 }
 
 - (void)endEditingSingleItem {
-    self.singleTextField.text = @"";
-    [self setSingleHidden:YES];
-    [self.singleTextField resignFirstResponder];
-}
-
-- (void)setSingleAlpha:(int)alpha {
-    self.view.alpha = alpha;
-    self.singleTextField.alpha = alpha;
-}
-
-- (void)setSingleHidden:(BOOL)hidden {
-    self.view.hidden = hidden;
-    self.singleTextField.hidden = hidden;
+    editingSingle = NO;
+    [self endEditing];
 }
 
 - (void)commitSingle {
-    [self.delegate didFinishEditingSingle:self.singleTextField.text];
+    [self.delegate didFinishEditingSingle:self.textView.text];
 }
 
 #pragma mark - user actions
 
 - (IBAction)didTapDone:(id)sender {
-    if (addingMultiple) {
-        [self commitMultiple];
-        [self endEditingMultipleItems];
-    } else {
+    if (editingSingle) {
         [self commitSingle];
         [self endEditingSingleItem];
+    } else {
+        [self commitMultiple];
+        [self endEditingMultipleItems];
     }
 }
 
 - (IBAction)didTapCancel:(id)sender {
-    if (addingMultiple) {
-        [self endEditingMultipleItems];
-    } else {
+    if (editingSingle) {
         [self endEditingSingleItem];
+    } else {
+        [self endEditingMultipleItems];
     }
 }
 
 #pragma mark - textfield delegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self didTapDone:nil];
-    return YES;
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    BOOL isReturn = [text isEqualToString:@"\n"];
+    if (editingSingle && isReturn) {
+        [self didTapDone:nil];
+        return NO;
+    } else {
+        return YES;        
+    }
 }
 
 #pragma mark - private methods
