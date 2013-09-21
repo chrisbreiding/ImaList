@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		18A0A26FBBC444A18E65BACF /* libPods-ImaListTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31595206A7E041189CC67E84 /* libPods-ImaListTests.a */; };
-		4B08844117778BE600BF2A25 /* app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B08844017778BE600BF2A25 /* app-icon.png */; };
-		4B08844317778BEB00BF2A25 /* app-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B08844217778BEB00BF2A25 /* app-icon@2x.png */; };
 		4B0884481777AE1D00BF2A25 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0884461777AE1D00BF2A25 /* ItemsViewController.m */; };
 		4B0884491777AE1D00BF2A25 /* ItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B0884471777AE1D00BF2A25 /* ItemsViewController.xib */; };
 		4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3693BA172F6D7C00C81D9F /* ItemSpec.m */; };
@@ -69,9 +67,6 @@
 		4BC641D9177BBEEF00C06E90 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641D8177BBEEF00C06E90 /* Accounts.framework */; };
 		4BC641DB177BBEF600C06E90 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641DA177BBEF600C06E90 /* Social.framework */; };
 		4BC641DD177CF4D400C06E90 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641DC177CF4D400C06E90 /* MainStoryboard.storyboard */; };
-		4BC641E9177CF62100C06E90 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641E6177CF62100C06E90 /* Default-568h@2x.png */; };
-		4BC641EA177CF62100C06E90 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641E7177CF62100C06E90 /* Default.png */; };
-		4BC641EB177CF62100C06E90 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641E8177CF62100C06E90 /* Default@2x.png */; };
 		4BC641ED177CF6D100C06E90 /* FirebaseAuthClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641EC177CF6D100C06E90 /* FirebaseAuthClient.framework */; };
 		4BC641F2177FE75600C06E90 /* icon-add-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F0177FE75600C06E90 /* icon-add-list.png */; };
 		4BC641F3177FE75600C06E90 /* icon-add-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F1177FE75600C06E90 /* icon-add-list@2x.png */; };
@@ -88,13 +83,12 @@
 		4BC7EC6B176F82DA0040E9FB /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC6A176F82DA0040E9FB /* List.m */; };
 		4BC7EC6C176F82DA0040E9FB /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC6A176F82DA0040E9FB /* List.m */; };
 		4BCC99D6175289D000C3D825 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCC99D5175289D000C3D825 /* QuartzCore.framework */; };
+		4BDC9A3017ED330A006519DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BDC9A2F17ED330A006519DB /* Images.xcassets */; };
 		DD6007FF2E294ABDB593D137 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B636D51C3F404AB85E3302 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		31595206A7E041189CC67E84 /* libPods-ImaListTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImaListTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B08844017778BE600BF2A25 /* app-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon.png"; path = "../../app-icon.png"; sourceTree = "<group>"; };
-		4B08844217778BEB00BF2A25 /* app-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-icon@2x.png"; path = "../../app-icon@2x.png"; sourceTree = "<group>"; };
 		4B0884451777AE1D00BF2A25 /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
 		4B0884461777AE1D00BF2A25 /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
 		4B0884471777AE1D00BF2A25 /* ItemsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemsViewController.xib; sourceTree = "<group>"; };
@@ -161,9 +155,6 @@
 		4BC641DE177CF53B00C06E90 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = "Supporting Files/InfoPlist.strings"; sourceTree = "<group>"; };
 		4BC641E3177CF5CC00C06E90 /* ImaList-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ImaList-Info.plist"; sourceTree = "<group>"; };
 		4BC641E5177CF5F400C06E90 /* ImaList-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImaList-Prefix.pch"; sourceTree = "<group>"; };
-		4BC641E6177CF62100C06E90 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Supporting Files/Default-568h@2x.png"; sourceTree = "<group>"; };
-		4BC641E7177CF62100C06E90 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = "Supporting Files/Default.png"; sourceTree = "<group>"; };
-		4BC641E8177CF62100C06E90 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Supporting Files/Default@2x.png"; sourceTree = "<group>"; };
 		4BC641EC177CF6D100C06E90 /* FirebaseAuthClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuthClient.framework; path = Frameworks/FirebaseAuthClient.framework; sourceTree = "<group>"; };
 		4BC641F0177FE75600C06E90 /* icon-add-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-add-list.png"; sourceTree = "<group>"; };
 		4BC641F1177FE75600C06E90 /* icon-add-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-add-list@2x.png"; sourceTree = "<group>"; };
@@ -181,6 +172,7 @@
 		4BC7EC6A176F82DA0040E9FB /* List.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = List.m; sourceTree = "<group>"; };
 		4BC7EC6D176F84340040E9FB /* ListListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListListDataSource.h; sourceTree = "<group>"; };
 		4BCC99D5175289D000C3D825 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4BDC9A2F17ED330A006519DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7FE7D16BF8E648C0848B0712 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		E9B636D51C3F404AB85E3302 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75EF69AC1CE4BD882710606 /* Pods-ImaListTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImaListTests.xcconfig"; path = "Pods/Pods-ImaListTests.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -282,6 +274,7 @@
 				4BC641DC177CF4D400C06E90 /* MainStoryboard.storyboard */,
 				4B552E161784655700342D70 /* OptionsView */,
 				4BAD09AB1770F32A000D74D5 /* UI */,
+				4BDC9A2F17ED330A006519DB /* Images.xcassets */,
 				4B534038172B66C3003F9AE2 /* Supporting Files */,
 			);
 			path = ImaList;
@@ -290,9 +283,6 @@
 		4B534038172B66C3003F9AE2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4BC641E6177CF62100C06E90 /* Default-568h@2x.png */,
-				4BC641E7177CF62100C06E90 /* Default.png */,
-				4BC641E8177CF62100C06E90 /* Default@2x.png */,
 				4BC641E3177CF5CC00C06E90 /* ImaList-Info.plist */,
 				4BC641E5177CF5F400C06E90 /* ImaList-Prefix.pch */,
 				4BC641DE177CF53B00C06E90 /* InfoPlist.strings */,
@@ -363,8 +353,6 @@
 		4BAD09AB1770F32A000D74D5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				4B08844017778BE600BF2A25 /* app-icon.png */,
-				4B08844217778BEB00BF2A25 /* app-icon@2x.png */,
 				4BAD09BB1770F32A000D74D5 /* items */,
 				4BAD09C81770F32A000D74D5 /* lists */,
 				4BAD09CF1770F32A000D74D5 /* shared */,
@@ -565,8 +553,6 @@
 				4BAD0A031770F32B000D74D5 /* icon-add@2x.png in Resources */,
 				4B7E85D91771315F00DAF07E /* icon-delete-list.png in Resources */,
 				4B7E85DA1771316000DAF07E /* icon-delete-list@2x.png in Resources */,
-				4B08844117778BE600BF2A25 /* app-icon.png in Resources */,
-				4B08844317778BEB00BF2A25 /* app-icon@2x.png in Resources */,
 				4B0884491777AE1D00BF2A25 /* ItemsViewController.xib in Resources */,
 				4BC641CA17792EE400C06E90 /* cancel-button-highlighted.png in Resources */,
 				4BC641CB17792EE400C06E90 /* done-button-highlighted.png in Resources */,
@@ -575,9 +561,7 @@
 				4BAD0A41177C9D5A000D74D5 /* icon-login.png in Resources */,
 				4BAD0A42177C9D5A000D74D5 /* icon-login@2x.png in Resources */,
 				4BC641DD177CF4D400C06E90 /* MainStoryboard.storyboard in Resources */,
-				4BC641E9177CF62100C06E90 /* Default-568h@2x.png in Resources */,
-				4BC641EA177CF62100C06E90 /* Default.png in Resources */,
-				4BC641EB177CF62100C06E90 /* Default@2x.png in Resources */,
+				4BDC9A3017ED330A006519DB /* Images.xcassets in Resources */,
 				4BC641F2177FE75600C06E90 /* icon-add-list.png in Resources */,
 				4BC641F3177FE75600C06E90 /* icon-add-list@2x.png in Resources */,
 				4BC641F6177FEB3000C06E90 /* icon-editing-lists.png in Resources */,
@@ -798,6 +782,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7FE7D16BF8E648C0848B0712 /* Pods.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -815,6 +801,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7FE7D16BF8E648C0848B0712 /* Pods.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

@@ -180,7 +180,7 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(itemsView);
     NSArray *constraints = @[];
     NSArray *bottomConstraints = [self constraintWithString:@"V:[itemsView]-50-|" views:views];
-    NSArray *heightConstraints = [self constraintWithString:@"V:|-50-[itemsView]" views:views];
+    NSArray *heightConstraints = [self constraintWithString:@"V:|-70-[itemsView]" views:views];
     NSArray *horizontalConstraints = [self constraintWithString:@"H:|[itemsView]|" views:views];
     itemsBottomConstraint = bottomConstraints[0];
     constraints = [constraints arrayByAddingObjectsFromArray:bottomConstraints];

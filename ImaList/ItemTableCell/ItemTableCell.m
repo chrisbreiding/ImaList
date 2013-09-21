@@ -49,14 +49,15 @@ static void destroy_cache() {
         self.itemNameLabel.textColor = [UIColor blackColor];
     }
     
-    self.imageView.image = [UIImage imageNamed:checkImageName];
-    self.imageView.userInteractionEnabled = YES;
+    self.checkboxButton.imageView.image = [UIImage imageNamed:checkImageName];
+//    self.imageView.image = [UIImage imageNamed:checkImageName];
+//    self.imageView.userInteractionEnabled = YES;
     
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkmarkTapped:)];
-    [self.imageView setGestureRecognizers:@[gestureRecognizer]];
+//    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkmarkTapped:)];
+//    [self.imageView setGestureRecognizers:@[gestureRecognizer]];
 }
 
-- (void)checkmarkTapped:(id)gesture {
+- (IBAction)checkmarkTapped:(id)sender {
     [self.delegate didUpdateItem:_item isChecked:!_item.isChecked];
 }
 
