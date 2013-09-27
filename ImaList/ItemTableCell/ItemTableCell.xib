@@ -72,6 +72,7 @@
             <connections>
                 <outlet property="checkboxButton" destination="ARJ-S8-dJ9" id="LbS-fL-NGK"/>
                 <outlet property="deleteButton" destination="27" id="37"/>
+                <outlet property="deleteButtonTrailingConstraint" destination="cFb-ea-pLJ" id="dP5-KF-Xge"/>
                 <outlet property="itemNameLabel" destination="5" id="20"/>
             </connections>
         </tableViewCell>
