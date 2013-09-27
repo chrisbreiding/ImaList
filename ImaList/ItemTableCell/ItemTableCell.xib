@@ -53,7 +53,7 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
-                            <action selector="checkmarkTapped:" destination="2" eventType="touchUpInside" id="LeA-Yd-MWf"/>
+                            <action selector="didTapCheckmark:" destination="2" eventType="touchUpInside" id="md5-T2-qlD"/>
                         </connections>
                     </button>
                 </subviews>

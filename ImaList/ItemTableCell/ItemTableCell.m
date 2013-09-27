@@ -52,7 +52,7 @@ static void destroy_cache() {
     self.itemNameLabel.textColor = labelColor;
 }
 
-- (IBAction)checkmarkTapped:(id)sender {
+- (IBAction)didTapCheckmark:(id)sender {
     [self.delegate didUpdateItem:_item isChecked:!_item.isChecked];
 }
 

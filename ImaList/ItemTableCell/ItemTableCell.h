@@ -13,7 +13,7 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *deleteButtonTrailingConstraint;
 @property (nonatomic, strong) Item *item;
 
-- (IBAction)checkmarkTapped:(id)sender;
+- (IBAction)didTapCheckmark:(id)sender;
 - (IBAction)didTapDelete:(id)sender;
 - (void)configureCellWithItem:(Item *)item;
 
