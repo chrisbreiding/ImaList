@@ -10,7 +10,6 @@
 		18A0A26FBBC444A18E65BACF /* libPods-ImaListTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31595206A7E041189CC67E84 /* libPods-ImaListTests.a */; };
 		4B0884481777AE1D00BF2A25 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0884461777AE1D00BF2A25 /* ItemsViewController.m */; };
 		4B0884491777AE1D00BF2A25 /* ItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B0884471777AE1D00BF2A25 /* ItemsViewController.xib */; };
-		4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B3693BA172F6D7C00C81D9F /* ItemSpec.m */; };
 		4B534032172B66C3003F9AE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534031172B66C3003F9AE2 /* UIKit.framework */; };
 		4B534034172B66C3003F9AE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534033172B66C3003F9AE2 /* Foundation.framework */; };
 		4B534036172B66C3003F9AE2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534035172B66C3003F9AE2 /* CoreGraphics.framework */; };
@@ -34,7 +33,6 @@
 		4B7E85DA1771316000DAF07E /* icon-delete-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85D81771315F00DAF07E /* icon-delete-list@2x.png */; };
 		4B7E85DC1776357000DAF07E /* ItemListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85DB1776357000DAF07E /* ItemListDataSource.m */; };
 		4B7E85DE17765FB100DAF07E /* ListListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85DD17765FB100DAF07E /* ListListDataSource.m */; };
-		4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA2879517357D160041BB2D /* ItemListSpec.m */; };
 		4BAD099D176F8E3B000D74D5 /* ListCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */; };
 		4BAD099E176F8E3B000D74D5 /* ListCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */; };
 		4BAD09A0176F8E76000D74D5 /* ListCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */; };
@@ -92,7 +90,6 @@
 		4B0884451777AE1D00BF2A25 /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
 		4B0884461777AE1D00BF2A25 /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
 		4B0884471777AE1D00BF2A25 /* ItemsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemsViewController.xib; sourceTree = "<group>"; };
-		4B3693BA172F6D7C00C81D9F /* ItemSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemSpec.m; sourceTree = "<group>"; };
 		4B53402E172B66C3003F9AE2 /* ImaList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImaList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B534031172B66C3003F9AE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4B534033172B66C3003F9AE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -119,7 +116,6 @@
 		4B7E85D81771315F00DAF07E /* icon-delete-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-delete-list@2x.png"; sourceTree = "<group>"; };
 		4B7E85DB1776357000DAF07E /* ItemListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListDataSource.m; sourceTree = "<group>"; };
 		4B7E85DD17765FB100DAF07E /* ListListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListListDataSource.m; sourceTree = "<group>"; };
-		4BA2879517357D160041BB2D /* ItemListSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemListSpec.m; path = ImaListTests/ItemListSpec.m; sourceTree = SOURCE_ROOT; };
 		4BAD099B176F8E3B000D74D5 /* ListCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCollectionCell.h; sourceTree = "<group>"; };
 		4BAD099C176F8E3B000D74D5 /* ListCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCollectionCell.m; sourceTree = "<group>"; };
 		4BAD099F176F8E76000D74D5 /* ListCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCollectionCell.xib; sourceTree = "<group>"; };
@@ -294,8 +290,6 @@
 		4B53408F172F59F2003F9AE2 /* ImaListTests */ = {
 			isa = PBXGroup;
 			children = (
-				4BA2879517357D160041BB2D /* ItemListSpec.m */,
-				4B3693BA172F6D7C00C81D9F /* ItemSpec.m */,
 				4B534090172F59F2003F9AE2 /* Supporting Files */,
 			);
 			path = ImaListTests;
@@ -683,8 +677,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B3693BB172F6D7C00C81D9F /* ItemSpec.m in Sources */,
-				4BA2879617357D160041BB2D /* ItemListSpec.m in Sources */,
 				4B7E85B2176C177900DAF07E /* EditorViewController.m in Sources */,
 				4B7E85C9176E882C00DAF07E /* ItemTableCell.m in Sources */,
 				4BC7EC5B176F81300040E9FB /* ListsViewController.m in Sources */,
