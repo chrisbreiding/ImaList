@@ -6,7 +6,7 @@ static UIImage *cellBackgroundImage;
 __attribute__((constructor))
 static void initialize_cache() {
     cellBackgroundImage = [[UIImage imageNamed:@"item-cell.png"]
-                           resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 1, 0)];
+                           resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 1, 10)];
 }
 
 __attribute__((destructor))
@@ -42,19 +42,14 @@ static void destroy_cache() {
     self.itemNameLabel.text = _item.name;
     
     NSString *checkImageName = @"icon-unchecked.png";
+    UIColor *labelColor = [UIColor blackColor];
     if (_item.isChecked) {
         checkImageName = @"icon-checked.png";
-        self.itemNameLabel.textColor = [UIColor lightGrayColor];
-    } else {
-        self.itemNameLabel.textColor = [UIColor blackColor];
+        labelColor = [UIColor lightGrayColor];
     }
     
-    self.checkboxButton.imageView.image = [UIImage imageNamed:checkImageName];
-//    self.imageView.image = [UIImage imageNamed:checkImageName];
-//    self.imageView.userInteractionEnabled = YES;
-    
-//    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkmarkTapped:)];
-//    [self.imageView setGestureRecognizers:@[gestureRecognizer]];
+    [self.checkboxButton setImage:[UIImage imageNamed:checkImageName] forState:UIControlStateNormal];
+    self.itemNameLabel.textColor = labelColor;
 }
 
 - (IBAction)checkmarkTapped:(id)sender {

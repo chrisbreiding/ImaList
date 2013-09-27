@@ -82,6 +82,8 @@
 		4BC7EC6C176F82DA0040E9FB /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC6A176F82DA0040E9FB /* List.m */; };
 		4BCC99D6175289D000C3D825 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCC99D5175289D000C3D825 /* QuartzCore.framework */; };
 		4BDC9A3017ED330A006519DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BDC9A2F17ED330A006519DB /* Images.xcassets */; };
+		4BFC3F1A17F613490003AD44 /* icon-lists-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFC3F1817F613490003AD44 /* icon-lists-open.png */; };
+		4BFC3F1B17F613490003AD44 /* icon-lists-open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFC3F1917F613490003AD44 /* icon-lists-open@2x.png */; };
 		DD6007FF2E294ABDB593D137 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B636D51C3F404AB85E3302 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +171,8 @@
 		4BC7EC6D176F84340040E9FB /* ListListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListListDataSource.h; sourceTree = "<group>"; };
 		4BCC99D5175289D000C3D825 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4BDC9A2F17ED330A006519DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4BFC3F1817F613490003AD44 /* icon-lists-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-lists-open.png"; sourceTree = "<group>"; };
+		4BFC3F1917F613490003AD44 /* icon-lists-open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-lists-open@2x.png"; sourceTree = "<group>"; };
 		7FE7D16BF8E648C0848B0712 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		E9B636D51C3F404AB85E3302 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75EF69AC1CE4BD882710606 /* Pods-ImaListTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImaListTests.xcconfig"; path = "Pods/Pods-ImaListTests.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -384,6 +388,8 @@
 				4BAD09CA1770F32A000D74D5 /* icon-edit-lists@2x.png */,
 				4BC641F4177FEB3000C06E90 /* icon-editing-lists.png */,
 				4BC641F5177FEB3000C06E90 /* icon-editing-lists@2x.png */,
+				4BFC3F1817F613490003AD44 /* icon-lists-open.png */,
+				4BFC3F1917F613490003AD44 /* icon-lists-open@2x.png */,
 				4BAD09CB1770F32A000D74D5 /* icon-lists.png */,
 				4BAD09CC1770F32A000D74D5 /* icon-lists@2x.png */,
 			);
@@ -533,10 +539,12 @@
 				4BAD09EB1770F32A000D74D5 /* icon-clear@2x.png in Resources */,
 				4BAD09EC1770F32A000D74D5 /* icon-delete-item.png in Resources */,
 				4BAD09ED1770F32A000D74D5 /* icon-delete-item@2x.png in Resources */,
+				4BFC3F1A17F613490003AD44 /* icon-lists-open.png in Resources */,
 				4BAD09EE1770F32B000D74D5 /* icon-sort.png in Resources */,
 				4BAD09EF1770F32B000D74D5 /* icon-sort@2x.png in Resources */,
 				4BAD09F01770F32B000D74D5 /* icon-unchecked.png in Resources */,
 				4BAD09F11770F32B000D74D5 /* icon-unchecked@2x.png in Resources */,
+				4BFC3F1B17F613490003AD44 /* icon-lists-open@2x.png in Resources */,
 				4BAD09F21770F32B000D74D5 /* item-cell.png in Resources */,
 				4BAD09F31770F32B000D74D5 /* item-cell@2x.png in Resources */,
 				4BAD09F41770F32B000D74D5 /* icon-edit-lists.png in Resources */,

@@ -112,6 +112,7 @@
 
 - (void)showLists:(id)sender {
     listsShown = YES;
+    [self toggleListsIcon];
     self.footerBottomConstraint.constant = 0;
     itemsBottomConstraint.constant = 170;
     [UIView animateWithDuration:0.3 animations:^{
@@ -137,15 +138,16 @@
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         listsShown = NO;
+        [self toggleListsIcon];
         if (completion) completion();
     }];
 }
 
 - (void)toggleButtonsListShown:(BOOL)shown {
-    int listAlpha = shown ? 1 : 0;
+    CGFloat listAlpha = shown ? 1 : 0;
     self.editListsButton.alpha = listAlpha;
     self.addListButton.alpha = listAlpha;
-    int itemAlpha = shown ? 0 : 1;
+    CGFloat itemAlpha = shown ? 0 : 1;
     self.clearCompletedButton.alpha = itemAlpha;
     self.sortItemsButton.alpha = itemAlpha;
     self.addItemButton.alpha = itemAlpha;
@@ -155,6 +157,11 @@
     editingList = !editingList;
     [self toggleEditIcon];
     [listsVC toggleEditingMode];
+}
+
+- (void)toggleListsIcon {
+    NSString *listsIconName = listsShown ? @"icon-lists-open" : @"icon-lists";
+    [self.listsButton setBackgroundImage:[UIImage imageNamed:listsIconName] forState:UIControlStateNormal];
 }
 
 - (void)toggleEditIcon {
