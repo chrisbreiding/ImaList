@@ -91,7 +91,7 @@ static void destroy_cache() {
 
 - (void)hideDeleteButtonAnimated:(BOOL)animated {
     deleteButtonShown = NO;
-    self.deleteButtonTrailingConstraint.constant = -60;
+    self.deleteButtonTrailingConstraint.constant = -50;
     [self relayoutAnimate:animated completion:^{
         self.deleteButton.hidden = YES;
     }];
