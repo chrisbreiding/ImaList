@@ -46,14 +46,30 @@ static void destroy_cache() {
     if (_item.isChecked) {
         checkImageName = @"icon-checked.png";
         labelColor = [UIColor lightGrayColor];
+        self.importantButton.hidden = YES;
+    } else {
+        NSString *importantImageName = @"icon-unimportant.png";
+        if (_item.importance > 0) {
+            importantImageName = @"icon-important.png";
+        }
+        [self.importantButton setImage:[UIImage imageNamed:importantImageName] forState:UIControlStateNormal];
+        self.importantButton.hidden = NO;
     }
-    
     [self.checkboxButton setImage:[UIImage imageNamed:checkImageName] forState:UIControlStateNormal];
     self.itemNameLabel.textColor = labelColor;
 }
 
 - (IBAction)didTapCheckmark:(id)sender {
     [self.delegate didUpdateItem:_item isChecked:!_item.isChecked];
+}
+
+- (IBAction)didTapImportant:(id)sender {
+    NSUInteger importance = _item.importance;
+    importance++;
+    if (importance > MAX_ITEM_IMPORTANCE) {
+        importance = 0;
+    }
+    [self.delegate didUpdateItem:_item importance:importance];
 }
 
 #pragma mark - swipes

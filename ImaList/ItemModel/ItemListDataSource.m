@@ -24,19 +24,31 @@
     }];
     
     [_itemsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        NSNumber *importance = snapshot.value[@"importance"];
+        if (!importance) {
+            importance = @0;
+        }
+
         [self itemCreatedWithValues:@{
              @"_id": snapshot.name,
              @"name": snapshot.value[@"name"],
              @"isChecked": snapshot.value[@"isChecked"],
+             @"importance": importance,
              @"ref": snapshot.ref
          }];
     }];
     
     [_itemsRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
+        NSNumber *importance = snapshot.value[@"importance"];
+        if (!importance) {
+            importance = @0;
+        }
+        
         [self itemChangedWithValues:@{
              @"_id": snapshot.name,
              @"name": snapshot.value[@"name"],
-             @"isChecked": snapshot.value[@"isChecked"]
+             @"isChecked": snapshot.value[@"isChecked"],
+             @"importance": importance
          }];
     }];
     
@@ -76,6 +88,10 @@
 
 - (void)updateItem:(Item *)item isChecked:(BOOL)isChecked {
     [item.ref updateChildValues:@{ @"isChecked": @(isChecked) }];
+}
+
+- (void)updateItem:(Item *)item importance:(NSUInteger)importance {
+    [item.ref updateChildValues:@{ @"importance": @(importance) }];
 }
 
 - (void)removeItem:(Item *)item {
@@ -125,6 +141,7 @@
     Item *item = [self itemWithId:values[@"_id"]];
     item.name = values[@"name"];
     item.isChecked = [values[@"isChecked"] boolValue];
+    item.importance = [values[@"importance"] integerValue];
     [self.delegate didUpdateItemAtIndex:[self indexOfItem:item]];
 }
 

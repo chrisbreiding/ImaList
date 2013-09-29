@@ -15,14 +15,43 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="Item Name Label">
-                        <rect key="frame" x="50" y="0.0" width="270" height="50"/>
+                        <rect key="frame" x="50" y="0.0" width="220" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <gestureRecognizers/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27" userLabel="Delete Button">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARJ-S8-dJ9" userLabel="Checkmark">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="0JL-sg-lkM"/>
+                            <constraint firstAttribute="height" constant="50" id="YF0-0o-RXA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <state key="normal" image="icon-unchecked.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="didTapCheckmark:" destination="2" eventType="touchUpInside" id="md5-T2-qlD"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Q8-sJ-7Li" userLabel="Important">
+                        <rect key="frame" x="270" y="0.0" width="50" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="mG6-4b-1Kc"/>
+                            <constraint firstAttribute="width" constant="50" id="nOo-ze-GU4"/>
+                        </constraints>
+                        <state key="normal" title="Button" image="icon-unimportant.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="didTapImportant:" destination="2" eventType="touchUpInside" id="8wt-h3-NV8"/>
+                        </connections>
+                    </button>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27" userLabel="Delete">
                         <rect key="frame" x="320" y="0.0" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.48627450979999998" green="0.078431372550000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,25 +71,12 @@
                             <action selector="didTapDelete:" destination="2" eventType="touchUpInside" id="47"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARJ-S8-dJ9">
-                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="50" id="0JL-sg-lkM"/>
-                            <constraint firstAttribute="height" constant="50" id="YF0-0o-RXA"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <state key="normal" image="icon-unchecked.png">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="didTapCheckmark:" destination="2" eventType="touchUpInside" id="md5-T2-qlD"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstItem="2Q8-sJ-7Li" firstAttribute="top" secondItem="FtE-N3-l4J" secondAttribute="top" id="KZq-E6-a7i"/>
                     <constraint firstAttribute="trailing" secondItem="27" secondAttribute="trailing" constant="-50" id="QdX-Y1-WId"/>
+                    <constraint firstAttribute="trailing" secondItem="2Q8-sJ-7Li" secondAttribute="trailing" id="keU-Wt-Ktp"/>
                     <constraint firstItem="27" firstAttribute="top" secondItem="FtE-N3-l4J" secondAttribute="top" id="sXy-30-bH8"/>
                     <constraint firstItem="ARJ-S8-dJ9" firstAttribute="top" secondItem="FtE-N3-l4J" secondAttribute="top" id="tSc-pb-eoj"/>
                     <constraint firstItem="5" firstAttribute="leading" secondItem="FtE-N3-l4J" secondAttribute="leading" constant="50" id="uaT-SH-boe"/>
@@ -71,7 +87,7 @@
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="5" firstAttribute="trailing" secondItem="2" secondAttribute="trailing" id="lWX-Nn-lOZ"/>
+                <constraint firstItem="5" firstAttribute="trailing" secondItem="2" secondAttribute="trailing" constant="-50" id="lWX-Nn-lOZ"/>
                 <constraint firstAttribute="bottom" secondItem="5" secondAttribute="bottom" id="mFQ-1L-ixb"/>
                 <constraint firstItem="5" firstAttribute="top" secondItem="2" secondAttribute="top" id="t8F-Wt-P1S"/>
             </constraints>
@@ -79,6 +95,7 @@
                 <outlet property="checkboxButton" destination="ARJ-S8-dJ9" id="LbS-fL-NGK"/>
                 <outlet property="deleteButton" destination="27" id="37"/>
                 <outlet property="deleteButtonTrailingConstraint" destination="QdX-Y1-WId" id="r8B-Nb-4rT"/>
+                <outlet property="importantButton" destination="2Q8-sJ-7Li" id="hBw-dh-Fdv"/>
                 <outlet property="itemNameLabel" destination="5" id="20"/>
             </connections>
         </tableViewCell>
@@ -86,5 +103,6 @@
     <resources>
         <image name="icon-delete-item.png" width="50" height="50"/>
         <image name="icon-unchecked.png" width="50" height="50"/>
+        <image name="icon-unimportant.png" width="50" height="50"/>
     </resources>
 </document>

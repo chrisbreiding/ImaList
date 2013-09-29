@@ -15,6 +15,7 @@
 - (void)createItemWithValues:(NSDictionary *)values;
 - (void)updateItem:(Item *)item name:(NSString *)name;
 - (void)updateItem:(Item *)item isChecked:(BOOL)isChecked;
+- (void)updateItem:(Item *)item importance:(NSUInteger)importance;
 - (void)removeItem:(Item *)item;
 - (void)sortItems;
 - (void)clearCompleted;

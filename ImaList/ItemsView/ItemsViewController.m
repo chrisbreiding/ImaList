@@ -61,20 +61,19 @@
 - (void)didCreateItemAtIndex:(int)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationTop];
+                          withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)didUpdateItemAtIndex:(int)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationLeft];
-    
+                          withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)didRemoveItemAtIndex:(int)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                      withRowAnimation:UITableViewRowAnimationBottom];
+                          withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)didSortItems {
@@ -85,6 +84,10 @@
 
 - (void)didUpdateItem:(Item *)item isChecked:(BOOL)isChecked {
     [self.dataSource updateItem:item isChecked:isChecked];
+}
+
+- (void)didUpdateItem:(Item *)item importance:(NSUInteger)importance {
+    [self.dataSource updateItem:item importance:importance];
 }
 
 - (void)didDeleteItem:(Item *)item {
