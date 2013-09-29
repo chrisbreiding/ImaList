@@ -13,5 +13,6 @@ static const NSUInteger MAX_ITEM_IMPORTANCE = 1;
 @property (nonatomic, strong) Firebase *ref;
 
 - (instancetype)initWithValues:(NSDictionary *)values;
+- (void)updateWithValues:(NSDictionary *)values;
 
 @end

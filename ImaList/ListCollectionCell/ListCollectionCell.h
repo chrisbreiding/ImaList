@@ -8,6 +8,7 @@
 @property(nonatomic, weak) id<ListCellDelegate> delegate;
 
 @property (nonatomic, weak) IBOutlet UILabel *listNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *importantCountLabel;
 @property (nonatomic, weak) IBOutlet UIButton *deleteButton;
 @property (nonatomic, strong) List *list;
 

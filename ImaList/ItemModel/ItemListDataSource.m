@@ -27,6 +27,7 @@
         NSNumber *importance = snapshot.value[@"importance"];
         if (!importance) {
             importance = @0;
+            [snapshot.ref updateChildValues:@{ @"importance": importance }];
         }
 
         [self itemCreatedWithValues:@{
@@ -139,9 +140,7 @@
 
 - (void)itemChangedWithValues:(NSDictionary *)values {
     Item *item = [self itemWithId:values[@"_id"]];
-    item.name = values[@"name"];
-    item.isChecked = [values[@"isChecked"] boolValue];
-    item.importance = [values[@"importance"] integerValue];
+    [item updateWithValues:values];
     [self.delegate didUpdateItemAtIndex:[self indexOfItem:item]];
 }
 

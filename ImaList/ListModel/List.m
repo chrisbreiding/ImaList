@@ -1,6 +1,8 @@
 #import "List.h"
 
-@implementation List
+@implementation List {
+    NSDictionary *items;
+}
 
 - (instancetype)initWithValues:(NSDictionary *)values {
     self = [super init];
@@ -8,12 +10,30 @@
         self._id = values[@"_id"];
         self.name = values[@"name"];
         self.ref = values[@"ref"];
+        items = values[@"items"];
+        [self calculateImportantCount];
     }
     return self;
 }
 
+-(void)updateWithValues:(NSDictionary *)values {
+    self.name = values[@"name"];
+    items = values[@"items"];
+    [self calculateImportantCount];
+}
+
 - (BOOL)isEqualToList:(List *)list {
     return [self._id isEqualToString:list._id];
+}
+
+- (void)calculateImportantCount {
+    __block NSUInteger count = 0;
+    [items enumerateKeysAndObjectsUsingBlock:^(NSString *_id, NSDictionary *item, BOOL *stop) {
+        if ([item[@"importance"] integerValue] > 0) {
+            count++;
+        }
+    }];
+    self.importantCount = count;
 }
 
 - (NSString *)description {

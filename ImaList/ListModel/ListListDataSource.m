@@ -29,17 +29,29 @@
         }];
         
         [listsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+            NSDictionary *items = snapshot.value[@"items"];
+            if (!items) {
+                items = @{};
+            }
+            
             [self listCreatedWithValues:@{
                  @"_id": snapshot.name,
                  @"name": snapshot.value[@"name"],
+                 @"items": items,
                  @"ref": snapshot.ref
              }];
         }];
         
         [listsRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
+            NSDictionary *items = snapshot.value[@"items"];
+            if (!items) {
+                items = @{};
+            }
+
             [self listChangedWithValues:@{
                  @"_id": snapshot.name,
-                 @"name": snapshot.value[@"name"]
+                 @"name": snapshot.value[@"name"],
+                 @"items": items
              }];
         }];
         
@@ -110,7 +122,7 @@
 
 - (void)listChangedWithValues:(NSDictionary *)values {
     List *list = [self listWithId:values[@"_id"]];
-    list.name = values[@"name"];
+    [list updateWithValues:values];
     [self.delegate didUpdateListAtIndex:[self indexOfList:list]];
 }
 

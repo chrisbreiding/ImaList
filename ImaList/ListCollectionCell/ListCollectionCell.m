@@ -11,15 +11,23 @@
 - (void)configureCellWithList:(List *)list editing:(BOOL)isEditing current:(BOOL)isCurrent {
     self.list = list;
     self.listNameLabel.text = list.name;
+    self.highlighted = current = isCurrent;
+
     if (isEditing) {
         self.deleteButton.hidden = NO;
+        self.importantCountLabel.hidden = YES;
         editing = YES;
     }
     if (!isEditing && editing) {
         self.deleteButton.hidden = YES;
         editing = NO;
     }
-    self.highlighted = current = isCurrent;
+    if (!isEditing && list.importantCount > 0) {
+        self.importantCountLabel.text = [NSString stringWithFormat:@"%d", list.importantCount];
+        self.importantCountLabel.hidden = NO;
+    } else {
+        self.importantCountLabel.hidden = YES;
+    }
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
