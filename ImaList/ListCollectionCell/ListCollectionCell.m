@@ -9,6 +9,7 @@
 }
 
 - (void)configureCellWithList:(List *)list editing:(BOOL)isEditing current:(BOOL)isCurrent {
+    [self style];
     self.list = list;
     self.listNameLabel.text = list.name;
     self.highlighted = current = isCurrent;
@@ -30,12 +31,17 @@
     }
 }
 
+- (void)style {
+    CALayer *layer = self.importantCountLabel.layer;
+    layer.cornerRadius = self.importantCountLabel.frame.size.height / 2;
+}
+
 - (void)setHighlighted:(BOOL)highlighted {
     if (highlighted || current) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.bgView.backgroundColor = [UIColor whiteColor];
         self.listNameLabel.textColor = [UIColor colorWithWhite:0.208 alpha:1];
     } else {
-        self.backgroundColor = [UIColor colorWithRed:0.439 green:0.553 blue:0.145 alpha:1];
+        self.bgView.backgroundColor = [UIColor colorWithRed:0.439 green:0.553 blue:0.145 alpha:1];
         self.listNameLabel.textColor = [UIColor whiteColor];
     }
 }

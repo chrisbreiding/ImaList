@@ -10,6 +10,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *listNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *importantCountLabel;
 @property (nonatomic, weak) IBOutlet UIButton *deleteButton;
+@property (nonatomic, weak) IBOutlet UIView *bgView;
 @property (nonatomic, strong) List *list;
 
 - (IBAction)didTapDelete:(id)sender;
