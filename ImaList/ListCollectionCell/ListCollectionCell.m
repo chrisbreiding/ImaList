@@ -1,4 +1,5 @@
 #import <QuartzCore/QuartzCore.h>
+#import "NSString+UtilityMethods.h"
 #import "ListCollectionCell.h"
 #import "List.h"
 
@@ -9,9 +10,9 @@
 }
 
 - (void)configureCellWithList:(List *)list editing:(BOOL)isEditing current:(BOOL)isCurrent {
-    [self style];
     self.list = list;
     self.listNameLabel.text = list.name;
+    self.listNameLabel.numberOfLines = [list.name wordCount] == 1 ? 1 : 3;
     self.highlighted = current = isCurrent;
 
     if (isEditing) {
@@ -29,6 +30,8 @@
     } else {
         self.importantCountLabel.hidden = YES;
     }
+    
+    [self style];
 }
 
 - (void)style {

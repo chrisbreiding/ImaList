@@ -21,6 +21,7 @@
 		4B53408E172F59F2003F9AE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534033172B66C3003F9AE2 /* Foundation.framework */; };
 		4B534094172F59F2003F9AE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B534092172F59F2003F9AE2 /* InfoPlist.strings */; };
 		4B552E19178465FB00342D70 /* OptionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B552E18178465FB00342D70 /* OptionsView.m */; };
+		4B6CECAE17F8E64B003BD644 /* NSString+UtilityMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6CECAD17F8E64B003BD644 /* NSString+UtilityMethods.m */; };
 		4B7E85B1176C177900DAF07E /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85AF176C177900DAF07E /* EditorViewController.m */; };
 		4B7E85B2176C177900DAF07E /* EditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7E85AF176C177900DAF07E /* EditorViewController.m */; };
 		4B7E85B3176C177900DAF07E /* EditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B7E85B0176C177900DAF07E /* EditorViewController.xib */; };
@@ -112,6 +113,8 @@
 		4B534098172F59F2003F9AE2 /* ImaListTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ImaListTests-Prefix.pch"; sourceTree = "<group>"; };
 		4B552E17178465FB00342D70 /* OptionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsView.h; sourceTree = "<group>"; };
 		4B552E18178465FB00342D70 /* OptionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsView.m; sourceTree = "<group>"; };
+		4B6CECAC17F8E64B003BD644 /* NSString+UtilityMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UtilityMethods.h"; sourceTree = "<group>"; };
+		4B6CECAD17F8E64B003BD644 /* NSString+UtilityMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UtilityMethods.m"; sourceTree = "<group>"; };
 		4B7E85AE176C177900DAF07E /* EditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorViewController.h; sourceTree = "<group>"; };
 		4B7E85AF176C177900DAF07E /* EditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorViewController.m; sourceTree = "<group>"; };
 		4B7E85B0176C177900DAF07E /* EditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorViewController.xib; sourceTree = "<group>"; };
@@ -281,6 +284,7 @@
 				4B53404D172B66C3003F9AE2 /* MainViewController.m */,
 				4BC641DC177CF4D400C06E90 /* MainStoryboard.storyboard */,
 				4B552E161784655700342D70 /* OptionsView */,
+				4B6CECAB17F8E62A003BD644 /* Utility */,
 				4BAD09AB1770F32A000D74D5 /* UI */,
 				4BDC9A2F17ED330A006519DB /* Images.xcassets */,
 				4B534038172B66C3003F9AE2 /* Supporting Files */,
@@ -324,6 +328,15 @@
 				4B552E18178465FB00342D70 /* OptionsView.m */,
 			);
 			path = OptionsView;
+			sourceTree = "<group>";
+		};
+		4B6CECAB17F8E62A003BD644 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				4B6CECAC17F8E64B003BD644 /* NSString+UtilityMethods.h */,
+				4B6CECAD17F8E64B003BD644 /* NSString+UtilityMethods.m */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		4B7E85AD176C177900DAF07E /* EditorView */ = {
@@ -686,6 +699,7 @@
 				4B7E85B1176C177900DAF07E /* EditorViewController.m in Sources */,
 				4B7E85C8176E882C00DAF07E /* ItemTableCell.m in Sources */,
 				4BC7EC5A176F81300040E9FB /* ListsViewController.m in Sources */,
+				4B6CECAE17F8E64B003BD644 /* NSString+UtilityMethods.m in Sources */,
 				4BC7EC64176F829E0040E9FB /* Item.m in Sources */,
 				4BC7EC6B176F82DA0040E9FB /* List.m in Sources */,
 				4BAD099D176F8E3B000D74D5 /* ListCollectionCell.m in Sources */,
