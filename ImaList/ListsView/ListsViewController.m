@@ -74,8 +74,8 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
-    int fromInt = [fromIndexForMove intValue];
-    int toInt = indexPath.row;
+    NSUInteger fromInt = [fromIndexForMove intValue];
+    NSUInteger toInt = indexPath.row;
     if (fromIndexForMove && fromInt != toInt) {
         [self.dataSource moveListFromIndex:fromInt toIndex:toInt];
         fromIndexForMove = nil;
@@ -93,7 +93,7 @@
     }
 }
 
-- (void)didCreateListAtIndex:(int)index {
+- (void)didCreateListAtIndex:(NSUInteger)index {
     if (isShown) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
         [self.collectionView insertItemsAtIndexPaths:@[indexPath]];
@@ -101,7 +101,7 @@
     }
 }
 
-- (void)didUpdateListAtIndex:(int)index {
+- (void)didUpdateListAtIndex:(NSUInteger)index {
     if (isShown) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
         [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
@@ -112,7 +112,7 @@
     [self.collectionView reloadData];
 }
 
-- (void)didRemoveListAtIndex:(int)index {
+- (void)didRemoveListAtIndex:(NSUInteger)index {
     if (isShown) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
         [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];

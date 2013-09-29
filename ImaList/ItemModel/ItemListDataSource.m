@@ -147,7 +147,7 @@
 
 - (void)sortedListAtId:(NSString *)_id withPreviousId:(NSString *)previousId {
     Item *item = [self itemWithId:_id];
-    int toIndex = 0;
+    NSUInteger toIndex = 0;
     if (previousId) {
         Item *previousItem = [self itemWithId:previousId];
         toIndex = [self indexOfItem:previousItem] + 1;
@@ -160,7 +160,7 @@
 
 - (void)itemRemovedWithId:(NSString *)_id {
     Item *item = [self itemWithId:_id];
-    int index = [self indexOfItem:item];
+    NSUInteger index = [self indexOfItem:item];
     [items removeObjectAtIndex:index];
     [self.delegate didRemoveItemAtIndex:index];
 }

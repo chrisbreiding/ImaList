@@ -25,9 +25,9 @@
 @protocol ItemListDataSourceDelegate <NSObject>
 
 - (void)didLoadItemsNonZero:(BOOL)nonZero;
-- (void)didCreateItemAtIndex:(int)index;
-- (void)didUpdateItemAtIndex:(int)index;
-- (void)didRemoveItemAtIndex:(int)index;
+- (void)didCreateItemAtIndex:(NSUInteger)index;
+- (void)didUpdateItemAtIndex:(NSUInteger)index;
+- (void)didRemoveItemAtIndex:(NSUInteger)index;
 - (void)didSortItems;
 
 @end

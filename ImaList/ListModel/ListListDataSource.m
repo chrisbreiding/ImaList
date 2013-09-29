@@ -84,7 +84,7 @@
     [list.ref updateChildValues:@{ @"name": name }];
 }
 
-- (void)moveListFromIndex:(int)fromIndex toIndex:(int)toIndex {
+- (void)moveListFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
     List *list = [self listAtIndex:fromIndex];
     [lists removeObject:list];
     [lists insertObject:list atIndex:toIndex];
@@ -116,7 +116,7 @@
 
 - (void)sortedListAtId:(NSString *)_id withPreviousId:(NSString *)previousId {
     List *list = [self listWithId:_id];
-    int toIndex = 0;
+    NSUInteger toIndex = 0;
     if (previousId) {
         List *previousList = [self listWithId:previousId];
         toIndex = [self indexOfList:previousList] + 1;
@@ -136,7 +136,7 @@
 
 - (void)listRemovedWithId:(NSString *)_id {
     List *list = [self listWithId:_id];
-    int index = [self indexOfList:list];
+    NSUInteger index = [self indexOfList:list];
     [lists removeObjectAtIndex:index];
     [self.delegate didRemoveListAtIndex:index];
 }

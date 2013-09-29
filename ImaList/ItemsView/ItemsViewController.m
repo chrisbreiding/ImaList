@@ -58,19 +58,19 @@
     self.tableView.hidden = !nonZero;
 }
 
-- (void)didCreateItemAtIndex:(int)index {
+- (void)didCreateItemAtIndex:(NSUInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationFade];
 }
 
-- (void)didUpdateItemAtIndex:(int)index {
+- (void)didUpdateItemAtIndex:(NSUInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationFade];
 }
 
-- (void)didRemoveItemAtIndex:(int)index {
+- (void)didRemoveItemAtIndex:(NSUInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView deleteRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationFade];

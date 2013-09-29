@@ -16,7 +16,7 @@
 - (void)storeCurrentList:(List *)list;
 - (void)createListWithName:(NSString *)name;
 - (void)updateList:(List *)list name:(NSString *)name;
-- (void)moveListFromIndex:(int)fromIndex toIndex:(int)index;
+- (void)moveListFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)index;
 - (void)removeList:(List *)list;
 
 @end
@@ -24,9 +24,9 @@
 @protocol ListListDataSourceDelegate <NSObject>
 
 - (void)updateCurrentList:(List *)list;
-- (void)didCreateListAtIndex:(int)index;
-- (void)didUpdateListAtIndex:(int)index;
+- (void)didCreateListAtIndex:(NSUInteger)index;
+- (void)didUpdateListAtIndex:(NSUInteger)index;
 - (void)didSortLists;
-- (void)didRemoveListAtIndex:(int)index;
+- (void)didRemoveListAtIndex:(NSUInteger)index;
 
 @end

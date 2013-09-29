@@ -52,7 +52,7 @@
     [self endEditing];
 }
 
-- (void)setTextViewAlpha:(int)alpha {
+- (void)setTextViewAlpha:(NSUInteger)alpha {
     self.view.alpha = alpha;
     self.textView.alpha = alpha;
 }
