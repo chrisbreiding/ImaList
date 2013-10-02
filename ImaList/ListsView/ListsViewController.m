@@ -93,6 +93,10 @@
     }
 }
 
+- (void)didUpdateTotalImportantCount:(NSUInteger)count {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
+}
+
 - (void)didCreateListAtIndex:(NSUInteger)index {
     if (isShown) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];

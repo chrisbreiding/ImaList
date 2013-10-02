@@ -124,6 +124,7 @@
     List *list = [self listWithId:values[@"_id"]];
     [list updateWithValues:values];
     [self.delegate didUpdateListAtIndex:[self indexOfList:list]];
+    [self updateTotalImportantCount];
 }
 
 - (void)sortedListAtId:(NSString *)_id withPreviousId:(NSString *)previousId {
@@ -144,6 +145,14 @@
         List *list = (List *)obj;
         [list.ref setPriority:@(idx)];
     }];
+}
+
+- (void)updateTotalImportantCount {
+    __block NSUInteger count = 0;
+    [lists enumerateObjectsUsingBlock:^(List *list, NSUInteger idx, BOOL *stop) {
+        count += list.importantCount;
+    }];
+    [self.delegate didUpdateTotalImportantCount:count];
 }
 
 - (void)listRemovedWithId:(NSString *)_id {

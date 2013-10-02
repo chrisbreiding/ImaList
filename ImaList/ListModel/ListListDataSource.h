@@ -24,6 +24,7 @@
 @protocol ListListDataSourceDelegate <NSObject>
 
 - (void)updateCurrentList:(List *)list;
+- (void)didUpdateTotalImportantCount:(NSUInteger)count;
 - (void)didCreateListAtIndex:(NSUInteger)index;
 - (void)didUpdateListAtIndex:(NSUInteger)index;
 - (void)didSortLists;

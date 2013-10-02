@@ -11,7 +11,7 @@
         self.name = values[@"name"];
         self.ref = values[@"ref"];
         items = values[@"items"];
-        [self calculateImportantCount];
+        [self updateImportantCount];
     }
     return self;
 }
@@ -19,14 +19,14 @@
 -(void)updateWithValues:(NSDictionary *)values {
     self.name = values[@"name"];
     items = values[@"items"];
-    [self calculateImportantCount];
+    [self updateImportantCount];
 }
 
 - (BOOL)isEqualToList:(List *)list {
     return [self._id isEqualToString:list._id];
 }
 
-- (void)calculateImportantCount {
+- (void)updateImportantCount {
     __block NSUInteger count = 0;
     [items enumerateKeysAndObjectsUsingBlock:^(NSString *_id, NSDictionary *item, BOOL *stop) {
         if ([item[@"importance"] integerValue] > 0) {
