@@ -14,95 +14,130 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="Item Name Label">
-                        <rect key="frame" x="50" y="0.0" width="220" height="50"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWg-5Q-jaN" userLabel="Container View">
+                        <rect key="frame" x="-130" y="0.0" width="580" height="49"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <gestureRecognizers/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARJ-S8-dJ9" userLabel="Checkmark">
-                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9a-jS-FZa" userLabel="Border">
+                                <rect key="frame" x="140" y="48" width="300" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.83137254901960789" green="0.83137254901960789" blue="0.83137254901960789" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="rWp-b3-0W4"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000027" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="Item Name Label">
+                                <rect key="frame" x="180" y="0.0" width="270" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARJ-S8-dJ9" userLabel="Checkmark">
+                                <rect key="frame" x="130" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="add-yd-oUc"/>
+                                    <constraint firstAttribute="height" constant="50" id="rYk-gR-981"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="icon-unchecked.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapCheckmark:" destination="2" eventType="touchUpInside" id="md5-T2-qlD"/>
+                                </connections>
+                            </button>
+                            <imageView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-important-marker.png" translatesAutoresizingMaskIntoConstraints="NO" id="3oO-7d-Ji0" userLabel="Important Marker">
+                                <rect key="frame" x="400" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="G1b-iq-7pj"/>
+                                    <constraint firstAttribute="width" constant="50" id="w45-Qe-AnP"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Q8-sJ-7Li" userLabel="Important">
+                                <rect key="frame" x="0.0" y="0.0" width="130" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.70196078431372544" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="NtE-dI-deK"/>
+                                    <constraint firstAttribute="height" constant="50" id="jAt-bU-QQr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <inset key="titleEdgeInsets" minX="-24" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="80" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="release!" image="icon-important.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27" userLabel="Delete">
+                                <rect key="frame" x="450" y="0.0" width="130" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.5725490196078431" green="0.094117647058823528" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="G7r-bH-Vci"/>
+                                    <constraint firstAttribute="width" constant="130" id="pkE-b4-5dA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="80" maxY="0.0"/>
+                                <state key="normal" title="release!" image="icon-delete-item.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="0JL-sg-lkM"/>
-                            <constraint firstAttribute="height" constant="50" id="YF0-0o-RXA"/>
+                            <constraint firstItem="5" firstAttribute="leading" secondItem="nWg-5Q-jaN" secondAttribute="leading" constant="180" id="2s0-iq-OMR"/>
+                            <constraint firstItem="ARJ-S8-dJ9" firstAttribute="leading" secondItem="nWg-5Q-jaN" secondAttribute="leading" constant="130" id="6rz-n8-3oN"/>
+                            <constraint firstAttribute="trailing" secondItem="j9a-jS-FZa" secondAttribute="trailing" constant="140" id="Fy1-D3-d1d"/>
+                            <constraint firstItem="27" firstAttribute="top" secondItem="nWg-5Q-jaN" secondAttribute="top" id="GRm-eL-w00"/>
+                            <constraint firstAttribute="bottom" secondItem="j9a-jS-FZa" secondAttribute="bottom" id="Lmw-Fj-59z"/>
+                            <constraint firstAttribute="trailing" secondItem="3oO-7d-Ji0" secondAttribute="trailing" constant="130" id="Q6Y-FW-ja3"/>
+                            <constraint firstItem="2Q8-sJ-7Li" firstAttribute="leading" secondItem="nWg-5Q-jaN" secondAttribute="leading" id="S94-fN-lhE"/>
+                            <constraint firstItem="2Q8-sJ-7Li" firstAttribute="top" secondItem="nWg-5Q-jaN" secondAttribute="top" id="UCp-At-E5F"/>
+                            <constraint firstItem="j9a-jS-FZa" firstAttribute="leading" secondItem="nWg-5Q-jaN" secondAttribute="leading" constant="140" id="YfM-Az-4NT"/>
+                            <constraint firstItem="ARJ-S8-dJ9" firstAttribute="top" secondItem="nWg-5Q-jaN" secondAttribute="top" id="Yk9-l4-Mng"/>
+                            <constraint firstAttribute="width" constant="580" id="cbj-5a-wKe"/>
+                            <constraint firstItem="3oO-7d-Ji0" firstAttribute="top" secondItem="nWg-5Q-jaN" secondAttribute="top" id="dnb-66-VI5"/>
+                            <constraint firstItem="5" firstAttribute="top" secondItem="nWg-5Q-jaN" secondAttribute="top" id="hhJ-UZ-DuG"/>
+                            <constraint firstAttribute="trailing" secondItem="27" secondAttribute="trailing" id="ju6-4q-tBm"/>
+                            <constraint firstItem="27" firstAttribute="leading" secondItem="3oO-7d-Ji0" secondAttribute="trailing" id="oQE-j5-aRb"/>
+                            <constraint firstAttribute="trailing" secondItem="5" secondAttribute="trailing" constant="130" id="wZW-FP-kGy"/>
+                            <constraint firstAttribute="bottom" secondItem="5" secondAttribute="bottom" id="y4x-kj-n0c"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <state key="normal" image="icon-unchecked.png">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="didTapCheckmark:" destination="2" eventType="touchUpInside" id="md5-T2-qlD"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Q8-sJ-7Li" userLabel="Important">
-                        <rect key="frame" x="270" y="0.0" width="50" height="50"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="mG6-4b-1Kc"/>
-                            <constraint firstAttribute="width" constant="50" id="nOo-ze-GU4"/>
-                        </constraints>
-                        <state key="normal" title="Button" image="icon-unimportant.png">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="didTapImportant:" destination="2" eventType="touchUpInside" id="8wt-h3-NV8"/>
-                        </connections>
-                    </button>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27" userLabel="Delete">
-                        <rect key="frame" x="320" y="0.0" width="50" height="50"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.48627450979999998" green="0.078431372550000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="50" id="Yak-Tr-Yjj"/>
-                            <constraint firstAttribute="height" constant="50" id="bCu-Lf-frL"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                        <state key="normal" image="icon-delete-item.png">
-                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <state key="highlighted">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="didTapDelete:" destination="2" eventType="touchUpInside" id="47"/>
-                        </connections>
-                    </button>
+                    </view>
                 </subviews>
                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="2Q8-sJ-7Li" firstAttribute="top" secondItem="FtE-N3-l4J" secondAttribute="top" id="KZq-E6-a7i"/>
-                    <constraint firstAttribute="trailing" secondItem="27" secondAttribute="trailing" constant="-50" id="QdX-Y1-WId"/>
-                    <constraint firstAttribute="trailing" secondItem="2Q8-sJ-7Li" secondAttribute="trailing" id="keU-Wt-Ktp"/>
-                    <constraint firstItem="27" firstAttribute="top" secondItem="FtE-N3-l4J" secondAttribute="top" id="sXy-30-bH8"/>
-                    <constraint firstItem="ARJ-S8-dJ9" firstAttribute="top" secondItem="FtE-N3-l4J" secondAttribute="top" id="tSc-pb-eoj"/>
-                    <constraint firstItem="5" firstAttribute="leading" secondItem="FtE-N3-l4J" secondAttribute="leading" constant="50" id="uaT-SH-boe"/>
-                    <constraint firstItem="ARJ-S8-dJ9" firstAttribute="leading" secondItem="FtE-N3-l4J" secondAttribute="leading" id="z2w-7I-wuc"/>
+                    <constraint firstAttribute="bottom" secondItem="nWg-5Q-jaN" secondAttribute="bottom" id="9Oi-H0-DT3"/>
+                    <constraint firstItem="nWg-5Q-jaN" firstAttribute="leading" secondItem="FtE-N3-l4J" secondAttribute="leading" constant="-130" id="FFD-LM-QeW"/>
+                    <constraint firstItem="nWg-5Q-jaN" firstAttribute="top" secondItem="FtE-N3-l4J" secondAttribute="top" id="mRO-iP-cYk"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
-            <constraints>
-                <constraint firstItem="5" firstAttribute="trailing" secondItem="2" secondAttribute="trailing" constant="-50" id="lWX-Nn-lOZ"/>
-                <constraint firstAttribute="bottom" secondItem="5" secondAttribute="bottom" id="mFQ-1L-ixb"/>
-                <constraint firstItem="5" firstAttribute="top" secondItem="2" secondAttribute="top" id="t8F-Wt-P1S"/>
-            </constraints>
             <connections>
                 <outlet property="checkboxButton" destination="ARJ-S8-dJ9" id="LbS-fL-NGK"/>
-                <outlet property="deleteButton" destination="27" id="37"/>
-                <outlet property="deleteButtonTrailingConstraint" destination="QdX-Y1-WId" id="r8B-Nb-4rT"/>
-                <outlet property="importantButton" destination="2Q8-sJ-7Li" id="hBw-dh-Fdv"/>
+                <outlet property="containerLeadingConstraint" destination="FFD-LM-QeW" id="KFs-bv-8qE"/>
+                <outlet property="deleteButton" destination="27" id="Epb-g4-72e"/>
+                <outlet property="importantButton" destination="2Q8-sJ-7Li" id="yp6-YW-H6Z"/>
+                <outlet property="importantMarker" destination="3oO-7d-Ji0" id="ze9-zb-bmM"/>
                 <outlet property="itemNameLabel" destination="5" id="20"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
         <image name="icon-delete-item.png" width="50" height="50"/>
+        <image name="icon-important-marker.png" width="50" height="50"/>
+        <image name="icon-important.png" width="50" height="50"/>
         <image name="icon-unchecked.png" width="50" height="50"/>
-        <image name="icon-unimportant.png" width="50" height="50"/>
     </resources>
 </document>

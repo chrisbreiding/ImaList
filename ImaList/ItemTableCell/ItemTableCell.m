@@ -1,59 +1,36 @@
 #import "ItemTableCell.h"
 #import "Item.h"
 
-static UIImage *cellBackgroundImage;
-
-__attribute__((constructor))
-static void initialize_cache() {
-    cellBackgroundImage = [[UIImage imageNamed:@"item-cell.png"]
-                           resizableImageWithCapInsets:UIEdgeInsetsMake(0, 10, 1, 10)];
-}
-
-__attribute__((destructor))
-static void destroy_cache() {
-    cellBackgroundImage = nil;
-}
+static const CGFloat PAN_BUTTON_WIDTH = 130;
 
 @implementation ItemTableCell {
-    BOOL deleteButtonShown;
+    CGFloat panOffset;
 }
 
 -(void)awakeFromNib {
     [super awakeFromNib];
-    [self style];
-    [self addSwipeGestures];
+    [self addGestures];
 }
 
 -(void)configureCellWithItem:(Item *)item {
     _item = item;
     [self addAttributes];
-    if (deleteButtonShown) {
-        [self hideDeleteButtonAnimated:NO];
-    }
-}
-
-- (void)style {
-    UIImageView *cellBackgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
-    cellBackgroundView.image = cellBackgroundImage;
-    self.backgroundView = cellBackgroundView;
 }
 
 - (void)addAttributes {
     self.itemNameLabel.text = _item.name;
+    self.containerLeadingConstraint.constant = -PAN_BUTTON_WIDTH;
     
     NSString *checkImageName = @"icon-unchecked.png";
     UIColor *labelColor = [UIColor blackColor];
     if (_item.isChecked) {
         checkImageName = @"icon-checked.png";
         labelColor = [UIColor lightGrayColor];
-        self.importantButton.hidden = YES;
+        self.importantMarker.hidden = YES;
+    } else if (_item.importance > 0) {
+        self.importantMarker.hidden = NO;
     } else {
-        NSString *importantImageName = @"icon-unimportant.png";
-        if (_item.importance > 0) {
-            importantImageName = @"icon-important.png";
-        }
-        [self.importantButton setImage:[UIImage imageNamed:importantImageName] forState:UIControlStateNormal];
-        self.importantButton.hidden = NO;
+        self.importantMarker.hidden = YES;
     }
     [self.checkboxButton setImage:[UIImage imageNamed:checkImageName] forState:UIControlStateNormal];
     self.itemNameLabel.textColor = labelColor;
@@ -63,69 +40,71 @@ static void destroy_cache() {
     [self.delegate didUpdateItem:_item isChecked:!_item.isChecked];
 }
 
-- (IBAction)didTapImportant:(id)sender {
+#pragma mark - gestures
+
+- (void)addGestures {
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(didPan:)];
+    [self addGestureRecognizer:pan];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)didPan:(UIGestureRecognizer *)sender {
+    CGFloat touchX = [sender locationInView:self].x;
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        panOffset = touchX;
+    }
+    if (sender.state == UIGestureRecognizerStateChanged) {
+        CGFloat newX = (-PAN_BUTTON_WIDTH) + (touchX - panOffset);
+        if (newX < 0 && newX > -(PAN_BUTTON_WIDTH * 2)) {
+            self.containerLeadingConstraint.constant = newX;
+        }
+        if (newX > 0 || newX < -(PAN_BUTTON_WIDTH * 2)) {
+            self.importantButton.titleLabel.text = self.deleteButton.titleLabel.text = @"release!";
+        } else {
+            self.importantButton.titleLabel.text = self.deleteButton.titleLabel.text = @"";
+        }
+    }
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGFloat newX = (-PAN_BUTTON_WIDTH) + (touchX - panOffset);
+        if (newX > 0) {
+            [self changeImportance];
+        } else if (newX < -(PAN_BUTTON_WIDTH * 2)) {
+            [self delete];
+        } else {
+            [self resetViewCompletion:nil];
+        }
+    }
+}
+
+- (void)resetViewCompletion:(void (^)())completion {
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         self.containerLeadingConstraint.constant = -PAN_BUTTON_WIDTH;
+                         [self layoutIfNeeded];
+                     }
+                     completion:^(BOOL finished) {
+                         if (completion) completion();
+                     }];
+}
+
+#pragma mark - actions
+
+- (void)changeImportance {
     NSUInteger importance = _item.importance;
     importance++;
     if (importance > MAX_ITEM_IMPORTANCE) {
         importance = 0;
     }
-    [self.delegate didUpdateItem:_item importance:importance];
-}
-
-#pragma mark - swipes
-
-- (void)addSwipeGestures {
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc]
-                                           initWithTarget:self
-                                           action:@selector(didSwipeRight:)];
-    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self addGestureRecognizer:swipeRight];
-
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]
-                                           initWithTarget:self
-                                           action:@selector(didSwipeLeft:)];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self addGestureRecognizer:swipeLeft];
-}
-
-- (void)didSwipeRight:(UIGestureRecognizer *)sender {
-    [self hideDeleteButtonAnimated:YES];
-}
-
-- (void)didSwipeLeft:(UIGestureRecognizer *)sender {
-    [self showDeleteButtonAnimated:YES];
-}
-
-#pragma mark - deletion
-
-- (void)showDeleteButtonAnimated:(BOOL)animated {
-    deleteButtonShown = YES;
-    self.deleteButton.hidden = NO;
-    self.deleteButtonTrailingConstraint.constant = 0;
-    [self relayoutAnimate:animated completion:nil];
-}
-
-- (void)hideDeleteButtonAnimated:(BOOL)animated {
-    deleteButtonShown = NO;
-    self.deleteButtonTrailingConstraint.constant = -50;
-    [self relayoutAnimate:animated completion:^{
-        self.deleteButton.hidden = YES;
+    [self resetViewCompletion:^{
+        [self.delegate didUpdateItem:_item importance:importance];
     }];
 }
 
-- (void)relayoutAnimate:(BOOL)animated completion:(void (^)())completion {
-    if (animated) {
-        [UIView animateWithDuration:0.3 animations:^{
-            [self layoutIfNeeded];
-        } completion:^(BOOL finished) {
-            if (completion) completion();
-        }];
-    } else {
-        [self layoutIfNeeded];
-    }
-}
-
-- (IBAction)didTapDelete:(id)sender {
+- (void)delete {
     [self.delegate didDeleteItem:_item];
 }
 

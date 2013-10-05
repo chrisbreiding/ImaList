@@ -6,7 +6,7 @@
 @class Firebase;
 @protocol ItemsDelegate;
 
-@interface ItemsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ItemCellDelegate, ItemListDataSourceDelegate, EditorDelegate>
+@interface ItemsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, ItemCellDelegate, ItemListDataSourceDelegate, EditorDelegate>
 
 @property (nonatomic, weak) id<ItemsDelegate> delegate;
 @property (nonatomic, strong) ItemListDataSource *dataSource;
