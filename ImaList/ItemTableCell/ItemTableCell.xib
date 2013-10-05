@@ -76,7 +76,7 @@
                             <button contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27" userLabel="Delete">
                                 <rect key="frame" x="450" y="0.0" width="130" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.5725490196078431" green="0.094117647058823528" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.81176470588235294" green="0.14117647058823529" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="G7r-bH-Vci"/>
                                     <constraint firstAttribute="width" constant="130" id="pkE-b4-5dA"/>

@@ -28,7 +28,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.4392156862745098" green="0.55294117647058827" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.31764705882352939" green="0.62352941176470589" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="obV-pO-e7U" firstAttribute="top" secondItem="qwF-lj-WTI" secondAttribute="top" constant="20" id="Np7-1I-YXV"/>
                                     <constraint firstItem="obV-pO-e7U" firstAttribute="leading" secondItem="qwF-lj-WTI" secondAttribute="leading" id="azn-oT-iCU"/>
@@ -310,7 +310,7 @@
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.4392156862745098" green="0.55294117647058827" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.31764705882352939" green="0.62352941176470589" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="SbS-6U-YJd" firstAttribute="leading" secondItem="qrh-ma-hWK" secondAttribute="leading" id="5SB-zT-B1C"/>
@@ -367,7 +367,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cl8-U4-a0n">
                                 <rect key="frame" x="220" y="205" width="90" height="40"/>
-                                <color key="backgroundColor" red="0.4392156862745098" green="0.55294117647058827" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.31764705882352939" green="0.62352941176470589" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="kRL-og-gir"/>
                                 </constraints>

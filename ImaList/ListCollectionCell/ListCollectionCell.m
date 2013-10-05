@@ -44,7 +44,7 @@
         self.bgView.backgroundColor = [UIColor whiteColor];
         self.listNameLabel.textColor = [UIColor colorWithWhite:0.208 alpha:1];
     } else {
-        self.bgView.backgroundColor = [UIColor colorWithRed:0.439 green:0.553 blue:0.145 alpha:1];
+        self.bgView.backgroundColor = [UIColor colorWithRed:0.318 green:0.624 blue:0.306 alpha:1.000];
         self.listNameLabel.textColor = [UIColor whiteColor];
     }
 }
