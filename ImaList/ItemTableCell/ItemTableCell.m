@@ -4,17 +4,19 @@
 static const CGFloat PAN_BUTTON_WIDTH = 130;
 
 @implementation ItemTableCell {
-    CGFloat panOffset;
+    CGPoint originalPanPoint;
+    CGFloat panXOffset;
+    BOOL panIntended;
 }
 
 -(void)awakeFromNib {
     [super awakeFromNib];
-    [self addGestures];
 }
 
 -(void)configureCellWithItem:(Item *)item {
     _item = item;
     [self addAttributes];
+    [self addGestures];
 }
 
 - (void)addAttributes {
@@ -45,6 +47,8 @@ static const CGFloat PAN_BUTTON_WIDTH = 130;
 - (void)addGestures {
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                           action:@selector(didPan:)];
+    pan.delegate = self;
+    pan.maximumNumberOfTouches = 1;
     [self addGestureRecognizer:pan];
 }
 
@@ -53,12 +57,25 @@ static const CGFloat PAN_BUTTON_WIDTH = 130;
 }
 
 - (void)didPan:(UIGestureRecognizer *)sender {
-    CGFloat touchX = [sender locationInView:self].x;
+    CGPoint touchPoint = [sender locationInView:self];
     if (sender.state == UIGestureRecognizerStateBegan) {
-        panOffset = touchX;
+        originalPanPoint = [sender locationInView:self];
     }
     if (sender.state == UIGestureRecognizerStateChanged) {
-        CGFloat newX = (-PAN_BUTTON_WIDTH) + (touchX - panOffset);
+        NSInteger offsetX = fabsf(touchPoint.x - originalPanPoint.x);
+        NSInteger offsetY = fabsf(touchPoint.y - originalPanPoint.y);
+        if ( offsetX < 20 || offsetY > 20 ) {
+            panIntended = NO;
+            if (offsetY > 20) {
+                [self resetViewCompletion:nil];
+            }
+            return;
+        }
+        if ( !panIntended ) {
+            panXOffset = touchPoint.x;
+            panIntended = YES;
+        }
+        CGFloat newX = (-PAN_BUTTON_WIDTH) + (touchPoint.x - panXOffset);
         if (newX < 0 && newX > -(PAN_BUTTON_WIDTH * 2)) {
             self.containerLeadingConstraint.constant = newX;
         }
@@ -69,14 +86,19 @@ static const CGFloat PAN_BUTTON_WIDTH = 130;
         }
     }
     if (sender.state == UIGestureRecognizerStateEnded) {
-        CGFloat newX = (-PAN_BUTTON_WIDTH) + (touchX - panOffset);
-        if (newX > 0) {
-            [self changeImportance];
-        } else if (newX < -(PAN_BUTTON_WIDTH * 2)) {
-            [self delete];
+        if (panIntended) {
+            CGFloat newX = (-PAN_BUTTON_WIDTH) + (touchPoint.x - panXOffset);
+            if (newX > 0) {
+                [self changeImportance];
+            } else if (newX < -(PAN_BUTTON_WIDTH * 2)) {
+                [self delete];
+            } else {
+                [self resetViewCompletion:nil];
+            }
         } else {
             [self resetViewCompletion:nil];
         }
+        panIntended = NO;
     }
 }
 

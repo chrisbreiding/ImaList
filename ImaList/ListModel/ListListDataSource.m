@@ -107,7 +107,7 @@
     [list.ref removeValue];
 }
 
-#pragma mark = private
+#pragma mark - private
 
 - (List *)listWithId:(NSString *)_id {
     NSPredicate *idPredicate = [NSPredicate predicateWithFormat:@"_id == %@", _id];
