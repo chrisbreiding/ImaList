@@ -58,47 +58,56 @@ static const CGFloat PAN_BUTTON_WIDTH = 130;
 
 - (void)didPan:(UIGestureRecognizer *)sender {
     CGPoint touchPoint = [sender locationInView:self];
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        originalPanPoint = [sender locationInView:self];
-    }
-    if (sender.state == UIGestureRecognizerStateChanged) {
-        NSInteger offsetX = fabsf(touchPoint.x - originalPanPoint.x);
-        NSInteger offsetY = fabsf(touchPoint.y - originalPanPoint.y);
-        if ( offsetX < 20 || offsetY > 20 ) {
-            panIntended = NO;
-            if (offsetY > 20) {
-                [self resetViewCompletion:nil];
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan: {
+            originalPanPoint = [sender locationInView:self];
+            break;
+        }
+            
+        case UIGestureRecognizerStateChanged: {
+            NSInteger offsetX = fabsf(touchPoint.x - originalPanPoint.x);
+            NSInteger offsetY = fabsf(touchPoint.y - originalPanPoint.y);
+            if ( offsetX < 20 || offsetY > 20 ) {
+                panIntended = NO;
+                if (offsetY > 20) {
+                    [self resetViewCompletion:nil];
+                }
+                return;
             }
-            return;
-        }
-        if ( !panIntended ) {
-            panXOffset = touchPoint.x;
-            panIntended = YES;
-        }
-        CGFloat newX = (-PAN_BUTTON_WIDTH) + (touchPoint.x - panXOffset);
-        if (newX < 0 && newX > -(PAN_BUTTON_WIDTH * 2)) {
-            self.containerLeadingConstraint.constant = newX;
-        }
-        if (newX > 0 || newX < -(PAN_BUTTON_WIDTH * 2)) {
-            self.importantButton.titleLabel.text = self.deleteButton.titleLabel.text = @"release!";
-        } else {
-            self.importantButton.titleLabel.text = self.deleteButton.titleLabel.text = @"";
-        }
-    }
-    if (sender.state == UIGestureRecognizerStateEnded) {
-        if (panIntended) {
+            if ( !panIntended ) {
+                panXOffset = touchPoint.x;
+                panIntended = YES;
+            }
             CGFloat newX = (-PAN_BUTTON_WIDTH) + (touchPoint.x - panXOffset);
-            if (newX > 0) {
-                [self changeImportance];
-            } else if (newX < -(PAN_BUTTON_WIDTH * 2)) {
-                [self delete];
+            if (newX < 0 && newX > -(PAN_BUTTON_WIDTH * 2)) {
+                self.containerLeadingConstraint.constant = newX;
+            }
+            if (newX > 0 || newX < -(PAN_BUTTON_WIDTH * 2)) {
+                self.importantButton.titleLabel.text = self.deleteButton.titleLabel.text = @"release!";
+            } else {
+                self.importantButton.titleLabel.text = self.deleteButton.titleLabel.text = @"";
+            }
+            break;
+        }
+            
+        case UIGestureRecognizerStateEnded: {
+            if (panIntended) {
+                CGFloat newX = (-PAN_BUTTON_WIDTH) + (touchPoint.x - panXOffset);
+                if (newX > 0) {
+                    [self changeImportance];
+                } else if (newX < -(PAN_BUTTON_WIDTH * 2)) {
+                    [self delete];
+                } else {
+                    [self resetViewCompletion:nil];
+                }
             } else {
                 [self resetViewCompletion:nil];
             }
-        } else {
-            [self resetViewCompletion:nil];
+            panIntended = NO;
         }
-        panIntended = NO;
+            
+        default:
+            break;
     }
 }
 
