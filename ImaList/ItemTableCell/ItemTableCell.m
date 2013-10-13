@@ -5,8 +5,10 @@ static const CGFloat PAN_BUTTON_WIDTH = 130;
 
 @implementation ItemTableCell {
     CGPoint originalPanPoint;
+    CGPoint originalPointInParent;
     CGFloat panXOffset;
     BOOL panIntended;
+    BOOL panCancelled;
 }
 
 -(void)awakeFromNib {
@@ -61,16 +63,19 @@ static const CGFloat PAN_BUTTON_WIDTH = 130;
     switch (sender.state) {
         case UIGestureRecognizerStateBegan: {
             originalPanPoint = [sender locationInView:self];
+            originalPointInParent = [sender locationInView:self.superview];
             break;
         }
             
         case UIGestureRecognizerStateChanged: {
-            NSInteger offsetX = fabsf(touchPoint.x - originalPanPoint.x);
-            NSInteger offsetY = fabsf(touchPoint.y - originalPanPoint.y);
-            if ( offsetX < 20 || offsetY > 20 ) {
+            CGFloat offsetX = fabsf(touchPoint.x - originalPanPoint.x);
+            CGPoint pointInParent = [sender locationInView:self.superview];
+            CGFloat scrollOffsetY = fabsf(pointInParent.y - originalPointInParent.y);
+            if ( offsetX < 20 || scrollOffsetY > 20 || panCancelled) {
                 panIntended = NO;
-                if (offsetY > 20) {
+                if (scrollOffsetY > 20) {
                     [self resetViewCompletion:nil];
+                    panCancelled = YES;
                 }
                 return;
             }
@@ -104,6 +109,7 @@ static const CGFloat PAN_BUTTON_WIDTH = 130;
                 [self resetViewCompletion:nil];
             }
             panIntended = NO;
+            panCancelled = NO;
         }
             
         default:
