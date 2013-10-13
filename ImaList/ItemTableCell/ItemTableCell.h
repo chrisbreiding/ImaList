@@ -3,7 +3,7 @@
 @class Item;
 @protocol ItemCellDelegate;
 
-@interface ItemTableCell : UITableViewCell <UIGestureRecognizerDelegate>
+@interface ItemTableCell : UITableViewCell
 
 @property (nonatomic, weak) id<ItemCellDelegate> delegate;
 
@@ -17,6 +17,9 @@
 
 - (IBAction)didTapCheckmark:(id)sender;
 - (void)configureCellWithItem:(Item *)item;
+- (void)changeImportance;
+- (void)delete;
+- (void)resetViewCompletion:(void (^)())completion;
 
 @end
 

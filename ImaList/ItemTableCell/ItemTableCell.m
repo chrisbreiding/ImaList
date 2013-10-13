@@ -1,14 +1,9 @@
 #import "ItemTableCell.h"
 #import "Item.h"
-
-static const CGFloat PAN_BUTTON_WIDTH = 130;
+#import "ItemPanHandler.h"
 
 @implementation ItemTableCell {
-    CGPoint originalPanPoint;
-    CGPoint originalPointInParent;
-    CGFloat panXOffset;
-    BOOL panIntended;
-    BOOL panCancelled;
+    ItemPanHandler *panHandler;
 }
 
 -(void)awakeFromNib {
@@ -47,74 +42,12 @@ static const CGFloat PAN_BUTTON_WIDTH = 130;
 #pragma mark - gestures
 
 - (void)addGestures {
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
+    panHandler = [ItemPanHandler handlerWithCell:self];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:panHandler
                                                                           action:@selector(didPan:)];
-    pan.delegate = self;
+    pan.delegate = panHandler;
     pan.maximumNumberOfTouches = 1;
     [self addGestureRecognizer:pan];
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
-}
-
-- (void)didPan:(UIGestureRecognizer *)sender {
-    CGPoint touchPoint = [sender locationInView:self];
-    switch (sender.state) {
-        case UIGestureRecognizerStateBegan: {
-            originalPanPoint = [sender locationInView:self];
-            originalPointInParent = [sender locationInView:self.superview];
-            break;
-        }
-            
-        case UIGestureRecognizerStateChanged: {
-            CGFloat offsetX = fabsf(touchPoint.x - originalPanPoint.x);
-            CGPoint pointInParent = [sender locationInView:self.superview];
-            CGFloat scrollOffsetY = fabsf(pointInParent.y - originalPointInParent.y);
-            if ( offsetX < 20 || scrollOffsetY > 20 || panCancelled) {
-                panIntended = NO;
-                if (scrollOffsetY > 20) {
-                    [self resetViewCompletion:nil];
-                    panCancelled = YES;
-                }
-                return;
-            }
-            if ( !panIntended ) {
-                panXOffset = touchPoint.x;
-                panIntended = YES;
-            }
-            CGFloat newX = (-PAN_BUTTON_WIDTH) + (touchPoint.x - panXOffset);
-            if (newX < 0 && newX > -(PAN_BUTTON_WIDTH * 2)) {
-                self.containerLeadingConstraint.constant = newX;
-            }
-            if (newX > 0 || newX < -(PAN_BUTTON_WIDTH * 2)) {
-                self.importantButton.titleLabel.text = self.deleteButton.titleLabel.text = @"release!";
-            } else {
-                self.importantButton.titleLabel.text = self.deleteButton.titleLabel.text = @"";
-            }
-            break;
-        }
-            
-        case UIGestureRecognizerStateEnded: {
-            if (panIntended) {
-                CGFloat newX = (-PAN_BUTTON_WIDTH) + (touchPoint.x - panXOffset);
-                if (newX > 0) {
-                    [self changeImportance];
-                } else if (newX < -(PAN_BUTTON_WIDTH * 2)) {
-                    [self delete];
-                } else {
-                    [self resetViewCompletion:nil];
-                }
-            } else {
-                [self resetViewCompletion:nil];
-            }
-            panIntended = NO;
-            panCancelled = NO;
-        }
-            
-        default:
-            break;
-    }
 }
 
 - (void)resetViewCompletion:(void (^)())completion {

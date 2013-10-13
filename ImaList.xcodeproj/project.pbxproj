@@ -83,6 +83,7 @@
 		4BC7EC6C176F82DA0040E9FB /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC6A176F82DA0040E9FB /* List.m */; };
 		4BCC99D6175289D000C3D825 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCC99D5175289D000C3D825 /* QuartzCore.framework */; };
 		4BDC9A3017ED330A006519DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BDC9A2F17ED330A006519DB /* Images.xcassets */; };
+		4BE48545180B15E500B918DC /* ItemPanHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE48544180B15E500B918DC /* ItemPanHandler.m */; };
 		4BFC3F1A17F613490003AD44 /* icon-lists-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFC3F1817F613490003AD44 /* icon-lists-open.png */; };
 		4BFC3F1B17F613490003AD44 /* icon-lists-open@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFC3F1917F613490003AD44 /* icon-lists-open@2x.png */; };
 		4BFC3F2017F7B1A70003AD44 /* icon-important.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFC3F1C17F7B1A70003AD44 /* icon-important.png */; };
@@ -178,6 +179,8 @@
 		4BC7EC6D176F84340040E9FB /* ListListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListListDataSource.h; sourceTree = "<group>"; };
 		4BCC99D5175289D000C3D825 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4BDC9A2F17ED330A006519DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4BE48543180B15E500B918DC /* ItemPanHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPanHandler.h; sourceTree = "<group>"; };
+		4BE48544180B15E500B918DC /* ItemPanHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPanHandler.m; sourceTree = "<group>"; };
 		4BFC3F1817F613490003AD44 /* icon-lists-open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-lists-open.png"; sourceTree = "<group>"; };
 		4BFC3F1917F613490003AD44 /* icon-lists-open@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-lists-open@2x.png"; sourceTree = "<group>"; };
 		4BFC3F1C17F7B1A70003AD44 /* icon-important.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-important.png"; sourceTree = "<group>"; };
@@ -352,6 +355,8 @@
 		4B7E85C4176E882C00DAF07E /* ItemTableCell */ = {
 			isa = PBXGroup;
 			children = (
+				4BE48543180B15E500B918DC /* ItemPanHandler.h */,
+				4BE48544180B15E500B918DC /* ItemPanHandler.m */,
 				4B7E85C5176E882C00DAF07E /* ItemTableCell.h */,
 				4B7E85C6176E882C00DAF07E /* ItemTableCell.m */,
 				4B7E85C7176E882C00DAF07E /* ItemTableCell.xib */,
@@ -700,6 +705,7 @@
 				4B7E85C8176E882C00DAF07E /* ItemTableCell.m in Sources */,
 				4BC7EC5A176F81300040E9FB /* ListsViewController.m in Sources */,
 				4B6CECAE17F8E64B003BD644 /* NSString+UtilityMethods.m in Sources */,
+				4BE48545180B15E500B918DC /* ItemPanHandler.m in Sources */,
 				4BC7EC64176F829E0040E9FB /* Item.m in Sources */,
 				4BC7EC6B176F82DA0040E9FB /* List.m in Sources */,
 				4BAD099D176F8E3B000D74D5 /* ListCollectionCell.m in Sources */,
