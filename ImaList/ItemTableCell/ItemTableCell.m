@@ -13,7 +13,6 @@
 -(void)configureCellWithItem:(Item *)item {
     _item = item;
     [self addAttributes];
-    [self addGestures];
 }
 
 - (void)addAttributes {
@@ -37,17 +36,6 @@
 
 - (IBAction)didTapCheckmark:(id)sender {
     [self.delegate didUpdateItem:_item isChecked:!_item.isChecked];
-}
-
-#pragma mark - gestures
-
-- (void)addGestures {
-    panHandler = [ItemPanHandler handlerWithCell:self];
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:panHandler
-                                                                          action:@selector(didPan:)];
-    pan.delegate = panHandler;
-    pan.maximumNumberOfTouches = 1;
-    [self addGestureRecognizer:pan];
 }
 
 - (void)resetViewCompletion:(void (^)())completion {

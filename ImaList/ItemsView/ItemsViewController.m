@@ -1,9 +1,11 @@
 #import "ItemsViewController.h"
 #import "ItemListDataSource.h"
 #import "Item.h"
+#import "ItemPanHandler.h"
 
 @implementation ItemsViewController {
     Item *itemBeingEdited;
+    ItemPanHandler *panHandler;
 }
 
 - (instancetype)init {
@@ -23,6 +25,8 @@
     [self.tableView registerNib:cellNib forCellReuseIdentifier:@"ItemTableCell"];
     
     self.noItemsTextView.text = @"\nNo Items Here!\n\nTap anywhere to add items.";
+    
+    [self addGestures];
 }
 
 - (void)updateItemsRef:(Firebase *)itemsRef {
@@ -123,7 +127,16 @@
     [self.dataSource sortItems];
 }
 
-#pragma mark - gesture recognizer delegate
+#pragma mark - gestures
+
+- (void)addGestures {
+    panHandler = [ItemPanHandler handlerWithTableView:self.tableView];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:panHandler
+                                                                          action:@selector(didPan:)];
+    pan.delegate = panHandler;
+    pan.maximumNumberOfTouches = 1;
+    [self.tableView addGestureRecognizer:pan];
+}
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;

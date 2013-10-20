@@ -4,7 +4,7 @@
 
 @interface ItemPanHandler : NSObject <UIGestureRecognizerDelegate>
 
-+ (instancetype)handlerWithCell:(ItemTableCell *)cell;
++ (instancetype)handlerWithTableView:(UITableView *)aTableView;
 - (void)didPan:(UIGestureRecognizer *)sender;
 
 @end

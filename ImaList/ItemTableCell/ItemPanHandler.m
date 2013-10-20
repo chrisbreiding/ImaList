@@ -4,6 +4,7 @@
 const CGFloat PAN_BUTTON_WIDTH = 130;
 
 @implementation ItemPanHandler {
+    UITableView *tableView;
     ItemTableCell *cell;
     CGPoint originalPanPoint;
     CGPoint originalPointInParent;
@@ -12,20 +13,24 @@ const CGFloat PAN_BUTTON_WIDTH = 130;
     BOOL panCancelled;
 }
 
-+ (instancetype)handlerWithCell:(ItemTableCell *)cell {
-    return [[ItemPanHandler alloc] initWithCell:cell];
++ (instancetype)handlerWithTableView:(UITableView *)tableView {
+    return [[ItemPanHandler alloc] initWithTableView:tableView];
 }
 
-- (instancetype)initWithCell:(ItemTableCell *)aCell {
+- (instancetype)initWithTableView:(UITableView *)aTableView {
     self = [super init];
     if (self) {
-        cell = aCell;
+        tableView = aTableView;
     }
     return self;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)sender {
+    return [self cellForGesture:sender] != nil;
 }
 
 - (void)didPan:(UIGestureRecognizer *)sender {
@@ -42,12 +47,18 @@ const CGFloat PAN_BUTTON_WIDTH = 130;
             [self endPan:sender];
             break;
             
+        case UIGestureRecognizerStateCancelled:
+            panIntended = NO;
+            [self endPan:sender];
+            break;
+        
         default:
             break;
     }
 }
 
 - (void)beginPan:(UIGestureRecognizer *)sender {
+    cell = [self cellForGesture:sender];
     originalPanPoint = [sender locationInView:cell];
     originalPointInParent = [sender locationInView:cell.superview];
 }
@@ -116,6 +127,12 @@ const CGFloat PAN_BUTTON_WIDTH = 130;
 
 - (BOOL)shouldDeleteAtX:(CGFloat)x {
     return x < -(PAN_BUTTON_WIDTH * 2);
+}
+
+- (ItemTableCell *)cellForGesture:(UIGestureRecognizer *)sender {
+    CGPoint swipeLocation = [sender locationInView:tableView];
+    NSIndexPath *swipedIndexPath = [tableView indexPathForRowAtPoint:swipeLocation];
+    return (ItemTableCell *)[tableView cellForRowAtIndexPath:swipedIndexPath];
 }
 
 @end
