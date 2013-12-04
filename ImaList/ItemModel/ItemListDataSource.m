@@ -1,6 +1,7 @@
-#import <Firebase/Firebase.h>
 #import "ItemListDataSource.h"
 #import "Item.h"
+#import "FDataSnapshot+UtilityMethods.h"
+#import <Firebase/Firebase.h>
 
 @implementation ItemListDataSource {
     NSMutableArray *items;
@@ -24,32 +25,25 @@
     }];
     
     [_itemsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-        NSNumber *importance = snapshot.value[@"importance"];
-        if (!importance) {
-            importance = @0;
-            [snapshot.ref updateChildValues:@{ @"importance": importance }];
-        }
+        NSDictionary *values = [snapshot valuesOrDefaults:[self itemDefaults]];
 
         [self itemCreatedWithValues:@{
              @"_id": snapshot.name,
-             @"name": snapshot.value[@"name"],
-             @"isChecked": snapshot.value[@"isChecked"],
-             @"importance": importance,
+             @"name": values[@"name"],
+             @"isChecked": values[@"isChecked"],
+             @"importance": values[@"importance"],
              @"ref": snapshot.ref
          }];
     }];
     
     [_itemsRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-        NSNumber *importance = snapshot.value[@"importance"];
-        if (!importance) {
-            importance = @0;
-        }
-        
+        NSDictionary *values = [snapshot valuesOrDefaults:[self itemDefaults]];
+
         [self itemChangedWithValues:@{
              @"_id": snapshot.name,
-             @"name": snapshot.value[@"name"],
-             @"isChecked": snapshot.value[@"isChecked"],
-             @"importance": importance
+             @"name": values[@"name"],
+             @"isChecked": values[@"isChecked"],
+             @"importance": values[@"importance"]
          }];
     }];
     
@@ -162,6 +156,14 @@
     NSUInteger index = [self indexOfItem:item];
     [items removeObjectAtIndex:index];
     [self.delegate didRemoveItemAtIndex:index];
+}
+
+- (NSDictionary *)itemDefaults {
+    return @{
+             @"name": @"",
+             @"isChecked": @NO,
+             @"importance": @0
+             };
 }
 
 @end

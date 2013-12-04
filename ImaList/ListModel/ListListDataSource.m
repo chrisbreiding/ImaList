@@ -1,6 +1,7 @@
-#import <Firebase/Firebase.h>
 #import "ListListDataSource.h"
 #import "List.h"
+#import "FDataSnapshot+UtilityMethods.h"
+#import <Firebase/Firebase.h>
 
 @implementation ListListDataSource {
     NSMutableArray *lists;
@@ -29,29 +30,23 @@
         }];
         
         [listsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-            NSDictionary *items = snapshot.value[@"items"];
-            if (!items) {
-                items = @{};
-            }
+            NSDictionary *values = [snapshot valuesOrDefaults:[self listDefaults]];
             
             [self listCreatedWithValues:@{
                  @"_id": snapshot.name,
-                 @"name": snapshot.value[@"name"],
-                 @"items": items,
+                 @"name": values[@"name"],
+                 @"items": values[@"items"],
                  @"ref": snapshot.ref
              }];
         }];
         
         [listsRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-            NSDictionary *items = snapshot.value[@"items"];
-            if (!items) {
-                items = @{};
-            }
+            NSDictionary *values = [snapshot valuesOrDefaults:[self listDefaults]];
 
             [self listChangedWithValues:@{
                  @"_id": snapshot.name,
-                 @"name": snapshot.value[@"name"],
-                 @"items": items
+                 @"name": values[@"name"],
+                 @"items": values[@"items"]
              }];
         }];
         
@@ -160,6 +155,13 @@
     NSUInteger index = [self indexOfList:list];
     [lists removeObjectAtIndex:index];
     [self.delegate didRemoveListAtIndex:index];
+}
+
+- (NSDictionary *)listDefaults {
+    return @{
+             @"name": @"list",
+             @"items": @{}
+             };
 }
 
 @end
