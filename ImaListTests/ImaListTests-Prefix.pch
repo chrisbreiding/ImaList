@@ -1,8 +1,0 @@
-//
-// Prefix header for all source files of the 'ImaListTests' target in the 'ImaListTests' project
-//
-
-#ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
-#endif
