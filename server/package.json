@@ -1,0 +1,22 @@
+{
+  "name": "ImaList",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src/server.coffee",
+  "dependencies": {
+    "express": "~3.4.8",
+    "mongoose": "~3.8.8",
+    "coffee-script": "~1.7.1",
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "chai": "~1.9.0",
+    "sinon": "~1.8.2"
+  },
+  "scripts": {
+    "start": "nodemon src/server.coffee",
+    "test": "mocha --reporter spec --compilers coffee:coffee-script/register $(find spec -name '*.coffee')",
+    "debug": "DEBUG=express:* nodemon src/server.coffee"
+  }
+}
