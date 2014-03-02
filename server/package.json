@@ -2,7 +2,7 @@
   "name": "ImaList",
   "version": "0.0.1",
   "private": true,
-  "main": "src/server.coffee",
+  "main": "main.coffee",
   "dependencies": {
     "express": "~3.4.8",
     "mongoose": "~3.8.8",
@@ -15,8 +15,8 @@
     "sinon": "~1.8.2"
   },
   "scripts": {
-    "start": "nodemon src/server.coffee",
+    "start": "nodemon main.coffee",
     "test": "mocha --reporter tap --compilers coffee:coffee-script/register $(find spec -name '*.coffee')",
-    "debug": "DEBUG=express:* nodemon src/server.coffee"
+    "debug": "DEBUG=express:* nodemon main.coffee"
   }
 }

@@ -1,5 +1,6 @@
 expect = require('chai').expect
 {spy, stub} = require 'sinon'
+
 User = require '../../src/models/user'
 
 describe 'User', ->
