@@ -1,0 +1,8 @@
+launchers:
+  mocha:
+    command: npm test
+    protocol: tap
+launch_in_dev:
+  - mocha
+src_files:
+  - '**/*.coffee'

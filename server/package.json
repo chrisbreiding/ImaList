@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "nodemon src/server.coffee",
-    "test": "mocha --reporter spec --compilers coffee:coffee-script/register $(find spec -name '*.coffee')",
+    "test": "mocha --reporter tap --compilers coffee:coffee-script/register $(find spec -name '*.coffee')",
     "debug": "DEBUG=express:* nodemon src/server.coffee"
   }
 }
