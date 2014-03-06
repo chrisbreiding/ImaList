@@ -7,7 +7,7 @@ describe 'routes', ->
 
   beforeEach ->
     @app = get: spy()
-    routes.activate @app
+    routes.configure @app
 
   describe 'get /', ->
 

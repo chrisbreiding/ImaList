@@ -1,8 +1,8 @@
 path = require 'path'
 
-activate = (app)->
+configure = (app)->
 
   app.get '/', (req, res)->
     res.sendfile path.join(__dirname, '..', 'client', 'dist', 'index.html')
 
-module.exports = activate: activate
+module.exports = configure: configure
