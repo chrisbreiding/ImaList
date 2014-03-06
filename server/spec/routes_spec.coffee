@@ -1,5 +1,4 @@
-expect = require('chai').expect
-{spy} = require 'sinon'
+{spy} = sinon
 
 routes = require '../src/routes'
 

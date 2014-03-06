@@ -1,5 +1,5 @@
-expect = require('chai').expect
-{spy, stub, mock} = require 'sinon'
+{spy, stub} = sinon
+
 middleware = require '../src/middleware'
 routes = require '../src/routes'
 
