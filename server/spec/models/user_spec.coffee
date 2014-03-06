@@ -42,7 +42,7 @@ describe 'User', ->
       @callback = @find.args[0][0]
 
     it 'does a find for all users', ->
-      expect(@find.called).to.be.true
+      expect(@find).to.have.been.called
 
     it 'passes callback to find', ->
       expect(@callback).to.be.a 'function'
@@ -59,7 +59,7 @@ describe 'User', ->
         @callback null, [user1, user2]
 
       it 'calls the projections callback', ->
-        expect(@projectionsCallback.called).to.be.true
+        expect(@projectionsCallback).to.have.been.called
 
       it 'passes array of list projections to projectionsCallback', ->
         lists = @projectionsCallback.args[0][1]
@@ -71,7 +71,7 @@ describe 'User', ->
         @callback 'some error'
 
       it 'calls the projections callback', ->
-        expect(@projectionsCallback.called).to.be.true
+        expect(@projectionsCallback).to.have.been.called
 
       it 'passes through the error', ->
         err = @projectionsCallback.args[0][0]

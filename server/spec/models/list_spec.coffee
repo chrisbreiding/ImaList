@@ -60,7 +60,7 @@ describe 'List', ->
       @callback = @find.args[0][1]
 
     it 'queries with find', ->
-      expect(@find.called).to.be.true
+      expect(@find).to.have.been.called
 
     it 'queries for viewers who match user', ->
       query = @find.args[0][0]
@@ -88,7 +88,7 @@ describe 'List', ->
         expect(user2).to.equal @user
 
       it 'calls the projections callback', ->
-        expect(@projectionsCallback.called).to.be.true
+        expect(@projectionsCallback).to.have.been.called
 
       it 'passes array of list projections to projectionsCallback', ->
         lists = @projectionsCallback.args[0][1]
@@ -100,7 +100,7 @@ describe 'List', ->
         @callback 'some error'
 
       it 'calls the projections callback', ->
-        expect(@projectionsCallback.called).to.be.true
+        expect(@projectionsCallback).to.have.been.called
 
       it 'passes through the error', ->
         err = @projectionsCallback.args[0][0]

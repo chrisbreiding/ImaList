@@ -21,4 +21,4 @@ describe 'routes', ->
       expect(@getRootPath).to.equal '/'
 
     it 'sends index.html', ->
-      expect(@res.sendfile.calledWithMatch /index\.html/).to.be.true
+      expect(@res.sendfile).to.have.been.calledWithMatch /index\.html/

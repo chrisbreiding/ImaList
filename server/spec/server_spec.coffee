@@ -18,13 +18,13 @@ describe 'server', ->
     server @express, 1337
 
   it 'creates a server', ->
-    expect(@express.called).to.be.true
+    expect(@express).to.have.been.called
 
   it 'configures middleware with express and app', ->
-    expect(middleware.configure.calledWith @express, @app).to.be.true
+    expect(middleware.configure).to.have.been.calledWith @express, @app
 
   it 'configures routes with app', ->
-    expect(routes.configure.calledWith @app).to.be.true
+    expect(routes.configure).to.have.been.calledWith @app
 
   it 'listens on port specified', ->
-    expect(@app.listen.calledWith 1337).to.be.true
+    expect(@app.listen).to.have.been.calledWith 1337

@@ -19,23 +19,23 @@ describe 'middleware', ->
     middleware.configure @express, @app
 
   it 'uses express json', ->
-    expect(@app.use.calledWith 'json').to.be.true
+    expect(@app.use).to.have.been.calledWith 'json'
 
   it 'uses express urlencoded', ->
-    expect(@app.use.calledWith 'urlencoded').to.be.true
+    expect(@app.use).to.have.been.calledWith 'urlencoded'
 
   it 'uses express cookieParser', ->
-    expect(@app.use.calledWith 'cookieParser').to.be.true
+    expect(@app.use).to.have.been.calledWith 'cookieParser'
 
   it 'uses express methodOverride', ->
-    expect(@app.use.calledWith 'methodOverride').to.be.true
+    expect(@app.use).to.have.been.calledWith 'methodOverride'
 
   it 'uses express session', ->
-    expect(@app.use.calledWith 'session').to.be.true
+    expect(@app.use).to.have.been.calledWith 'session'
 
   it 'uses app router', ->
-    expect(@app.use.calledWith 'router').to.be.true
+    expect(@app.use).to.have.been.calledWith 'router'
 
   it 'uses express static', ->
-    expect(@app.use.calledWith 'static').to.be.true
+    expect(@app.use).to.have.been.calledWith 'static'
 
