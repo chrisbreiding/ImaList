@@ -1,3 +1,3 @@
-path = require 'path'
+db = require './db'
 
 exports.configure = (app)->
