@@ -1,6 +1,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Firebase/Firebase.h>
-#import <FirebaseAuthClient/FirebaseAuthClient.h>
+#import <FirebaseSimpleLogin/FirebaseSimpleLogin.h>
 #import "Reachability.h"
 #import "MainViewController.h"
 #import "LoginViewController.h"
@@ -54,7 +54,7 @@
 
 - (void)checkAuthentication {
     Firebase* ref = [[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com"];
-    FirebaseAuthClient* authClient = [[FirebaseAuthClient alloc] initWithRef:ref];
+    FirebaseSimpleLogin *authClient = [[FirebaseSimpleLogin alloc] initWithRef:ref];
     
     [authClient checkAuthStatusWithBlock:^(NSError* error, FAUser* user) {
         if (error != nil || user == nil) {

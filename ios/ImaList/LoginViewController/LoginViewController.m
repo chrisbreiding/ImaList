@@ -1,4 +1,4 @@
-#import <FirebaseAuthClient/FirebaseAuthClient.h>
+#import <FirebaseSimpleLogin/FirebaseSimpleLogin.h>
 #import "LoginViewController.h"
 
 @implementation LoginViewController
@@ -10,7 +10,7 @@
 
 - (IBAction)attemptLogin:(id)sender {
     Firebase* ref = [[Firebase alloc] initWithUrl:@"https://imalist.firebaseio.com"];
-    FirebaseAuthClient* authClient = [[FirebaseAuthClient alloc] initWithRef:ref];
+    FirebaseSimpleLogin *authClient = [[FirebaseSimpleLogin alloc] initWithRef:ref];
     @try {
         [authClient loginWithEmail:self.emailTextField.text
                        andPassword:self.passwordTextField.text

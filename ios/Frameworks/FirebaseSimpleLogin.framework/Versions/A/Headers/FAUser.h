@@ -1,5 +1,5 @@
 /*
- * Firebase iOS Auth Client Library
+ * Firebase iOS Simple Login Library
  *
  * Copyright © 2013 Firebase - All Rights Reserved
  * https://www.firebase.com
@@ -50,6 +50,12 @@
 
 
 /**
+ * @return A uid for this user. It is unique across all auth providers.
+ */
+@property (nonatomic, strong) NSString* uid;
+
+
+/**
  * @return The provider that authenticated this user
  */
 @property (nonatomic) FAProvider provider;
@@ -68,6 +74,12 @@
  * @return The user's email if this user was authenticated via email/password, nil otherwise
  */
 @property (strong, nonatomic) NSString* email;
+
+
+/**
+ * @return A flag indicating whether or not the user logged in with a temporary password after a password reset
+ */
+@property (nonatomic) BOOL* isTemporaryPassword;
 
 
 /**

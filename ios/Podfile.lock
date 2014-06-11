@@ -1,11 +1,11 @@
 PODS:
-  - Firebase (1.0.9)
+  - Firebase (1.1.7)
   - LXReorderableCollectionViewFlowLayout (0.1.1)
   - Reachability (3.1.1)
   - Reveal-iOS-SDK (1.0.4)
 
 DEPENDENCIES:
-  - Firebase (~> 1.0.0)
+  - Firebase (~> 1.1.7)
   - LXReorderableCollectionViewFlowLayout (from `https://github.com/lxcid/LXReorderableCollectionViewFlowLayout.git`)
   - Reachability
   - Reveal-iOS-SDK
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/lxcid/LXReorderableCollectionViewFlowLayout.git
 
 SPEC CHECKSUMS:
-  Firebase: 9ed1c8e37b4ea658c3a9eb5539edfc5fb8933f21
+  Firebase: 88d2a0f4c0c8f2d65a732bb2f7ec9b9c6e72876f
   LXReorderableCollectionViewFlowLayout: 9974891a956d330a7b4e98a501323216daeebcae
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   Reveal-iOS-SDK: d3c8e109d42219daaa7a6e1ad2de34f0bdbb7a88

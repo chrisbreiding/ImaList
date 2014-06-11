@@ -12,9 +12,6 @@
 		4B0884481777AE1D00BF2A25 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0884461777AE1D00BF2A25 /* ItemsViewController.m */; };
 		4B0884491777AE1D00BF2A25 /* ItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B0884471777AE1D00BF2A25 /* ItemsViewController.xib */; };
 		4B14630C184FAC9A003705FC /* FDataSnapshot+UtilityMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B14630B184FAC9A003705FC /* FDataSnapshot+UtilityMethods.m */; };
-		4B534032172B66C3003F9AE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534031172B66C3003F9AE2 /* UIKit.framework */; };
-		4B534034172B66C3003F9AE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534033172B66C3003F9AE2 /* Foundation.framework */; };
-		4B534036172B66C3003F9AE2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534035172B66C3003F9AE2 /* CoreGraphics.framework */; };
 		4B53403E172B66C3003F9AE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53403D172B66C3003F9AE2 /* main.m */; };
 		4B534042172B66C3003F9AE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B534041172B66C3003F9AE2 /* AppDelegate.m */; };
 		4B53404E172B66C3003F9AE2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B53404D172B66C3003F9AE2 /* MainViewController.m */; };
@@ -53,10 +50,7 @@
 		4BC641CE1779314100C06E90 /* cancel-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641CC1779314100C06E90 /* cancel-button.png */; };
 		4BC641CF1779314100C06E90 /* done-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641CD1779314100C06E90 /* done-button.png */; };
 		4BC641D4177BB29E00C06E90 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC641D2177BB29E00C06E90 /* LoginViewController.m */; };
-		4BC641D9177BBEEF00C06E90 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641D8177BBEEF00C06E90 /* Accounts.framework */; };
-		4BC641DB177BBEF600C06E90 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641DA177BBEF600C06E90 /* Social.framework */; };
 		4BC641DD177CF4D400C06E90 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641DC177CF4D400C06E90 /* MainStoryboard.storyboard */; };
-		4BC641ED177CF6D100C06E90 /* FirebaseAuthClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641EC177CF6D100C06E90 /* FirebaseAuthClient.framework */; };
 		4BC641F2177FE75600C06E90 /* icon-add-list.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F0177FE75600C06E90 /* icon-add-list.png */; };
 		4BC641F3177FE75600C06E90 /* icon-add-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F1177FE75600C06E90 /* icon-add-list@2x.png */; };
 		4BC641F6177FEB3000C06E90 /* icon-editing-lists.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BC641F4177FEB3000C06E90 /* icon-editing-lists.png */; };
@@ -68,6 +62,17 @@
 		4BC7EC64176F829E0040E9FB /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC60176F829E0040E9FB /* Item.m */; };
 		4BC7EC6B176F82DA0040E9FB /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC7EC6A176F82DA0040E9FB /* List.m */; };
 		4BCC99D6175289D000C3D825 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCC99D5175289D000C3D825 /* QuartzCore.framework */; };
+		4BD66C3F19489A9200F688DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534033172B66C3003F9AE2 /* Foundation.framework */; };
+		4BD66C4319489ACA00F688DB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD66C4219489ACA00F688DB /* CFNetwork.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		4BD66C4619489CE000F688DB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534031172B66C3003F9AE2 /* UIKit.framework */; };
+		4BD66C4719489CE800F688DB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B534035172B66C3003F9AE2 /* CoreGraphics.framework */; };
+		4BD66C4B19489D6C00F688DB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B636D51C3F404AB85E3302 /* libPods.a */; };
+		4BD66C4D19489F5500F688DB /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD66C4C19489F5500F688DB /* libc++.dylib */; };
+		4BD66C4F19489F5C00F688DB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD66C4E19489F5C00F688DB /* SystemConfiguration.framework */; };
+		4BD66C511948A16C00F688DB /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD66C501948A16C00F688DB /* libicucore.dylib */; };
+		4BD66C531948A22E00F688DB /* FirebaseSimpleLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD66C521948A22E00F688DB /* FirebaseSimpleLogin.framework */; };
+		4BD66C541948A23900F688DB /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641D8177BBEEF00C06E90 /* Accounts.framework */; };
+		4BD66C551948A23D00F688DB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC641DA177BBEF600C06E90 /* Social.framework */; };
 		4BDC9A3017ED330A006519DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BDC9A2F17ED330A006519DB /* Images.xcassets */; };
 		4BE48545180B15E500B918DC /* ItemPanHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE48544180B15E500B918DC /* ItemPanHandler.m */; };
 		4BFC3F1A17F613490003AD44 /* icon-lists-open.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFC3F1817F613490003AD44 /* icon-lists-open.png */; };
@@ -76,7 +81,6 @@
 		4BFC3F2117F7B1A70003AD44 /* icon-important@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFC3F1D17F7B1A70003AD44 /* icon-important@2x.png */; };
 		4BFC3F2217F7B1A70003AD44 /* icon-unimportant.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFC3F1E17F7B1A70003AD44 /* icon-unimportant.png */; };
 		4BFC3F2317F7B1A70003AD44 /* icon-unimportant@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BFC3F1F17F7B1A70003AD44 /* icon-unimportant@2x.png */; };
-		DD6007FF2E294ABDB593D137 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B636D51C3F404AB85E3302 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,7 +148,6 @@
 		4BC641DE177CF53B00C06E90 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = "Supporting Files/InfoPlist.strings"; sourceTree = "<group>"; };
 		4BC641E3177CF5CC00C06E90 /* ImaList-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ImaList-Info.plist"; sourceTree = "<group>"; };
 		4BC641E5177CF5F400C06E90 /* ImaList-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImaList-Prefix.pch"; sourceTree = "<group>"; };
-		4BC641EC177CF6D100C06E90 /* FirebaseAuthClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAuthClient.framework; path = Frameworks/FirebaseAuthClient.framework; sourceTree = "<group>"; };
 		4BC641F0177FE75600C06E90 /* icon-add-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-add-list.png"; sourceTree = "<group>"; };
 		4BC641F1177FE75600C06E90 /* icon-add-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-add-list@2x.png"; sourceTree = "<group>"; };
 		4BC641F4177FEB3000C06E90 /* icon-editing-lists.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-editing-lists.png"; sourceTree = "<group>"; };
@@ -161,6 +164,12 @@
 		4BC7EC6A176F82DA0040E9FB /* List.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = List.m; sourceTree = "<group>"; };
 		4BC7EC6D176F84340040E9FB /* ListListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListListDataSource.h; sourceTree = "<group>"; };
 		4BCC99D5175289D000C3D825 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4BD66C4019489A9B00F688DB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		4BD66C4219489ACA00F688DB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4BD66C4C19489F5500F688DB /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		4BD66C4E19489F5C00F688DB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4BD66C501948A16C00F688DB /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		4BD66C521948A22E00F688DB /* FirebaseSimpleLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseSimpleLogin.framework; path = Frameworks/FirebaseSimpleLogin.framework; sourceTree = "<group>"; };
 		4BDC9A2F17ED330A006519DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4BE48543180B15E500B918DC /* ItemPanHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPanHandler.h; sourceTree = "<group>"; };
 		4BE48544180B15E500B918DC /* ItemPanHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPanHandler.m; sourceTree = "<group>"; };
@@ -179,14 +188,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BC641DB177BBEF600C06E90 /* Social.framework in Frameworks */,
-				4BC641D9177BBEEF00C06E90 /* Accounts.framework in Frameworks */,
+				4BD66C551948A23D00F688DB /* Social.framework in Frameworks */,
+				4BD66C541948A23900F688DB /* Accounts.framework in Frameworks */,
+				4BD66C511948A16C00F688DB /* libicucore.dylib in Frameworks */,
+				4BD66C4F19489F5C00F688DB /* SystemConfiguration.framework in Frameworks */,
+				4BD66C4D19489F5500F688DB /* libc++.dylib in Frameworks */,
+				4BD66C4719489CE800F688DB /* CoreGraphics.framework in Frameworks */,
+				4BD66C4619489CE000F688DB /* UIKit.framework in Frameworks */,
+				4BD66C4319489ACA00F688DB /* CFNetwork.framework in Frameworks */,
+				4BD66C3F19489A9200F688DB /* Foundation.framework in Frameworks */,
 				4BCC99D6175289D000C3D825 /* QuartzCore.framework in Frameworks */,
-				4B534032172B66C3003F9AE2 /* UIKit.framework in Frameworks */,
-				4B534034172B66C3003F9AE2 /* Foundation.framework in Frameworks */,
-				4B534036172B66C3003F9AE2 /* CoreGraphics.framework in Frameworks */,
-				DD6007FF2E294ABDB593D137 /* libPods.a in Frameworks */,
-				4BC641ED177CF6D100C06E90 /* FirebaseAuthClient.framework in Frameworks */,
+				4BD66C4B19489D6C00F688DB /* libPods.a in Frameworks */,
+				4BD66C531948A22E00F688DB /* FirebaseSimpleLogin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +237,12 @@
 		4B534030172B66C3003F9AE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4BC641EC177CF6D100C06E90 /* FirebaseAuthClient.framework */,
+				4BD66C521948A22E00F688DB /* FirebaseSimpleLogin.framework */,
+				4BD66C501948A16C00F688DB /* libicucore.dylib */,
+				4BD66C4E19489F5C00F688DB /* SystemConfiguration.framework */,
+				4BD66C4C19489F5500F688DB /* libc++.dylib */,
+				4BD66C4219489ACA00F688DB /* CFNetwork.framework */,
+				4BD66C4019489A9B00F688DB /* CoreFoundation.framework */,
 				4BC641DA177BBEF600C06E90 /* Social.framework */,
 				4BC641D8177BBEEF00C06E90 /* Accounts.framework */,
 				4BCC99D5175289D000C3D825 /* QuartzCore.framework */,
@@ -467,6 +485,11 @@
 				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = CB;
+				TargetAttributes = {
+					4B53402D172B66C3003F9AE2 = {
+						DevelopmentTeam = HY2LSN6ZF3;
+					};
+				};
 			};
 			buildConfigurationList = 4B534029172B66C3003F9AE2 /* Build configuration list for PBXProject "ImaList" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -673,15 +696,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
 					"\"$(SRCROOT)/Frameworks\"",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImaList/ImaList-Prefix.pch";
 				INFOPLIST_FILE = "ImaList/ImaList-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -692,15 +720,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
 					"\"$(SRCROOT)/Frameworks\"",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ImaList/ImaList-Prefix.pch";
 				INFOPLIST_FILE = "ImaList/ImaList-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

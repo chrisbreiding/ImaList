@@ -1,5 +1,5 @@
 /*
- * Firebase iOS Auth Client Library
+ * Firebase iOS Simple Login Library
  *
  * Copyright © 2013 Firebase - All Rights Reserved
  * https://www.firebase.com
@@ -26,8 +26,8 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef FirebaseAuthClient_FATypes_h
-#define FirebaseAuthClient_FATypes_h
+#ifndef FirebaseSimpleLogin_FATypes_h
+#define FirebaseSimpleLogin_FATypes_h
 
 typedef enum {
     FAErrorUserDoesNotExist = -1,
@@ -35,6 +35,8 @@ typedef enum {
     FAErrorAccessNotGranted = -3,
     FAErrorAccountNotFound = -4,
     FAErrorAuthenticationProviderNotEnabled = -5,
+    FAErrorInvalidEmail = -6,
+    FAErrorBadSystemToken = -7,
     FAErrorUnknown = -9999
 } FAError;
 
@@ -42,7 +44,9 @@ typedef enum {
     FAProviderInvalid = -1,
     FAProviderPassword = 1,
     FAProviderFacebook = 2,
-    FAProviderTwitter = 3
+    FAProviderTwitter = 3,
+    FAProviderAnonymous = 4,
+    FAProviderGoogle = 5
 } FAProvider;
 
 #endif
