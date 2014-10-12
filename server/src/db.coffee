@@ -1,17 +1,46 @@
-r = require 'rethinkdb'
-_ = require 'lodash'
+thinky = require('thinky')()
 
-config =
-  host: process.env.DB_HOST or 'localhost'
-  port: parseInt(process.env.DB_PORT) or 28015
-  db: process.env.DB_DB or 'imalist'
-  tables: ['lists', 'items', 'users']
+Item = thinky.createModel 'Item',
+  id: String
+  name: String
+  completed: _type: Boolean, default: false
+  listId: String
+
+List = thinky.createModel 'List',
+  id: String
+  name: String
+  userId: String
+
+User = thinky.createModel 'User',
+  id: String
+  username: String
+  password: String
+
+Item.belongsTo List, 'list', 'listId', 'id'
+List.hasMany Item, 'items', 'id', 'listId'
+
+List.belongsTo User, 'user', 'userId', 'id'
+User.hasMany List, 'lists', 'id', 'ownerId'
+
+List.ensureIndex 'userId'
 
 module.exports =
 
-  setup: ->
-    r.connect { host: config.host, port: config.port }, (err, connection)->
-      throw err if err
-      r.dbCreate(config.db).run connection, ->
-        _.each config.tables, (tableName)->
-          r.db(config.db).tableCreate tableName, primaryKey: tableName
+  addUser: (data)->
+    (new User data).saveAll()
+
+  getUsers: ->
+    User.run()
+
+  getUser: (id)->
+    User.get(id).getJoin().run()
+
+  addList: (data)->
+    (new List data).saveAll()
+
+  getLists: (userId)->
+    User.get(userId).getJoin().run().then (user)->
+      user.lists
+
+  getList: (id)->
+    List.get(id).getJoin().run()

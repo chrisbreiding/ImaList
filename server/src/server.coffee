@@ -1,16 +1,13 @@
 path = require 'path'
-_ = require 'lodash'
 bodyParser = require 'body-parser'
-db = require './db'
-routes = require './routes'
+setupRoutes = require './routes'
 
 module.exports = (express, port)->
   app = express()
 
   app.use bodyParser()
-  routes.configure app
+  setupRoutes app
   app.use express.static path.join(__dirname, '..', '..', 'client', 'public')
-  db.setup()
 
   app.listen port, ->
     console.log "listening on port #{port}..."
