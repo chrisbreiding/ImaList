@@ -2,7 +2,7 @@
 node_modules
 *.log
 _dev
-_build
+_prod
 rethinkdb_data
 
 build/
