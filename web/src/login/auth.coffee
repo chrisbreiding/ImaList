@@ -6,6 +6,9 @@ module.exports =
   isAuthenticated: ->
     @_getRef().getAuth()?
 
+  onAuthChange: (callback)->
+    @_getRef().onAuth callback
+
   login: (email, password)->
     new RSVP.Promise (resolve)=>
       @_getRef().authWithPassword

@@ -21,4 +21,5 @@ render = ->
 
   React.renderComponent component, document.body
 
+auth.onAuthChange render
 render()
