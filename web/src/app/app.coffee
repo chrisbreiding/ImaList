@@ -7,21 +7,24 @@ Login = require '../login/login'
 module.exports = React.createClass
 
   getInitialState: ->
-    listId: null
+    list: null
 
   render: ->
-    items = if @state.listId?
-      Items listId: @state.listId, onBack: @_showLists
+    [items, className] = if @state.list?
+      [
+        Items list: @state.list, onBack: @_showLists
+        'app showing-items'
+      ]
     else
-      null
+      [null, 'app']
 
-    React.DOM.div null,
-      React.DOM.button onClick: @props.onLogout, 'Logout'
+    React.DOM.div className: className,
+      # React.DOM.button onClick: @props.onLogout, 'Logout'
       Lists onListSelect: @_showItems
       items
 
-  _showItems: (listId)->
-    @setState listId: listId
+  _showItems: (list)->
+    @setState {list}
 
   _showLists: ->
-    @setState listId: null
+    @setState list: null

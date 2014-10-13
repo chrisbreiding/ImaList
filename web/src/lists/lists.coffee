@@ -18,10 +18,10 @@ module.exports = React.createClass
   render: ->
     lists = _.map @state.lists, (list, id)=>
       RD.li
-        key: list.name, onClick: @_didSelectList(id)
+        key: list.name, onClick: @_didSelectList(id, list.name)
         list.name
     RD.div className: 'lists',
       RD.ul null, lists
 
-  _didSelectList: (listId)->
-    => @props.onListSelect listId
+  _didSelectList: (id, name)->
+    => @props.onListSelect {id, name}
