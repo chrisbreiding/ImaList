@@ -1,27 +1,12 @@
 React = require 'react'
 _ = require 'lodash'
-Firebase = require 'firebase'
-ReactFireMixin = require 'reactfire'
 
 RD = React.DOM
 
 module.exports = React.createClass
 
-  mixins: [ReactFireMixin]
-
-  getInitialState: ->
-    lists: []
-
-  componentWillMount: ->
-    @bindAsObject new Firebase('https://imalist.firebaseio.com/lists/'), 'lists'
-
   render: ->
-    lists = _.map @state.lists, (list, id)=>
+    RD.ul className: 'lists', _.map @props.lists, (list)=>
       RD.li
-        key: list.name, onClick: @_didSelectList(id, list.name)
+        key: list.name, onClick: _.partial(@props.onListSelect, list)
         list.name
-    RD.div className: 'lists',
-      RD.ul null, lists
-
-  _didSelectList: (id, name)->
-    => @props.onListSelect {id, name}

@@ -1,5 +1,11 @@
 .lists,
 .items {
+  bottom: 0;
+  position: absolute;
+  top: 2.4em;
+  transition: all .5s ease;
+  width: 100%;
+
   li {
     border-top: solid 1px #e3e3e3;
     padding: .5em .7em;
@@ -11,9 +17,29 @@
     &:hover,
     &:focus,
     &:active {
-      color: primary-color;
+      color: action-color;
+    }
+
+    &:active {
+      background: darken(light-color, 12%);
     }
   }
 }
 
+.lists {
+  left: 0;
+}
 
+.items {
+  left: 100%;
+}
+
+.showing-items {
+  .lists {
+    left: -100%;
+  }
+
+  .items {
+    left: 0;
+  }
+}
