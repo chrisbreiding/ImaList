@@ -13,7 +13,7 @@ module.exports = React.createClass
 
   getInitialState: ->
     lists: []
-    selectedList: null
+    selectedListId: null
 
   componentWillMount: ->
     @bindAsObject new Firebase('https://imalist.firebaseio.com/lists/'), 'lists'
@@ -21,22 +21,25 @@ module.exports = React.createClass
   render: ->
     lists = @state.lists
 
-    selectedList = @state.selectedList or lists[Object.keys(lists)[0]] or items: []
+    selectedListId = @state.selectedListId ? Object.keys(lists)[0]
+    selectedList = @state.lists[selectedListId] or items: {}
 
-    button = @state.selectedList and RD.button onClick: @_showLists,
-      RD.i className: 'fa fa-chevron-left'
-
-    className = if @state.selectedList then 'app showing-items' else 'app'
+    className = if @state.selectedListId? then 'app showing-items' else 'app'
 
     RD.div className: className,
       RD.header null,
         RD.h1 null, @state.selectedList?.name or 'ImaList'
-        button
+        RD.button onClick: @_showLists,
+          RD.i className: 'fa fa-chevron-left'
       Lists lists: lists, onListSelect: @_showItems
-      Items items: selectedList.items
+      Items items: selectedList.items, onUpdate: _.partial @_itemUpdated, selectedListId
 
-  _showItems: (list)->
-    @setState selectedList: list
+  _showItems: (id)->
+    @setState selectedListId: id
 
   _showLists: ->
-    @setState selectedList: null
+    @setState selectedListId: null
+
+  _itemUpdated: (listId, itemId, item)->
+    itemRef = @firebaseRefs.lists.child "#{listId}/items/#{itemId}"
+    itemRef.update item
