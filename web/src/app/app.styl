@@ -1,4 +1,8 @@
 .app {
+  padding-bottom: 2.4em;
+  overflow: hidden;
+  fill-container();
+
   header {
     background: primary-color;
     color: light-color;
@@ -21,6 +25,30 @@
       width: 2.4em;
     }
   }
+
+  footer {
+    background: light-color;
+    border-top: solid 1px #b7b7b7;
+    bottom: 0;
+    box-sizing: border-box;
+    display: none;
+    height: 2.4em;
+    position: fixed;
+    width: 100%;
+
+    button {
+      color: #898989;
+      height: 2.4em;
+      line-height: 2.4em;
+      padding: 0;
+      position: absolute;
+      width: 2.4em;
+    }
+  }
+}
+
+.showing-items footer {
+  display: block;
 }
 
 .showing-items header button {

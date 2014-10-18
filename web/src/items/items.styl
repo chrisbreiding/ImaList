@@ -1,29 +1,44 @@
 .items {
   li {
-    clearfix();
+    position: relative;
   }
 
   .toggle-checked {
     color: #b7b7b7;
     display: block;
-    float: left;
     height: 2.4em;
     line-height: 2.4em;
     outline: none;
     opacity: 0.7;
     padding: 0;
+    position: absolute;
     text-align: center;
     width: 2.4em;
 
     &:hover,
-    &:focus {
+    &:focus,
+    &:active {
       opacity: 1.0;
     }
   }
 
   .name {
+    background: none;
+    border: solid #b7b7b7 0;
+    border-radius: 0;
+    box-sizing: border-box;
     display: block;
-    padding: .5em .7em;
+    height: 2.4em;
+    line-height: 2.4em;
+    outline: none;
+    padding: .3em .3em .3em 2.4em;
+    transition: all .25s ease;
+    width: 100%;
+
+    &:focus {
+      border-width: .3em;
+      padding: 0 0 0 2.1em;
+    }
   }
 
   .checked {
@@ -32,7 +47,8 @@
       opacity: 1.0;
 
       &:hover,
-      &:focus {
+      &:focus,
+      &:active {
         opacity: 0.7;
       }
     }

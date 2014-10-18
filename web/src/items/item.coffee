@@ -1,4 +1,5 @@
 React = require 'react'
+_ = require 'lodash'
 
 RD = React.DOM
 
@@ -11,11 +12,18 @@ module.exports = React.createClass
         ref: 'toggleChecked'
         className: 'toggle-checked', onClick: @_toggleChecked
         RD.i className: 'fa fa-check'
-      RD.span
+      RD.input
+        ref: 'name'
         className: 'name'
-        @props.model.name
+        defaultValue: @props.model.name
+        onChange: @_updateName
 
   _toggleChecked: ->
     @refs.toggleChecked.getDOMNode().blur()
     @props.model.toggleChecked()
     @props.onUpdate @props.model
+
+  _updateName: _.debounce ->
+    @props.model.name = @refs.name.getDOMNode().value
+    @props.onUpdate @props.model
+  , 500

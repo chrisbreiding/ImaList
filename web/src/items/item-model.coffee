@@ -1,4 +1,4 @@
-module.exports = class Item
+class Item
 
   props: ['name', 'isChecked']
 
@@ -8,3 +8,9 @@ module.exports = class Item
 
   toggleChecked: ->
     @isChecked = !@isChecked
+
+Item.newOne = ->
+  name: ''
+  isChecked: false
+
+module.exports = Item

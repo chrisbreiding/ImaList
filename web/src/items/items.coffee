@@ -9,5 +9,5 @@ module.exports = React.createClass
     React.DOM.ul className: 'items', _.map @props.items, (item, id)=>
       Item
         model: new ItemModel item
-        key: item.name
+        key: id
         onUpdate: _.partial @props.onUpdate, id
