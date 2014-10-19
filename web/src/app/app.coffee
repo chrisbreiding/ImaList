@@ -38,7 +38,7 @@ module.exports = React.createClass
         RD.button onClick: @_showLists,
           RD.i className: 'fa fa-chevron-left'
       Lists lists: lists, onListSelect: @_showItems
-      Items items: selectedList.items, onUpdate: _.partial @_itemUpdated, selectedListId
+      Items ref: 'items', items: selectedList.items, onUpdate: _.partial @_itemUpdated, selectedListId
       RD.footer null,
         RD.button onClick: @_add,
           RD.i className: 'fa fa-plus'
@@ -65,7 +65,9 @@ module.exports = React.createClass
         @_addItem itemsRef, if priority? then priority + 1 else 0
 
   _addItem: (itemsRef, priority)->
-    itemsRef.push().setWithPriority ItemModel.newOne(), priority
+    newItemRef = itemsRef.push()
+    newItemRef.setWithPriority ItemModel.newOne(), priority, =>
+      @refs.items.add newItemRef.name()
 
   _itemUpdated: (listId, itemId, item)->
     itemRef = @firebaseRefs.lists.child "#{listId}/items/#{itemId}"

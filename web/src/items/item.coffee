@@ -27,3 +27,6 @@ module.exports = React.createClass
     @props.model.name = @refs.name.getDOMNode().value
     @props.onUpdate @props.model
   , 500
+
+  edit: ->
+    @refs.name.getDOMNode().focus()
