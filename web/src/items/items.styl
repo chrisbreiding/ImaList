@@ -3,23 +3,22 @@
     position: relative;
   }
 
-  .toggle-checked {
+  .toggle-checked,
+  .toggle-options {
     color: #b7b7b7;
     display: block;
     height: 2.4em;
     line-height: 2.4em;
     outline: none;
-    opacity: 0.7;
     padding: 0;
     position: absolute;
     text-align: center;
     width: 2.4em;
+  }
 
-    &:hover,
-    &:focus,
-    &:active {
-      opacity: 1.0;
-    }
+  .toggle-checked {
+    top: 0;
+    left: 0;
   }
 
   .name {
@@ -31,13 +30,13 @@
     height: 2.4em;
     line-height: 1;
     outline: none;
-    padding: .3em .3em .3em 2.4em;
+    padding: .3em 2.4em;
     transition: all .25s ease;
     width: 100%;
 
     &:focus {
       border-width: .3em;
-      padding: 0 0 0 2.1em;
+      padding: 0 2.1em;
     }
   }
 
@@ -55,6 +54,39 @@
 
     .name {
       color: #979797;
+    }
+  }
+
+  .toggle-options {
+    top: 0;
+    right: 0;
+  }
+
+  options-width = 2.4em;
+
+  .options {
+    position: absolute;
+    top: 0;
+    right: -1 * options-width;
+    transition: all .25s ease;
+
+    button {
+      background: error-color;
+      height: 2.4em;
+      line-height: 2.4em;
+      padding: 0;
+      width: 2.4em;
+    }
+  }
+
+  .showing-options {
+    .toggle-options {
+      right: options-width;
+      transform: rotate(90deg);
+    }
+
+    .options {
+      right: 0;
     }
   }
 }

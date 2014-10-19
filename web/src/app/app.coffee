@@ -38,7 +38,11 @@ module.exports = React.createClass
         RD.button onClick: @_showLists,
           RD.i className: 'fa fa-chevron-left'
       Lists lists: lists, onListSelect: @_showItems
-      Items ref: 'items', items: selectedList.items, onUpdate: _.partial @_itemUpdated, selectedListId
+      Items
+        ref: 'items'
+        items: selectedList.items
+        onUpdate: _.partial @_itemUpdated, selectedListId
+        onRemove: _.partial @_itemRemoved, selectedListId
       RD.footer null,
         RD.button onClick: @_add,
           RD.i className: 'fa fa-plus'
@@ -72,3 +76,8 @@ module.exports = React.createClass
   _itemUpdated: (listId, itemId, item)->
     itemRef = @firebaseRefs.lists.child "#{listId}/items/#{itemId}"
     itemRef.update item
+
+  _itemRemoved: (listId, itemId)->
+    itemRef = @firebaseRefs.lists.child "#{listId}/items/#{itemId}"
+    itemRef.remove()
+

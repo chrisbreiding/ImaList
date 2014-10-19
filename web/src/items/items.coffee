@@ -12,6 +12,7 @@ module.exports = React.createClass
         ref: "item-#{id}"
         key: id
         onUpdate: _.partial @props.onUpdate, id
+        onRemove: _.partial @props.onRemove, id
 
   add: (id)->
     @refs["item-#{id}"].edit()

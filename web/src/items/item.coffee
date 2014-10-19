@@ -5,9 +5,17 @@ RD = React.DOM
 
 module.exports = React.createClass
 
+  getInitialState: ->
+    showingOptions: false
+
   render: ->
+    className = ''
+    if @props.model.isChecked
+      className = 'checked'
+    if @state.showingOptions
+      className += ' showing-options'
     RD.li
-      className: if @props.model.isChecked then 'checked' else ''
+      ref: 'root', className: className
       RD.button
         ref: 'toggleChecked'
         className: 'toggle-checked', onClick: @_toggleChecked
@@ -17,6 +25,17 @@ module.exports = React.createClass
         className: 'name'
         defaultValue: @props.model.name
         onChange: @_updateName
+      RD.button
+        className: 'toggle-options', onClick: @_toggleOptions
+        RD.i className: 'fa fa-ellipsis-h'
+      RD.ul
+        className: 'options'
+        RD.button
+          onClick: @_remove
+          RD.i className: 'fa fa-times'
+
+  edit: ->
+    @refs.name.getDOMNode().focus()
 
   _toggleChecked: ->
     @refs.toggleChecked.getDOMNode().blur()
@@ -28,5 +47,8 @@ module.exports = React.createClass
     @props.onUpdate @props.model
   , 500
 
-  edit: ->
-    @refs.name.getDOMNode().focus()
+  _toggleOptions: ->
+    @setState showingOptions: !@state.showingOptions
+
+  _remove: ->
+    @props.onRemove()
