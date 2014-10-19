@@ -2,8 +2,11 @@ header {
   background: primary-color;
   color: light-color;
   height: 2.4em;
+  left: 0;
   line-height: 2.4em;
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
 
   h1 {
     fill-container();
@@ -25,6 +28,8 @@ header {
 .items {
   bottom: 2.4em;
   position: absolute;
+  -webkit-overflow-scrolling: touch;
+  overflow: scroll;
   top: 2.4em;
   transition: all .5s ease;
   width: 100%;
