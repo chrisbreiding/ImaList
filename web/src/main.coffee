@@ -1,8 +1,11 @@
 React = require 'react'
 RSVP = require 'rsvp'
+attachFastClick = require 'fastclick'
 App = require './app/app'
 Login = require './login/login'
 auth = require './login/auth'
+
+attachFastClick document.body
 
 RSVP.on 'error', (e)->
   console.error 'Error caught by RSVP:'
