@@ -1,0 +1,37 @@
+.login {
+  .error {
+    color: error-color;
+    font-size: .8em;
+    margin: 1em .5em;
+  }
+
+  fieldset {
+    margin: .5em;
+
+    &:first-child {
+      margin-top: 1em;
+    }
+  }
+
+  label {
+    display: block;
+    margin-bottom: .25em;
+  }
+
+  input {
+    box-sizing: border-box;
+    width: 100%;
+
+    &:focus {
+      outline: solid 3px primary-color;
+    }
+  }
+
+  button {
+    background: action-color;
+    border-radius: 3px;
+    float: right;
+    margin-top: .5em;
+    padding: .5em .75em;
+  }
+}
