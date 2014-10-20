@@ -16,3 +16,23 @@ fill-container() {
   bottom: 0;
   left: 0;
 }
+
+buttonize-background(color) {
+  background: color;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: darken(color, 20%);
+  }
+}
+
+buttonize-color(color) {
+  color: color;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: darken(color, 20%);
+  }
+}
