@@ -27,13 +27,20 @@ header {
 
 .lists,
 .items {
-  bottom: 2.4em;
+  bottom: 0;
   position: absolute;
-  -webkit-overflow-scrolling: touch;
-  overflow: scroll;
-  top: 2.4em;
+  top: 0;
   transition: all .5s ease;
   width: 100%;
+
+  ul {
+    bottom: 2.4em;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    top: 2.4em;
+    width: 100%;
+  }
 
   li {
     border-top: solid 1px #e3e3e3;
@@ -46,6 +53,10 @@ header {
 
 .lists {
   left: 0;
+
+  ul {
+    bottom: 0;
+  }
 }
 
 .items {

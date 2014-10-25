@@ -33,19 +33,17 @@ module.exports = React.createClass
     className = if userSelectedId then 'app showing-items' else 'app'
 
     RD.div className: className,
-      RD.header null,
-        RD.h1 null, if userSelectedId and selectedList.name? then selectedList.name else 'ImaList'
-        RD.button onClick: @_showLists,
-          RD.i className: 'fa fa-chevron-left'
-      Lists lists: lists, onListSelect: @_showItems
+      Lists
+        lists: lists
+        onListSelect: @_showItems
       Items
         ref: 'items'
+        listName: selectedList.name
         items: selectedList.items
+        onBack: @_showLists
+        onAdd: @_add
         onUpdate: _.partial @_itemUpdated, selectedListId
         onRemove: _.partial @_itemRemoved, selectedListId
-      RD.footer null,
-        RD.button onClick: @_add,
-          RD.i className: 'fa fa-plus'
 
   _showItems: (id)->
     @setState selectedListId: id

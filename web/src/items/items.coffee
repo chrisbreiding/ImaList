@@ -3,16 +3,27 @@ _ = require 'lodash'
 Item = require './item'
 ItemModel = require './item-model'
 
+RD = React.DOM
+
 module.exports = React.createClass
 
   render: ->
-    React.DOM.ul className: 'items', _.map @props.items, (item, id)=>
-      Item
-        model: new ItemModel item
-        ref: "item-#{id}"
-        key: id
-        onUpdate: _.partial @props.onUpdate, id
-        onRemove: _.partial @props.onRemove, id
+    RD.div className: 'items',
+      RD.header null,
+        RD.h1 null, @props.listName
+        RD.button onClick: @props.onBack,
+          RD.i className: 'fa fa-chevron-left'
+      RD.ul null, _.map @props.items, (item, id)=>
+        Item
+          model: new ItemModel item
+          ref: "item-#{id}"
+          key: id
+          onUpdate: _.partial @props.onUpdate, id
+          onRemove: _.partial @props.onRemove, id
+      RD.footer null,
+        RD.button onClick: @props.onAdd,
+          RD.i className: 'fa fa-plus'
+
 
   add: (id)->
     @refs["item-#{id}"].edit()
