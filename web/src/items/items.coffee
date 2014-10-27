@@ -15,7 +15,7 @@ module.exports = React.createClass
     RD.div className: 'items',
       RD.header null,
         RD.h1 null, @props.listName
-        RD.button onClick: @props.onToggleLists,
+        RD.button onClick: @props.onShowLists,
           RD.i className: 'fa fa-bars'
       RD.ul null, _.map @props.items, (item, id)=>
         Item

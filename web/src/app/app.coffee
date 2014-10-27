@@ -47,18 +47,12 @@ module.exports = React.createClass
         ref: 'items'
         listName: selectedList.name
         items: selectedList.items
-        onToggleLists: @_toggleLists
+        onShowLists: @_showLists
         onAdd: @_add
         onUpdate: @_itemUpdated
         onRemove: @_itemRemoved
         onClearCompleted: @_clearCompleted
       ActionSheet @state.actionSheetProps
-
-  _toggleLists: ->
-    if @state.showItems
-      @_showLists()
-    else
-      @_showItems @state.selectedListId
 
   _showItems: (id)->
     @setState
