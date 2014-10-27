@@ -9,17 +9,14 @@ header {
   z-index: 10;
 
   h1 {
-    fill-container();
+    @extend .fill-container;
     line-height: 2.4em;
     text-align: center;
   }
 
   button {
-    height: 2.4em;
-    line-height: 2.4em;
-    padding: 0;
+    @extend .icon-button;
     position: absolute;
-    width: 2.4em;
   }
 }
 
@@ -80,10 +77,6 @@ footer {
 
   button {
     buttonize-color(neutral-color);
-    display: inline-block;
-    height: 2.4em;
-    line-height: 2.4em;
-    padding: 0;
-    width: 2.4em;
+    @extend .icon-button;
   }
 }

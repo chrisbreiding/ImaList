@@ -7,14 +7,8 @@
   .toggle-checked,
   .toggle-options {
     buttonize-color(#b7b7b7);
-    display: block;
-    height: 2.4em;
-    line-height: 2.4em;
-    outline: none;
-    padding: 0;
+    @extend .icon-button;
     position: absolute;
-    text-align: center;
-    width: 2.4em;
   }
 
   .toggle-checked {
@@ -56,28 +50,27 @@
     right: 0;
   }
 
-  options-width = 2.4em;
+  option-width = 2.4em;
+  num-options = 1;
+  full-width = option-width * num-options;
 
   .options {
     height: 2.4em;
     position: absolute;
     top: 0;
-    right: -1 * options-width;
+    right: -1 * full-width;
     transition: all .25s ease;
-    width: options-width;
+    width: full-width;
 
     button {
       buttonize-background(error-color);
-      height: 2.4em;
-      line-height: 2.4em;
-      padding: 0;
-      width: 2.4em;
+      @extend .icon-button;
     }
   }
 
   .showing-options {
     .toggle-options {
-      right: options-width;
+      right: full-width + 1em;
       -webkit-transform: rotate(90deg);
       transform: rotate(90deg);
     }
