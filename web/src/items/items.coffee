@@ -11,8 +11,8 @@ module.exports = React.createClass
     RD.div className: 'items',
       RD.header null,
         RD.h1 null, @props.listName
-        RD.button onClick: @props.onBack,
-          RD.i className: 'fa fa-chevron-left'
+        RD.button onClick: @props.onToggleLists,
+          RD.i className: 'fa fa-bars'
       RD.ul null, _.map @props.items, (item, id)=>
         Item
           model: new ItemModel item
@@ -23,7 +23,6 @@ module.exports = React.createClass
       RD.footer null,
         RD.button onClick: @props.onAdd,
           RD.i className: 'fa fa-plus'
-
 
   add: (id)->
     @refs["item-#{id}"].edit()

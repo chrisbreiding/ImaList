@@ -14,6 +14,7 @@ module.exports = React.createClass
 
   getInitialState: ->
     lists: []
+    showItems: localStorage.selectedListId?
     selectedListId: JSON.parse localStorage.selectedListId ? 'null'
 
   componentWillMount: ->
@@ -30,7 +31,7 @@ module.exports = React.createClass
     selectedListId = userSelectedId ? Object.keys(lists)[0]
     selectedList = @state.lists[selectedListId] or items: {}
 
-    className = if userSelectedId then 'app showing-items' else 'app'
+    className = if @state.showItems then 'app showing-items' else 'app'
 
     RD.div className: className,
       Lists
@@ -40,16 +41,24 @@ module.exports = React.createClass
         ref: 'items'
         listName: selectedList.name
         items: selectedList.items
-        onBack: @_showLists
+        onToggleLists: @_toggleLists
         onAdd: @_add
         onUpdate: _.partial @_itemUpdated, selectedListId
         onRemove: _.partial @_itemRemoved, selectedListId
 
+  _toggleLists: ->
+    if @state.showItems
+      @_showLists()
+    else
+      @_showItems @state.selectedListId
+
   _showItems: (id)->
-    @setState selectedListId: id
+    @setState
+      showItems: true
+      selectedListId: id
 
   _showLists: ->
-    @setState selectedListId: null
+    @setState showItems: false
 
   _add: ->
     if @state.selectedListId
