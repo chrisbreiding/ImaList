@@ -6,6 +6,7 @@ Lists = require '../lists/lists'
 Items = require '../items/items'
 ItemModel = require '../items/item-model'
 ActionSheet = require '../action-sheet/action-sheet'
+store = require '../lib/store'
 
 RD = React.DOM
 cs = React.addons.classSet
@@ -16,14 +17,16 @@ module.exports = React.createClass
 
   getInitialState: ->
     lists: []
-    showItems: localStorage.selectedListId?
-    selectedListId: JSON.parse localStorage.selectedListId ? 'null'
+    showItems: store.fetch('showItems') or false
+    selectedListId: store.fetch('selectedListId') ? null
 
   componentWillMount: ->
     @bindAsObject new Firebase('https://imalist.firebaseio.com/lists/'), 'lists'
 
   componentDidUpdate: ->
-    localStorage.selectedListId = JSON.stringify @state.selectedListId
+    store.save
+      selectedListId: @state.selectedListId
+      showItems: @state.showItems
 
   render: ->
     lists = @state.lists
