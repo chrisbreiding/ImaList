@@ -8,6 +8,10 @@ RD = React.DOM
 module.exports = React.createClass
 
   render: ->
+    if _.where(@props.items, isChecked: true).length
+      clearCompleted = RD.button onClick: @props.onClearCompleted,
+        RD.i className: 'fa fa-ban'
+
     RD.div className: 'items',
       RD.header null,
         RD.h1 null, @props.listName
@@ -23,6 +27,7 @@ module.exports = React.createClass
       RD.footer null,
         RD.button onClick: @props.onAdd,
           RD.i className: 'fa fa-plus'
+        clearCompleted
 
   add: (id)->
     @refs["item-#{id}"].edit()

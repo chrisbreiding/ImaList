@@ -5,6 +5,7 @@ ReactFireMixin = require 'reactfire'
 Lists = require '../lists/lists'
 Items = require '../items/items'
 ItemModel = require '../items/item-model'
+ActionSheet = require '../action-sheet/action-sheet'
 
 RD = React.DOM
 
@@ -43,8 +44,10 @@ module.exports = React.createClass
         items: selectedList.items
         onToggleLists: @_toggleLists
         onAdd: @_add
-        onUpdate: _.partial @_itemUpdated, selectedListId
-        onRemove: _.partial @_itemRemoved, selectedListId
+        onUpdate: @_itemUpdated
+        onRemove: @_itemRemoved
+        onClearCompleted: @_clearCompleted
+      ActionSheet @state.actionSheetProps
 
   _toggleLists: ->
     if @state.showItems
@@ -80,11 +83,25 @@ module.exports = React.createClass
     newItemRef.setWithPriority ItemModel.newOne(), priority, =>
       @refs.items.add newItemRef.name()
 
-  _itemUpdated: (listId, itemId, item)->
-    itemRef = @firebaseRefs.lists.child "#{listId}/items/#{itemId}"
+  _itemUpdated: (itemId, item)->
+    itemRef = @firebaseRefs.lists.child "#{@state.selectedListId}/items/#{itemId}"
     itemRef.update item
 
-  _itemRemoved: (listId, itemId)->
-    itemRef = @firebaseRefs.lists.child "#{listId}/items/#{itemId}"
+  _itemRemoved: (itemId)->
+    itemRef = @firebaseRefs.lists.child "#{@state.selectedListId}/items/#{itemId}"
     itemRef.remove()
 
+  _clearCompleted: ->
+    actionSheetProps =
+      confirmMessage: 'Clear Completed'
+      onConfirm: =>
+        for id, item of @state.lists[@state.selectedListId].items
+          @_itemRemoved id if item.isChecked
+        @_removeActionSheet()
+      onCancel: =>
+        @_removeActionSheet()
+
+    @setState {actionSheetProps}
+
+  _removeActionSheet: ->
+    @setState actionSheetProps: null
