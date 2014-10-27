@@ -1,4 +1,4 @@
-React = require 'react'
+React = require 'react/addons'
 RSVP = require 'rsvp'
 attachFastClick = require 'fastclick'
 App = require './app/app'

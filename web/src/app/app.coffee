@@ -1,4 +1,4 @@
-React = require 'react'
+React = require 'react/addons'
 _ = require 'lodash'
 Firebase = require 'firebase'
 ReactFireMixin = require 'reactfire'
@@ -8,6 +8,7 @@ ItemModel = require '../items/item-model'
 ActionSheet = require '../action-sheet/action-sheet'
 
 RD = React.DOM
+cs = React.addons.classSet
 
 module.exports = React.createClass
 
@@ -32,9 +33,10 @@ module.exports = React.createClass
     selectedListId = userSelectedId ? Object.keys(lists)[0]
     selectedList = @state.lists[selectedListId] or items: {}
 
-    className = if @state.showItems then 'app showing-items' else 'app'
-
-    RD.div className: className,
+    RD.div
+      className: cs
+        'app': true
+        'showing-items': @state.showItems
       Lists
         lists: lists
         onListSelect: @_showItems

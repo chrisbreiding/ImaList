@@ -1,7 +1,8 @@
-React = require 'react'
+React = require 'react/addons'
 _ = require 'lodash'
 
 RD = React.DOM
+cs = React.addons.classSet
 
 module.exports = React.createClass
 
@@ -9,13 +10,11 @@ module.exports = React.createClass
     showingOptions: false
 
   render: ->
-    className = ''
-    if @props.model.isChecked
-      className = 'checked'
-    if @state.showingOptions
-      className += ' showing-options'
     RD.li
-      ref: 'root', className: className
+      ref: 'root'
+      className: cs
+        'checked': @props.model.isChecked
+        'showing-options': @state.showingOptions
       RD.button
         ref: 'toggleChecked'
         className: 'toggle-checked', onClick: @_toggleChecked

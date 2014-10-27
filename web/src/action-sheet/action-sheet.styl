@@ -1,17 +1,14 @@
 .action-sheet {
   background: rgba(0, 0, 0, 0.7);
   fill-container();
-  opacity: 0;
-  transition: all .25s ease;
 
   .container {
     background: light-color;
-    bottom: -200px;
+    bottom: 0;
     box-sizing: border-box;
     left: 0;
     padding: .5em;
     position: absolute;
-    transition: all .25s ease;
     width: 100%;
 
     button {
@@ -31,11 +28,37 @@
     }
   }
 
-  &.show {
+  &-enter,
+  &-leave {
+    &,
+    & .container {
+      transition: all .25s ease;
+    }
+  }
+
+  &-enter {
+    opacity: 0.01;
+
+    .container {
+      bottom: -200px;
+    }
+  }
+
+  &-enter-active,
+  &-leave {
     opacity: 1;
 
     .container {
       bottom: 0;
     }
   }
+
+  &-leave-active {
+    opacity: 0.01;
+
+    .container {
+      bottom: -200px;
+    }
+  }
+
 }

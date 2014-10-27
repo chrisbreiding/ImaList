@@ -1,4 +1,4 @@
-React = require 'react'
+React = require 'react/addons'
 Firebase = require 'firebase'
 auth = require './auth'
 
