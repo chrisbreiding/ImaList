@@ -1,8 +1,8 @@
 React = require 'react/addons'
 RSVP = require 'rsvp'
 attachFastClick = require 'fastclick'
-App = require './app/app'
-Login = require './login/login'
+App = React.createFactory require './app/app'
+Login = React.createFactory require './login/login'
 auth = require './login/auth'
 
 attachFastClick document.body
@@ -22,7 +22,7 @@ render = ->
   else
     Login onLogin: render
 
-  React.renderComponent component, document.body
+  React.render component, document.body
 
 auth.onAuthChange render
 render()

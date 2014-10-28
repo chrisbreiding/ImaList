@@ -1,6 +1,6 @@
 React = require 'react/addons'
 _ = require 'lodash'
-Item = require './item'
+Item = React.createFactory require './item'
 ItemModel = require './item-model'
 
 RD = React.DOM

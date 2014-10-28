@@ -1,7 +1,7 @@
 React = require 'react/addons'
 
 RD = React.DOM
-Transition = React.addons.CSSTransitionGroup
+Transition = React.createFactory React.addons.CSSTransitionGroup
 
 module.exports = React.createClass
 

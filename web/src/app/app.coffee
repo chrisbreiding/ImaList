@@ -2,10 +2,10 @@ React = require 'react/addons'
 _ = require 'lodash'
 Firebase = require 'firebase'
 ReactFireMixin = require 'reactfire'
-Lists = require '../lists/lists'
-Items = require '../items/items'
+Lists = React.createFactory require '../lists/lists'
+Items = React.createFactory require '../items/items'
 ItemModel = require '../items/item-model'
-ActionSheet = require '../action-sheet/action-sheet'
+ActionSheet = React.createFactory require '../action-sheet/action-sheet'
 store = require '../lib/store'
 
 RD = React.DOM
