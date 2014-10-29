@@ -22,16 +22,17 @@
     border-radius: 0;
     box-sizing: border-box;
     display: block;
-    height: 2.4em;
+    height: unit;
     line-height: 1;
     outline: none;
-    padding: .3em 2.4em;
+    padding: .3em unit;
+    text-overflow: ellipsis;
     transition: all .25s ease;
     width: 100%;
 
     &:focus {
       border-width: .3em;
-      padding: 0 2.1em;
+      padding: .3em (unit - .3em);
     }
   }
 
@@ -50,12 +51,12 @@
     right: 0;
   }
 
-  option-width = 2.4em;
+  option-width = unit;
   num-options = 1;
   full-width = option-width * num-options;
 
   .options {
-    height: 2.4em;
+    height: unit;
     position: absolute;
     top: 0;
     right: -1 * full-width;
@@ -69,6 +70,10 @@
   }
 
   .showing-options {
+    .name {
+      padding-right: full-width + 1em + unit;
+    }
+
     .toggle-options {
       right: full-width + 1em;
       -webkit-transform: rotate(90deg);
