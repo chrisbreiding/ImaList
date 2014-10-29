@@ -24,6 +24,7 @@ module.exports = React.createClass
         className: 'name'
         defaultValue: @props.model.name
         onChange: @_updateName
+        onKeyUp: @_keyup
       RD.button
         className: 'toggle-options', onClick: @_toggleOptions
         RD.i className: 'fa fa-ellipsis-h'
@@ -45,6 +46,10 @@ module.exports = React.createClass
     @props.model.name = @refs.name.getDOMNode().value
     @props.onUpdate @props.model
   , 500
+
+  _keyup: (e)->
+    if e.key is 'Enter' and (@refs.name.getDOMNode().value or '').trim() isnt ''
+      @props.onNext()
 
   _toggleOptions: ->
     @setState showingOptions: !@state.showingOptions

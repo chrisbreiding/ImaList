@@ -80,7 +80,7 @@ module.exports = React.createClass
   _addItem: (itemsRef, priority)->
     newItemRef = itemsRef.push()
     newItemRef.setWithPriority ItemModel.newOne(), priority, =>
-      @refs.items.add newItemRef.name()
+      @refs.items.editItem newItemRef.name()
 
   _itemUpdated: (itemId, item)->
     itemRef = @firebaseRefs.lists.child "#{@state.selectedListId}/items/#{itemId}"
