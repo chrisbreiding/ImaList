@@ -17,3 +17,57 @@ buttonize-color(color) {
     color: darken(color, 20%);
   }
 }
+
+options(num-options) {
+  option-width = unit;
+  full-width = option-width * num-options;
+
+  position: relative;
+
+  .toggle-options {
+    buttonize-color(#b7b7b7);
+    @extend .icon-button;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    i {
+      transition: all .25s ease;
+    }
+  }
+
+  .options {
+    height: unit;
+    position: absolute;
+    top: 0;
+    right: -1 * full-width;
+    transition: all .25s ease;
+    width: full-width;
+
+    button {
+      @extend .icon-button;
+    }
+  }
+
+  &.showing-options {
+    .name {
+      padding-right: full-width + 1em + unit;
+    }
+
+    .toggle-options {
+      padding-left: .5em;
+      right: full-width;
+      width: unit + .5em;
+      text-align: left;
+
+      i {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+      }
+    }
+
+    .options {
+      right: 0;
+    }
+  }
+}

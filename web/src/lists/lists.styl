@@ -1,14 +1,19 @@
 .lists li {
-  box-sizing: border-box;
   cursor: pointer;
-  height: unit;
-  line-height: unit;
-  padding: 0 .7em;
+  options(2);
 
   &:hover,
   &:focus,
   &:active {
     background: darken(light-color, 10%);
     color: action-color;
+  }
+
+  .name {
+    box-sizing: border-box;
+    display: block;
+    height: unit;
+    line-height: unit;
+    padding: 0 unit 0 .7em;
   }
 }

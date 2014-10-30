@@ -1,19 +1,15 @@
 .items {
   li {
-    position: relative;
+    options(1);
     overflow: hidden;
   }
 
-  .toggle-checked,
-  .toggle-options {
+  .toggle-checked {
     buttonize-color(#b7b7b7);
     @extend .icon-button;
-    position: absolute;
-  }
-
-  .toggle-checked {
-    top: 0;
     left: 0;
+    position: absolute;
+    top: 0;
   }
 
   .name {
@@ -43,45 +39,6 @@
 
     .name {
       color: #979797;
-    }
-  }
-
-  .toggle-options {
-    top: 0;
-    right: 0;
-  }
-
-  option-width = unit;
-  num-options = 1;
-  full-width = option-width * num-options;
-
-  .options {
-    height: unit;
-    position: absolute;
-    top: 0;
-    right: -1 * full-width;
-    transition: all .25s ease;
-    width: full-width;
-
-    button {
-      buttonize-background(error-color);
-      @extend .icon-button;
-    }
-  }
-
-  .showing-options {
-    .name {
-      padding-right: full-width + 1em + unit;
-    }
-
-    .toggle-options {
-      right: full-width + 1em;
-      -webkit-transform: rotate(90deg);
-      transform: rotate(90deg);
-    }
-
-    .options {
-      right: 0;
     }
   }
 }

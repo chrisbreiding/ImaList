@@ -31,6 +31,7 @@ module.exports = React.createClass
       RD.ul
         className: 'options'
         RD.button
+          className: 'remove'
           onClick: @_remove
           RD.i className: 'fa fa-times'
 

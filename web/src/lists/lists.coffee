@@ -1,5 +1,6 @@
 React = require 'react/addons'
 _ = require 'lodash'
+List = React.createFactory require './list'
 
 RD = React.DOM
 
@@ -10,6 +11,7 @@ module.exports = React.createClass
       RD.header null,
         RD.h1 null, 'ImaList'
       RD.ul null, _.map @props.lists, (list, id)=>
-        RD.li
-          key: list.name, onClick: _.partial @props.onListSelect, id
-          list.name
+        List
+          key: list.name
+          name: list.name
+          onSelect: _.partial @props.onListSelect, id
