@@ -1,6 +1,8 @@
 header {
-  background: primary-color;
-  color: light-color;
+  background: light-color;
+  border-bottom: solid 1px primary-color;
+  box-sizing: border-box;
+  color: primary-color;
   height: unit;
   line-height: unit;
   position: fixed;
@@ -15,6 +17,7 @@ header {
   }
 
   button {
+    buttonize-color(primary-color);
     @extend .icon-button;
     position: absolute;
   }
@@ -26,7 +29,7 @@ header {
   bottom: 0;
   position: absolute;
   top: 0;
-  transition: all .25s ease-out;
+  transition: all .35s ease-out;
   width: 100%;
 
   ul {
@@ -56,11 +59,14 @@ header {
 }
 
 .items {
-  box-shadow: 0 0 2em rgba(0, 0, 0, 0.4);
   left: 100%;
 }
 
 .showing-items {
+  .lists {
+    left: -100%;
+  }
+
   .items {
     left: 0;
   }
@@ -68,7 +74,7 @@ header {
 
 footer {
   background: light-color;
-  border-top: solid 1px #b7b7b7;
+  border-top: solid 1px primary-color;
   bottom: 0;
   box-sizing: border-box;
   height: unit;
@@ -76,7 +82,7 @@ footer {
   width: 100%;
 
   button {
-    buttonize-color(neutral-color);
+    buttonize-color(primary-color);
     @extend .icon-button;
   }
 }

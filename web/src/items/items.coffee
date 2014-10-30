@@ -20,7 +20,7 @@ module.exports = React.createClass
       RD.header null,
         RD.h1 null, @props.listName
         RD.button onClick: @props.onShowLists,
-          RD.i className: 'fa fa-bars'
+          RD.i className: 'fa fa-chevron-left'
       RD.ul null, _.map items, (item, index)=>
         id = item.id
         Item
