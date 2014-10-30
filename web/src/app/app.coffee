@@ -43,6 +43,8 @@ module.exports = React.createClass
       Lists
         lists: lists
         onListSelect: @_showItems
+        onUpdate: @_listUpdated
+        onRemove: @_listRemoved
       Items
         ref: 'items'
         listName: selectedList.name
@@ -61,6 +63,12 @@ module.exports = React.createClass
 
   _showLists: ->
     @setState showItems: false
+
+  _listUpdated: (id, list)->
+    @firebaseRefs.lists.child(id).update list
+
+  _listRemoved: (id)->
+    @firebaseRefs.lists.child(id).remove()
 
   _add: ->
     if @state.selectedListId
@@ -82,12 +90,12 @@ module.exports = React.createClass
     newItemRef.setWithPriority ItemModel.newOne(), priority, =>
       @refs.items.editItem newItemRef.name()
 
-  _itemUpdated: (itemId, item)->
-    itemRef = @firebaseRefs.lists.child "#{@state.selectedListId}/items/#{itemId}"
+  _itemUpdated: (id, item)->
+    itemRef = @firebaseRefs.lists.child "#{@state.selectedListId}/items/#{id}"
     itemRef.update item
 
-  _itemRemoved: (itemId)->
-    itemRef = @firebaseRefs.lists.child "#{@state.selectedListId}/items/#{itemId}"
+  _itemRemoved: (id)->
+    itemRef = @firebaseRefs.lists.child "#{@state.selectedListId}/items/#{id}"
     itemRef.remove()
 
   _clearCompleted: ->

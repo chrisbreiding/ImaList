@@ -1,4 +1,5 @@
 React = require 'react/addons'
+_ = require 'lodash'
 
 RD = React.DOM
 cs = React.addons.classSet
@@ -6,33 +7,53 @@ cs = React.addons.classSet
 module.exports = React.createClass
 
   getInitialState: ->
+    editing: false
     showingOptions: false
 
   render: ->
-    RD.li
-      className: cs
-        'showing-options': @state.showingOptions
+    name = if @state.editing
+      RD.input
+        ref: 'name'
+        className: 'name'
+        defaultValue: @props.model.name
+        onChange: @_updateName
+        onKeyUp: @_keyup
+    else
       RD.span
         className: 'name'
         onClick: @props.onSelect
-        @props.name
+        @props.model.name
+
+    RD.li
+      className: cs
+        'showing-options': @state.showingOptions
+      name
       RD.button
         className: 'toggle-options', onClick: @_toggleOptions
         RD.i className: 'fa fa-ellipsis-h'
       RD.ul
         className: 'options'
         RD.button
-          className: 'edit'
-          onClick: @_edit
-          RD.i className: 'fa fa-edit'
-        RD.button
           className: 'remove'
           onClick: @_remove
           RD.i className: 'fa fa-times'
 
   _toggleOptions: ->
-    @setState showingOptions: !@state.showingOptions
+    show = !@state.showingOptions
+    @setState showingOptions: show, =>
+      @_toggleEditing show
 
-  _edit: ->
+  _toggleEditing: (edit)->
+    @setState editing: edit, =>
+      @refs.name.getDOMNode().focus() if edit
 
   _remove: ->
+    @props.onRemove()
+
+  _updateName: _.debounce ->
+    @props.model.name = @refs.name.getDOMNode().value
+    @props.onUpdate @props.model
+  , 500
+
+  _keyup: (e)->
+    @_toggleOptions() if e.key is 'Enter'

@@ -1,19 +1,38 @@
 .lists li {
-  cursor: pointer;
-  options(2);
-
-  &:hover,
-  &:focus,
-  &:active {
-    background: darken(light-color, 10%);
-    color: action-color;
-  }
+  options(1);
 
   .name {
     box-sizing: border-box;
     display: block;
     height: unit;
-    line-height: unit;
-    padding: 0 unit 0 .7em;
+    line-height: unit - .4em;
+    padding: .2em unit .2em .7em;
+  }
+
+  span.name {
+    cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: darken(light-color, 10%);
+      color: action-color;
+    }
+  }
+
+  input.name {
+    border: solid primary-color 0;
+    border-radius: 0;
+    outline: none;
+    text-overflow: ellipsis;
+    transition: all .25s ease;
+    width: 100%;
+
+    &:focus {
+      border-width: .2em;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: .5em;
+    }
   }
 }
