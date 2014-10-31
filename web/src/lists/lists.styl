@@ -5,12 +5,12 @@
     box-sizing: border-box;
     display: block;
     height: unit;
-    line-height: unit - .4em;
     padding: .2em unit .2em .7em;
   }
 
   span.name {
     cursor: pointer;
+    line-height: unit - .4em;
 
     &:hover,
     &:focus,
@@ -23,6 +23,7 @@
   input.name {
     border: solid primary-color 0;
     border-radius: 0;
+    line-height: 1;
     outline: none;
     text-overflow: ellipsis;
     transition: all .25s ease;

@@ -3,8 +3,8 @@ class Item
   props: ['name', 'isChecked']
 
   constructor: (props)->
-    for propName in @props
-      @[propName] = props[propName]
+    @name = props.name
+    @isChecked = props.isChecked ? false
 
   toggleChecked: ->
     @isChecked = !@isChecked

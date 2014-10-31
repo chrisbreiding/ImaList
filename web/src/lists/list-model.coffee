@@ -3,8 +3,8 @@ class List
   props: ['name', 'items']
 
   constructor: (props)->
-    for propName in @props
-      @[propName] = props[propName]
+    @name = props.name
+    @items = props.items or {}
 
 List.newOne = ->
   name: ''

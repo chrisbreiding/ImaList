@@ -57,3 +57,6 @@ module.exports = React.createClass
 
   _keyup: (e)->
     @_toggleOptions() if e.key is 'Enter'
+
+  edit: ->
+    @_toggleOptions()

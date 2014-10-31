@@ -14,7 +14,14 @@ module.exports = React.createClass
       RD.ul null, _.map @props.lists, (list, id)=>
         List
           key: id
+          ref: id
           model: new ListModel list
           onSelect: _.partial @props.onListSelect, id
           onUpdate: _.partial @props.onUpdate, id
           onRemove: _.partial @props.onRemove, id
+      RD.footer null,
+        RD.button onClick: @props.onAdd,
+          RD.i className: 'fa fa-plus'
+
+  edit: (id)->
+    @refs[id].edit()
