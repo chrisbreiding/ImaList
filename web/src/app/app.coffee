@@ -91,7 +91,15 @@ module.exports = React.createClass
     @firebaseRefs.lists.child(id).update list
 
   _listRemoved: (id)->
-    @firebaseRefs.lists.child(id).remove()
+    actionSheetProps =
+      confirmMessage: 'Remove List'
+      onConfirm: =>
+        @firebaseRefs.lists.child(id).remove()
+        @_removeActionSheet()
+      onCancel: =>
+        @_removeActionSheet()
+
+    @setState {actionSheetProps}
 
   _addItem: ->
     ref = @firebaseRefs.lists.child "#{@state.selectedListId}/items/"
