@@ -36,7 +36,12 @@ module.exports = React.createClass
           RD.i className: 'fa fa-times'
 
   edit: ->
-    @refs.name.getDOMNode().focus()
+    domNode = @refs.name.getDOMNode()
+    domNode.focus()
+
+    return unless domNode.setSelectionRange
+
+    domNode.setSelectionRange domNode.value.length, domNode.value.length
 
   _toggleChecked: ->
     @refs.toggleChecked.getDOMNode().blur()
