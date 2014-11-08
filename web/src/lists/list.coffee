@@ -44,8 +44,7 @@ module.exports = React.createClass
       @_toggleEditing show
 
   _toggleEditing: (edit)->
-    @setState editing: edit, =>
-      @refs.name.getDOMNode().focus() if edit
+    @setState editing: edit
 
   _remove: ->
     @props.onRemove()
