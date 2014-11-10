@@ -8,12 +8,14 @@ module.exports = React.createClass
 
   getInitialState: ->
     showingOptions: false
+    editing: false
 
   render: ->
     RD.li
       ref: 'root'
       className: cs
         'checked': @props.model.isChecked
+        'editing': @state.editing
         'showing-options': @state.showingOptions
       RD.button
         ref: 'toggleChecked'
@@ -23,6 +25,8 @@ module.exports = React.createClass
         ref: 'name'
         className: 'name'
         defaultValue: @props.model.name
+        onFocus: @_focus
+        onBlur: @_blur
         onChange: @_updateName
         onKeyUp: @_keyup
       RD.button
@@ -52,6 +56,12 @@ module.exports = React.createClass
     @props.model.name = @refs.name.getDOMNode().value
     @props.onUpdate @props.model
   , 500
+
+  _focus: ->
+    @setState editing: true
+
+  _blur: ->
+    @setState editing: false
 
   _keyup: (e)->
     if e.key is 'Enter' and (@refs.name.getDOMNode().value or '').trim() isnt ''

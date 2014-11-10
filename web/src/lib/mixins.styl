@@ -55,6 +55,10 @@ options(num-options) {
       padding-right: full-width + 1em + unit;
     }
 
+    &.editing .name {
+      padding-right: .6em;
+    }
+
     .toggle-options {
       padding-left: .5em;
       right: full-width;
@@ -70,5 +74,10 @@ options(num-options) {
     .options {
       right: 0;
     }
+  }
+
+  &.editing .toggle-options,
+  &.showing-options.editing .options {
+    right: -(unit);
   }
 }
