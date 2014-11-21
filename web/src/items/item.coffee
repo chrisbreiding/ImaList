@@ -1,5 +1,6 @@
 React = require 'react/addons'
-_ = require 'lodash'
+
+Name = React.createFactory require './name'
 
 RD = React.DOM
 cs = React.addons.classSet
@@ -21,14 +22,12 @@ module.exports = React.createClass
         ref: 'toggleChecked'
         className: 'toggle-checked', onClick: @_toggleChecked
         RD.i className: 'fa fa-check'
-      RD.input
+      Name
         ref: 'name'
-        className: 'name'
-        defaultValue: @props.model.name
-        onFocus: @_focus
-        onBlur: @_blur
-        onChange: @_updateName
-        onKeyUp: @_keyup
+        name: @props.model.name
+        onEditingStatusChange: @_onEditingStatusChange
+        onUpdate: @_updateName
+        onNext: @props.onNext
       RD.button
         className: 'toggle-options', onClick: @_toggleOptions
         RD.i className: 'fa fa-ellipsis-h'
@@ -40,32 +39,19 @@ module.exports = React.createClass
           RD.i className: 'fa fa-times'
 
   edit: ->
-    domNode = @refs.name.getDOMNode()
-    domNode.focus()
-
-    return unless domNode.setSelectionRange
-
-    domNode.setSelectionRange domNode.value.length, domNode.value.length
+    @refs.name.edit()
 
   _toggleChecked: ->
     @refs.toggleChecked.getDOMNode().blur()
     @props.model.toggleChecked()
     @props.onUpdate @props.model
 
-  _updateName: _.debounce ->
-    @props.model.name = @refs.name.getDOMNode().value
+  _onEditingStatusChange: (status)->
+    @setState editing: status
+
+  _updateName: (name)->
+    @props.model.name = name
     @props.onUpdate @props.model
-  , 500
-
-  _focus: ->
-    @setState editing: true
-
-  _blur: ->
-    @setState editing: false
-
-  _keyup: (e)->
-    if e.key is 'Enter' and (@refs.name.getDOMNode().value or '').trim() isnt ''
-      @props.onNext()
 
   _toggleOptions: ->
     @setState showingOptions: !@state.showingOptions
