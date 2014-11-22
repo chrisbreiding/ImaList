@@ -13,7 +13,6 @@ module.exports = React.createClass
       onFocus: _.partial @_updateEditingStatus, true
       onBlur: _.partial @_updateEditingStatus, false
       onChange: @_updateName
-      onKeyUp: @_keyup
 
   edit: ->
     domNode = @getDOMNode()
@@ -28,13 +27,6 @@ module.exports = React.createClass
     setTimeout =>
       @refs.name.recalculateSize()
     , 300
-
-  _keyup: (e)->
-    if e.key is 'Enter' and @_hasValue()
-      @props.onNext()
-
-  _hasValue: ->
-    (@getDOMNode().value or '').trim() isnt ''
 
   _updateName: _.debounce ->
     @props.onUpdate @getDOMNode().value
