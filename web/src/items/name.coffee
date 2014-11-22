@@ -1,16 +1,17 @@
 React = require 'react/addons'
 _ = require 'lodash'
 
-RD = React.DOM
+Textarea = React.createFactory require '../lib/growing-textarea'
 
 module.exports = React.createClass
 
   render: ->
-    RD.input
+    Textarea
+      ref: 'name'
       className: 'name'
       defaultValue: @props.name
-      onFocus: _.partial @props.onEditingStatusChange, true
-      onBlur: _.partial @props.onEditingStatusChange, false
+      onFocus: _.partial @_updateEditingStatus, true
+      onBlur: _.partial @_updateEditingStatus, false
       onChange: @_updateName
       onKeyUp: @_keyup
 
@@ -21,6 +22,12 @@ module.exports = React.createClass
     return unless domNode.setSelectionRange
 
     domNode.setSelectionRange domNode.value.length, domNode.value.length
+
+  _updateEditingStatus: (editing)->
+    @props.onEditingStatusChange editing
+    setTimeout =>
+      @refs.name.recalculateSize()
+    , 300
 
   _keyup: (e)->
     if e.key is 'Enter' and @_hasValue()
