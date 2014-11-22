@@ -17,7 +17,7 @@ module.exports = React.createClass
         RD.i className: 'fa fa-ban'
 
     RD.div
-      className: 'items', onClick: @_stopEditing
+      className: 'items'
       RD.header null,
         RD.h1 null, @props.listName
         RD.button onClick: @props.onShowLists,
@@ -25,10 +25,9 @@ module.exports = React.createClass
       RD.ul null, _.map items, (item, index)=>
         id = item.id
         Item
-          model: new ItemModel item
           ref: id
           key: id
-          onEdit: _.partial @_stopEditingExcept, id
+          model: new ItemModel item
           onUpdate: _.partial @props.onUpdate, id
           onRemove: _.partial @props.onRemove, id
           onNext: if index is items.length - 1
@@ -42,11 +41,3 @@ module.exports = React.createClass
 
   edit: (id)->
     @refs[id].edit()
-
-  _stopEditingExcept: (id)->
-    _.each @props.items, (item)=>
-      @refs[item.id].stopEditing() unless item.id is id
-
-  _stopEditing: ->
-    _.each @props.items, (item)=>
-      @refs[item.id].stopEditing()

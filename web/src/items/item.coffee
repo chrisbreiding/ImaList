@@ -1,5 +1,4 @@
 React = require 'react/addons'
-_ = require 'lodash'
 
 Name = React.createFactory require './name'
 
@@ -11,18 +10,13 @@ module.exports = React.createClass
   getInitialState: ->
     showingOptions: false
     editing: false
-    multiline: false
 
   render: ->
-    isMultiline = @state.multiline or (@_nameHasMultipleLines() and @state.editing)
-    multilineIcon = if isMultiline then 'minus' else 'bars'
-
     RD.li
       ref: 'root'
       className: cs
         'checked': @props.model.isChecked
         'editing': @state.editing
-        'multiline': isMultiline
         'showing-options': @state.showingOptions
       RD.button
         ref: 'toggleChecked'
@@ -31,9 +25,8 @@ module.exports = React.createClass
       Name
         ref: 'name'
         name: @props.model.name
-        multiline: isMultiline
         editing: @state.editing
-        onEdit: @_onEdit
+        onEditingStatusChange: @_onEditingStatusChange
         onUpdate: @_updateName
         onNext: @props.onNext
       RD.button
@@ -45,29 +38,19 @@ module.exports = React.createClass
           className: 'remove'
           onClick: @_remove
           RD.i className: 'fa fa-times'
-      RD.button
-        className: 'toggle-multiline', onClick: @_toggleMultiline
-        RD.i className: "fa fa-#{multilineIcon}"
 
   edit: ->
     @refs.name.edit()
-
-  stopEditing: ->
-    @setState
-      editing: false
-      multiline: false
-
-  _nameHasMultipleLines: ->
-    _.contains @props.model.name, '\n'
 
   _toggleChecked: ->
     @refs.toggleChecked.getDOMNode().blur()
     @props.model.toggleChecked()
     @props.onUpdate @props.model
 
-  _onEdit: ->
-    @props.onEdit()
-    @setState editing: true
+  _onEditingStatusChange: (editing)->
+    @setState
+      editing: editing
+      showingOptions: false
 
   _updateName: (name)->
     @props.model.name = name
@@ -78,8 +61,3 @@ module.exports = React.createClass
 
   _remove: ->
     @props.onRemove()
-
-  _toggleMultiline: (e)->
-    e.stopPropagation()
-    @setState multiline: !@state.multiline, =>
-      @edit()

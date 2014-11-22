@@ -6,17 +6,11 @@ RD = React.DOM
 module.exports = React.createClass
 
   render: ->
-    el = RD.textarea
-    name = @props.name
-
-    unless @props.multiline
-      el = RD.input
-      name = @props.name.split('\n')[0]
-
-    el
+    RD.input
       className: 'name'
-      defaultValue: name
-      onClick: @_edit
+      defaultValue: @props.name
+      onFocus: _.partial @props.onEditingStatusChange, true
+      onBlur: _.partial @props.onEditingStatusChange, false
       onChange: @_updateName
       onKeyUp: @_keyup
 
@@ -27,22 +21,13 @@ module.exports = React.createClass
     return unless domNode.setSelectionRange
 
     domNode.setSelectionRange domNode.value.length, domNode.value.length
-    @props.onEdit true
-
-  _edit: (e)->
-    e.stopPropagation()
-    @props.onEdit true
-    setTimeout => @getDOMNode().focus()
 
   _keyup: (e)->
-    if e.key is 'Enter' and @_hasValue() and @_isntMultiline()
+    if e.key is 'Enter' and @_hasValue()
       @props.onNext()
 
   _hasValue: ->
     (@getDOMNode().value or '').trim() isnt ''
-
-  _isntMultiline: ->
-    not @props.multiline
 
   _updateName: _.debounce ->
     @props.onUpdate @getDOMNode().value
