@@ -21,17 +21,40 @@
     border-radius: 0;
     box-sizing: border-box;
     display: block;
-    height: unit;
-    line-height: 1;
     outline: none;
-    padding: .2em unit;
     text-overflow: ellipsis;
     transition: all .25s ease;
     width: 100%;
 
     &:focus {
       border-width: .2em;
-      padding: 0 .6em;
+    }
+  }
+
+  input.name {
+    height: unit;
+    line-height: 1;
+    padding: .2em unit;
+
+    &:focus {
+      padding: .5em (unit + .6em) .5em .6em;
+    }
+  }
+
+  textarea.name {
+    display: none;
+    min-height: 3 * unit;
+    line-height: 1.5;
+    padding: .5em (unit + .6em) .5em .6em;
+  }
+
+  .multiline {
+    input.name {
+      display: none;
+    }
+
+    textarea.name {
+      display: block;
     }
   }
 
@@ -43,5 +66,18 @@
     .name {
       color: #979797;
     }
+  }
+
+  .toggle-multiline {
+    buttonize-background(primary-color);
+    @extend .icon-button;
+    position: absolute;
+    right: -(unit);
+    top: 0;
+    transition: all .25s ease;
+  }
+
+  .editing .toggle-multiline {
+    right: 0;
   }
 }

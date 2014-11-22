@@ -16,7 +16,8 @@ module.exports = React.createClass
       clearCompleted = RD.button onClick: @props.onClearCompleted,
         RD.i className: 'fa fa-ban'
 
-    RD.div className: 'items',
+    RD.div
+      className: 'items', onClick: @_stopEditing
       RD.header null,
         RD.h1 null, @props.listName
         RD.button onClick: @props.onShowLists,
@@ -27,6 +28,7 @@ module.exports = React.createClass
           model: new ItemModel item
           ref: id
           key: id
+          onEdit: _.partial @_stopEditingExcept, id
           onUpdate: _.partial @props.onUpdate, id
           onRemove: _.partial @props.onRemove, id
           onNext: if index is items.length - 1
@@ -40,3 +42,11 @@ module.exports = React.createClass
 
   edit: (id)->
     @refs[id].edit()
+
+  _stopEditingExcept: (id)->
+    _.each @props.items, (item)=>
+      @refs[item.id].stopEditing() unless item.id is id
+
+  _stopEditing: ->
+    _.each @props.items, (item)=>
+      @refs[item.id].stopEditing()
