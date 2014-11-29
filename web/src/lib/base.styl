@@ -10,8 +10,13 @@ body {
 
 body {
   color: dark-color;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
   font-size: 18px;
+}
+
+body,
+input,
+textarea {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 strong {
@@ -37,17 +42,19 @@ a {
   }
 }
 
-input {
-  border: solid 1px #c7c7c7;
-  border-radius: 3px;
+input,
+textarea {
   font-size: 1em;
-  padding: 5px 10px;
   -webkit-appearance: none;
 }
 
+input {
+  border: solid 1px #c7c7c7;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
 textarea {
-  -webkit-appearance: none;
-  font-size: 1em;
   line-height: 1.5;
   resize: none;
 }
