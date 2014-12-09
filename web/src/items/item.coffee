@@ -40,7 +40,8 @@ module.exports = React.createClass
           RD.i className: 'fa fa-times'
 
   edit: ->
-    @refs.name.edit()
+    @setState editing: true, =>
+      @refs.name.edit()
 
   _toggleChecked: ->
     @refs.toggleChecked.getDOMNode().blur()

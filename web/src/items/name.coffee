@@ -6,14 +6,27 @@ Textarea = React.createFactory require '../lib/growing-textarea'
 module.exports = React.createClass
 
   render: ->
-    Textarea
-      ref: 'name'
-      className: 'name'
-      defaultValue: @props.name
-      onFocus: _.partial @_updateEditingStatus, true
-      onBlur: _.partial @_updateEditingStatus, false
-      onKeyUp: @_onKeyUp
-      onKeyDown: @_onKeyDown
+    if @props.editing
+      Textarea
+        ref: 'name'
+        className: 'name'
+        autofocus: true
+        defaultValue: @props.name
+        onFocus: _.partial @props.onEditingStatusChange, true
+        onBlur: _.partial @props.onEditingStatusChange, false
+        onKeyUp: @_onKeyUp
+        onKeyDown: @_onKeyDown
+    else
+      React.DOM.div
+        className: 'name'
+        onClick: _.partial @props.onEditingStatusChange, true
+        @props.name
+
+  componentDidMount: ->
+    @edit() if @props.editing
+
+  componentDidUpdate: ->
+    @edit() if @props.editing
 
   edit: ->
     domNode = @getDOMNode()
@@ -23,14 +36,8 @@ module.exports = React.createClass
 
     domNode.setSelectionRange domNode.value.length, domNode.value.length
 
-  _updateEditingStatus: (editing)->
-    @props.onEditingStatusChange editing
-    setTimeout =>
-      @refs.name.recalculateSize()
-    , 300
-
-  _updateName: _.debounce ->
-    @props.onUpdate @getDOMNode().value
+  _updateName: _.debounce (name)->
+    @props.onUpdate name
   , 500
 
   _onKeyDown: (e)->
@@ -40,7 +47,7 @@ module.exports = React.createClass
     if e.key is 'Enter' and not e.shiftKey and @_hasValue()
       @props.onNext()
     else
-      @_updateName()
+      @_updateName @getDOMNode().value
 
   _hasValue: ->
     (@getDOMNode().value or '').trim() isnt ''
