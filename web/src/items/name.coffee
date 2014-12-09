@@ -12,7 +12,8 @@ module.exports = React.createClass
       defaultValue: @props.name
       onFocus: _.partial @_updateEditingStatus, true
       onBlur: _.partial @_updateEditingStatus, false
-      onChange: @_updateName
+      onKeyUp: @_onKeyUp
+      onKeyDown: @_onKeyDown
 
   edit: ->
     domNode = @getDOMNode()
@@ -31,3 +32,15 @@ module.exports = React.createClass
   _updateName: _.debounce ->
     @props.onUpdate @getDOMNode().value
   , 500
+
+  _onKeyDown: (e)->
+    e.preventDefault() if e.key is 'Enter' and not e.shiftKey
+
+  _onKeyUp: (e)->
+    if e.key is 'Enter' and not e.shiftKey and @_hasValue()
+      @props.onNext()
+    else
+      @_updateName()
+
+  _hasValue: ->
+    (@getDOMNode().value or '').trim() isnt ''

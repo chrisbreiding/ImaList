@@ -30,6 +30,10 @@ module.exports = React.createClass
           model: new ItemModel item
           onUpdate: _.partial @props.onUpdate, id
           onRemove: _.partial @props.onRemove, id
+          onNext: if index is items.length - 1
+            @props.onAdd
+          else
+            _.partial @edit, items[index + 1].id
       RD.footer null,
         RD.button onClick: @props.onAdd,
           RD.i className: 'fa fa-plus'
