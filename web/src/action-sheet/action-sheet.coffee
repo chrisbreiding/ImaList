@@ -1,23 +1,25 @@
 React = require 'react/addons'
 
 RD = React.DOM
-Transition = React.createFactory React.addons.CSSTransitionGroup
+cs = React.addons.classSet
 
 module.exports = React.createClass
 
   render: ->
-    Transition
-      transitionName: 'action-sheet'
-      if @props.onConfirm
-        RD.div
-          ref: 'root', className: 'action-sheet'
-          RD.div
-            className: 'container'
-            RD.button
-              className: 'confirm', onClick: @props.onConfirm
-              @props.confirmMessage or 'Confirm'
-            RD.button
-              className: 'cancel', onClick: @props.onCancel
-              @props.cancelMessage or 'Cancel'
-      else
-        null
+    if @props.confirmMessage
+      @previousConfirm = @props.confirmMessage
+    if @props.cancelMessage
+      @previousCancel = @props.cancelMessage
+
+    RD.div
+      className: cs
+        'action-sheet': true
+        'action-sheet-showing': @props.onConfirm?
+      RD.div
+        className: 'container'
+        RD.button
+          className: 'confirm', onClick: @props.onConfirm
+          @props.confirmMessage or @previousConfirm or 'Confirm'
+        RD.button
+          className: 'cancel', onClick: @props.onCancel
+          @props.cancelMessage or @previousCancel or 'Cancel'

@@ -1,11 +1,12 @@
 .action-sheet {
   background: rgba(0, 0, 0, 0.7);
   @extend .fill-container;
-  z-index: 100;
+  opacity: 0.01;
+  z-index: -1;
 
   .container {
     background: light-color;
-    bottom: 0;
+    bottom: -200px;
     box-sizing: border-box;
     left: 0;
     padding: .5em;
@@ -29,37 +30,17 @@
     }
   }
 
-  &-enter,
-  &-leave {
-    &,
-    & .container {
-      transition: all .25s ease;
-    }
+  &,
+  & .container {
+    transition: all .25s ease;
   }
 
-  &-enter {
-    opacity: 0.01;
-
-    .container {
-      bottom: -200px;
-    }
-  }
-
-  &-enter-active,
-  &-leave {
+  &.action-sheet-showing {
     opacity: 1;
+    z-index: 100;
 
     .container {
       bottom: 0;
     }
   }
-
-  &-leave-active {
-    opacity: 0.01;
-
-    .container {
-      bottom: -200px;
-    }
-  }
-
 }

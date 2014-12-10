@@ -13,7 +13,6 @@ module.exports = React.createClass
 
   render: ->
     RD.li
-      ref: 'root'
       className: cs
         'checked': @props.model.isChecked
         'editing': @state.editing
