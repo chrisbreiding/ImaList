@@ -17,7 +17,7 @@ module.exports = React.createClass
         onKeyUp: @_onKeyUp
         onKeyDown: @_onKeyDown
     else
-      React.DOM.div
+      React.DOM.pre
         className: 'name'
         onClick: _.partial @props.onEditingStatusChange, true
         @props.name
