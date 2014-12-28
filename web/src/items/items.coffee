@@ -8,11 +8,9 @@ RD = React.DOM
 module.exports = React.createClass
 
   render: ->
-    items = _.map @props.items, (item, id)->
-      item.id = id
-      item
+    items = @_items @props.items
 
-    if _.any(@props.items, isChecked: true)
+    if _.any(items, isChecked: true)
       clearCompleted = RD.button onClick: @props.onClearCompleted,
         RD.i className: 'fa fa-ban'
 
@@ -41,3 +39,14 @@ module.exports = React.createClass
 
   edit: (id)->
     @refs[id].edit()
+
+  _items: (itemsObj)->
+    @_order @_toArray itemsObj
+
+  _toArray: (itemsObj)->
+    _.map itemsObj, (list, id)->
+      list.id = id
+      list
+
+  _order: (items)->
+    _.sortBy items, 'order'

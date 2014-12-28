@@ -1,5 +1,4 @@
 React = require 'react/addons'
-_ = require 'lodash'
 
 RD = React.DOM
 cs = React.addons.classSet
@@ -49,10 +48,9 @@ module.exports = React.createClass
   _remove: ->
     @props.onRemove()
 
-  _updateName: _.debounce ->
+  _updateName: ->
     @props.model.name = @refs.name.getDOMNode().value
     @props.onUpdate @props.model
-  , 500
 
   _keyup: (e)->
     @_toggleOptions() if e.key is 'Enter'

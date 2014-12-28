@@ -1,17 +1,22 @@
 Firebase = require 'firebase'
 RSVP = require 'rsvp'
 
-module.exports =
+module.exports = class Auth
+
+  constructor: (@_ref)->
 
   isAuthenticated: ->
-    @_getRef().getAuth()?
+    @_ref.getAuth()?
+
+  userEmail: ->
+    @_ref.getAuth().password.email
 
   onAuthChange: (callback)->
-    @_getRef().onAuth callback
+    @_ref.onAuth callback
 
   login: (email, password)->
     new RSVP.Promise (resolve)=>
-      @_getRef().authWithPassword
+      @_ref.authWithPassword
         email: email
         password: password
       ,
@@ -19,7 +24,4 @@ module.exports =
           resolve authData?
 
   logout: ->
-    @_getRef().unauth()
-
-  _getRef: ->
-    @_ref or (@_ref = new Firebase 'https://imalist.firebaseio.com')
+    @_ref.unauth()

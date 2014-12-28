@@ -1,16 +1,16 @@
 class Item
 
-  props: ['name', 'isChecked']
-
   constructor: (props)->
+    @order = props.order
     @name = props.name
     @isChecked = props.isChecked ? false
 
   toggleChecked: ->
     @isChecked = !@isChecked
 
-Item.newOne = ->
-  name: ''
-  isChecked: false
+  @newOne: (order)->
+    order: order
+    name: ''
+    isChecked: false
 
 module.exports = Item

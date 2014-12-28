@@ -33,6 +33,6 @@ module.exports = React.createClass
     password = @refs.password.getDOMNode().value
     auth.login(email, password).then (didSucceed)=>
       if didSucceed
-        @props.onLogin()
+        @props.onLogin email
       else
         @setState loginFailed: true

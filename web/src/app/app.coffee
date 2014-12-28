@@ -22,7 +22,8 @@ module.exports = React.createClass
     selectedListId: store.fetch('selectedListId') ? null
 
   componentWillMount: ->
-    @bindAsObject new Firebase('https://imalist.firebaseio.com/lists/'), 'lists'
+    ref = @props.firebaseRef.child 'lists'
+    @bindAsObject ref.orderByChild('order'), 'lists'
 
   componentDidUpdate: ->
     store.save
@@ -68,21 +69,19 @@ module.exports = React.createClass
     @setState showItems: false
 
   _add: (type, ref, items, Model)->
-    keys = Object.keys items
-
-    unless keys.length
-      @_addWithPriority type, ref, Model, 0
+    unless Object.keys(items).length
+      @_addWithOrder type, ref, Model, 0
       return
 
-    lastRef = ref.child keys[keys.length - 1]
-    lastRef.once 'child_added', (snapshot)=>
-      priority = snapshot.getPriority()
-      @_addWithPriority type, ref, Model, if priority? then priority + 1 else 0
+    order = @_lastOrder(items) + 1
+    @_addWithOrder type, ref, Model, order
 
-  _addWithPriority: (type, ref, Model, priority)->
-    newRef = ref.push()
-    newRef.setWithPriority Model.newOne(), priority, =>
-      @refs[type].edit newRef.name()
+  _lastOrder: (items)->
+    Math.max _.pluck(items, 'order')...
+
+  _addWithOrder: (type, ref, Model, order)->
+    newRef = ref.push Model.newOne(order, @props.userEmail), =>
+      @refs[type].edit newRef.key()
 
   _addList: ->
     @_add 'lists', @firebaseRefs.lists, @state.lists, ListModel

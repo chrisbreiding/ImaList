@@ -8,10 +8,10 @@
   },
   "dependencies": {
     "fastclick": "~1.0.3",
-    "firebase": "~1.1.1",
+    "firebase": "~2.0.6",
     "lodash": "~2.4.1",
     "react": "~0.12.0",
-    "reactfire": "~0.2.0",
-    "rsvp": "~3.0.14"
+    "reactfire": "~0.4.0",
+    "rsvp": "3.0.14"
   }
 }
