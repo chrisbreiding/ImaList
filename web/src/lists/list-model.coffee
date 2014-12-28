@@ -1,4 +1,6 @@
-class List
+Collection = require '../lib/collection'
+
+module.exports = class List extends Collection
 
   constructor: (props)->
     @order = props.order
@@ -13,5 +15,3 @@ class List
     items: {}
     owner: owner
     shared: false
-
-module.exports = List

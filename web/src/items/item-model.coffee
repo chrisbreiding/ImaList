@@ -1,4 +1,6 @@
-class Item
+Collection = require '../lib/collection'
+
+module.exports = class Item extends Collection
 
   constructor: (props)->
     @order = props.order
@@ -12,5 +14,3 @@ class Item
     order: order
     name: ''
     isChecked: false
-
-module.exports = Item

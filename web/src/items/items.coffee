@@ -8,7 +8,7 @@ RD = React.DOM
 module.exports = React.createClass
 
   render: ->
-    items = @_items @props.items
+    items = ItemModel.curated @props.items
 
     if _.any(items, isChecked: true)
       clearCompleted = RD.button onClick: @props.onClearCompleted,
@@ -39,14 +39,3 @@ module.exports = React.createClass
 
   edit: (id)->
     @refs[id].edit()
-
-  _items: (itemsObj)->
-    @_order @_toArray itemsObj
-
-  _toArray: (itemsObj)->
-    _.map itemsObj, (list, id)->
-      list.id = id
-      list
-
-  _order: (items)->
-    _.sortBy items, 'order'

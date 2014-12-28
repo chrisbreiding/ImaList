@@ -11,7 +11,7 @@ module.exports = React.createClass
     RD.div className: 'lists',
       RD.header null,
         RD.h1 null, 'ImaList'
-      RD.ul null, _.map @_lists(@props.lists), (list)=>
+      RD.ul null, _.map ListModel.curated(@props.lists), (list)=>
         id = list.id
         List
           key: id
@@ -26,14 +26,3 @@ module.exports = React.createClass
 
   edit: (id)->
     @refs[id].edit()
-
-  _lists: (listsObj)->
-    @_order @_toArray listsObj
-
-  _toArray: (listsObj)->
-    _.map listsObj, (list, id)->
-      list.id = id
-      list
-
-  _order: (lists)->
-    _.sortBy lists, 'order'
