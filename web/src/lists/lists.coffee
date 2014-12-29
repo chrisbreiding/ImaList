@@ -24,6 +24,10 @@ module.exports = React.createClass
       RD.footer null,
         RD.button onClick: @props.onAdd,
           RD.i className: 'fa fa-plus'
+        RD.button
+          className: 'logout'
+          onClick: @props.onLogout
+          RD.i className: 'fa fa-sign-out'
 
   edit: (id)->
     @refs[id].edit()

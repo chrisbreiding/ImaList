@@ -22,14 +22,13 @@ logout = ->
   render()
 
 render = (userEmail)->
-  userEmail ?= auth.userEmail()
-
   component = if auth.isAuthenticated()
-    App firebaseRef: ref, onLogout: logout, userEmail: userEmail
+    App firebaseRef: ref, onLogout: logout, userEmail: userEmail ? auth.userEmail()
   else
-    Login onLogin: render
+    Login auth: auth, onLogin: render
 
   React.render component, document.body
 
 auth.onAuthChange render
+
 render()

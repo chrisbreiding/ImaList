@@ -22,8 +22,7 @@ module.exports = React.createClass
     selectedListId: store.fetch('selectedListId') ? null
 
   componentWillMount: ->
-    ref = @props.firebaseRef.child 'lists'
-    @bindAsObject ref.orderByChild('order'), 'lists'
+    @bindAsObject @props.firebaseRef.child('lists'), 'lists'
 
   componentDidUpdate: ->
     store.save
@@ -46,6 +45,7 @@ module.exports = React.createClass
         ref: 'lists'
         lists: lists
         userEmail: @props.userEmail
+        onLogout: @_logout
         onAdd: @_addList
         onListSelect: @_showItems
         onUpdate: @_listUpdated
@@ -60,6 +60,17 @@ module.exports = React.createClass
         onRemove: @_itemRemoved
         onClearCompleted: @_clearCompleted
       ActionSheet @state.actionSheetProps
+
+  _logout: ->
+    actionSheetProps =
+      confirmMessage: 'Logout'
+      onConfirm: =>
+        @_removeActionSheet =>
+          @props.onLogout()
+      onCancel: =>
+        @_removeActionSheet()
+
+    @setState {actionSheetProps}
 
   _showItems: (id)->
     @setState
@@ -126,5 +137,5 @@ module.exports = React.createClass
 
     @setState {actionSheetProps}
 
-  _removeActionSheet: ->
-    @setState actionSheetProps: null
+  _removeActionSheet: (callback)->
+    @setState actionSheetProps: null, callback

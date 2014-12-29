@@ -1,6 +1,5 @@
 React = require 'react/addons'
 Firebase = require 'firebase'
-auth = require './auth'
 
 RD = React.DOM
 
@@ -31,7 +30,7 @@ module.exports = React.createClass
 
     email = @refs.email.getDOMNode().value
     password = @refs.password.getDOMNode().value
-    auth.login(email, password).then (didSucceed)=>
+    @props.auth.login(email, password).then (didSucceed)=>
       if didSucceed
         @props.onLogin email
       else
