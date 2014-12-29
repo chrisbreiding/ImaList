@@ -1,4 +1,5 @@
 Collection = require '../lib/collection'
+_ = require 'lodash'
 
 module.exports = class List extends Collection
 
@@ -15,3 +16,7 @@ module.exports = class List extends Collection
     items: {}
     owner: owner
     shared: false
+
+  @approvedForUser: (lists, userEmail)->
+    _.filter lists, (list)->
+      list.shared or list.owner is userEmail

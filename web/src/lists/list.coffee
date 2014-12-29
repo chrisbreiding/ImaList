@@ -26,12 +26,19 @@ module.exports = React.createClass
     RD.li
       className: cs
         'showing-options': @state.showingOptions
+        'shared': @props.model.shared
+        'is-owner': @props.isOwner
       name
-      RD.button
-        className: 'toggle-options', onClick: @_toggleOptions
-        RD.i className: 'fa fa-ellipsis-h'
-      RD.ul
+      RD.div
         className: 'options'
+        RD.i className: 'shared-indicator fa fa-share-alt-square'
+        RD.button
+          className: 'toggle-options', onClick: @_toggleOptions
+          RD.i className: 'fa fa-ellipsis-h'
+        RD.button
+          className: 'toggle-shared'
+          onClick: @_toggledShared
+          RD.i className: 'fa fa-share-alt'
         RD.button
           className: 'remove'
           onClick: @_remove
@@ -45,11 +52,18 @@ module.exports = React.createClass
   _toggleEditing: (edit)->
     @setState editing: edit
 
+  _toggledShared: ->
+    @props.model.shared = !@props.model.shared
+    @_update()
+
   _remove: ->
     @props.onRemove()
 
   _updateName: ->
     @props.model.name = @refs.name.getDOMNode().value
+    @_update()
+
+  _update: ->
     @props.onUpdate @props.model
 
   _keyup: (e)->

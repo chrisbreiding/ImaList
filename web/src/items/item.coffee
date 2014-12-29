@@ -28,11 +28,11 @@ module.exports = React.createClass
         onEditingStatusChange: @_onEditingStatusChange
         onUpdate: @_updateName
         onNext: @props.onNext
-      RD.button
-        className: 'toggle-options', onClick: @_toggleOptions
-        RD.i className: 'fa fa-ellipsis-h'
-      RD.ul
+      RD.div
         className: 'options'
+        RD.button
+          className: 'toggle-options', onClick: @_toggleOptions
+          RD.i className: 'fa fa-ellipsis-h'
         RD.button
           className: 'remove'
           onClick: @_remove

@@ -19,6 +19,7 @@ buttonize-color(color) {
 }
 
 options(num-options) {
+  num-options = num-options + 1;
   option-width = unit;
   full-width = option-width * num-options;
 
@@ -28,9 +29,6 @@ options(num-options) {
   .toggle-options {
     buttonize-color(#b7b7b7);
     @extend .icon-button;
-    position: absolute;
-    right: 0;
-    top: 0;
 
     i {
       transition: all .25s ease;
@@ -41,7 +39,7 @@ options(num-options) {
     height: unit;
     position: absolute;
     top: 0;
-    right: -1 * full-width;
+    right: -(full-width - unit);
     transition: all .25s ease;
     width: full-width;
 
@@ -52,7 +50,7 @@ options(num-options) {
 
   &.showing-options {
     .name {
-      padding-right: full-width + 1em + unit;
+      padding-right: full-width + 1em;
     }
 
     &.editing .name {
@@ -61,7 +59,6 @@ options(num-options) {
 
     .toggle-options {
       padding-left: .5em;
-      right: full-width;
       width: unit + .5em;
       text-align: left;
 
@@ -73,11 +70,11 @@ options(num-options) {
 
     .options {
       right: 0;
+      width: full-width + .5em;
     }
   }
 
-  &.editing .toggle-options,
-  &.showing-options.editing .options {
-    right: -(unit);
+  &.editing .options {
+    right: -(full-width);
   }
 }

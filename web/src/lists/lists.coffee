@@ -11,12 +11,13 @@ module.exports = React.createClass
     RD.div className: 'lists',
       RD.header null,
         RD.h1 null, 'ImaList'
-      RD.ul null, _.map ListModel.curated(@props.lists), (list)=>
+      RD.ul null, _.map @_lists(@props.lists, @props.userEmail), (list)=>
         id = list.id
         List
           key: id
           ref: id
           model: new ListModel list
+          isOwner: list.owner is @props.userEmail
           onSelect: _.partial @props.onListSelect, id
           onUpdate: _.partial @props.onUpdate, id
           onRemove: _.partial @props.onRemove, id
@@ -26,3 +27,6 @@ module.exports = React.createClass
 
   edit: (id)->
     @refs[id].edit()
+
+  _lists: (lists, userEmail)->
+    ListModel.approvedForUser ListModel.curated(lists), userEmail

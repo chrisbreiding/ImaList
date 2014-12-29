@@ -45,6 +45,7 @@ module.exports = React.createClass
       Lists
         ref: 'lists'
         lists: lists
+        userEmail: @props.userEmail
         onAdd: @_addList
         onListSelect: @_showItems
         onUpdate: @_listUpdated

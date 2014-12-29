@@ -1,6 +1,36 @@
 .lists li {
   options(1);
 
+  owner-width = unit * 3;
+
+  &.is-owner .options {
+    right: -(owner-width - unit);
+    width: owner-width;
+  }
+
+  &.is-owner.showing-options {
+    .name {
+      padding-right: owner-width + 1em;
+    }
+
+    .options {
+      right: 0;
+      width: owner-width + .5em;
+    }
+  }
+
+  .shared-indicator {
+    color: primary-color;
+    display: none;
+    position: absolute;
+    left: -.8em;
+    top: .8em;
+  }
+
+  &.showing-options.shared .shared-indicator {
+    display: block;
+  }
+
   .name {
     box-sizing: border-box;
     display: block;
@@ -35,5 +65,14 @@
       padding-bottom: 0;
       padding-left: .5em;
     }
+  }
+
+  / .lists li .options .toggle-shared {
+    buttonize-background(neutral-color);
+    display: none;
+  }
+
+  &.is-owner .toggle-shared {
+    display: inline-block;
   }
 }
