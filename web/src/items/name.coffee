@@ -24,16 +24,17 @@ module.exports = React.createClass
 
     domNode.setSelectionRange domNode.value.length, domNode.value.length
 
+  hasValue: ->
+    (@getDOMNode().value or '').trim() isnt ''
+
   _updateName: ->
     @props.onUpdate @getDOMNode().value
 
   _onKeyDown: (e)->
-    if e.key is 'Enter' and not e.shiftKey
+    if e.key is 'Enter' and e.shiftKey
       e.preventDefault()
 
   _onKeyUp: (e)->
-    if e.key is 'Enter' and not e.shiftKey and @_hasValue()
+    if e.key is 'Enter' and e.shiftKey and @hasValue()
       @props.onNext()
-
-  _hasValue: ->
-    (@getDOMNode().value or '').trim() isnt ''
+      return

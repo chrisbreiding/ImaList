@@ -28,6 +28,9 @@ module.exports = React.createClass
         onEditingStatusChange: @_onEditingStatusChange
         onUpdate: @_updateName
         onNext: @props.onNext
+      RD.button
+        className: 'next', onClick: @_nextIfValue
+        RD.i className: 'fa fa-level-down'
       RD.div
         className: 'options'
         RD.button
@@ -41,6 +44,10 @@ module.exports = React.createClass
   edit: ->
     @setState editing: true, =>
       @refs.name.edit()
+
+  _nextIfValue: ->
+    if @refs.name.hasValue()
+     @props.onNext()
 
   _toggleChecked: ->
     @refs.toggleChecked.getDOMNode().blur()

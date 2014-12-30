@@ -32,8 +32,24 @@
 
     &:focus {
       border-width: .2em;
-      padding: .4em .6em;
+      padding: .4em (unit + .6em) .4em .6em;
     }
+  }
+
+  .next {
+    bottom: 0;
+    buttonize-background(success-color);
+    @extend .icon-button;
+    position: absolute;
+    right: -(unit);
+
+    i {
+      font-size: 1.2em;
+    }
+  }
+
+  .editing .next {
+    right: 0;
   }
 
   .checked {
