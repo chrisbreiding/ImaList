@@ -38,3 +38,6 @@ module.exports = React.createClass
     if e.key is 'Enter' and e.shiftKey and @hasValue()
       @props.onNext()
       return
+
+    if e.key is 'Escape'
+      @getDOMNode().blur()
