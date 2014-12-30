@@ -6,6 +6,7 @@ RD = React.DOM
 module.exports = React.createClass
 
   getInitialState: ->
+    attemptingLogin: false
     loginFailed: false
 
   render: ->
@@ -23,15 +24,22 @@ module.exports = React.createClass
           RD.label null, 'Password'
           RD.input ref: 'password', type: 'password'
         RD.fieldset null,
-          RD.button null, 'Log In'
+          if @state.attemptingLogin
+            RD.span null, RD.i className: 'fa fa-spinner fa-spin'
+          else
+            RD.button null, 'Log In'
 
   _attemptLogin: (e)->
     e.preventDefault()
 
     email = @refs.email.getDOMNode().value
     password = @refs.password.getDOMNode().value
-    @props.auth.login(email, password).then (didSucceed)=>
-      if didSucceed
-        @props.onLogin email
-      else
-        @setState loginFailed: true
+
+    @setState attemptingLogin: true, =>
+      @props.auth.login(email, password).then (didSucceed)=>
+        if didSucceed
+          @props.onLogin email
+        else
+          @setState
+            attemptingLogin: false
+            loginFailed: true
