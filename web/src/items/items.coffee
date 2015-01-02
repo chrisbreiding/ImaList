@@ -14,12 +14,7 @@ module.exports = React.createClass
       clearCompleted = RD.button onClick: @props.onClearCompleted,
         RD.i className: 'fa fa-ban'
 
-    RD.div
-      className: 'items'
-      RD.header null,
-        RD.h1 null, @props.listName
-        RD.button onClick: @props.onShowLists,
-          RD.i className: 'fa fa-chevron-left'
+    itemsList = if items.length
       RD.ul null, _.map items, (item, index)=>
         id = item.id
         Item
@@ -32,6 +27,18 @@ module.exports = React.createClass
             @props.onAdd
           else
             _.partial @edit, items[index + 1].id
+    else
+      RD.p
+        className: 'no-items'
+        'No Items Yet'
+
+    RD.div
+      className: 'items'
+      RD.header null,
+        RD.h1 null, @props.listName
+        RD.button onClick: @props.onShowLists,
+          RD.i className: 'fa fa-chevron-left'
+      itemsList
       RD.footer null,
         RD.button onClick: @props.onAdd,
           RD.i className: 'fa fa-plus'
