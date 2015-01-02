@@ -30,21 +30,8 @@ module.exports = React.createClass
       showItems: @state.showItems
 
   render: ->
-    lists = @state.lists
-
-    userSelectedId = @state.selectedListId ? null
-
-    fallbackId = Object.keys(lists)[0]
-    selectedListId = userSelectedId ? fallbackId
-
-    selectedList = if @state.lists[selectedListId]
-      @state.lists[selectedListId]
-    else if @state.lists[fallbackId]
-      selectedListId = fallbackId
-      @state.lists[fallbackId]
-    else
-      selectedListId = null
-      items: {}
+    lists = @_curatedLists @state.lists, @props.userEmail
+    selectedList = @_selectedList lists
 
     RD.div
       className: cs
@@ -53,7 +40,7 @@ module.exports = React.createClass
       Lists
         ref: 'lists'
         lists: lists
-        selectedListId: selectedListId
+        selectedListId: selectedList.id
         userEmail: @props.userEmail
         onLogout: @_logout
         onAdd: @_addList
@@ -81,6 +68,22 @@ module.exports = React.createClass
         @_removeActionSheet()
 
     @setState {actionSheetProps}
+
+  _curatedLists: (lists, userEmail)->
+    ListModel.approvedForUser ListModel.curated(lists), userEmail
+
+  _selectedList: (lists)->
+    userSelectedId = @state.selectedListId ? null
+
+    fallbackId = lists[0]?.id
+    selectedListId = userSelectedId ? fallbackId
+
+    if (selected = _.find lists, id: selectedListId)
+      selected
+    else if (fallback = _.find lists, id: fallbackId)
+      fallback
+    else
+      items: {}
 
   _showItems: (id)->
     @setState
