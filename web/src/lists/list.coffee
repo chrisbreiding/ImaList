@@ -28,6 +28,7 @@ module.exports = React.createClass
         'showing-options': @state.showingOptions
         'shared': @props.model.shared
         'is-owner': @props.isOwner
+        'is-selected': @props.isSelected
       name
       RD.div
         className: 'options'

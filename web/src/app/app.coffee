@@ -34,8 +34,17 @@ module.exports = React.createClass
 
     userSelectedId = @state.selectedListId ? null
 
-    selectedListId = userSelectedId ? Object.keys(lists)[0]
-    selectedList = @state.lists[selectedListId] or items: {}
+    fallbackId = Object.keys(lists)[0]
+    selectedListId = userSelectedId ? fallbackId
+
+    selectedList = if @state.lists[selectedListId]
+      @state.lists[selectedListId]
+    else if @state.lists[fallbackId]
+      selectedListId = fallbackId
+      @state.lists[fallbackId]
+    else
+      selectedListId = null
+      items: {}
 
     RD.div
       className: cs
@@ -44,6 +53,7 @@ module.exports = React.createClass
       Lists
         ref: 'lists'
         lists: lists
+        selectedListId: selectedListId
         userEmail: @props.userEmail
         onLogout: @_logout
         onAdd: @_addList

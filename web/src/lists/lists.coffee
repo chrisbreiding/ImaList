@@ -18,6 +18,7 @@ module.exports = React.createClass
           ref: id
           model: new ListModel list
           isOwner: list.owner is @props.userEmail
+          isSelected: id is @props.selectedListId
           onSelect: _.partial @props.onListSelect, id
           onUpdate: _.partial @props.onUpdate, id
           onRemove: _.partial @props.onRemove, id
