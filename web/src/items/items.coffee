@@ -30,7 +30,7 @@ module.exports = React.createClass
     else
       RD.p
         className: 'no-items'
-        'No Items Yet'
+        'No Items'
 
     RD.div
       className: 'items'
