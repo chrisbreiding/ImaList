@@ -27,7 +27,7 @@ render = (userEmail)->
   else
     Login auth: auth, onLogin: render
 
-  React.render component, document.body
+  React.render component, document.getElementById('app')
 
 auth.onAuthChange render
 
