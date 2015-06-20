@@ -7,7 +7,8 @@ Auth = require './login/auth'
 
 attachFastClick document.body
 
-FIREBASE_URL = 'https://imalist.firebaseio.com'
+appName = localStorage.appName or 'imalist'
+FIREBASE_URL = "https://#{appName}.firebaseio.com"
 
 RSVP.on 'error', (e)->
   console.error 'Error caught by RSVP:'
