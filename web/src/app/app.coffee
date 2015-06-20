@@ -94,7 +94,7 @@ module.exports = React.createClass
     @setState showItems: false
 
   _add: (type, ref, items, Model)->
-    unless Object.keys(items).length
+    if !items or !Object.keys(items).length
       @_addWithOrder type, ref, Model, 0
       return
 
