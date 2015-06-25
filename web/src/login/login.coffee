@@ -4,6 +4,7 @@ Firebase = require 'firebase'
 RD = React.DOM
 
 module.exports = React.createClass
+  displayName: 'Login'
 
   getInitialState: ->
     attemptingLogin: false

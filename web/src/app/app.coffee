@@ -13,6 +13,7 @@ RD = React.DOM
 cs = React.addons.classSet
 
 module.exports = React.createClass
+  displayName: 'App'
 
   mixins: [ReactFireMixin]
 
