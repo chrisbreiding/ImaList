@@ -30,6 +30,8 @@ module.exports = React.createClass
         'shared': @props.model.shared
         'is-owner': @props.isOwner
         'is-selected': @props.isSelected
+      'data-id': @props.id
+      RD.i className: 'sort-handle fa fa-arrows'
       name
       RD.div
         className: 'options'

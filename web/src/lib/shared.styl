@@ -77,11 +77,41 @@ header {
     width: unit;
   }
 
+  .editing &,
+  &.gu-mirror {
+    .sort-handle {
+      top: 0;
+    }
+  }
+
+  &.editing {
+    .sort-handle {
+      top: -(unit);
+    }
+  }
+
   .name {
     box-sizing: border-box;
     display: block;
     height: unit;
     text-overflow: ellipsis;
+  }
+
+  &.gu-transit {
+    background: darken(light-color, 5%);
+    opacity: 0.4;
+  }
+
+  &.gu-mirror {
+    background: light-color;
+    border: solid 1px darken(light-color, 20%);
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+    position: fixed;
+    z-index: 9999;
+
+    .options {
+      display: none;
+    }
   }
 }
 
@@ -117,6 +147,10 @@ header {
 
     li.is-selected {
       background: darken(light-color, 5%);
+    }
+
+    header button {
+      display: none;
     }
   }
 

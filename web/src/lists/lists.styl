@@ -6,7 +6,7 @@
   }
 }
 
-.lists li {
+.list {
   options(1);
 
   owner-width = unit * 3;
@@ -27,6 +27,16 @@
     }
   }
 
+  &.editing .options,
+  .editing & .options {
+    right: -(owner-width - unit);
+  }
+
+  &.editing.is-owner .options,
+  .editing &.is-owner .options {
+    right: -(owner-width);
+  }
+
   .shared-indicator {
     color: primary-color;
     display: none;
@@ -41,6 +51,7 @@
 
   .name {
     padding: .2em unit .2em .7em;
+    transition: all .25s ease;
   }
 
   span.name {
@@ -59,7 +70,6 @@
     line-height: 1;
     outline: none;
     text-overflow: ellipsis;
-    transition: all .25s ease;
     width: 100%;
 
     &:focus {
@@ -70,7 +80,14 @@
     }
   }
 
-  / .lists li .options .toggle-shared {
+  .editing &,
+  &.gu-mirror {
+    .name {
+      padding-left: unit;
+    }
+  }
+
+  .toggle-shared {
     buttonize-background(neutral-color);
     display: none;
   }
