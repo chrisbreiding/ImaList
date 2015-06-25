@@ -14,13 +14,16 @@ module.exports = React.createClass
   render: ->
     RD.li
       className: cs
+        'item': true
         'checked': @props.model.isChecked
         'editing': @state.editing
         'showing-options': @state.showingOptions
+      'data-id': @props.id
       RD.button
         ref: 'toggleChecked'
         className: 'toggle-checked', onClick: @_toggleChecked
         RD.i className: 'fa fa-check'
+      RD.i className: 'sort-handle fa fa-arrows'
       Name
         ref: 'name'
         name: @props.model.name

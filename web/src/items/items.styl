@@ -1,13 +1,32 @@
-header button {
+.back {
   text-align: left;
   padding-left: 0.8em;
   width: 4em;
 }
 
-.items {
-  li {
-    options(1);
+.edit {
+  padding-right: 0.8em;
+  right: 0;
+  text-align: right;
+
+  .editing & {
+    width: auto;
   }
+
+  span {
+    font-size: 0.8em;
+  }
+}
+
+.no-items {
+  color: neutral-color;
+  font-size: 1.2em;
+  margin-top: unit * 2;
+  text-align: center;
+}
+
+.item {
+  options(1);
 
   .toggle-checked {
     buttonize-color(#b7b7b7);
@@ -15,10 +34,6 @@ header button {
     left: 0;
     position: absolute;
     top: 0;
-  }
-
-  .editing .toggle-checked {
-    left: -(unit);
   }
 
   .name {
@@ -54,11 +69,32 @@ header button {
     }
   }
 
-  .editing .next {
-    right: 0;
+  .editing &,
+  &.gu-mirror {
+    .toggle-checked {
+      left: -(unit);
+    }
+
+    .sort-handle {
+      top: 0;
+    }
   }
 
-  .checked {
+  &.editing {
+    .toggle-checked {
+      left: -(unit);
+    }
+
+    .sort-handle {
+      top: -(unit);
+    }
+
+    .next {
+      right: 0;
+    }
+  }
+
+  &.checked {
     .toggle-checked {
       buttonize-color(action-color);
     }
@@ -68,10 +104,24 @@ header button {
     }
   }
 
-  .no-items {
-    color: neutral-color;
-    font-size: 1.2em;
-    margin-top: unit * 2;
-    text-align: center;
+  &.gu-transit {
+    background: darken(light-color, 5%);
+    opacity: 0.4;
   }
+
+  &.gu-mirror {
+    background: light-color;
+    border: solid 1px darken(light-color, 20%);
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+    position: fixed;
+    z-index: 9999;
+
+    .options {
+      display: none;
+    }
+  }
+}
+
+.gu-hide {
+  display: none !important;
 }

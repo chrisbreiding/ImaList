@@ -25,6 +25,7 @@ module.exports = React.createClass
 
     RD.li
       className: cs
+        'list': true
         'showing-options': @state.showingOptions
         'shared': @props.model.shared
         'is-owner': @props.isOwner

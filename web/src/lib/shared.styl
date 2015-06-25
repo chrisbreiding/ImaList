@@ -28,15 +28,13 @@ header {
   bottom: 0;
   position: absolute;
   top: 0;
+  padding-top: unit;
   transition: all .35s ease-out;
   width: 100%;
 
   ul {
-    bottom: unit;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    position: absolute;
-    top: unit;
     width: 100%;
   }
 
@@ -59,6 +57,32 @@ header {
 
 .items {
   left: 100%;
+}
+
+.list,
+.item {
+  .sort-handle {
+    color: #b7b7b7;
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    display: inline-block;
+    height: unit;
+    line-height: unit;
+    position: absolute;
+    text-align: center;
+    top: -(unit);
+    transition: all .25s ease;
+    width: unit;
+  }
+
+  .name {
+    box-sizing: border-box;
+    display: block;
+    height: unit;
+    text-overflow: ellipsis;
+  }
 }
 
 .showing-items {
@@ -92,8 +116,7 @@ header {
     }
 
     li.is-selected {
-      background: darken(light-color, 10%);
-      color: action-color;
+      background: darken(light-color, 5%);
     }
   }
 
