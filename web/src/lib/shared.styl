@@ -28,14 +28,15 @@ header {
   bottom: 0;
   position: absolute;
   top: 0;
-  padding-top: unit;
   transition: all .35s ease-out;
   width: 100%;
 
   ul {
+    @extend .fill-container;
+    bottom: unit;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    width: 100%;
+    top: unit;
   }
 
   li {
