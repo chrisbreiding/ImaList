@@ -165,6 +165,34 @@ header {
       display: none;
     }
   }
+
+  .list,
+  .item {
+    .sort-handle {
+      top: 0;
+    }
+  }
+
+  .list {
+    span.name {
+      padding-left: unit;
+    }
+
+    &.showing-options .sort-handle  {
+      top: -(unit);
+    }
+  }
+
+  .item {
+    .toggle-checked {
+      left: unit;
+    }
+
+    .name {
+      padding-left: unit * 2
+    }
+  }
+
 }
 
 footer {

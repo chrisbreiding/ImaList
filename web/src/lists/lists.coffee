@@ -21,7 +21,7 @@ module.exports = React.createClass
       RD.header null,
         RD.h1 null, 'ImaList'
         RD.button className: 'edit', onClick: @_toggleEditing,
-          if @state.editing then RD.span null, 'Done' else RD.i className: 'fa fa-edit'
+          if @state.editing then RD.span null, 'Done' else RD.i className: 'fa fa-sort'
       SortableList
         el: 'ul'
         handleClass: 'sort-handle'

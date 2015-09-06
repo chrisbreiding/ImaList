@@ -55,7 +55,7 @@ module.exports = React.createClass
         RD.button className: 'back', onClick: @_onBack,
           RD.i className: 'fa fa-chevron-left'
         RD.button className: 'edit', onClick: @_toggleEditing,
-          if @state.editing then RD.span null, 'Done' else RD.i className: 'fa fa-edit'
+          if @state.editing then RD.span null, 'Done' else RD.i className: 'fa fa-sort'
       itemsList
       RD.footer null,
         RD.button onClick: @props.onAdd,
