@@ -7,7 +7,7 @@
     "zunder": "~0.4.2"
   },
   "dependencies": {
-    "dragula": "~1.6.1",
+    "dragula": "^3.1.0",
     "fastclick": "~1.0.3",
     "firebase": "~2.0.6",
     "lodash": "~3.9.3",

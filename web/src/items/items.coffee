@@ -1,4 +1,3 @@
-dragula = require 'dragula'
 React = require 'react/addons'
 _ = require 'lodash'
 Item = React.createFactory require './item'
