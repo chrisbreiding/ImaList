@@ -6,7 +6,7 @@
   }
 }
 
-.lists li {
+.list {
   options(1);
 
   owner-width = unit * 3;
@@ -27,6 +27,16 @@
     }
   }
 
+  &.editing .options,
+  .editing & .options {
+    right: -(owner-width - unit);
+  }
+
+  &.editing.is-owner .options,
+  .editing &.is-owner .options {
+    right: -(owner-width);
+  }
+
   .shared-indicator {
     color: primary-color;
     display: none;
@@ -40,10 +50,8 @@
   }
 
   .name {
-    box-sizing: border-box;
-    display: block;
-    height: unit;
     padding: .2em unit .2em .7em;
+    transition: all .25s ease;
   }
 
   span.name {
@@ -52,8 +60,7 @@
 
     &:hover,
     &:focus {
-      background: darken(light-color, 10%);
-      color: action-color;
+      background: darken(light-color, 5%);
     }
   }
 
@@ -63,7 +70,6 @@
     line-height: 1;
     outline: none;
     text-overflow: ellipsis;
-    transition: all .25s ease;
     width: 100%;
 
     &:focus {
@@ -74,7 +80,14 @@
     }
   }
 
-  / .lists li .options .toggle-shared {
+  .editing &,
+  &.gu-mirror {
+    .name {
+      padding-left: unit;
+    }
+  }
+
+  .toggle-shared {
     buttonize-background(neutral-color);
     display: none;
   }

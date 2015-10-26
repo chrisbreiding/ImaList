@@ -4,6 +4,7 @@ _ = require 'lodash'
 Textarea = React.createFactory require '../lib/growing-textarea'
 
 module.exports = React.createClass
+  displayName: 'ItemName'
 
   render: ->
     Textarea

@@ -4,6 +4,7 @@ RD = React.DOM
 cs = React.addons.classSet
 
 module.exports = React.createClass
+  displayName: 'List'
 
   getInitialState: ->
     editing: false
@@ -25,10 +26,13 @@ module.exports = React.createClass
 
     RD.li
       className: cs
+        'list': true
         'showing-options': @state.showingOptions
         'shared': @props.model.shared
         'is-owner': @props.isOwner
         'is-selected': @props.isSelected
+      'data-id': @props.id
+      RD.i className: 'sort-handle fa fa-arrows'
       name
       RD.div
         className: 'options'

@@ -7,7 +7,8 @@ Auth = require './login/auth'
 
 attachFastClick document.body
 
-FIREBASE_URL = 'https://imalist.firebaseio.com'
+appName = localStorage.appName or 'imalist'
+FIREBASE_URL = "https://#{appName}.firebaseio.com"
 
 RSVP.on 'error', (e)->
   console.error 'Error caught by RSVP:'
@@ -27,7 +28,7 @@ render = (userEmail)->
   else
     Login auth: auth, onLogin: render
 
-  React.render component, document.body
+  React.render component, document.getElementById('app')
 
 auth.onAuthChange render
 

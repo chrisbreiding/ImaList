@@ -2,10 +2,16 @@ React = require 'react/addons'
 _ = require 'lodash'
 Item = React.createFactory require './item'
 ItemModel = require './item-model'
+SortableList = React.createFactory require '../lib/sortable-list'
 
 RD = React.DOM
+cs = React.addons.classSet
 
 module.exports = React.createClass
+  displayName: 'Items'
+
+  getInitialState: ->
+    editing: false
 
   render: ->
     items = ItemModel.curated @props.items
@@ -15,11 +21,19 @@ module.exports = React.createClass
         RD.i className: 'fa fa-ban'
 
     itemsList = if items.length
-      RD.ul null, _.map items, (item, index)=>
+      SortableList
+        ref: 'list'
+        el: 'ul'
+        handleClass: 'sort-handle'
+        onSortingUpdate: (ids)=>
+          _.each ids, (id, index)=>
+            @props.onUpdate id, order: index
+      , _.map items, (item, index)=>
         id = item.id
         Item
           ref: id
           key: id
+          id: id
           model: new ItemModel item
           onUpdate: _.partial @props.onUpdate, id
           onRemove: _.partial @props.onRemove, id
@@ -30,14 +44,18 @@ module.exports = React.createClass
     else
       RD.p
         className: 'no-items'
-        'No Items Yet'
+        'No Items'
 
     RD.div
-      className: 'items'
+      className: cs
+        'items': true
+        'editing': @state.editing
       RD.header null,
         RD.h1 null, @props.listName
-        RD.button onClick: @props.onShowLists,
+        RD.button className: 'back', onClick: @_onBack,
           RD.i className: 'fa fa-chevron-left'
+        RD.button className: 'edit', onClick: @_toggleEditing,
+          if @state.editing then RD.span null, 'Done' else RD.i className: 'fa fa-sort'
       itemsList
       RD.footer null,
         RD.button onClick: @props.onAdd,
@@ -46,3 +64,13 @@ module.exports = React.createClass
 
   edit: (id)->
     @refs[id].edit()
+
+  _onBack: ->
+    @_setEditing false
+    @props.onShowLists()
+
+  _toggleEditing: ->
+    @_setEditing !@state.editing
+
+  _setEditing: (editing)->
+    @setState { editing }

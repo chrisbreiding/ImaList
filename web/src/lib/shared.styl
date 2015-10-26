@@ -32,12 +32,11 @@ header {
   width: 100%;
 
   ul {
+    @extend .fill-container;
     bottom: unit;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    position: absolute;
     top: unit;
-    width: 100%;
   }
 
   li {
@@ -59,6 +58,62 @@ header {
 
 .items {
   left: 100%;
+}
+
+.list,
+.item {
+  .sort-handle {
+    color: #b7b7b7;
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    display: inline-block;
+    height: unit;
+    line-height: unit;
+    position: absolute;
+    text-align: center;
+    top: -(unit);
+    transition: all .25s ease;
+    width: unit;
+  }
+
+  .editing &,
+  &.gu-mirror {
+    .sort-handle {
+      top: 0;
+    }
+  }
+
+  &.editing {
+    .sort-handle {
+      top: -(unit);
+    }
+  }
+
+  .name {
+    box-sizing: border-box;
+    display: block;
+    height: unit;
+    text-overflow: ellipsis;
+  }
+
+  &.gu-transit {
+    background: darken(light-color, 5%);
+    opacity: 0.4;
+  }
+
+  &.gu-mirror {
+    background: light-color;
+    border: solid 1px darken(light-color, 20%);
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+    position: fixed;
+    z-index: 9999;
+
+    .options {
+      display: none;
+    }
+  }
 }
 
 .showing-items {
@@ -92,8 +147,11 @@ header {
     }
 
     li.is-selected {
-      background: darken(light-color, 10%);
-      color: action-color;
+      background: darken(light-color, 5%);
+    }
+
+    header button {
+      display: none;
     }
   }
 
@@ -107,6 +165,34 @@ header {
       display: none;
     }
   }
+
+  .list,
+  .item {
+    .sort-handle {
+      top: 0;
+    }
+  }
+
+  .list {
+    span.name {
+      padding-left: unit;
+    }
+
+    &.showing-options .sort-handle  {
+      top: -(unit);
+    }
+  }
+
+  .item {
+    .toggle-checked {
+      left: unit;
+    }
+
+    .name {
+      padding-left: unit * 2
+    }
+  }
+
 }
 
 footer {

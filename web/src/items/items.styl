@@ -1,7 +1,32 @@
-.items {
-  li {
-    options(1);
+.back {
+  text-align: left;
+  padding-left: 0.8em;
+  width: 4em;
+}
+
+.edit {
+  padding-right: 0.8em;
+  right: 0;
+  text-align: right;
+
+  .editing & {
+    width: auto;
   }
+
+  span {
+    font-size: 0.8em;
+  }
+}
+
+.no-items {
+  color: neutral-color;
+  font-size: 1.2em;
+  margin-top: unit * 2;
+  text-align: center;
+}
+
+.item {
+  options(1);
 
   .toggle-checked {
     buttonize-color(#b7b7b7);
@@ -9,10 +34,6 @@
     left: 0;
     position: absolute;
     top: 0;
-  }
-
-  .editing .toggle-checked {
-    left: -(unit);
   }
 
   .name {
@@ -48,11 +69,24 @@
     }
   }
 
-  .editing .next {
-    right: 0;
+  .editing &,
+  &.gu-mirror {
+    .toggle-checked {
+      left: -(unit);
+    }
   }
 
-  .checked {
+  &.editing {
+    .toggle-checked {
+      left: -(unit);
+    }
+
+    .next {
+      right: 0;
+    }
+  }
+
+  &.checked {
     .toggle-checked {
       buttonize-color(action-color);
     }
@@ -61,11 +95,8 @@
       color: #979797;
     }
   }
+}
 
-  .no-items {
-    color: neutral-color;
-    font-size: 1.2em;
-    margin-top: unit * 2;
-    text-align: center;
-  }
+.gu-hide {
+  display: none !important;
 }

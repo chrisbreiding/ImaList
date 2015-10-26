@@ -4,6 +4,7 @@ RD = React.DOM
 cs = React.addons.classSet
 
 module.exports = React.createClass
+  displayName: 'ActionSheet'
 
   render: ->
     if @props.confirmMessage
