@@ -2,14 +2,16 @@
 * Credit: https://github.com/andreypopp/react-textarea-autosize
 */
 
-var React = require('react');
-var _ = require('lodash');
+import _ from 'lodash';
+import React from 'react';
+import { findDOMNode } from 'react-dom';
 
-var TextareaAutosize = React.createClass({
+export default React.createClass({
   displayName: 'TextareaAutosize',
 
   render: function() {
     var props = _.extend({}, this.props, {
+      ref: 'textarea',
       onChange: this.onChange,
       style: _.extend({}, this.props.style, {overflow: 'hidden'})
     });
@@ -42,7 +44,7 @@ var TextareaAutosize = React.createClass({
 
   getDiffSize: function() {
     if (window.getComputedStyle) {
-      var styles = window.getComputedStyle(this.getDOMNode());
+      var styles = window.getComputedStyle(this._getDOMNode());
 
       // If the textarea is set to border-box, it's not necessary to
       // subtract the padding.
@@ -66,9 +68,11 @@ var TextareaAutosize = React.createClass({
       return;
     }
 
-    var node = this.getDOMNode();
+    var node = this._getDOMNode();
     node.style.height = (node.scrollHeight - this.diff) + 'px';
+  },
+
+  _getDOMNode () {
+    return findDOMNode(this.refs.textarea);
   }
 });
-
-module.exports = TextareaAutosize;

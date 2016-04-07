@@ -3,16 +3,24 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "gulp": "~3.8.8",
-    "zunder": "~0.4.2"
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "eslint": "^2.7.0",
+    "eslint-plugin-react": "^4.3.0",
+    "gulp": "~3.9.1",
+    "zunder": "~0.5.4"
   },
   "dependencies": {
-    "dragula": "^3.1.0",
-    "fastclick": "~1.0.3",
-    "firebase": "~2.0.6",
-    "lodash": "~3.9.3",
-    "react": "~0.12.0",
-    "reactfire": "~0.4.0",
-    "rsvp": "~3.0.14"
+    "classnames": "^2.2.3",
+    "dragula": "^3.6.8",
+    "fastclick": "^1.0.6",
+    "firebase": "^2.4.2",
+    "lodash": "^4.8.2",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "reactfire": "^0.6.0",
+    "rsvp": "^3.2.1"
   }
 }
