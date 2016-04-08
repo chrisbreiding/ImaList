@@ -12,10 +12,7 @@ describe 'authentication', ->
   describe 'logging in with incorrect password', ->
 
     beforeEach ->
-      cy
-        .get('.login input[type=email]').type Cypress.env('email')
-        .get('.login input[type=password]').type 'wrong'
-        .get('.login button').click()
+      cy.login 'wrong'
 
     it 'shows an error message', ->
       cy
@@ -25,10 +22,7 @@ describe 'authentication', ->
   describe 'logging in with correct password', ->
 
     beforeEach ->
-      cy
-        .get('.login input[type=email]').type Cypress.env('email')
-        .get('.login input[type=password]').type Cypress.env('password')
-        .get('.login button').click()
+      cy.login()
 
     it 'shows the lists', ->
       cy
