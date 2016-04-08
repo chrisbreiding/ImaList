@@ -16,8 +16,8 @@ export default createClass({
       <div className='login'>
         <header>
           <h1>Please Log In</h1>
-          {this.state.loginFailed ? <p className='error'>Login failed. Please try again.</p> : null}
         </header>
+        {this.state.loginFailed ? <p className='error'>Login failed. Please try again.</p> : null}
         <form onSubmit={this._attemptLogin}>
           <fieldset>
             <label>Email</label>
