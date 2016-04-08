@@ -1,3 +1,11 @@
+Cypress.addParentCommand('visitMainPage', function () {
+  cy.server().visit('/', {
+    onBeforeLoad: function (contentWindow) {
+      contentWindow.localStorage.appName = 'imalist-test';
+    }
+  });
+});
+
 Cypress.addParentCommand('login', function (password) {
   password = password || Cypress.env('password');
   cy

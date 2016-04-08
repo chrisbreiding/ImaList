@@ -1,8 +1,7 @@
 describe 'authentication', ->
 
   beforeEach ->
-    cy.server().visit '/', onBeforeLoad: (contentWindow)->
-      contentWindow.localStorage.appName = 'imalist-test'
+    cy.visitMainPage()
 
   it 'shows the login form', ->
     cy
