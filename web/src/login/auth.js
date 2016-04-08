@@ -1,5 +1,3 @@
-import RSVP from 'rsvp';
-
 export default class Auth {
   constructor (ref) {
     this._ref = ref;
@@ -17,11 +15,9 @@ export default class Auth {
     this._ref.onAuth(callback);
   }
 
-  login (email, password) {
-    return new RSVP.Promise((resolve) => {
-      this._ref.authWithPassword({ email, password }, (err, authData) => {
-        resolve(authData != null);
-      });
+  login (email, password, callback) {
+    this._ref.authWithPassword({ email, password }, (err, authData) => {
+      callback(authData != null);
     });
   }
 

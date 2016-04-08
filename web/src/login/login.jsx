@@ -44,7 +44,7 @@ export default createClass({
     const password =  findDOMNode(this.refs.password).value;
 
     this.setState({ attemptingLogin: true }, () => {
-      this.props.auth.login(email, password).then(function(didSucceed) {
+      this.props.auth.login(email, password, (didSucceed) => {
         if (didSucceed) {
           return this.props.onLogin(email);
         } else {
