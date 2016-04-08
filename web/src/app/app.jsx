@@ -133,7 +133,7 @@ export default createClass({
   },
 
   _addList () {
-    const lists = _.reject(this.state.lists, (__, key) => key === '.key');
+    const lists = _.reject(this.state.lists, (__, key) => key === '.key' || key === '.value' );
     this._add('lists', this.firebaseRefs.lists, lists, ListModel);
   },
 
