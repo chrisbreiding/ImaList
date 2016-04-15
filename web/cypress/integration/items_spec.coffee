@@ -1,20 +1,11 @@
 describe 'items', ->
 
-  $ = Cypress.$
-
   beforeEach ->
     cy
       .visitMainPage()
       .login()
-      .get('.lists > footer button').first().click()
-      .get('.list')
-      .then ->
-        $('.list').each ->
-          $(this).find('.remove').click()
-          $('.confirm').click()
-
-    cy
-      .get('.lists > footer button').first().click()
+      .clearLists()
+      .createList()
       .get('.list').first().within ->
         cy.get('input').type('list name', force: true)
         cy.get('.toggle-options').click(force: true)
@@ -111,7 +102,7 @@ describe 'items', ->
 
     beforeEach ->
       cy
-        .get('.items > footer button')
+        .get('.items > footer button').first()
         .click()
         .click()
         .click()

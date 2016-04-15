@@ -13,3 +13,21 @@ Cypress.addParentCommand('login', function (password) {
     .get('.login input[type=password]').type(password)
     .get('.login button').click();
 });
+
+Cypress.addParentCommand('clearLists', function () {
+  var $ = Cypress.$
+
+  cy
+    .get('.lists > footer button').first().click()
+    .get('.list')
+    .then(function () {
+      $('.list').each(function () {
+        $(this).find('.remove').click()
+        $('.confirm').click()
+      });
+    });
+});
+
+Cypress.addParentCommand('createList', function () {
+  cy.get('.lists > footer button').first().click();
+});
