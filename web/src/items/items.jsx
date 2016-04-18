@@ -55,7 +55,7 @@ class Items extends Component {
 
   _items (items) {
     if (this.props.isLoading) {
-      return <p className='no-items'>Loading...</p>;
+      return <p className='no-items'><i className="fa fa-hourglass-end fa-spin"></i> Loading...</p>;
     } else if (!items.length) {
       return <p className='no-items'>No Items</p>;
     }

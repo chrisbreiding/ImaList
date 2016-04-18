@@ -55,7 +55,7 @@ class Lists extends Component {
 
   _lists (lists) {
     if (this.props.isLoading) {
-      return <p className='no-items'>Loading...</p>;
+      return <p className='no-items'><i className="fa fa-hourglass-end fa-spin"></i> Loading...</p>;
     } else if (!lists.length) {
       return <p className='no-items'>No Lists</p>;
     }
