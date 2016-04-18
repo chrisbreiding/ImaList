@@ -1,27 +1,26 @@
-export default class Auth {
-  constructor (ref) {
-    this._ref = ref;
-  }
+import firebaseRef from '../data/firebase';
 
+export default {
   isAuthenticated () {
-    return this._ref.getAuth() != null;
-  }
+    return firebaseRef.getAuth() != null;
+  },
 
   userEmail () {
-    return this._ref.getAuth().password.email;
-  }
+    const auth = firebaseRef.getAuth();
+    return auth && auth.password && auth.password.email;
+  },
 
-  onAuthChange (callback) {
-    this._ref.onAuth(callback);
-  }
+  onChange (callback) {
+    firebaseRef.onAuth(() => callback(this.isAuthenticated()));
+  },
 
   login (email, password, callback) {
-    this._ref.authWithPassword({ email, password }, (err, authData) => {
+    firebaseRef.authWithPassword({ email, password }, (err, authData) => {
       callback(authData != null);
     });
-  }
+  },
 
   logout () {
-    this._ref.unauth();
-  }
+    firebaseRef.unauth();
+  },
 };

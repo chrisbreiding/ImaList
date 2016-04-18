@@ -3,11 +3,11 @@ const NAMESPACE = 'imalist';
 export default {
   data: JSON.parse(localStorage[NAMESPACE] || '{}'),
 
-  fetch: function(key) {
+  get: function(key) {
     return this.data[key];
   },
 
-  save: function(key, value) {
+  set: function(key, value) {
     if (typeof key === 'string') {
       this.data[key] = value;
     } else {

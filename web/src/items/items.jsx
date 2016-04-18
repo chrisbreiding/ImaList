@@ -1,18 +1,26 @@
 import cs from 'classnames';
 import _ from 'lodash';
-import React, { createClass } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { curated } from '../lib/collection';
+import { addItem, editItem, updateItem, removeItem, attemptClearCompleted, clearCompleted } from './items-actions';
+
+import ActionSheet from '../action-sheet/action-sheet';
 import Item from './item';
-import ItemModel from './item-model';
 import SortableList from '../lib/sortable-list';
 
-export default createClass({
-  displayName: 'Items',
+function curated (items) {
+  return _(items)
+    .map((item, id) => _.extend(item, { id }))
+    .sortBy('order')
+    .value();
+};
 
-  getInitialState () {
-    return { editing: false };
-  },
+class Items extends Component {
+  constructor (props) {
+    super(props);
+    this.state = { editing: false };
+  }
 
   render () {
     const items = curated(this.props.items);
@@ -25,27 +33,30 @@ export default createClass({
         })}
       >
         <header>
-          <h1>{this.props.listName}</h1>
-          <button className='back' onClick={this._onBack}>
+          <h1>{this.props.list.name}</h1>
+          <button className='back' onClick={this._onBack.bind(this)}>
             <i className='fa fa-chevron-left'></i>
           </button>
-          <button className='edit' onClick={this._toggleEditing}>
+          <button className='edit' onClick={this._toggleEditing.bind(this)}>
             {this.state.editing ? <span>Done</span> : <i className='fa fa-sort'></i>}
           </button>
         </header>
-        {this._itemsList(items)}
+        {this._items(items)}
         <footer>
-          <button onClick={this.props.onAdd}>
+          <button onClick={() => this._addItem()}>
             <i className='fa fa-plus'></i>
           </button>
-          {this._clearCompleted(items)}
+          {this._clearCompletedButton(items)}
         </footer>
+        {this._confirmClearCompleted()}
       </div>
     );
-  },
+  }
 
-  _itemsList (items) {
-    if (!items.length) {
+  _items (items) {
+    if (this.props.isLoading) {
+      return <p className='no-items'>Loading...</p>;
+    } else if (!items.length) {
       return <p className='no-items'>No Items</p>;
     }
 
@@ -55,50 +66,89 @@ export default createClass({
         el='ul'
         handleClass='sort-handle'
         onSortingUpdate={(ids) => {
-          _.each(ids, (id, index) => this.props.onUpdate(id, { order: index }));
+          _.each(ids, (id, order) => this._updateItem({ id, order }));
         }}
       >
       {_.map(items, (item, index) => (
         <Item
           ref={item.id}
           key={item.id}
-          id={item.id}
-          model={new ItemModel(item)}
-          onUpdate={_.partial(this.props.onUpdate, item.id)}
-          onRemove={_.partial(this.props.onRemove, item.id)}
-          onNext={index === items.length - 1 ? this.props.onAdd : _.partial(this.edit, items[index + 1].id)}
+          model={item}
+          isEditing={item.id === this.props.app.editItemId}
+          onEdit={(shouldEdit) => this._editItem(item, shouldEdit)}
+          onUpdate={(item) => this._updateItem(item)}
+          onRemove={() => this._removeItem(item)}
+          onNext={() => this._next(items, index)}
         ></Item>
       ))}
       </SortableList>
     );
-  },
+  }
 
-  _clearCompleted (items) {
+  _clearCompletedButton (items) {
     if (!_.some(items, { isChecked: true })) return null;
 
     return (
-      <button onClick={this.props.onClearCompleted}>
+      <button onClick={this._clearCompleted.bind(this)}>
         <i className='fa fa-ban'></i>
       </button>
     );
-  },
+  }
 
-  edit (id) {
-    return this.refs[id].edit();
-  },
+  _clearCompleted () {
+    this.props.dispatch(attemptClearCompleted());
+  }
+
+  _next (items, index) {
+    if (index === items.length - 1) {
+      this._addItem();
+    } else {
+      this._editItem(items[index + 1], true);
+    }
+  }
+
+  _editItem (item, shouldEdit) {
+    this.props.dispatch(editItem(shouldEdit ? item.id : null));
+  }
 
   _onBack () {
     this._setEditing(false);
     return this.props.onShowLists();
-  },
+  }
 
   _toggleEditing () {
     return this._setEditing(!this.state.editing);
-  },
+  }
 
   _setEditing (editing) {
     return this.setState({
       editing: editing
     });
   }
-});
+
+  _addItem () {
+    this.props.dispatch(addItem(this.props.list));
+  }
+
+  _updateItem (item) {
+    this.props.dispatch(updateItem(this.props.list, item));
+  }
+
+  _removeItem (item) {
+    this.props.dispatch(removeItem(this.props.list, item.id));
+  }
+
+  _confirmClearCompleted () {
+    if (!this.props.app.attemptingClearCompleted) return null;
+
+    return (
+      <ActionSheet
+        confirmMessage='Clear Completed'
+        onConfirm={() => this.props.dispatch(clearCompleted(this.props.list))}
+        onCancel={() => this.props.dispatch(attemptClearCompleted(false))}
+      />
+    );
+  }
+}
+
+export default connect(({ app }) => ({ app }))(Items);

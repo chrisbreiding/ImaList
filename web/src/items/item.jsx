@@ -1,18 +1,23 @@
 import cs from 'classnames';
-import React, { createClass } from 'react';
+import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
 import Name from './name';
 
-export default  createClass({
-  displayName: 'Item',
+export default class Item extends Component {
+  constructor (props) {
+    super(props);
 
-  getInitialState () {
-    return {
+    this.state = {
       showingOptions: false,
-      editing: false
     };
-  },
+  }
+
+  componentDidUpdate () {
+    if (this.props.isEditing) {
+      this.refs.name.edit();
+    }
+  }
 
   render () {
     return (
@@ -20,15 +25,15 @@ export default  createClass({
         className={cs({
           'item': true,
           'checked': this.props.model.isChecked,
-          'editing': this.state.editing,
+          'editing': this.props.isEditing,
           'showing-options': this.state.showingOptions,
         })}
-        data-id={this.props.id}
+        data-id={this.props.model.id}
       >
         <button
           ref='toggleChecked'
           className='toggle-checked'
-          onClick={this._toggleChecked}
+          onClick={this._toggleChecked.bind(this)}
         >
           <i className='fa fa-check'></i>
         </button>
@@ -36,61 +41,62 @@ export default  createClass({
         <Name
           ref='name'
           name={this.props.model.name}
-          editing={this.state.editing}
-          onEditingStatusChange={this._onEditingStatusChange}
-          onUpdate={this._updateName}
+          onEditingStatusChange={this._onEditingStatusChange.bind(this)}
+          onUpdate={this._updateName.bind(this)}
           onNext={this.props.onNext}
         ></Name>
         <button
           className='next'
-          onClick={this._nextIfValue}
+          onClick={this._nextIfValue.bind(this)}
         >
          <i className='fa fa-level-down'></i>
         </button>
         <div className='options'>
-          <button className='toggle-options' onClick={this._toggleOptions}>
+          <button className='toggle-options' onClick={this._toggleOptions.bind(this)}>
             <i className='fa fa-ellipsis-h'></i>
           </button>
-          <button className='remove' onClick={this._remove}>
+          <button className='remove' onClick={this._remove.bind(this)}>
             <i className='fa fa-times'></i>
           </button>
         </div>
       </li>
     );
-  },
-  edit () {
-    this.setState({ editing: true }, () => this.refs.name.edit());
-  },
+  }
 
   _nextIfValue () {
     if (this.refs.name.hasValue()) {
       this.props.onNext();
     }
-  },
+  }
 
   _toggleChecked () {
     findDOMNode(this.refs.toggleChecked).blur();
-    this.props.model.toggleChecked();
-    this.props.onUpdate(this.props.model);
-  },
+    this.props.onUpdate({
+      id: this.props.model.id,
+      isChecked: !this.props.model.isChecked,
+    });
+  }
 
   _onEditingStatusChange (editing) {
+    this.props.onEdit(editing);
+
     this.setState({
-      editing: editing,
       showingOptions: false
     });
-  },
+  }
 
   _updateName (name) {
-    this.props.model.name = name;
-    this.props.onUpdate(this.props.model);
-  },
+    this.props.onUpdate({
+      id: this.props.model.id,
+      name
+    });
+  }
 
   _toggleOptions () {
     this.setState({ showingOptions: !this.state.showingOptions });
-  },
+  }
 
   _remove () {
     this.props.onRemove();
-  },
-});
+  }
+}

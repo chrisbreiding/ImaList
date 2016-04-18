@@ -1,12 +1,10 @@
 import _ from 'lodash';
-import React, { createClass } from 'react';
+import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
 import Textarea from '../lib/growing-textarea';
 
-export default createClass({
-  displayName: 'ItemName',
-
+export default class Name extends Component {
   render () {
     return <Textarea
       ref='name'
@@ -14,11 +12,11 @@ export default createClass({
       value={this.props.name}
       onFocus={_.partial(this.props.onEditingStatusChange, true)}
       onBlur={_.partial(this.props.onEditingStatusChange, false)}
-      onChange={this._updateName}
-      onKeyDown={this._onKeyDown}
-      onKeyUp={this._onKeyUp}
+      onChange={this._updateName.bind(this)}
+      onKeyDown={this._onKeyDown.bind(this)}
+      onKeyUp={this._onKeyUp.bind(this)}
     />;
-  },
+  }
 
   edit () {
     const domNode = this._getDOMNode();
@@ -26,21 +24,21 @@ export default createClass({
     if (!domNode.setSelectionRange) return;
 
     domNode.setSelectionRange(domNode.value.length, domNode.value.length);
-  },
+  }
 
   hasValue () {
-    return (this._getDOMNode().value || '').trim() !== '';
-  },
+    return !!this._getDOMNode().value;
+  }
 
   _updateName () {
     this.props.onUpdate(this._getDOMNode().value);
-  },
+  }
 
   _onKeyDown (e) {
     if (e.key === 'Enter' && e.shiftKey) {
       e.preventDefault();
     }
-  },
+  }
 
   _onKeyUp (e) {
     if (e.key === 'Enter' && e.shiftKey && this.hasValue()) {
@@ -51,9 +49,9 @@ export default createClass({
     if (e.key === 'Escape') {
       this._getDOMNode().blur();
     }
-  },
+  }
 
   _getDOMNode () {
     return findDOMNode(this.refs.name);
-  },
-});
+  }
+}
