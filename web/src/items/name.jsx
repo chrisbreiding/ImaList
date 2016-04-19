@@ -18,12 +18,8 @@ export default class Name extends Component {
     />;
   }
 
-  edit () {
-    const domNode = this._getDOMNode();
-    domNode.focus();
-    if (!domNode.setSelectionRange) return;
-
-    domNode.setSelectionRange(domNode.value.length, domNode.value.length);
+  focus () {
+    this._getDOMNode().focus();
   }
 
   hasValue () {

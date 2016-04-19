@@ -9,13 +9,20 @@ export default class Item extends Component {
     super(props);
 
     this.state = {
+      editing: false,
       showingOptions: false,
     };
   }
 
   componentDidUpdate () {
-    if (this.props.isEditing) {
-      this.refs.name.edit();
+    if (this.props.isEditing && !this.state.editing) {
+      this.setState({ editing: true }, () => {
+        this.refs.name.focus();
+      });
+    }
+
+    if (!this.props.isEditing && this.state.editing) {
+      this.setState({ editing: false });
     }
   }
 

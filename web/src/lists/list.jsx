@@ -3,9 +3,24 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
 export default class List extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      editing: false,
+      showingOptions: false,
+    };
+  }
+
   componentDidUpdate () {
-    if (this.props.isEditing) {
-      this.refs.name.focus();
+    if (this.props.isEditing && !this.state.editing) {
+      this.setState({ editing: true, showingOptions: true }, () => {
+        this.refs.name.focus();
+      });
+    }
+
+    if (!this.props.isEditing && this.state.editing) {
+      this.setState({ editing: false });
     }
   }
 
@@ -14,7 +29,7 @@ export default class List extends Component {
       <li
         className={cs({
           'list': true,
-          'showing-options': this.props.isEditing,
+          'showing-options': this.state.showingOptions,
           'shared': this.props.model.shared,
           'is-owner': this.props.isOwner,
           'is-selected': this.props.isSelected,
@@ -25,7 +40,7 @@ export default class List extends Component {
         <span>{this._name()}</span>
         <div className='options'>
           <i className='shared-indicator fa fa-share-alt-square'></i>
-          <button className='toggle-options' onClick={this._toggleEditing.bind(this)}>
+          <button className='toggle-options' onClick={this._toggleOptions.bind(this)}>
             <i className='fa fa-ellipsis-h'></i>
           </button>
           <button className='toggle-shared' onClick={this._toggledShared.bind(this)}>
@@ -40,7 +55,7 @@ export default class List extends Component {
   }
 
   _name () {
-    if (this.props.isEditing) {
+    if (this.state.showingOptions) {
       return <input
         ref='name'
         className='name'
@@ -55,8 +70,8 @@ export default class List extends Component {
     }
   }
 
-  _toggleEditing () {
-    this.props.onEdit(!this.props.isEditing);
+  _toggleOptions () {
+    this.setState({ showingOptions: !this.state.showingOptions });
   }
 
   _toggledShared () {
@@ -79,7 +94,7 @@ export default class List extends Component {
 
   _keyup (e) {
     if (e.key === 'Enter') {
-      this._toggleEditing();
+      this._toggleOptions();
     }
   }
 }
