@@ -10,7 +10,7 @@
     "eslint": "^2.7.0",
     "eslint-plugin-react": "^4.3.0",
     "gulp": "~3.9.1",
-    "zunder": "~0.5.4"
+    "zunder": "~0.5.5"
   },
   "dependencies": {
     "classnames": "^2.2.3",
