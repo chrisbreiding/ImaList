@@ -23,7 +23,7 @@ Cypress.addParentCommand('clearLists', function () {
     .then(function () {
       $('.list').each(function () {
         $(this).find('.remove').click()
-        $('.confirm').click()
+        $('.confirm:contains("Remove List")').click()
       });
     });
 });

@@ -36,7 +36,7 @@ describe 'authentication', ->
       describe 'and confirming', ->
 
         beforeEach ->
-          cy.get('.confirm').click()
+          cy.get('.confirm:contains("Logout")').click()
 
         it 'shows the login form', ->
           cy
@@ -46,7 +46,7 @@ describe 'authentication', ->
       describe 'and canceling', ->
 
         beforeEach ->
-          cy.get('.cancel').click()
+          cy.get('.confirm:contains("Logout")').next('.cancel').click()
 
         it 'stays on the lists', ->
           cy

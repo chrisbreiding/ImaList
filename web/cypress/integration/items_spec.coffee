@@ -112,7 +112,7 @@ describe 'items', ->
       cy.get('.item').last().find('.toggle-checked').click(force: true)
 
       cy.get('.items > footer button').last().click()
-      cy.get('.confirm').click()
+      cy.get('.confirm:contains("Clear Completed")').click()
 
     it 'removes the checked items', ->
       cy

@@ -67,7 +67,7 @@ describe 'lists', ->
       cy
         .createList()
         .get('.list').first().find('.remove').click(force: true)
-        .get('.confirm').click()
+        .get('.confirm:contains("Remove List")').click()
 
     it 'removes the list', ->
       cy
