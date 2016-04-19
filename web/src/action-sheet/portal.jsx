@@ -5,8 +5,6 @@ let idNum = 0;
 
 export default class Portal extends Component {
   componentDidMount () {
-    document.body.className += ' portal-present';
-
     const id = `portal-${idNum++}`;
     let element = document.getElementById(id);
     if (!element) {
@@ -20,7 +18,6 @@ export default class Portal extends Component {
 
   componentWillUnmount () {
     document.body.removeChild(this.element);
-    document.body.className = document.body.className.replace('portal-present', '');
   }
 
   componentDidUpdate() {
