@@ -31,8 +31,8 @@
   }
 
   &,
-  & .container {
-    transition: all .25s ease;
+  .container {
+    transition: all .35s ease;
   }
 
   &.action-sheet-showing {
@@ -41,6 +41,26 @@
 
     .container {
       bottom: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .action-sheet {
+    .container {
+      bottom: auto;
+      left: 50%;
+      margin-left: -150px;
+      margin-top: -50px;
+      top: -200px;
+      width: 300px;
+    }
+
+    &.action-sheet-showing {
+      .container {
+        bottom: auto;
+        top: 50%;
+      }
     }
   }
 }

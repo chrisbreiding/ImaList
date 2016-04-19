@@ -116,10 +116,10 @@ class Lists extends Component {
 
   _confirmRemoval () {
     const listId = this.props.app.attemptingRemoveList;
-    if (!listId) return null;
 
     return (
       <ActionSheet
+        isShowing={!!listId}
         confirmMessage='Remove List'
         onConfirm={() => this.props.dispatch(removeList(listId))}
         onCancel={() => this.props.dispatch(attemptRemoveList(false))}

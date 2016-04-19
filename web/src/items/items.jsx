@@ -139,10 +139,9 @@ class Items extends Component {
   }
 
   _confirmClearCompleted () {
-    if (!this.props.app.attemptingClearCompleted) return null;
-
     return (
       <ActionSheet
+        isShowing={this.props.app.attemptingClearCompleted}
         confirmMessage='Clear Completed'
         onConfirm={() => this.props.dispatch(clearCompleted(this.props.list))}
         onCancel={() => this.props.dispatch(attemptClearCompleted(false))}

@@ -49,10 +49,9 @@ class App extends Component {
   }
 
   _confirmLogout () {
-    if (!this.props.auth.attemptingLogout) return null;
-
     return (
       <ActionSheet
+        isShowing={this.props.auth.attemptingLogout}
         confirmMessage='Logout'
         onConfirm={() => this.props.dispatch(logout())}
         onCancel={() => this.props.dispatch(attemptLogout(false))}
