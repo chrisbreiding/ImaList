@@ -1,4 +1,5 @@
 import cs from 'classnames';
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -10,6 +11,14 @@ import ActionSheet from '../action-sheet/action-sheet';
 import Items from '../items/items';
 import Lists from '../lists/lists';
 
+function curatedLists (lists, auth) {
+  return _(lists)
+    .map((list, id) => _.extend(list, { id }))
+    .sortBy('order')
+    .filter(list => list.shared || list.owner === auth.email)
+    .value();
+}
+
 class App extends Component {
   componentWillMount () {
     listen(this.props.dispatch);
@@ -20,8 +29,9 @@ class App extends Component {
   }
 
   render () {
-    const { app, auth, dispatch, lists } = this.props;
-    const selectedList = lists[app.selectedListId] || {};
+    const { app, auth, dispatch } = this.props;
+    const lists = curatedLists(this.props.lists, auth);
+    const selectedList = this._selectedList(lists);
 
     return (
       <div
@@ -46,6 +56,17 @@ class App extends Component {
         {this._confirmLogout()}
       </div>
     );
+  }
+
+  _selectedList (lists) {
+    const userSelectedId = this.props.app.selectedListId || null;
+    const fallbackId = lists[0] && lists[0].id;
+    const selectedListId = userSelectedId || fallbackId;
+
+    const selected = _.find(lists, { id: selectedListId });
+    const fallback = _.find(lists, { id: fallbackId });
+
+    return selected || fallback || { items: {} };
   }
 
   _confirmLogout () {

@@ -9,14 +9,6 @@ import ActionSheet from '../action-sheet/action-sheet';
 import SortableList from '../lib/sortable-list';
 import List from './list';
 
-function curated (lists, auth) {
-  return _(lists)
-    .map((list, id) => _.extend(list, { id }))
-    .sortBy('order')
-    .filter(list => list.shared || list.owner === auth.email)
-    .value();
-}
-
 class Lists extends Component {
   constructor(props) {
     super(props);
@@ -24,12 +16,11 @@ class Lists extends Component {
   }
 
   render () {
-    const lists = curated(this.props.lists, this.props.auth);
+    const { lists } = this.props;
 
     return (
       <div
-        className={cs({
-          lists: true,
+        className={cs('lists', {
           editing: this.state.editing,
         })}
       >
@@ -130,4 +121,4 @@ class Lists extends Component {
   }
 }
 
-export default connect(({ auth, app, lists }) => ({ auth, app, lists }))(Lists);
+export default connect(({ auth, app }) => ({ auth, app }))(Lists);
