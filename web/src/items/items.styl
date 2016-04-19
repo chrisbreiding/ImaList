@@ -61,6 +61,18 @@
     }
   }
 
+  &.type-label {
+    .toggle-checked {
+      display: none;
+    }
+
+    .name {
+      background-color: #F8F8FF;
+      font-weight: bold;
+      padding-left: .6em;
+    }
+  }
+
   .next {
     bottom: 0;
     buttonize-background(success-color);
@@ -78,11 +90,19 @@
     .toggle-checked {
       left: -(unit);
     }
+
+    .name {
+      padding-left: unit;
+    }
   }
 
   &.editing {
     .toggle-checked {
       left: -(unit);
+    }
+
+    .name {
+      padding-left: .6em;
     }
 
     .next {

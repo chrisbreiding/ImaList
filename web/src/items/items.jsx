@@ -44,7 +44,12 @@ class Items extends Component {
         {this._items(items)}
         <footer>
           <button onClick={() => this._addItem()}>
+            <span>Item</span>
             <i className='fa fa-plus'></i>
+          </button>
+          <button onClick={() => this._addItem('label')}>
+            <span>Label</span>
+            <i className='fa fa-plus-square'></i>
           </button>
           {this._clearCompletedButton(items)}
         </footer>
@@ -126,8 +131,8 @@ class Items extends Component {
     });
   }
 
-  _addItem () {
-    this.props.dispatch(addItem(this.props.list));
+  _addItem (type) {
+    this.props.dispatch(addItem(this.props.list, { type }));
   }
 
   _updateItem (item) {

@@ -42,9 +42,11 @@ class Lists extends Component {
         {this._lists(lists)}
         <footer>
           <button onClick={this._addList.bind(this)}>
+            <span>List</span>
             <i className='fa fa-plus'></i>
           </button>
           <button className='logout' onClick={this.props.onLogout}>
+            <span>Logout</span>
             <i className='fa fa-sign-out'></i>
           </button>
         </footer>

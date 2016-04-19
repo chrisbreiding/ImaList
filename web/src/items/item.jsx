@@ -20,10 +20,11 @@ export default class Item extends Component {
   }
 
   render () {
+    const type = this.props.model.type || 'todo';
+
     return (
       <li
-        className={cs({
-          'item': true,
+        className={cs('item', `type-${type}`, {
           'checked': this.props.model.isChecked,
           'editing': this.props.isEditing,
           'showing-options': this.state.showingOptions,

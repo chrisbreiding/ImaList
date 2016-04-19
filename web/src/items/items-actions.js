@@ -2,18 +2,19 @@ import _ from 'lodash';
 import C from '../data/constants';
 import firebaseRef from '../data/firebase';
 
-function newItem ({ order }) {
+function newItem ({ order, type = 'todo' }) {
   return {
     order,
+    type,
     name: '',
     isChecked: false,
   };
 }
 
-export function addItem (list) {
+export function addItem (list, { type }) {
   return (dispatch) => {
     const order = list.items && Object.keys(list.items).length ? Math.max.apply(Math, _.map(list.items, 'order')) + 1 : 0;
-    const newRef = firebaseRef.child(`lists/${list.id}/items`).push(newItem({ order }), () => {
+    const newRef = firebaseRef.child(`lists/${list.id}/items`).push(newItem({ order, type }), () => {
       dispatch(editItem(newRef.key()));
     });
   };

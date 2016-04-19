@@ -207,5 +207,22 @@ footer {
   button {
     buttonize-color(primary-color);
     @extend .icon-button;
+    position: relative;
+    width: unit + 1;
+
+    span {
+      bottom: 0.5em;
+      font-size: 0.7em;
+      left: 0;
+      line-height: 1;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+
+      + i {
+        position: relative;
+        top: -0.4em;
+      }
+    }
   }
 }
