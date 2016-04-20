@@ -126,6 +126,44 @@ header {
   }
 }
 
+footer {
+  background: light-color;
+  border-top: solid 1px primary-color;
+  bottom: 0;
+  box-sizing: border-box;
+  display: flex;
+  height: unit;
+  position: fixed;
+  width: 100%;
+
+  .spacer {
+    flex-grow: 2;
+  }
+
+  button {
+    buttonize-color(primary-color);
+    @extend .icon-button;
+    flex-shrink: 0;
+    position: relative;
+    width: unit + 1;
+
+    span {
+      bottom: 0.5em;
+      font-size: 0.7em;
+      left: 0;
+      line-height: 1;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+
+      + i {
+        position: relative;
+        top: -0.4em;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 550px) {
   .app {
     display: -webkit-flex;
@@ -183,6 +221,12 @@ header {
     }
   }
 
+  .items {
+    footer {
+      padding-right: list-width; 
+    }
+  }
+
   .item {
     .toggle-checked {
       left: unit;
@@ -201,36 +245,4 @@ header {
     }
   }
 
-}
-
-footer {
-  background: light-color;
-  border-top: solid 1px primary-color;
-  bottom: 0;
-  box-sizing: border-box;
-  height: unit;
-  position: fixed;
-  width: 100%;
-
-  button {
-    buttonize-color(primary-color);
-    @extend .icon-button;
-    position: relative;
-    width: unit + 1;
-
-    span {
-      bottom: 0.5em;
-      font-size: 0.7em;
-      left: 0;
-      line-height: 1;
-      position: absolute;
-      text-align: center;
-      width: 100%;
-
-      + i {
-        position: relative;
-        top: -0.4em;
-      }
-    }
-  }
 }

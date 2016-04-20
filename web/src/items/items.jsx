@@ -51,6 +51,7 @@ class Items extends Component {
             <span>Label</span>
             <i className='fa fa-plus-square'></i>
           </button>
+          <div className="spacer"></div>
           {this._clearCompletedButton(items)}
         </footer>
         {this._confirmClearCompleted()}
@@ -94,7 +95,8 @@ class Items extends Component {
     if (!_.some(items, { isChecked: true })) return null;
 
     return (
-      <button onClick={this._clearCompleted.bind(this)}>
+      <button className="clear-completed" onClick={this._clearCompleted.bind(this)}>
+        <span>Clear <i className="fa fa-check-square-o"></i></span>
         <i className='fa fa-ban'></i>
       </button>
     );
