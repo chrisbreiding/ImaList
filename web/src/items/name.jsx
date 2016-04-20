@@ -26,10 +26,6 @@ export default class Name extends Component {
     return !!this._value().trim();
   }
 
-  addNewLine () {
-    this.props.onUpdate(this._value() + '\n');
-  }
-
   _value () {
     return this._getDOMNode().value || '';
   }
@@ -39,27 +35,23 @@ export default class Name extends Component {
   }
 
   _onKeyDown (e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-    }
-  }
-
-  _onKeyUp (e) {
     const isEnter = e.key === 'Enter';
 
     if ((isEnter && e.shiftKey) || (isEnter && this._shouldAddNewLine())) {
-      this.addNewLine();
       return;
     }
 
     if (isEnter) {
+      e.preventDefault();
       clearTimeout(this._nextTimeout);
       this._nextTimeout = setTimeout(() => {
         this._nextTimeout = null;
         if (this.hasValue()) this.props.onNext();
       }, ENTER_DELAY);
     }
+  }
 
+  _onKeyUp (e) {
     if (e.key === 'Escape') {
       this._getDOMNode().blur();
     }
