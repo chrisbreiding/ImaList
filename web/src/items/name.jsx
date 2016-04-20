@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 
-import Textarea from '../lib/growing-textarea';
+import Textarea from 'react-textarea-autosize';
 
 export default class Name extends Component {
   render () {
