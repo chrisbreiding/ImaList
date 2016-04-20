@@ -1,8 +1,8 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
-
 import Textarea from 'react-textarea-autosize';
+
+const ENTER_DELAY = 200;
 
 export default class Name extends Component {
   render () {
@@ -10,8 +10,8 @@ export default class Name extends Component {
       ref='name'
       className='name'
       value={this.props.name}
-      onFocus={_.partial(this.props.onEditingStatusChange, true)}
-      onBlur={_.partial(this.props.onEditingStatusChange, false)}
+      onFocus={() => this.props.onEditingStatusChange(true)}
+      onBlur={() => this.props.onEditingStatusChange(false)}
       onChange={this._updateName.bind(this)}
       onKeyDown={this._onKeyDown.bind(this)}
       onKeyUp={this._onKeyUp.bind(this)}
@@ -23,28 +23,53 @@ export default class Name extends Component {
   }
 
   hasValue () {
-    return !!this._getDOMNode().value;
+    return !!this._value().trim();
+  }
+
+  addNewLine () {
+    this.props.onUpdate(this._value() + '\n');
+  }
+
+  _value () {
+    return this._getDOMNode().value || '';
   }
 
   _updateName () {
-    this.props.onUpdate(this._getDOMNode().value);
+    this.props.onUpdate(this._value());
   }
 
   _onKeyDown (e) {
-    if (e.key === 'Enter' && e.shiftKey) {
+    if (e.key === 'Enter') {
       e.preventDefault();
     }
   }
 
   _onKeyUp (e) {
-    if (e.key === 'Enter' && e.shiftKey && this.hasValue()) {
-      this.props.onNext();
+    const isEnter = e.key === 'Enter';
+
+    if ((isEnter && e.shiftKey) || (isEnter && this._shouldAddNewLine())) {
+      this.addNewLine();
       return;
+    }
+
+    if (isEnter) {
+      clearTimeout(this._nextTimeout);
+      this._nextTimeout = setTimeout(() => {
+        this._nextTimeout = null;
+        if (this.hasValue()) this.props.onNext();
+      }, ENTER_DELAY);
     }
 
     if (e.key === 'Escape') {
       this._getDOMNode().blur();
     }
+  }
+
+  _shouldAddNewLine () {
+    const shouldAdd = !!this._nextTimeout;
+    clearTimeout(this._nextTimeout);
+    this._nextTimeout = null;
+    return shouldAdd;
   }
 
   _getDOMNode () {
