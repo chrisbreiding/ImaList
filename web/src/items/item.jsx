@@ -38,14 +38,6 @@ export default class Item extends Component {
         })}
         data-id={this.props.model.id}
       >
-        <button
-          ref='toggleChecked'
-          className='toggle-checked'
-          onClick={this._toggleChecked.bind(this)}
-        >
-          <i className='fa fa-check'></i>
-        </button>
-        <i className='sort-handle fa fa-arrows'></i>
         <Name
           ref='name'
           name={this.props.model.name}
@@ -54,11 +46,13 @@ export default class Item extends Component {
           onNext={this.props.onNext}
         ></Name>
         <button
-          className='next'
-          onClick={this._nextIfValue.bind(this)}
+          ref='toggleChecked'
+          className='toggle-checked'
+          onClick={this._toggleChecked.bind(this)}
         >
-         <i className='fa fa-level-down'></i>
+          <i className='fa fa-check'></i>
         </button>
+        <i className='sort-handle fa fa-arrows'></i>
         <div className='options'>
           <button className='toggle-options' onClick={this._toggleOptions.bind(this)}>
             <i className='fa fa-ellipsis-h'></i>
@@ -69,12 +63,6 @@ export default class Item extends Component {
         </div>
       </li>
     );
-  }
-
-  _nextIfValue () {
-    if (this.refs.name.hasValue()) {
-      this.props.onNext();
-    }
   }
 
   _toggleChecked () {
