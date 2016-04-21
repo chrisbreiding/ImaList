@@ -108,6 +108,50 @@ describe 'items', ->
       it 'removes the item', ->
         cy.get('.item').should 'have.length', 0
 
+  describe 'adding a label', ->
+
+    beforeEach ->
+      cy.get('.items > footer button').eq(1).click()
+
+    it 'displays an empty label', ->
+      cy.get('.type-label').should 'have.length', 1
+
+    it 'focuses the label', ->
+      cy.get('.type-label').first().should 'have.class', 'editing'
+
+  describe 'bulk adding items', ->
+
+    beforeEach ->
+      cy.get('.items > footer button').eq(2).click()
+
+    it 'displays the bulk add form', ->
+      cy.get('.bulk-add').should 'have.class', 'modal-showing'
+
+    describe 'canceling', ->
+
+      beforeEach ->
+        cy.get('.bulk-add .cancel').click()
+
+      it 'hides the bulk add form', ->
+        cy.get('.bulk-add').should 'not.have.class', 'modal-showing'
+
+    describe 'adding', ->
+
+      beforeEach ->
+        cy
+          .get('.bulk-add textarea').type 'one{enter}two{enter}three'
+          .get('.bulk-add .add').click()
+
+      it 'hides the bulk add form', ->
+        cy.get('.bulk-add').should 'not.have.class', 'modal-showing'
+
+      it 'adds 3 items', ->
+        cy
+          .get('.item').should 'have.length', 3
+          .get('.item').first().find('textarea').should 'have.value', 'one'
+          .get('.item').eq(1).find('textarea').should 'have.value', 'two'
+          .get('.item').eq(2).find('textarea').should 'have.value', 'three'
+
   describe 'clearing completed', ->
 
     beforeEach ->
