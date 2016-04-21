@@ -126,39 +126,42 @@ header {
   }
 }
 
-footer {
-  background: light-color;
-  border-top: solid 1px primary-color;
-  bottom: 0;
-  box-sizing: border-box;
-  display: flex;
-  height: unit;
-  position: fixed;
-  width: 100%;
+.lists,
+.items {
+  > footer {
+    background: light-color;
+    border-top: solid 1px primary-color;
+    bottom: 0;
+    box-sizing: border-box;
+    display: flex;
+    height: unit;
+    position: fixed;
+    width: 100%;
 
-  .spacer {
-    flex-grow: 2;
-  }
+    .spacer {
+      flex-grow: 2;
+    }
 
-  button {
-    buttonize-color(primary-color);
-    @extend .icon-button;
-    flex-shrink: 0;
-    position: relative;
-    width: unit + 1;
+    button {
+      buttonize-color(primary-color);
+      @extend .icon-button;
+      flex-shrink: 0;
+      position: relative;
+      width: unit + 1;
 
-    span {
-      bottom: 0.5em;
-      font-size: 0.7em;
-      left: 0;
-      line-height: 1;
-      position: absolute;
-      text-align: center;
-      width: 100%;
+      span {
+        bottom: 0.5em;
+        font-size: 0.7em;
+        left: 0;
+        line-height: 1;
+        position: absolute;
+        text-align: center;
+        width: 100%;
 
-      + i {
-        position: relative;
-        top: -0.4em;
+        + i {
+          position: relative;
+          top: -0.4em;
+        }
       }
     }
   }
@@ -223,7 +226,7 @@ footer {
 
   .items {
     footer {
-      padding-right: list-width; 
+      padding-right: list-width;
     }
   }
 
@@ -244,5 +247,4 @@ footer {
       padding-left: .6em;
     }
   }
-
 }

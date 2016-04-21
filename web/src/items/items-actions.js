@@ -2,21 +2,43 @@ import _ from 'lodash';
 import C from '../data/constants';
 import firebaseRef from '../data/firebase';
 
-function newItem ({ order, type = 'todo' }) {
+function newOrder (list) {
+  return list.items && Object.keys(list.items).length ?
+    Math.max.apply(Math, _.map(list.items, 'order')) + 1 :
+    0;
+}
+
+function newItem ({ order, type = 'todo', name = '' }) {
   return {
     order,
     type,
-    name: '',
+    name,
     isChecked: false,
   };
 }
 
 export function addItem (list, { type }) {
   return (dispatch) => {
-    const order = list.items && Object.keys(list.items).length ? Math.max.apply(Math, _.map(list.items, 'order')) + 1 : 0;
+    const order = newOrder(list);
     const newRef = firebaseRef.child(`lists/${list.id}/items`).push(newItem({ order, type }), () => {
       dispatch(editItem(newRef.key()));
     });
+  };
+}
+
+export function attemptBulkAdd (bulkAddItems) {
+  return { type: C.BULK_ADD_ITEMS, bulkAddItems };
+}
+
+export function bulkAdd (list, names) {
+  return () => {
+    const startingOrder = newOrder(list);
+    _(names)
+      .reject(name => !name.trim())
+      .map((name, index) => newItem({ name, order: startingOrder + index }))
+      .each(item => {
+        firebaseRef.child(`lists/${list.id}/items`).push(item);
+      });
   };
 }
 

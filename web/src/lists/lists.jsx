@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 
 import { editList, selectList, addList, updateList, attemptRemoveList, removeList } from './lists-actions';
 
-import ActionSheet from '../action-sheet/action-sheet';
+import ActionSheet from '../modal/action-sheet';
 import SortableList from '../lib/sortable-list';
 import List from './list';
 

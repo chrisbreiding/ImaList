@@ -1,10 +1,18 @@
-.action-sheet {
+.modal {
   background: rgba(0, 0, 0, 0.7);
   @extend .fill-container;
   opacity: 0.01;
   overflow: hidden;
+  transition: all .35s ease;
   z-index: -1;
 
+  &.modal-showing {
+    opacity: 1;
+    z-index: 100;
+  }
+}
+
+.action-sheet {
   .container {
     background: light-color;
     bottom: -200px;
@@ -12,6 +20,7 @@
     left: 0;
     padding: .5em;
     position: absolute;
+    transition: all .35s ease;
     width: 100%;
 
     button {
@@ -31,18 +40,8 @@
     }
   }
 
-  &,
-  .container {
-    transition: all .35s ease;
-  }
-
-  &.action-sheet-showing {
-    opacity: 1;
-    z-index: 100;
-
-    .container {
-      bottom: 0;
-    }
+  &.modal-showing .container {
+    bottom: 0;
   }
 }
 
@@ -57,11 +56,9 @@
       width: 300px;
     }
 
-    &.action-sheet-showing {
-      .container {
-        bottom: auto;
-        top: 50%;
-      }
+    &.modal-showing .container {
+      bottom: auto;
+      top: 50%;
     }
   }
 }

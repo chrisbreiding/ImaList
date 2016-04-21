@@ -3,9 +3,19 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { addItem, editItem, updateItem, removeItem, attemptClearCompleted, clearCompleted } from './items-actions';
+import {
+  addItem,
+  attemptBulkAdd,
+  attemptClearCompleted,
+  bulkAdd,
+  clearCompleted,
+  editItem,
+  removeItem,
+  updateItem,
+} from './items-actions';
 
-import ActionSheet from '../action-sheet/action-sheet';
+import ActionSheet from '../modal/action-sheet';
+import BulkAdd from './bulk-add';
 import Item from './item';
 import SortableList from '../lib/sortable-list';
 
@@ -51,17 +61,31 @@ class Items extends Component {
             <span>Label</span>
             <i className='fa fa-plus-square'></i>
           </button>
-          <div className="spacer"></div>
+          <button onClick={() => this._attemptBulkAdd()}>
+            <span>Bulk</span>
+            <i className='fa fa-plus-square-o'></i>
+          </button>
+          <div className='spacer'></div>
           {this._clearCompletedButton(items)}
         </footer>
-        {this._confirmClearCompleted()}
+        <BulkAdd
+          isShowing={this.props.app.bulkAddItems}
+          onCancel={() => this.props.dispatch(attemptBulkAdd(false))}
+          onAdd={this._addBulkItems.bind(this)}
+        />
+        <ActionSheet
+          isShowing={this.props.app.attemptingClearCompleted}
+          confirmMessage='Clear Completed'
+          onConfirm={() => this.props.dispatch(clearCompleted(this.props.list))}
+          onCancel={() => this.props.dispatch(attemptClearCompleted(false))}
+        />
       </div>
     );
   }
 
   _items (items) {
     if (this.props.isLoading) {
-      return <p className='no-items'><i className="fa fa-hourglass-end fa-spin"></i> Loading...</p>;
+      return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>;
     } else if (!items.length) {
       return <p className='no-items'>No Items</p>;
     }
@@ -95,8 +119,8 @@ class Items extends Component {
     if (!_.some(items, { isChecked: true })) return null;
 
     return (
-      <button className="clear-completed" onClick={this._clearCompleted.bind(this)}>
-        <span>Clear <i className="fa fa-check-square-o"></i></span>
+      <button className='clear-completed' onClick={this._clearCompleted.bind(this)}>
+        <span>Clear <i className='fa fa-check-square-o'></i></span>
         <i className='fa fa-ban'></i>
       </button>
     );
@@ -145,15 +169,13 @@ class Items extends Component {
     this.props.dispatch(removeItem(this.props.list, item.id));
   }
 
-  _confirmClearCompleted () {
-    return (
-      <ActionSheet
-        isShowing={this.props.app.attemptingClearCompleted}
-        confirmMessage='Clear Completed'
-        onConfirm={() => this.props.dispatch(clearCompleted(this.props.list))}
-        onCancel={() => this.props.dispatch(attemptClearCompleted(false))}
-      />
-    );
+  _attemptBulkAdd () {
+    this.props.dispatch(attemptBulkAdd(true));
+  }
+
+  _addBulkItems (names) {
+    this.props.dispatch(bulkAdd(this.props.list, names));
+    this.props.dispatch(attemptBulkAdd(false));
   }
 }
 

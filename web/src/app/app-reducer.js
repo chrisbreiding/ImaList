@@ -5,6 +5,7 @@ import localStore from '../data/local-store';
 export default function (state = {
   attemptingClearCompleted: false,
   attemptingRemoveList: false,
+  bulkAddItems: false,
   editItemId: null,
   editListId: null,
   loadingData: false,
@@ -12,6 +13,10 @@ export default function (state = {
   showItems: localStore.get('showItems') || false,
 }, action = {}) {
   switch (action.type) {
+    case C.BULK_ADD_ITEMS:
+      return _.extend({}, state, {
+        bulkAddItems: action.bulkAddItems
+      });
     case C.EDIT_LIST:
       return _.extend({}, state, {
         editListId: action.listId

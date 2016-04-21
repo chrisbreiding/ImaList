@@ -7,7 +7,7 @@ import { attemptLogout, logout } from '../login/auth-actions';
 import { listen, stopListening } from '../app/app-actions';
 import { selectList } from '../lists/lists-actions';
 
-import ActionSheet from '../action-sheet/action-sheet';
+import ActionSheet from '../modal/action-sheet';
 import Items from '../items/items';
 import Lists from '../lists/lists';
 
