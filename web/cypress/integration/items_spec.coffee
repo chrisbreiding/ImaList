@@ -53,12 +53,10 @@ describe 'items', ->
           .get('.item').first().find 'textarea'
           .should 'have.text', 'some item'
 
-    describe 'clicking next', ->
+    describe 'hitting enter', ->
 
       beforeEach ->
-        cy.get('.item').first().within ->
-          cy.get('textarea').type 'first one'
-          cy.get('.next').click(force: true)
+        cy.get('.item').first().find('textarea').type 'first one{enter}'
 
       it 'adds another item', ->
         cy
@@ -69,11 +67,23 @@ describe 'items', ->
       describe 'from first item', ->
 
         beforeEach ->
-          cy.get('.item').first().find('.next').click(force: true)
+          cy.get('.item').first().find('textarea').type '{enter}'
 
         it 'focuses the second item', ->
           cy.get('.item').last()
             .should 'have.class', 'editing'
+
+    describe 'double-tapping enter', ->
+
+      beforeEach ->
+        cy
+          .get('.item').first().find 'textarea'
+          .type 'first one{enter}{enter}second line'
+
+      it 'adds a new line', ->
+        cy
+          .get('.item').first().find 'textarea'
+          .should 'have.value', 'first one\nsecond line'
 
     describe 'checking off the item', ->
 
