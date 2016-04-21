@@ -1,26 +1,39 @@
-import firebaseRef from '../data/firebase';
+import { updateAuthStatus } from './auth-actions';
+import getFirebaseRef from '../data/firebase';
+import { observeStore } from '../data/store';
 
 export default {
   isAuthenticated () {
-    return firebaseRef.getAuth() != null;
+    return this._firebaseRef.getAuth() != null;
   },
 
   userEmail () {
-    const auth = firebaseRef.getAuth();
+    const auth = this._firebaseRef.getAuth();
     return auth && auth.password && auth.password.email;
   },
 
-  onChange (callback) {
-    firebaseRef.onAuth(() => callback(this.isAuthenticated()));
+  listenForChange (dispatch) {
+    this._firebaseRef = getFirebaseRef();
+    observeStore('app.appName', () => this._firebaseRefChanged(dispatch));
+    this._firebaseRefChanged(dispatch);
+  },
+
+  _firebaseRefChanged (dispatch) {
+    if (this._authChangeCallback) {
+      this._firebaseRef.offAuth(this._authChangeCallback);
+    }
+    this._firebaseRef = getFirebaseRef();
+    this._authChangeCallback = () => dispatch(updateAuthStatus());
+    this._firebaseRef.onAuth(this._authChangeCallback);
   },
 
   login (email, password, callback) {
-    firebaseRef.authWithPassword({ email, password }, (err, authData) => {
+    this._firebaseRef.authWithPassword({ email, password }, (err, authData) => {
       callback(authData != null);
     });
   },
 
   logout () {
-    firebaseRef.unauth();
+    this._firebaseRef.unauth();
   },
 };

@@ -1,18 +1,15 @@
-import { connect } from 'react-redux';
 import React from 'react';
-import { findDOMNode } from 'react-dom';
+import { connect } from 'react-redux';
 import { login } from './auth-actions';
 
-function Login ({ dispatch, auth }) {
+import Settings from './settings';
+
+function Login ({ auth, dispatch }) {
   let email, password;
 
   function attemptLogin (e) {
     e.preventDefault();
-
-    dispatch(login(
-      findDOMNode(email).value,
-      findDOMNode(password).value
-    ));
+    dispatch(login(email.value, password.value));
   }
 
   return (
@@ -36,6 +33,9 @@ function Login ({ dispatch, auth }) {
             <button>Log In</button>}
         </fieldset>
       </form>
+      <footer>
+        <Settings />
+      </footer>
     </div>
   );
 }

@@ -1,5 +1,13 @@
 import Firebase from 'firebase';
+import { observeStore } from './store';
 
-const appName = localStorage.appName || 'imalist';
+let ref;
 
-export default new Firebase(`https://${appName}.firebaseio.com`);
+observeStore('app.appName', (appName) => {
+  if (ref) ref.off();
+  ref = new Firebase(`https://${appName}.firebaseio.com`);
+});
+
+export default function getFirebaseRef () {
+  return ref;
+}

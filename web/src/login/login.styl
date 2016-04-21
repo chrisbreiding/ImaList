@@ -29,13 +29,43 @@
     }
   }
 
-  button,
-  span {
-    buttonize-background(action-color);
-    border-radius: 3px;
-    color: light-color;
-    float: right;
-    margin-top: .5em;
-    padding: .5em .75em;
+  > form {
+    button,
+    span {
+      buttonize-background(action-color);
+      border-radius: 3px;
+      color: light-color;
+      float: right;
+      margin-top: .5em;
+      padding: .5em .75em;
+    }
+  }
+
+  footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.settings {
+  form {
+    display: inline-block;
+    opacity: 0.01;
+    transition: all 0.5s ease;
+  }
+
+  &.showing-settings form {
+    opacity: 1.0;
+  }
+
+  label {
+    color: dark-color;
+    font-size: 0.8em;
+  }
+
+  button {
+    buttonize-color(neutral-color);
+    @extend .icon-button;
   }
 }

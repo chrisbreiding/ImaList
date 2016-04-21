@@ -32,3 +32,7 @@ export function logout () {
     auth.logout();
   };
 }
+
+export function showSettings (showingSettings) {
+  return { type: C.SHOW_SETTINGS, showingSettings };
+}

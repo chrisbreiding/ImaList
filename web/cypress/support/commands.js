@@ -1,9 +1,8 @@
 Cypress.addParentCommand('visitMainPage', function () {
-  cy.server().visit('/', {
-    onBeforeLoad: function (contentWindow) {
-      contentWindow.localStorage.appName = 'imalist-test';
-    }
-  });
+  cy
+    .server().visit('/')
+    .get('.settings button').click()
+    .get('.settings input').clear().type('imalist-test{enter}');
 });
 
 Cypress.addParentCommand('login', function (password) {
@@ -11,7 +10,7 @@ Cypress.addParentCommand('login', function (password) {
   cy
     .get('.login input[type=email]').type(Cypress.env('email'))
     .get('.login input[type=password]').type(password)
-    .get('.login button').click();
+    .get('.login > form button').click();
 });
 
 Cypress.addParentCommand('clearLists', function () {
