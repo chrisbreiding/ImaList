@@ -15,7 +15,7 @@ class Settings extends Component {
   render () {
     return (
       <div className={cs('settings', {
-          'showing-settings': this.props.auth.showingSettings
+        'showing-settings': this.props.auth.showingSettings,
       })}>
         <form onSubmit={this._onSubmit.bind(this)}>
           <label>App Name</label>

@@ -16,40 +16,40 @@ export default function (state = {
   switch (action.type) {
     case C.ATTEMPT_CLEAR_COMPLETED:
       return _.extend({}, state, {
-        attemptingClearCompleted: action.clearCompleted
+        attemptingClearCompleted: action.clearCompleted,
       });
     case C.ATTEMPT_REMOVE_LIST:
       return _.extend({}, state, {
-        attemptingRemoveList: action.listId
+        attemptingRemoveList: action.listId,
       });
     case C.BULK_ADD_ITEMS:
       return _.extend({}, state, {
-        bulkAddItems: action.bulkAddItems
+        bulkAddItems: action.bulkAddItems,
       });
     case C.EDIT_LIST:
       return _.extend({}, state, {
-        editListId: action.listId
+        editListId: action.listId,
       });
     case C.EDIT_ITEM:
       return _.extend({}, state, {
-        editItemId: action.itemId
+        editItemId: action.itemId,
       });
     case C.LOADING_DATA:
       return _.extend({}, state, {
-        loadingData: action.loadingData
+        loadingData: action.loadingData,
       });
     case C.SELECT_LIST:
       return _.extend({}, state, {
         editListId: null,
-        selectedListId: action.listId
+        selectedListId: action.listId,
       });
     case C.SHOW_ITEMS:
       return _.extend({}, state, {
-        showItems: action.showItems
+        showItems: action.showItems,
       });
     case C.UPDATE_APP_NAME:
       return _.extend({}, state, {
-        appName: action.appName
+        appName: action.appName,
       });
     default:
       return state;

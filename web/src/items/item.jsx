@@ -77,14 +77,14 @@ export default class Item extends Component {
     this.props.onEdit(editing);
 
     this.setState({
-      showingOptions: false
+      showingOptions: false,
     });
   }
 
   _updateName (name) {
     this.props.onUpdate({
       id: this.props.model.id,
-      name
+      name,
     });
   }
 

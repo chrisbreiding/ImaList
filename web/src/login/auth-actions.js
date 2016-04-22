@@ -5,7 +5,7 @@ export function updateAuthStatus () {
   return {
     type: C.UPDATE_AUTH_STATUS,
     email: auth.userEmail(),
-    isAuthenticated: auth.isAuthenticated()
+    isAuthenticated: auth.isAuthenticated(),
   };
 }
 
@@ -21,7 +21,7 @@ export function login (email, password) {
       }
     });
   };
-};
+}
 
 export function attemptLogout (attemptingLogout) {
   return { type: C.ATTEMPT_LOGOUT, attemptingLogout };

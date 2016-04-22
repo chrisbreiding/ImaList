@@ -37,7 +37,7 @@ class App extends Component {
       <div
         className={cs({
           'app': true,
-          'showing-items': app.showItems
+          'showing-items': app.showItems,
         })}
       >
         <Lists

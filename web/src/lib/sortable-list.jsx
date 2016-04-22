@@ -8,13 +8,13 @@ function idsAndIndex (els, el) {
   const index = _.findIndex(ids, _.partial(_.isEqual, el.dataset.id));
 
   return { ids, index };
-};
+}
 
 export default createClass({
   displayName: 'SortableList',
 
   propTypes: {
-    onSortingUpdate: React.PropTypes.func.isRequired
+    onSortingUpdate: React.PropTypes.func.isRequired,
   },
 
   componentDidMount () {
@@ -38,7 +38,7 @@ export default createClass({
           handleEl = handleEl.parentElement;
         }
         return false;
-      }
+      },
     }).on('drag', (el, container) => {
       originalIndex = idsAndIndex(container.children, el).index;
     }).on('drop', (el, container) => {
@@ -69,5 +69,5 @@ export default createClass({
 
   render () {
     return React.createElement(this.props.el || 'div', { ref: 'list' }, this.props.children);
-  }
+  },
 });

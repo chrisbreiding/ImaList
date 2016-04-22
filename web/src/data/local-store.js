@@ -18,5 +18,5 @@ export default {
     }
     localStorage[NAMESPACE] = JSON.stringify(this.data);
     return value;
-  }
+  },
 };

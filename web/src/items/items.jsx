@@ -24,7 +24,7 @@ function curated (items) {
     .map((item, id) => _.extend(item, { id }))
     .sortBy('order')
     .value();
-};
+}
 
 class Items extends Component {
   constructor (props) {
@@ -39,7 +39,7 @@ class Items extends Component {
       <div
         className={cs({
           'items': true,
-          'editing': this.state.editing
+          'editing': this.state.editing,
         })}
       >
         <header>
@@ -153,7 +153,7 @@ class Items extends Component {
 
   _setEditing (editing) {
     return this.setState({
-      editing: editing
+      editing: editing,
     });
   }
 
