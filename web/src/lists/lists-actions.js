@@ -31,7 +31,7 @@ export function selectList (listId = null) {
 
 export function addList (lists, email) {
   return (dispatch) => {
-    const order = lists.length ? Math.max.apply(Math, _.map(lists, 'order')) + 1 : 0;
+    const order = lists.length ? Math.max(..._.map(lists, 'order')) + 1 : 0;
     const newRef = getFirebaseRef().child('lists').push(newList({ order, owner: email }), () => {
       dispatch(editList(newRef.key()));
     });

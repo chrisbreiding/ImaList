@@ -152,9 +152,7 @@ class Items extends Component {
   }
 
   _setEditing (editing) {
-    return this.setState({
-      editing: editing,
-    });
+    return this.setState({ editing });
   }
 
   _addItem (type) {

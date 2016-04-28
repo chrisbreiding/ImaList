@@ -42,18 +42,18 @@ export default createClass({
     }).on('drag', (el, container) => {
       originalIndex = idsAndIndex(container.children, el).index;
     }).on('drop', (el, container) => {
-        const ref = idsAndIndex(container.children, el);
-        const ids = ref.ids;
-        const index = ref.index;
+      const ref = idsAndIndex(container.children, el);
+      const ids = ref.ids;
+      const index = ref.index;
 
-        if (originalIndex === container.children.length - 1) {
-          container.appendChild(el);
-        } else if (index < originalIndex) {
-          container.insertBefore(el, container.children[originalIndex + 1]);
-        } else {
-          container.insertBefore(el, container.children[originalIndex]);
-        }
-        this.props.onSortingUpdate(ids);
+      if (originalIndex === container.children.length - 1) {
+        container.appendChild(el);
+      } else if (index < originalIndex) {
+        container.insertBefore(el, container.children[originalIndex + 1]);
+      } else {
+        container.insertBefore(el, container.children[originalIndex]);
+      }
+      this.props.onSortingUpdate(ids);
     });
   },
 

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { updateAppName } from '../app/app-actions';
 import { showSettings } from './auth-actions';
 
-
 class Settings extends Component {
   componentDidUpdate () {
     if (this.props.auth.showingSettings) {

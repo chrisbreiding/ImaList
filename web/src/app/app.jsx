@@ -15,7 +15,7 @@ function curatedLists (lists, auth) {
   return _(lists)
     .map((list, id) => _.extend(list, { id }))
     .sortBy('order')
-    .filter(list => list.shared || list.owner === auth.email)
+    .filter((list) => list.shared || list.owner === auth.email)
     .value();
 }
 

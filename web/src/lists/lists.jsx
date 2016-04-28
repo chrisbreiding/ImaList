@@ -10,7 +10,7 @@ import SortableList from '../lib/sortable-list';
 import List from './list';
 
 class Lists extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = { editing: false };
   }
@@ -36,7 +36,7 @@ class Lists extends Component {
             <span>List</span>
             <i className='fa fa-plus'></i>
           </button>
-          <div className="spacer"></div>
+          <div className='spacer'></div>
           <button className='logout' onClick={this.props.onLogout}>
             <span>Logout</span>
             <i className='fa fa-sign-out'></i>
@@ -49,7 +49,7 @@ class Lists extends Component {
 
   _lists (lists) {
     if (this.props.isLoading) {
-      return <p className='no-items'><i className="fa fa-hourglass-end fa-spin"></i> Loading...</p>;
+      return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>;
     } else if (!lists.length) {
       return <p className='no-items'>No Lists</p>;
     }
@@ -62,7 +62,7 @@ class Lists extends Component {
           _.each(ids, (id, order) => this._updateList({ id, order }));
         }}
       >
-        {_.map(lists, list => (
+        {_.map(lists, (list) => (
           <List
             key={list.id}
             ref={list.id}

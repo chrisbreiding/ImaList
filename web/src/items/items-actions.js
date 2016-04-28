@@ -4,7 +4,7 @@ import getFirebaseRef from '../data/firebase';
 
 function newOrder (list) {
   return list.items && Object.keys(list.items).length ?
-    Math.max.apply(Math, _.map(list.items, 'order')) + 1 :
+    Math.max(..._.map(list.items, 'order')) + 1 :
     0;
 }
 
@@ -34,9 +34,9 @@ export function bulkAdd (list, names) {
   return () => {
     const startingOrder = newOrder(list);
     _(names)
-      .reject(name => !name.trim())
+      .reject((name) => !name.trim())
       .map((name, index) => newItem({ name, order: startingOrder + index }))
-      .each(item => {
+      .each((item) => {
         getFirebaseRef().child(`lists/${list.id}/items`).push(item);
       });
   };
@@ -65,7 +65,7 @@ export function attemptClearCompleted (clearCompleted = true) {
 export function clearCompleted (list) {
   return (dispatch, getState) => {
     const items = getState().lists[list.id].items;
-    _.each(items, item => {
+    _.each(items, (item) => {
       if (item.isChecked) {
         getFirebaseRef().child(`lists/${list.id}/items/${item.id}`).remove();
       }

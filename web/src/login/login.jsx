@@ -5,7 +5,8 @@ import { login } from './auth-actions';
 import Settings from './settings';
 
 function Login ({ auth, dispatch }) {
-  let email, password;
+  let email;
+  let password;
 
   function attemptLogin (e) {
     e.preventDefault();
@@ -21,11 +22,11 @@ function Login ({ auth, dispatch }) {
       <form onSubmit={attemptLogin}>
         <fieldset>
           <label>Email</label>
-          <input ref={node => email = node} type='email' />
+          <input ref={(node) => email = node} type='email' />
         </fieldset>
         <fieldset>
           <label>Password</label>
-          <input ref={node => password = node} type='password' />
+          <input ref={(node) => password = node} type='password' />
         </fieldset>
         <fieldset>
           {auth.attemptingLogin ?

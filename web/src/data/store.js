@@ -19,7 +19,7 @@ export const store = createStoreWithMiddleware(rootReducer);
 export function observeStore (selector, onChange) {
   let currentValue;
 
-  function handleChange() {
+  function handleChange () {
     let nextValue = _.get(store.getState(), selector);
     if (nextValue !== currentValue) {
       currentValue = nextValue;

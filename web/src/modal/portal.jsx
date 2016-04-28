@@ -20,7 +20,7 @@ export default class Portal extends Component {
     document.body.removeChild(this.element);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     render((
       <div className={this.props.className || ''}>
         {this.props.children}
