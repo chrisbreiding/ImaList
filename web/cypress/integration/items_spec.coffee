@@ -7,9 +7,9 @@ describe 'items', ->
       .clearLists()
       .createList()
       .get('.list').first().within ->
-        cy.get('input').type('list name', force: true)
-        cy.get('.toggle-options').click(force: true)
-        cy.get('.name').click(force: true)
+        cy.get('input').type('list name')
+        cy.get('.toggle-options').click()
+        cy.get('.name').click()
 
   it 'shows the items', ->
     cy
@@ -45,7 +45,7 @@ describe 'items', ->
       beforeEach ->
         cy
           .get('.item').first().find 'textarea'
-          .type 'some item', force: true
+          .type 'some item'
           .reload()
 
       it 'persists the item name', ->
@@ -85,12 +85,13 @@ describe 'items', ->
           .get('.item').first().find 'textarea'
           .should 'have.value', 'first one\nsecond line'
 
-    describe 'checking off the item', ->
+    describe.only 'checking off the item', ->
 
       beforeEach ->
         cy
+          .get('.item').first().find('textarea').blur()
           .get('.item').first().find '.toggle-checked'
-          .click(force: true)
+          .click()
           .reload()
 
       it 'persists the item checked state', ->
@@ -102,8 +103,8 @@ describe 'items', ->
 
       beforeEach ->
         cy.get('.item').first().within ->
-          cy.get('.toggle-options').click(force: true)
-          cy.get('.remove').click(force: true)
+          cy.get('.toggle-options').click()
+          cy.get('.remove').click()
 
       it 'removes the item', ->
         cy.get('.item').should 'have.length', 0
@@ -161,9 +162,9 @@ describe 'items', ->
         .click()
         .click()
 
-      cy.get('.item').first().find('.toggle-checked').click(force: true)
-      cy.get('.item').eq(1).find('textarea').type 'will remain', force: true
-      cy.get('.item').last().find('.toggle-checked').click(force: true)
+      cy.get('.item').first().find('.toggle-checked').click()
+      cy.get('.item').eq(1).find('textarea').type 'will remain'
+      cy.get('.item').last().find('.toggle-checked').click()
 
       cy.get('.items > footer button').last().click()
       cy.get('.confirm:contains("Clear Completed")').click()
