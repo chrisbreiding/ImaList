@@ -85,7 +85,7 @@ describe 'items', ->
           .get('.item').first().find 'textarea'
           .should 'have.value', 'first one\nsecond line'
 
-    describe.only 'checking off the item', ->
+    describe 'checking off the item', ->
 
       beforeEach ->
         cy
