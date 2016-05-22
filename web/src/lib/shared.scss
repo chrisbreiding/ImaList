@@ -1,22 +1,22 @@
 header {
-  background: primary-color;
+  background: $primary-color;
   box-sizing: border-box;
-  height: unit;
-  line-height: unit;
+  height: $unit;
+  line-height: $unit;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 10;
 
   h1 {
-    color: light-color;
+    color: $light-color;
     @extend .fill-container;
-    line-height: unit;
+    line-height: $unit;
     text-align: center;
   }
 
   button {
-    buttonize-color(light-color);
+    @include buttonize-color($light-color);
     @extend .icon-button;
     position: absolute;
   }
@@ -24,7 +24,7 @@ header {
 
 .lists,
 .items {
-  background: light-color;
+  background: $light-color;
   bottom: 0;
   position: absolute;
   top: 0;
@@ -33,17 +33,17 @@ header {
 
   ul {
     @extend .fill-container;
-    bottom: unit;
+    bottom: $unit;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    top: unit;
+    top: $unit;
   }
 
   li {
     border-top: solid 1px #e3e3e3;
 
     .remove {
-      buttonize-background(error-color);
+      @include buttonize-background($error-color);
     }
 
     &:first-child {
@@ -69,13 +69,13 @@ header {
     cursor: -moz-grab;
     cursor: -webkit-grab;
     display: inline-block;
-    height: unit;
-    line-height: unit;
+    height: $unit;
+    line-height: $unit;
     position: absolute;
     text-align: center;
-    top: -(unit);
+    top: -($unit);
     transition: all .25s ease;
-    width: unit;
+    width: $unit;
   }
 
   .editing &,
@@ -87,25 +87,25 @@ header {
 
   &.editing {
     .sort-handle {
-      top: -(unit);
+      top: -($unit);
     }
   }
 
   .name {
     box-sizing: border-box;
     display: block;
-    height: unit;
+    height: $unit;
     text-overflow: ellipsis;
   }
 
   &.gu-transit {
-    background: darken(light-color, 5%);
+    background: darken($light-color, 5%);
     opacity: 0.4;
   }
 
   &.gu-mirror {
-    background: light-color;
-    border: solid 1px darken(light-color, 20%);
+    background: $light-color;
+    border: solid 1px darken($light-color, 20%);
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
     position: fixed;
     z-index: 9999;
@@ -129,12 +129,12 @@ header {
 .lists,
 .items {
   > footer {
-    background: light-color;
-    border-top: solid 1px primary-color;
+    background: $light-color;
+    border-top: solid 1px $primary-color;
     bottom: 0;
     box-sizing: border-box;
     display: flex;
-    height: unit;
+    height: $unit;
     position: fixed;
     width: 100%;
 
@@ -143,11 +143,11 @@ header {
     }
 
     button {
-      buttonize-color(primary-color);
+      @include buttonize-color($primary-color);
       @extend .icon-button;
       flex-shrink: 0;
       position: relative;
-      width: unit + 1;
+      width: $unit + 1;
 
       span {
         bottom: 0.5em;
@@ -173,7 +173,7 @@ header {
     display: flex;
   }
 
-  list-width = 250px;
+  $list-width: 250px;
 
   .showing-items .lists,
   .lists {
@@ -181,14 +181,14 @@ header {
     flex-shrink: 0;
     left: 0;
     position: relative;
-    width: list-width;
+    width: $list-width;
 
     footer {
-      width: list-width;
+      width: $list-width;
     }
 
     li.is-selected {
-      background: darken(light-color, 5%);
+      background: darken($light-color, 5%);
     }
 
     header button {
@@ -216,31 +216,31 @@ header {
 
   .list {
     span.name {
-      padding-left: unit;
+      padding-left: $unit;
     }
 
     &.showing-options .sort-handle  {
-      top: -(unit);
+      top: -($unit);
     }
   }
 
   .items {
     footer {
-      padding-right: list-width;
+      padding-right: $list-width;
     }
   }
 
   .item {
     .toggle-checked {
-      left: unit;
+      left: $unit;
     }
 
     .name {
-      padding-left: unit * 2
+      padding-left: $unit * 2
     }
 
     &.type-label .name {
-      padding-left: unit;
+      padding-left: $unit;
     }
 
     &.editing.type-label .name {

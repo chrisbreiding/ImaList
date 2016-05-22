@@ -5,38 +5,38 @@
 }
 
 .list {
-  options(1);
+  @include options(1);
 
-  owner-width = unit * 3;
+  $owner-width: $unit * 3;
 
   &.is-owner .options {
-    right: -(owner-width - unit);
-    width: owner-width;
+    right: -($owner-width - $unit);
+    width: $owner-width;
   }
 
   &.is-owner.showing-options {
     .name {
-      padding-right: owner-width + 1em;
+      padding-right: $owner-width + 1em;
     }
 
     .options {
       right: 0;
-      width: owner-width + .5em;
+      width: $owner-width + .5em;
     }
   }
 
   &.editing .options,
   .editing & .options {
-    right: -(owner-width - unit);
+    right: -($owner-width - $unit);
   }
 
   &.editing.is-owner .options,
   .editing &.is-owner .options {
-    right: -(owner-width);
+    right: -($owner-width);
   }
 
   .shared-indicator {
-    color: primary-color;
+    color: $primary-color;
     display: none;
     position: absolute;
     left: -.8em;
@@ -48,22 +48,22 @@
   }
 
   .name {
-    padding: .2em unit .2em .7em;
+    padding: .2em $unit .2em .7em;
     transition: all .25s ease;
   }
 
   span.name {
     cursor: pointer;
-    line-height: unit - .4em;
+    line-height: $unit - .4em;
 
     &:hover,
     &:focus {
-      background: darken(light-color, 5%);
+      background: darken($light-color, 5%);
     }
   }
 
   input.name {
-    border: solid primary-color 0;
+    border: solid $primary-color 0;
     border-radius: 0;
     line-height: 1;
     outline: none;
@@ -81,12 +81,12 @@
   .editing &,
   &.gu-mirror {
     .name {
-      padding-left: unit;
+      padding-left: $unit;
     }
   }
 
   .toggle-shared {
-    buttonize-background(neutral-color);
+    @include buttonize-background($neutral-color);
     display: none;
   }
 

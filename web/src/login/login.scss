@@ -1,8 +1,8 @@
 .login {
-  padding-top: unit;
+  padding-top: $unit;
 
   .error {
-    color: error-color;
+    color: $error-color;
     font-size: .8em;
     margin: 1em .5em;
   }
@@ -25,16 +25,16 @@
     width: 100%;
 
     &:focus {
-      outline: solid 3px primary-color;
+      outline: solid 3px $primary-color;
     }
   }
 
   > form {
     button,
     span {
-      buttonize-background(action-color);
+      @include buttonize-background($action-color);
       border-radius: 3px;
-      color: light-color;
+      color: $light-color;
       float: right;
       margin-top: .5em;
       padding: .5em .75em;
@@ -60,12 +60,12 @@
   }
 
   label {
-    color: dark-color;
+    color: $dark-color;
     font-size: 0.8em;
   }
 
   button {
-    buttonize-color(neutral-color);
+    @include buttonize-color($neutral-color);
     @extend .icon-button;
   }
 }

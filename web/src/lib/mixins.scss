@@ -1,35 +1,35 @@
-buttonize-background(color) {
-  background: color;
+@mixin buttonize-background($color) {
+  background: $color;
   transition: all .25s ease;
 
   &:hover,
   &:focus,
   &:active {
-    background: darken(color, 20%);
+    background: darken($color, 20%);
   }
 }
 
-buttonize-color(color) {
-  color: color;
+@mixin buttonize-color($color) {
+  color: $color;
   transition: all .25s ease;
 
   &:hover,
   &:focus,
   &:active {
-    color: darken(color, 20%);
+    color: darken($color, 20%);
   }
 }
 
-options(num-options) {
-  num-options = num-options + 1;
-  option-width = unit;
-  full-width = option-width * num-options;
+@mixin options($num) {
+  $num-options: $num + 1;
+  $option-width: $unit;
+  $full-width: $option-width * $num-options;
 
   overflow: hidden;
   position: relative;
 
   .toggle-options {
-    buttonize-color(#b7b7b7);
+    @include buttonize-color(#b7b7b7);
     @extend .icon-button;
 
     i {
@@ -38,12 +38,12 @@ options(num-options) {
   }
 
   .options {
-    height: unit;
+    height: $unit;
     position: absolute;
     top: 0;
-    right: -(full-width - unit);
+    right: -($full-width - $unit);
     transition: all .25s ease;
-    width: full-width;
+    width: $full-width;
 
     button {
       @extend .icon-button;
@@ -52,7 +52,7 @@ options(num-options) {
 
   &.showing-options {
     .name {
-      padding-right: full-width + 1em;
+      padding-right: $full-width + 1em;
     }
 
     &.editing .name {
@@ -61,7 +61,7 @@ options(num-options) {
 
     .toggle-options {
       padding-left: .5em;
-      width: unit + .5em;
+      width: $unit + .5em;
       text-align: left;
 
       i {
@@ -72,12 +72,12 @@ options(num-options) {
 
     .options {
       right: 0;
-      width: full-width + .5em;
+      width: $full-width + .5em;
     }
   }
 
   &.editing .options,
   .editing & .options {
-    right: -(full-width);
+    right: -($full-width);
   }
 }

@@ -2,14 +2,14 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 
 html,
 body {
-  background: light-color;
+  background: $light-color;
   height: 100%;
   overflow: hidden;
   width: 100%;
 }
 
 body {
-  color: dark-color;
+  color: $dark-color;
   font-size: 18px;
 }
 
@@ -35,14 +35,14 @@ em {
 a {
   &:link,
   &:visited {
-    color: action-color;
+    color: $action-color;
     text-decoration: none;
   }
 
   &:hover,
   &:focus,
   &:active {
-    color: darken(action-color, 20%);
+    color: darken($action-color, 20%);
     text-decoration: underline;
   }
 }
@@ -67,7 +67,7 @@ textarea {
 button {
   background: none;
   border: none;
-  color: light-color;
+  color: $light-color;
   font-size: 1em;
   cursor: pointer;
   outline: none;

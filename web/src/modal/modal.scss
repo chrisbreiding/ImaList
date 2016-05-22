@@ -14,7 +14,7 @@
 
 .action-sheet {
   .container {
-    background: light-color;
+    background: $light-color;
     bottom: -200px;
     box-sizing: border-box;
     left: 0;
@@ -31,11 +31,11 @@
     }
 
     .confirm {
-      buttonize-background(error-color);
+      @include buttonize-background($error-color);
     }
 
     .cancel {
-      buttonize-background(neutral-color);
+      @include buttonize-background($neutral-color);
       margin-top: .5em;
     }
   }
