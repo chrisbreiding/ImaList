@@ -1,5 +1,5 @@
 import C from '../data/constants';
-import getFirebaseRef from '../data/firebase';
+import { getFirebaseRef } from '../data/firebase';
 import localStore from '../data/local-store';
 
 export function updateAppName (appName) {
@@ -25,7 +25,7 @@ export function listen (dispatch) {
   });
 
   getFirebaseRef().on('child_removed', (childSnapshot) => {
-    if (childSnapshot.key() === 'lists') {
+    if (childSnapshot.key === 'lists') {
       dispatch(didUpdateLists({}));
     }
   });

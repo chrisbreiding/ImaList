@@ -1,13 +1,26 @@
-import Firebase from 'firebase';
+import firebase from 'firebase';
 import { observeStore } from './store';
 
-let ref;
+let app;
 
-observeStore('app.appName', (appName) => {
-  if (ref) ref.off();
-  ref = new Firebase(`https://${appName}.firebaseio.com`);
+observeStore('app.app', (appData) => {
+  app = firebase.initializeApp({
+    apiKey: appData.apiKey,
+    authDomain: `${appData.name}.firebaseapp.com`,
+    databaseURL: `https://${appData.name}.firebaseio.com`,
+    storageBucket: `${appData.name}.appspot.com`,
+  }, appData.name);
 });
 
-export default function getFirebaseRef () {
-  return ref;
+function getFirebaseAuth () {
+  return firebase.auth(app);
+}
+
+function getFirebaseRef () {
+  return firebase.database(app).ref();
+}
+
+export {
+  getFirebaseAuth,
+  getFirebaseRef,
 }

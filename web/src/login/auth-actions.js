@@ -13,12 +13,12 @@ export function login (email, password) {
   return (dispatch) => {
     dispatch({ type: C.ATTEMPT_LOGIN });
 
-    auth.login(email, password, (didSucceed) => {
-      if (didSucceed) {
-        dispatch(updateAuthStatus(true));
-      } else {
-        dispatch({ type: C.LOGIN_FAILED });
-      }
+    auth.login(email, password)
+    .then(() => {
+      dispatch(updateAuthStatus());
+    })
+    .catch(() => {
+      dispatch({ type: C.LOGIN_FAILED });
     });
   };
 }

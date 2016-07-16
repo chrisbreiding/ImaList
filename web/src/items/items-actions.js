@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import C from '../data/constants';
-import getFirebaseRef from '../data/firebase';
+import { getFirebaseRef } from '../data/firebase';
 
 function newOrder (list) {
   return list.items && Object.keys(list.items).length ?
@@ -21,7 +21,7 @@ export function addItem (list, { type }) {
   return (dispatch) => {
     const order = newOrder(list);
     const newRef = getFirebaseRef().child(`lists/${list.id}/items`).push(newItem({ order, type }), () => {
-      dispatch(editItem(newRef.key()));
+      dispatch(editItem(newRef.key));
     });
   };
 }

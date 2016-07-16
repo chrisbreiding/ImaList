@@ -15,7 +15,7 @@
     "classnames": "^2.2.3",
     "dragula": "^3.6.8",
     "fastclick": "^1.0.6",
-    "firebase": "^2.4.2",
+    "firebase": "^3.2.0",
     "lodash": "^4.8.2",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",

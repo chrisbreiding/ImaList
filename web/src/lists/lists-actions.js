@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import C from '../data/constants';
-import getFirebaseRef from '../data/firebase';
+import { getFirebaseRef } from '../data/firebase';
 import localStore from '../data/local-store';
 
 function newList ({ order, owner }) {
@@ -33,7 +33,7 @@ export function addList (lists, email) {
   return (dispatch) => {
     const order = lists.length ? Math.max(..._.map(lists, 'order')) + 1 : 0;
     const newRef = getFirebaseRef().child('lists').push(newList({ order, owner: email }), () => {
-      dispatch(editList(newRef.key()));
+      dispatch(editList(newRef.key));
     });
   };
 }

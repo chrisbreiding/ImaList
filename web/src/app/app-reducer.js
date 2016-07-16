@@ -3,7 +3,10 @@ import C from '../data/constants';
 import localStore from '../data/local-store';
 
 export default function (state = {
-  appName: localStore.get('appName') || 'imalist',
+  app: {
+    name: localStore.get('appName') || 'imalist',
+    apiKey: localStore.get('apiKey'),
+  },
   attemptingClearCompleted: false,
   attemptingRemoveList: false,
   bulkAddItems: false,
@@ -49,7 +52,10 @@ export default function (state = {
       });
     case C.UPDATE_APP_NAME:
       return _.extend({}, state, {
-        appName: action.appName,
+        app: {
+          name: action.appName,
+          apiKey: localStore.get('apiKey'),
+        },
       });
     default:
       return state;

@@ -1,8 +1,13 @@
 Cypress.addParentCommand('visitMainPage', function () {
   cy
-    .server().visit('/')
-    .get('.settings button').click()
-    .get('.settings input').clear().type('imalist-test{enter}');
+    .server().visit('/', {
+      onBeforeLoad: function (win) {
+        win.localStorage.imalist = JSON.stringify({
+          appName: 'imalist-test',
+          apiKey: Cypress.env('apiKey'),
+        });
+      }
+    })
 });
 
 Cypress.addParentCommand('login', function (password) {
