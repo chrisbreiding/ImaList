@@ -1,9 +1,11 @@
 import { updateAuthStatus } from './auth-actions';
 import { getFirebaseAuth } from '../data/firebase'
 
-let theDispatch
-
 export default {
+  init (dispatch) {
+    this.dispatch = dispatch
+  },
+
   isAuthenticated () {
     return !!this._currentUser()
   },
@@ -13,9 +15,10 @@ export default {
     return user && user.email;
   },
 
-  listenForChange (dispatch) {
-    theDispatch = dispatch
-    getFirebaseAuth().onAuthStateChanged(() => dispatch(updateAuthStatus()))
+  listenForChange () {
+    getFirebaseAuth().onAuthStateChanged(() => {
+      this.dispatch(updateAuthStatus())
+    })
   },
 
   login (email, password) {
@@ -24,7 +27,7 @@ export default {
 
   logout () {
     getFirebaseAuth().signOut().then(() => {
-      theDispatch(updateAuthStatus())
+      this.dispatch(updateAuthStatus())
     });
   },
 

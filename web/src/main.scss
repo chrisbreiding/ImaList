@@ -3,5 +3,5 @@
 @import 'lib/extensions';
 @import 'lib/mixins';
 @import 'lib/base';
-@import './*/*';
-@import './*/**/*';
+@import 'lib/shared';
+@import '!(lib)*/**/*';

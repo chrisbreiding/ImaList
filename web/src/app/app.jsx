@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import auth from '../login/auth';
 import { attemptLogout, logout } from '../login/auth-actions';
 import { listen, stopListening } from '../app/app-actions';
 import { selectList } from '../lists/lists-actions';
@@ -21,6 +22,8 @@ function curatedLists (lists, auth) {
 
 class App extends Component {
   componentWillMount () {
+    auth.init(this.props.dispatch);
+    auth.listenForChange();
     listen(this.props.dispatch);
   }
 

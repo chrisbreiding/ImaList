@@ -15,6 +15,7 @@ export default function (state = {
   loadingData: false,
   selectedListId: localStore.get('selectedListId') || null,
   showItems: localStore.get('showItems') || false,
+  state: C.NEEDS_INITIALIZATION,
 }, action = {}) {
   switch (action.type) {
     case C.ATTEMPT_CLEAR_COMPLETED:

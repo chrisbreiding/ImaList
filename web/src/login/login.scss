@@ -49,6 +49,18 @@
 }
 
 .settings {
+  position: absolute;
+  top: 100%;
+  margin-top: -$unit;
+
+  button {
+    @include buttonize-background($neutral-color);
+    @extend .icon-button;
+
+    border-radius: 0;
+    width: auto;
+  }
+
   form {
     display: inline-block;
     opacity: 0.01;
@@ -62,10 +74,5 @@
   label {
     color: $dark-color;
     font-size: 0.8em;
-  }
-
-  button {
-    @include buttonize-color($neutral-color);
-    @extend .icon-button;
   }
 }

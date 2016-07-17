@@ -5,6 +5,7 @@ export default function (state = {
   attemptingLogin: false,
   attemptingLogout: false,
   email: null,
+  initializingApp: true,
   isAuthenticated: false,
   loginFailed: false,
   showingSettings: false,

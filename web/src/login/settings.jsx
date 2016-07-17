@@ -16,17 +16,27 @@ class Settings extends Component {
       <div className={cs('settings', {
         'showing-settings': this.props.auth.showingSettings,
       })}>
-        <form onSubmit={this._onSubmit.bind(this)}>
-          <label>App Name</label>
-          <input
-            ref='appName'
-            placeholder='App Name'
-            defaultValue={this.props.app.appName}
-          />
-        </form>
         <button onClick={this._toggleShowing.bind(this)}>
-          <i className='fa fa-cog'></i>
+          <i className='fa fa-cog'></i> Firebase Settings
         </button>
+        <form onSubmit={this._onSubmit.bind(this)}>
+          <fieldset>
+            <label>App Name</label>
+            <input
+              ref='appName'
+              placeholder='App Name'
+              defaultValue={this.props.app.appName}
+            />
+          </fieldset>
+          <fieldset>
+            <label>API Key</label>
+            <input
+              ref='apiKey'
+              placeholder='API Key'
+              defaultValue={this.props.app.apiKey}
+            />
+          </fieldset>
+        </form>
       </div>
     );
   }

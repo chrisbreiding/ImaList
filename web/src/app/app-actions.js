@@ -38,3 +38,10 @@ export function listen (dispatch) {
 export function stopListening () {
   getFirebaseRef().off();
 }
+
+export function updateAppState (state) {
+  return {
+    type: C.UPDATE_APP_STATE,
+    state,
+  }
+}

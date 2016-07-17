@@ -34,9 +34,7 @@ function Login ({ auth, dispatch }) {
             <button>Log In</button>}
         </fieldset>
       </form>
-      <footer>
-        <Settings />
-      </footer>
+      <Settings />
     </div>
   );
 }
