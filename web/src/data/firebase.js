@@ -1,35 +1,31 @@
 import firebase from 'firebase';
-import { updateAppState } from '../app/app-actions'
-import C from './constants'
-import { observeStore, store } from './store';
 
-let app;
-
-observeStore('app.app', (appData) => {
-  if (app) app.delete()
+function init (prevApp, appName, apiKey) {
+  if (prevApp) prevApp.delete()
 
   try {
-    app = firebase.initializeApp({
-      apiKey: appData.apiKey,
-      authDomain: `${appData.name}.firebaseapp.com`,
-      databaseURL: `https://${appData.name}.firebaseio.com`,
-      storageBucket: `${appData.name}.appspot.com`,
-    }, appData.name);
-    store.dispatch(updateAppState(C.NEEDS_AUTH))
+    const app = firebase.initializeApp({
+      apiKey,
+      authDomain: `${appName}.firebaseapp.com`,
+      databaseURL: `https://${appName}.firebaseio.com`,
+      storageBucket: `${appName}.appspot.com`,
+    }, appName);
+    return app
   } catch (e) {
-    store.dispatch(updateAppState(C.NEEDS_FIREBASE_CONFIG))
+    return null
   }
-});
+}
 
-function getFirebaseAuth () {
+function getAuth (app) {
   return app.auth();
 }
 
-function getFirebaseRef () {
+function getRef (app) {
   return app.database().ref();
 }
 
-export {
-  getFirebaseAuth,
-  getFirebaseRef,
+export default {
+  getAuth,
+  getRef,
+  init,
 }

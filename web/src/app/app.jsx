@@ -3,7 +3,6 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import auth from '../login/auth';
 import { attemptLogout, logout } from '../login/auth-actions';
 import { listen, stopListening } from '../app/app-actions';
 import { selectList } from '../lists/lists-actions';
@@ -22,13 +21,11 @@ function curatedLists (lists, auth) {
 
 class App extends Component {
   componentWillMount () {
-    auth.init(this.props.dispatch);
-    auth.listenForChange();
-    listen(this.props.dispatch);
+    listen(this.props.app.firebaseApp, this.props.dispatch);
   }
 
   componentWillUnmount () {
-    stopListening();
+    stopListening(this.props.app.firebaseApp);
   }
 
   render () {
@@ -40,7 +37,7 @@ class App extends Component {
       <div
         className={cs({
           'app': true,
-          'showing-items': app.showItems,
+          'showing-items': app.showingItems,
         })}
       >
         <Lists
@@ -77,7 +74,7 @@ class App extends Component {
       <ActionSheet
         isShowing={this.props.auth.attemptingLogout}
         confirmMessage='Logout'
-        onConfirm={() => this.props.dispatch(logout())}
+        onConfirm={() => this.props.dispatch(logout(this.props.app.firebaseApp))}
         onCancel={() => this.props.dispatch(attemptLogout(false))}
       />
     );

@@ -1,31 +1,33 @@
-import cs from 'classnames';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateAppName } from '../app/app-actions';
-import { showSettings } from './auth-actions';
+
+import C from '../data/constants'
+import { updateFirebaseSettings } from '../app/app-actions';
+
+import Modal from '../modal/modal'
 
 class Settings extends Component {
   componentDidUpdate () {
-    if (this.props.auth.showingSettings) {
+    if (this.props.app.showingFirebaseSettings) {
       this.refs.appName.focus();
     }
   }
 
   render () {
+    const { app } = this.props
+
     return (
-      <div className={cs('settings', {
-        'showing-settings': this.props.auth.showingSettings,
-      })}>
-        <button onClick={this._toggleShowing.bind(this)}>
-          <i className='fa fa-cog'></i> Firebase Settings
-        </button>
+      <Modal className='settings modal-form' isShowing={this._shouldShowSettings()}>
+        <header>
+          <h1>Firebase Settings</h1>
+        </header>
         <form onSubmit={this._onSubmit.bind(this)}>
           <fieldset>
             <label>App Name</label>
             <input
               ref='appName'
               placeholder='App Name'
-              defaultValue={this.props.app.appName}
+              defaultValue={app.appName}
             />
           </fieldset>
           <fieldset>
@@ -33,31 +35,29 @@ class Settings extends Component {
             <input
               ref='apiKey'
               placeholder='API Key'
-              defaultValue={this.props.app.apiKey}
+              defaultValue={app.apiKey}
             />
           </fieldset>
+          <fieldset>
+            <button>Save</button>
+          </fieldset>
         </form>
-      </div>
+      </Modal>
     );
   }
 
-  _toggleShowing () {
-    if (this.props.auth.showingSettings) {
-      this._updateAppName();
-    } else {
-      this.props.dispatch(showSettings(true));
-    }
+  _shouldShowSettings () {
+    const { app } = this.props
+
+    return app.state === C.NEEDS_INITIALIZATION
+           || app.state === C.NEEDS_FIREBASE_CONFIG
+           || app.showingFirebaseSettings;
   }
 
   _onSubmit (e) {
     e.preventDefault();
-    this._updateAppName();
-  }
-
-  _updateAppName () {
-    this.props.dispatch(updateAppName(this.refs.appName.value))
-    this.props.dispatch(showSettings(false));
+    this.props.dispatch(updateFirebaseSettings(this.refs.appName.value, this.refs.apiKey.value))
   }
 }
 
-export default connect(({ app, auth }) => ({ app, auth }))(Settings);
+export default connect(({ app }) => ({ app }))(Settings);

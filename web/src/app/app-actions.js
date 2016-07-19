@@ -1,11 +1,24 @@
+import auth from '../login/auth'
 import C from '../data/constants';
-import { getFirebaseRef } from '../data/firebase';
+import firebase from '../data/firebase';
 import localStore from '../data/local-store';
 
-export function updateAppName (appName) {
+export function showFirebaseSettings (showingFirebaseSettings) {
+  return { type: C.SHOW_FIREBASE_SETTINGS, showingFirebaseSettings };
+}
+
+export function updateFirebaseSettings (appName, apiKey) {
   return (dispatch) => {
     localStore.set('appName', appName);
-    dispatch({ type: C.UPDATE_APP_NAME, appName });
+    localStore.set('apiKey', apiKey);
+    dispatch({ type: C.UPDATE_FIREBASE_SETTINGS, appName, apiKey });
+  };
+}
+
+export function updateFirebaseApp (firebaseApp) {
+  return (dispatch) => {
+    dispatch({ type: C.UPDATE_FIREBASE_APP, firebaseApp });
+    auth.listenForChange(firebaseApp)
   };
 }
 
@@ -13,30 +26,30 @@ function didUpdateLists (lists) {
   return { type: C.LISTS_UPDATED, lists };
 }
 
-export function listen (dispatch) {
+export function listen (app, dispatch) {
   dispatch({ type: C.LOADING_DATA, loadingData: true });
 
-  getFirebaseRef().on('child_added', (childSnapshot) => {
+  firebase.getRef(app).on('child_added', (childSnapshot) => {
     dispatch(didUpdateLists(childSnapshot.val()));
   });
 
-  getFirebaseRef().on('child_changed', (childSnapshot) => {
+  firebase.getRef(app).on('child_changed', (childSnapshot) => {
     dispatch(didUpdateLists(childSnapshot.val()));
   });
 
-  getFirebaseRef().on('child_removed', (childSnapshot) => {
+  firebase.getRef(app).on('child_removed', (childSnapshot) => {
     if (childSnapshot.key === 'lists') {
       dispatch(didUpdateLists({}));
     }
   });
 
-  getFirebaseRef().on('value', () => {
+  firebase.getRef(app).on('value', () => {
     dispatch({ type: C.LOADING_DATA, loadingData: false });
   });
 }
 
-export function stopListening () {
-  getFirebaseRef().off();
+export function stopListening (app) {
+  firebase.getRef(app).off();
 }
 
 export function updateAppState (state) {

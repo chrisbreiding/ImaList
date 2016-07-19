@@ -1,37 +1,37 @@
 import { updateAuthStatus } from './auth-actions';
-import { getFirebaseAuth } from '../data/firebase'
+import firebase from '../data/firebase'
 
 export default {
   init (dispatch) {
     this.dispatch = dispatch
   },
 
-  isAuthenticated () {
-    return !!this._currentUser()
+  isAuthenticated (app) {
+    return !!this._currentUser(app)
   },
 
-  userEmail () {
-    const user = this._currentUser();
-    return user && user.email;
+  userEmail (app) {
+    const user = this._currentUser(app);
+    return user ? user.email : null;
   },
 
-  listenForChange () {
-    getFirebaseAuth().onAuthStateChanged(() => {
-      this.dispatch(updateAuthStatus())
+  listenForChange (app) {
+    firebase.getAuth(app).onAuthStateChanged(() => {
+      this.dispatch(updateAuthStatus(app))
     })
   },
 
-  login (email, password) {
-    return getFirebaseAuth().signInWithEmailAndPassword(email, password);
+  login (app, email, password) {
+    return firebase.getAuth(app).signInWithEmailAndPassword(email, password);
   },
 
-  logout () {
-    getFirebaseAuth().signOut().then(() => {
-      this.dispatch(updateAuthStatus())
+  logout (app) {
+    firebase.getAuth(app).signOut().then(() => {
+      this.dispatch(updateAuthStatus(app))
     });
   },
 
-  _currentUser () {
-    return getFirebaseAuth().currentUser;
+  _currentUser (app) {
+    return firebase.getAuth(app).currentUser;
   },
 };

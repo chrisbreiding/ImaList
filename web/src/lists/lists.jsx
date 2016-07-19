@@ -24,7 +24,7 @@ class Lists extends Component {
           editing: this.state.editing,
         })}
       >
-        <header>
+        <header className='fixed'>
           <h1>ImaList</h1>
           <button className='edit' onClick={this._toggleEditing.bind(this)}>
             {this.state.editing ? <span>Done</span> : <i className='fa fa-sort'></i>}
@@ -89,11 +89,11 @@ class Lists extends Component {
   }
 
   _addList () {
-    this.props.dispatch(addList(this.props.lists, this.props.auth.email));
+    this.props.dispatch(addList(this.props.app.firebaseApp, this.props.lists, this.props.auth.email));
   }
 
   _updateList (list) {
-    this.props.dispatch(updateList(list));
+    this.props.dispatch(updateList(this.props.app.firebaseApp, list));
   }
 
   _removeList (list) {
@@ -115,7 +115,7 @@ class Lists extends Component {
       <ActionSheet
         isShowing={!!listId}
         confirmMessage='Remove List'
-        onConfirm={() => this.props.dispatch(removeList(listId))}
+        onConfirm={() => this.props.dispatch(removeList(this.props.app.firebaseApp, listId))}
         onCancel={() => this.props.dispatch(attemptRemoveList(false))}
       />
     );

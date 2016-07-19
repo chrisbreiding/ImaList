@@ -14,7 +14,6 @@
     "react"
   ],
   "rules": {
-    "arrow-body-style": ["error", "as-needed"],
     "array-bracket-spacing": ["error", "never"],
     "arrow-parens": ["error", "always"],
     "arrow-spacing": "error",
@@ -83,7 +82,6 @@
     "prefer-rest-params": "error",
     "prefer-spread": "error",
     "prefer-template": "error",
-    "semi-spacing": "error",
     "space-before-blocks": "error",
     "space-before-function-paren": "error",
     "space-in-parens": ["error", "never"],
@@ -93,7 +91,6 @@
     "use-isnan": "error",
     "valid-typeof": "error",
 
-    "jsx-quotes": ["error", "prefer-single"],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/react-in-jsx-scope": "error"

@@ -42,7 +42,7 @@ class Items extends Component {
           'editing': this.state.editing,
         })}
       >
-        <header>
+        <header className='fixed'>
           <h1>{this.props.list.name}</h1>
           <button className='back' onClick={this._onBack.bind(this)}>
             <i className='fa fa-chevron-left'></i>
@@ -139,7 +139,7 @@ class Items extends Component {
   }
 
   _editItem (item, shouldEdit) {
-    this.props.dispatch(editItem(shouldEdit ? item.id : null));
+    this.props.dispatch(editItem(this.props.app.firebaseApp, shouldEdit ? item.id : null));
   }
 
   _onBack () {
@@ -156,15 +156,15 @@ class Items extends Component {
   }
 
   _addItem (type) {
-    this.props.dispatch(addItem(this.props.list, { type }));
+    this.props.dispatch(addItem(this.props.app.firebaseApp, this.props.list, { type }));
   }
 
   _updateItem (item) {
-    this.props.dispatch(updateItem(this.props.list, item));
+    this.props.dispatch(updateItem(this.props.app.firebaseApp, this.props.list, item));
   }
 
   _removeItem (item) {
-    this.props.dispatch(removeItem(this.props.list, item.id));
+    this.props.dispatch(removeItem(this.props.app.firebaseApp, this.props.list, item.id));
   }
 
   _attemptBulkAdd () {
@@ -172,7 +172,7 @@ class Items extends Component {
   }
 
   _addBulkItems (names) {
-    this.props.dispatch(bulkAdd(this.props.list, names));
+    this.props.dispatch(bulkAdd(this.props.app.firebaseApp, this.props.list, names));
     this.props.dispatch(attemptBulkAdd(false));
   }
 }

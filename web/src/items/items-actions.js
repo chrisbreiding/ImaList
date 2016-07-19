@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import C from '../data/constants';
-import { getFirebaseRef } from '../data/firebase';
+import firebase from '../data/firebase';
 
 function newOrder (list) {
   return list.items && Object.keys(list.items).length ?
@@ -17,10 +17,10 @@ function newItem ({ order, type = 'todo', name = '' }) {
   };
 }
 
-export function addItem (list, { type }) {
+export function addItem (app, list, { type }) {
   return (dispatch) => {
     const order = newOrder(list);
-    const newRef = getFirebaseRef().child(`lists/${list.id}/items`).push(newItem({ order, type }), () => {
+    const newRef = firebase.getRef(app).child(`lists/${list.id}/items`).push(newItem({ order, type }), () => {
       dispatch(editItem(newRef.key));
     });
   };
@@ -30,31 +30,31 @@ export function attemptBulkAdd (bulkAddItems) {
   return { type: C.BULK_ADD_ITEMS, bulkAddItems };
 }
 
-export function bulkAdd (list, names) {
+export function bulkAdd (app, list, names) {
   return () => {
     const startingOrder = newOrder(list);
     _(names)
       .reject((name) => !name.trim())
       .map((name, index) => newItem({ name, order: startingOrder + index }))
       .each((item) => {
-        getFirebaseRef().child(`lists/${list.id}/items`).push(item);
+        firebase.getRef(app).child(`lists/${list.id}/items`).push(item);
       });
   };
 }
 
-export function editItem (itemId) {
+export function editItem (app, itemId) {
   return { type: C.EDIT_ITEM, itemId };
 }
 
-export function updateItem (list, item) {
+export function updateItem (app, list, item) {
   return () => {
-    getFirebaseRef().child(`lists/${list.id}/items/${item.id}`).update(item);
+    firebase.getRef(app).child(`lists/${list.id}/items/${item.id}`).update(item);
   };
 }
 
-export function removeItem (list, id) {
+export function removeItem (app, list, id) {
   return () => {
-    getFirebaseRef().child(`lists/${list.id}/items/${id}`).remove();
+    firebase.getRef(app).child(`lists/${list.id}/items/${id}`).remove();
   };
 }
 
@@ -62,12 +62,12 @@ export function attemptClearCompleted (clearCompleted = true) {
   return { type: C.ATTEMPT_CLEAR_COMPLETED, clearCompleted };
 }
 
-export function clearCompleted (list) {
+export function clearCompleted (app, list) {
   return (dispatch, getState) => {
     const items = getState().lists[list.id].items;
     _.each(items, (item) => {
       if (item.isChecked) {
-        getFirebaseRef().child(`lists/${list.id}/items/${item.id}`).remove();
+        firebase.getRef(app).child(`lists/${list.id}/items/${item.id}`).remove();
       }
     });
     dispatch(attemptClearCompleted(false));

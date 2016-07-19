@@ -5,10 +5,8 @@ export default function (state = {
   attemptingLogin: false,
   attemptingLogout: false,
   email: null,
-  initializingApp: true,
   isAuthenticated: false,
   loginFailed: false,
-  showingSettings: false,
 }, action = {}) {
   switch (action.type) {
     case C.ATTEMPT_LOGIN:
@@ -24,10 +22,6 @@ export default function (state = {
       return _.extend({}, state, {
         attemptingLogin: false,
         loginFailed: true,
-      });
-    case C.SHOW_SETTINGS:
-      return _.extend({}, state, {
-        showingSettings: action.showingSettings,
       });
     case C.UPDATE_AUTH_STATUS:
       return _.extend({}, state, {

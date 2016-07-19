@@ -14,7 +14,7 @@ export default class BulkAdd extends Component {
 
   render () {
     return (
-      <Modal className='bulk-add' isShowing={this.props.isShowing}>
+      <Modal className='bulk-add modal-form' isShowing={this.props.isShowing}>
         <Textarea
           ref='bulkItems'
           minRows={5}

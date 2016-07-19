@@ -116,48 +116,40 @@
 }
 
 .bulk-add {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-
   .container {
-    background: $light-color;
-    box-sizing: border-box;
     padding: 0.6em;
-    max-width: 20em;
-    width: 90%;
+  }
 
-    textarea {
-      box-sizing: border-box;
-      border: solid 3px lighten($neutral-color, 40%);
-      color: $dark-color;
-      display: block;
-      font-size: 0.8em;
-      outline: none;
-      padding: 0.4em 0.6em;
-      width: 100%;
+  textarea {
+    box-sizing: border-box;
+    border: solid 3px lighten($neutral-color, 40%);
+    color: $dark-color;
+    display: block;
+    font-size: 0.8em;
+    outline: none;
+    padding: 0.4em 0.6em;
+    width: 100%;
 
-      &:focus {
-        border-color: $primary-color;
-      }
+    &:focus {
+      border-color: $primary-color;
     }
+  }
 
-    footer {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 0.6em;
-    }
+  footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.6em;
+  }
 
-    button {
-      margin-left: 0.6em;
-    }
+  button {
+    margin-left: 0.6em;
+  }
 
-    .cancel {
-      @include buttonize-background($neutral-color);
-    }
+  .cancel {
+    @include buttonize-background($neutral-color);
+  }
 
-    .add {
-      @include buttonize-background($primary-color);
-    }
+  .add {
+    @include buttonize-background($primary-color);
   }
 }

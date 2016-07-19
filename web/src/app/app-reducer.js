@@ -3,18 +3,18 @@ import C from '../data/constants';
 import localStore from '../data/local-store';
 
 export default function (state = {
-  app: {
-    name: localStore.get('appName') || 'imalist',
-    apiKey: localStore.get('apiKey'),
-  },
+  appName: localStore.get('appName') || 'imalist',
+  apiKey: localStore.get('apiKey'),
   attemptingClearCompleted: false,
   attemptingRemoveList: false,
   bulkAddItems: false,
   editItemId: null,
   editListId: null,
+  firebaseApp: null,
   loadingData: false,
   selectedListId: localStore.get('selectedListId') || null,
-  showItems: localStore.get('showItems') || false,
+  showingItems: localStore.get('showingItems') || false,
+  showingFirebaseSettings: false,
   state: C.NEEDS_INITIALIZATION,
 }, action = {}) {
   switch (action.type) {
@@ -49,14 +49,30 @@ export default function (state = {
       });
     case C.SHOW_ITEMS:
       return _.extend({}, state, {
-        showItems: action.showItems,
+        showingItems: action.showingItems,
       });
-    case C.UPDATE_APP_NAME:
+    case C.SHOW_SETTINGS:
       return _.extend({}, state, {
-        app: {
-          name: action.appName,
-          apiKey: localStore.get('apiKey'),
-        },
+        showFirebaseSettings: action.showFirebaseSettings,
+      });
+    case C.UPDATE_FIREBASE_APP:
+      return _.extend({}, state, {
+        firebaseApp: action.firebaseApp,
+        state: C.NEEDS_AUTH,
+      });
+    case C.UPDATE_FIREBASE_SETTINGS:
+      return _.extend({}, state, {
+        appName: action.appName,
+        apiKey: action.apiKey,
+        state: C.NEEDS_INITIALIZATION,
+      });
+    case C.UPDATE_APP_STATE:
+      return _.extend({}, state, {
+        state: action.state,
+      });
+    case C.UPDATE_AUTH_STATUS:
+      return _.extend({}, state, {
+        state: action.isAuthenticated ? C.READY : C.NEEDS_AUTH,
       });
     default:
       return state;

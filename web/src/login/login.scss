@@ -1,6 +1,5 @@
-.login {
-  padding-top: $unit;
-
+.login,
+.settings {
   .error {
     color: $error-color;
     font-size: .8em;
@@ -29,7 +28,7 @@
     }
   }
 
-  > form {
+  form {
     button,
     span {
       @include buttonize-background($action-color);
@@ -40,36 +39,27 @@
       padding: .5em .75em;
     }
   }
-
-  footer {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
 }
 
 .settings {
-  position: absolute;
-  top: 100%;
-  margin-top: -$unit;
-
-  button {
-    @include buttonize-background($neutral-color);
-    @extend .icon-button;
-
-    border-radius: 0;
-    width: auto;
-  }
-
-  form {
-    display: inline-block;
-    opacity: 0.01;
-    transition: all 0.5s ease;
-  }
-
-  &.showing-settings form {
-    opacity: 1.0;
-  }
+  // background: #f8f8f8;
+  // bottom: 0;
+  // left: 0;
+  // margin-top: -$unit;
+  // position: absolute;
+  // right: 0;
+  // top: 100%;
+  // transition: all 0.5s ease;
+  // z-index: 11;
+  //
+  // button {
+  //   @include buttonize-background($neutral-color);
+  //   @extend .icon-button;
+  //
+  //   border-radius: 0;
+  //   display: block;
+  //   width: 100%;
+  // }
 
   label {
     color: $dark-color;

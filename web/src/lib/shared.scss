@@ -3,16 +3,22 @@ header {
   box-sizing: border-box;
   height: $unit;
   line-height: $unit;
-  position: fixed;
-  top: 0;
   width: 100%;
-  z-index: 10;
 
   h1 {
     color: $light-color;
-    @extend .fill-container;
     line-height: $unit;
     text-align: center;
+  }
+
+  &.fixed {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+
+    h1 {
+      @extend .fill-container;
+    }
   }
 
   button {
@@ -246,5 +252,18 @@ header {
     &.editing.type-label .name {
       padding-left: .6em;
     }
+  }
+}
+
+.modal-form {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  .container {
+    background: $light-color;
+    box-sizing: border-box;
+    max-width: 20em;
+    width: 90%;
   }
 }

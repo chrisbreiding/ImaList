@@ -1,16 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { login } from './auth-actions';
 
 import Settings from './settings';
 
-function Login ({ auth, dispatch }) {
+const Login = ({ app, auth, dispatch }) => {
   let email;
   let password;
 
   function attemptLogin (e) {
     e.preventDefault();
-    dispatch(login(email.value, password.value));
+    dispatch(login(app.firebaseApp, email.value, password.value));
   }
 
   return (
@@ -34,9 +35,12 @@ function Login ({ auth, dispatch }) {
             <button>Log In</button>}
         </fieldset>
       </form>
+      <button>
+        <i className='fa fa-cog'></i> Firebase Settings
+      </button>
       <Settings />
     </div>
   );
 }
 
-export default connect(({ auth }) => ({ auth }))(Login);
+export default connect(({ app, auth }) => ({ app, auth }))(Login);

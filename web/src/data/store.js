@@ -16,14 +16,16 @@ const rootReducer = combineReducers({ auth, app, lists });
 
 export const store = createStoreWithMiddleware(rootReducer);
 
-export function observeStore (selector, onChange) {
-  let currentValue;
+export function observeStore (selectors, onChange) {
+  selectors = [].concat(selectors)
+  let currentValues = [];
 
   function handleChange () {
-    let nextValue = _.get(store.getState(), selector);
-    if (nextValue !== currentValue) {
-      currentValue = nextValue;
-      onChange(currentValue);
+    const state = store.getState();
+    const nextValues = _.map(selectors, (selector) =>  _.get(state, selector));
+    if (!_.isEqual(currentValues, nextValues)) {
+      currentValues = nextValues
+      onChange(...currentValues);
     }
   }
 

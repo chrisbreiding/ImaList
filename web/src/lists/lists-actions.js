@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import C from '../data/constants';
-import { getFirebaseRef } from '../data/firebase';
+import firebase from '../data/firebase';
 import localStore from '../data/local-store';
 
 function newList ({ order, owner }) {
@@ -16,23 +16,23 @@ function newList ({ order, owner }) {
 export function selectList (listId = null) {
   localStore.set({
     selectedListId: listId,
-    showItems: !!listId,
+    showingItems: !!listId,
   });
 
   return (dispatch) => {
     if (listId) {
       dispatch({ type: C.SELECT_LIST, listId });
-      dispatch({ type: C.SHOW_ITEMS, showItems: true });
+      dispatch({ type: C.SHOW_ITEMS, showingItems: true });
     } else {
-      dispatch({ type: C.SHOW_ITEMS, showItems: false });
+      dispatch({ type: C.SHOW_ITEMS, showingItems: false });
     }
   };
 }
 
-export function addList (lists, email) {
+export function addList (app, lists, email) {
   return (dispatch) => {
     const order = lists.length ? Math.max(..._.map(lists, 'order')) + 1 : 0;
-    const newRef = getFirebaseRef().child('lists').push(newList({ order, owner: email }), () => {
+    const newRef = firebase.getRef(app).child('lists').push(newList({ order, owner: email }), () => {
       dispatch(editList(newRef.key));
     });
   };
@@ -42,9 +42,9 @@ export function editList (listId) {
   return { type: C.EDIT_LIST, listId };
 }
 
-export function updateList (list) {
+export function updateList (app, list) {
   return () => {
-    getFirebaseRef().child(`lists/${list.id}`).update(list);
+    firebase.getRef(app).child(`lists/${list.id}`).update(list);
   };
 }
 
@@ -52,9 +52,9 @@ export function attemptRemoveList (listId) {
   return { type: C.ATTEMPT_REMOVE_LIST, listId };
 }
 
-export function removeList (id) {
+export function removeList (app, id) {
   return (dispatch) => {
-    getFirebaseRef().child(`lists/${id}`).remove();
+    firebase.getRef(app).child(`lists/${id}`).remove();
     dispatch(attemptRemoveList(false));
   };
 }
