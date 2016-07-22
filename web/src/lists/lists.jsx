@@ -1,38 +1,32 @@
-import cs from 'classnames';
-import _ from 'lodash';
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import cs from 'classnames'
+import _ from 'lodash'
+import { action, observable } from 'mobx'
+import { observer } from 'mobx-react'
+import React, { Component } from 'react'
 
-import { editList, selectList, addList, updateList, attemptRemoveList, removeList } from './lists-actions';
+import authState from '../login/auth-state'
+import listsStore from './lists-store'
 
-import ActionSheet from '../modal/action-sheet';
-import SortableList from '../lib/sortable-list';
-import List from './list';
+import ActionSheet from '../modal/action-sheet'
+import SortableList from '../lib/sortable-list'
+import List from './list'
 
+@observer
 class Lists extends Component {
-  constructor (props) {
-    super(props);
-    this.state = { editing: false };
-  }
+  @observable editing = false
 
   render () {
-    const { lists } = this.props;
-
     return (
-      <div
-        className={cs('lists', {
-          editing: this.state.editing,
-        })}
-      >
+      <div className={cs('lists', { editing: this.editing })}>
         <header className='fixed'>
           <h1>ImaList</h1>
-          <button className='edit' onClick={this._toggleEditing.bind(this)}>
-            {this.state.editing ? <span>Done</span> : <i className='fa fa-sort'></i>}
+          <button className='edit' onClick={this._toggleEditing}>
+            {this.editing ? <span>Done</span> : <i className='fa fa-sort'></i>}
           </button>
         </header>
-        {this._lists(lists)}
+        {this._lists(this.props.lists)}
         <footer>
-          <button onClick={this._addList.bind(this)}>
+          <button onClick={() => this._addList(this.props.lists)}>
             <span>List</span>
             <i className='fa fa-plus'></i>
           </button>
@@ -42,16 +36,17 @@ class Lists extends Component {
             <i className='fa fa-sign-out'></i>
           </button>
         </footer>
-        {this._confirmRemoval()}
+        {this._removeConfirmation()}
       </div>
-    );
+    )
   }
 
+  // TODO: optimize by moving to own component
   _lists (lists) {
-    if (this.props.isLoading) {
-      return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>;
+    if (listsStore.isLoading) {
+      return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
     } else if (!lists.length) {
-      return <p className='no-items'>No Lists</p>;
+      return <p className='no-items'>No Lists</p>
     }
 
     return (
@@ -59,7 +54,7 @@ class Lists extends Component {
         el='ul'
         handleClass='sort-handle'
         onSortingUpdate={(ids) => {
-          _.each(ids, (id, order) => this._updateList({ id, order }));
+          _.each(ids, (id, order) => this._updateList({ id, order }))
         }}
       >
         {_.map(lists, (list) => (
@@ -67,59 +62,55 @@ class Lists extends Component {
             key={list.id}
             ref={list.id}
             model={list}
-            isOwner={list.owner === this.props.auth.email}
-            isEditing={list.id === this.props.app.editListId}
-            isSelected={list.id === this.props.selectedListId}
+            isOwner={list.owner === authState.userEmail}
+            isEditing={list.id === listsStore.editingListId}
+            isSelected={list.id === listsStore.selectedId}
             onEdit={(shouldEdit) => this._editList(list, shouldEdit)}
             onSelect={() => this._goToList(list)}
             onUpdate={(list) => this._updateList(list)}
-            onRemove={() => this._removeList(list)}
+            onRemove={() => this._attemptRemoveList(list)}
           />
         ))}
       </SortableList>
-    );
+    )
   }
 
-  _editList (list, shouldEdit) {
-    this.props.dispatch(editList(shouldEdit ? list.id : null));
-  }
-
-  _goToList (list) {
-    this.props.dispatch(selectList(list.id));
-  }
-
-  _addList () {
-    this.props.dispatch(addList(this.props.app.firebaseApp, this.props.lists, this.props.auth.email));
-  }
-
-  _updateList (list) {
-    this.props.dispatch(updateList(this.props.app.firebaseApp, list));
-  }
-
-  _removeList (list) {
-    this.props.dispatch(attemptRemoveList(list.id));
-  }
-
-  _toggleEditing () {
-    this._setEditing(!this.state.editing);
-  }
-
-  _setEditing (editing) {
-    this.setState({ editing });
-  }
-
-  _confirmRemoval () {
-    const listId = this.props.app.attemptingRemoveList;
+  _removeConfirmation () {
+    const listId = listsStore.attemptingRemoveListId
 
     return (
       <ActionSheet
         isShowing={!!listId}
         confirmMessage='Remove List'
-        onConfirm={() => this.props.dispatch(removeList(this.props.app.firebaseApp, listId))}
-        onCancel={() => this.props.dispatch(attemptRemoveList(false))}
+        onConfirm={action('list:removal:confirmed', () => listsStore.removeList(listId))}
+        onCancel={action('list:removal:canceled', () => listsStore.attemptRemoveList(false))}
       />
-    );
+    )
+  }
+
+  @action _editList (list, shouldEdit) {
+    listsStore.editList(shouldEdit ? list.id : null)
+  }
+
+  @action _goToList (list) {
+    listsStore.selectList(list.id)
+  }
+
+  @action _addList (lists) {
+    listsStore.addList(lists, authState.userEmail)
+  }
+
+  @action _updateList (list) {
+    listsStore.updateList(list)
+  }
+
+  @action _attemptRemoveList (list) {
+    listsStore.attemptRemoveList(list.id)
+  }
+
+  @action _toggleEditing = () => {
+    this.editing = !this.editing
   }
 }
 
-export default connect(({ auth, app }) => ({ auth, app }))(Lists);
+export default Lists

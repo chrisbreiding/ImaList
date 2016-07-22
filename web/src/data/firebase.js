@@ -1,7 +1,9 @@
-import firebase from 'firebase';
+import firebase from 'firebase'
 
-function init (prevApp, appName, apiKey) {
-  if (prevApp) prevApp.delete()
+import appState from '../app/app-state'
+
+function init (appName, apiKey) {
+  if (appState.app) appState.app.delete()
 
   try {
     const app = firebase.initializeApp({
@@ -9,19 +11,19 @@ function init (prevApp, appName, apiKey) {
       authDomain: `${appName}.firebaseapp.com`,
       databaseURL: `https://${appName}.firebaseio.com`,
       storageBucket: `${appName}.appspot.com`,
-    }, appName);
+    }, appName)
     return app
   } catch (e) {
     return null
   }
 }
 
-function getAuth (app) {
-  return app.auth();
+function getAuth () {
+  return appState.app.auth()
 }
 
-function getRef (app) {
-  return app.database().ref();
+function getRef () {
+  return appState.app.database().ref()
 }
 
 export default {

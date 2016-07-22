@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import Textarea from 'react-textarea-autosize';
+import React, { Component } from 'react'
+import Textarea from 'react-textarea-autosize'
 
-import Modal from '../modal/modal';
+import Modal from '../modal/modal'
 
 export default class BulkAdd extends Component {
   componentDidUpdate () {
     if (this.props.isShowing) {
-      this.refs.bulkItems.focus();
+      this.refs.bulkItems.focus()
     } else {
-      this.refs.bulkItems.value = '';
+      this.refs.bulkItems.value = ''
     }
   }
 
@@ -32,6 +32,6 @@ export default class BulkAdd extends Component {
           </button>
         </footer>
       </Modal>
-    );
+    )
   }
 }

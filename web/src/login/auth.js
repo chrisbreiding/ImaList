@@ -1,37 +1,60 @@
-import { updateAuthStatus } from './auth-actions';
+import { action } from 'mobx'
+
+import appState from '../app/app-state'
+import authState from './auth-state'
+import C from '../data/constants'
 import firebase from '../data/firebase'
 
-export default {
-  init (dispatch) {
-    this.dispatch = dispatch
-  },
+class Auth {
+  isAuthenticated () {
+    return !!this._currentUser()
+  }
 
-  isAuthenticated (app) {
-    return !!this._currentUser(app)
-  },
+  userEmail () {
+    const user = this._currentUser()
+    return user ? user.email : null
+  }
 
-  userEmail (app) {
-    const user = this._currentUser(app);
-    return user ? user.email : null;
-  },
+  listenForChange () {
+    firebase.getAuth().onAuthStateChanged(action('auth:state:changed', () => {
+      this._updateAuthStatus()
+      if (authState.isAuthenticated) {
+        appState.state = C.READY
+      } else {
+        appState.state = C.NEEDS_AUTH
+      }
+    }))
+  }
 
-  listenForChange (app) {
-    firebase.getAuth(app).onAuthStateChanged(() => {
-      this.dispatch(updateAuthStatus(app))
-    })
-  },
+  _updateAuthStatus () {
+    authState.userEmail = appState.app ? this.userEmail() : null
+    authState.isAuthenticated = appState.app ? this.isAuthenticated() : false
+  }
 
-  login (app, email, password) {
-    return firebase.getAuth(app).signInWithEmailAndPassword(email, password);
-  },
+  login (email, password) {
+    authState.attemptingLogin = true
 
-  logout (app) {
-    firebase.getAuth(app).signOut().then(() => {
-      this.dispatch(updateAuthStatus(app))
-    });
-  },
+    firebase.getAuth().signInWithEmailAndPassword(email, password)
+    .then(action('login:succeeded', () => {
+      authState.attemptingLogin = false
+      this._updateAuthStatus()
+    }))
+    .catch(action('login:failed', () => {
+      authState.attemptingLogin = false
+      authState.loginFailed = true
+    }))
+  }
 
-  _currentUser (app) {
-    return firebase.getAuth(app).currentUser;
-  },
-};
+  logout () {
+    firebase.getAuth().signOut().then(action('logged:out', () => {
+      authState.attemptingLogout = false
+      this._updateAuthStatus()
+    }))
+  }
+
+  _currentUser () {
+    return firebase.getAuth().currentUser
+  }
+}
+
+export default new Auth()

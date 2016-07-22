@@ -1,15 +1,11 @@
-import FastClick from  'fastclick';
-import React from  'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { store } from './data/store';
-import Root from './app/root';
+import FastClick from  'fastclick'
+import { useStrict } from 'mobx'
+import React from  'react'
+import ReactDOM from 'react-dom'
 
-new FastClick(document.body);
+import Root from './app/root'
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Root />
-  </Provider>,
-  document.getElementById('app')
-);
+new FastClick(document.body)
+useStrict(true)
+
+ReactDOM.render(<Root />, document.getElementById('app'))

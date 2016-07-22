@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-import Modal from './modal';
+import Modal from './modal'
 
-export default (props) => (
+const ActionSheet = (props) => (
   <Modal {...props} className='action-sheet'>
     <button className='confirm' onClick={props.onConfirm}>
       {props.confirmMessage || 'Confirm'}
@@ -11,4 +11,6 @@ export default (props) => (
       {props.cancelMessage || 'Cancel'}
     </button>
   </Modal>
-);
+)
+
+export default ActionSheet

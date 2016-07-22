@@ -1,26 +1,28 @@
-import cs from 'classnames';
-import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
+import cs from 'classnames'
+import { observer } from 'mobx-react'
+import React, { Component } from 'react'
+import { findDOMNode } from 'react-dom'
 
+@observer
 export default class List extends Component {
   constructor (props) {
-    super(props);
+    super(props)
 
     this.state = {
       editing: false,
       showingOptions: false,
-    };
+    }
   }
 
   componentDidUpdate () {
     if (this.props.isEditing && !this.state.editing) {
       this.setState({ editing: true, showingOptions: true }, () => {
-        this.refs.name.focus();
-      });
+        this.refs.name.focus()
+      })
     }
 
     if (!this.props.isEditing && this.state.editing) {
-      this.setState({ editing: false });
+      this.setState({ editing: false })
     }
   }
 
@@ -51,50 +53,56 @@ export default class List extends Component {
           </button>
         </div>
       </li>
-    );
+    )
   }
 
   _name () {
     if (this.state.showingOptions) {
-      return <input
-        ref='name'
-        className='name'
-        defaultValue={this.props.model.name}
-        onChange={this._updateName.bind(this)}
-        onKeyUp={this._keyup.bind(this)}
-      />;
+      return (
+        <input
+          ref='name'
+          className='name'
+          defaultValue={this.props.model.name}
+          onChange={this._updateName.bind(this)}
+          onKeyUp={this._keyup.bind(this)}
+        />
+      )
     } else {
-      return <span className='name' onClick={this.props.onSelect}>
-        {this.props.model.name}
-      </span>;
+      return (
+        <span className='name' onClick={this.props.onSelect}>
+          {this.props.model.name}
+        </span>
+      )
     }
   }
 
   _toggleOptions () {
-    this.setState({ showingOptions: !this.state.showingOptions });
+    this.setState({ showingOptions: !this.state.showingOptions })
   }
 
   _toggledShared () {
     this.props.onUpdate({
       id: this.props.model.id,
       shared: !this.props.model.shared,
-    });
+    })
   }
 
   _remove () {
-    this.props.onRemove();
+    this.props.onRemove()
   }
 
   _updateName () {
     this.props.onUpdate({
       id: this.props.model.id,
       name: findDOMNode(this.refs.name).value,
-    });
+    })
   }
 
   _keyup (e) {
     if (e.key === 'Enter') {
-      this._toggleOptions();
+      this._toggleOptions()
     }
   }
 }
+
+export default List

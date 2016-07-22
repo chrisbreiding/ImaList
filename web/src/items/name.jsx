@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
-import Textarea from 'react-textarea-autosize';
+import React, { Component } from 'react'
+import { findDOMNode } from 'react-dom'
+import Textarea from 'react-textarea-autosize'
 
-const ENTER_DELAY = 200;
+const ENTER_DELAY = 200
 
 export default class Name extends Component {
   render () {
@@ -15,56 +15,56 @@ export default class Name extends Component {
       onChange={this._updateName.bind(this)}
       onKeyDown={this._onKeyDown.bind(this)}
       onKeyUp={this._onKeyUp.bind(this)}
-    />;
+    />
   }
 
   focus () {
-    this._getDOMNode().focus();
+    this._getDOMNode().focus()
   }
 
   hasValue () {
-    return !!this._value().trim();
+    return !!this._value().trim()
   }
 
   _value () {
-    return this._getDOMNode().value || '';
+    return this._getDOMNode().value || ''
   }
 
   _updateName () {
-    this.props.onUpdate(this._value());
+    this.props.onUpdate(this._value())
   }
 
   _onKeyDown (e) {
-    const isEnter = e.key === 'Enter';
+    const isEnter = e.key === 'Enter'
 
     if ((isEnter && e.shiftKey) || (isEnter && this._shouldAddNewLine())) {
-      return;
+      return
     }
 
     if (isEnter) {
-      e.preventDefault();
-      clearTimeout(this._nextTimeout);
+      e.preventDefault()
+      clearTimeout(this._nextTimeout)
       this._nextTimeout = setTimeout(() => {
-        this._nextTimeout = null;
-        if (this.hasValue()) this.props.onNext();
-      }, ENTER_DELAY);
+        this._nextTimeout = null
+        if (this.hasValue()) this.props.onNext()
+      }, ENTER_DELAY)
     }
   }
 
   _onKeyUp (e) {
     if (e.key === 'Escape') {
-      this._getDOMNode().blur();
+      this._getDOMNode().blur()
     }
   }
 
   _shouldAddNewLine () {
-    const shouldAdd = !!this._nextTimeout;
-    clearTimeout(this._nextTimeout);
-    this._nextTimeout = null;
-    return shouldAdd;
+    const shouldAdd = !!this._nextTimeout
+    clearTimeout(this._nextTimeout)
+    this._nextTimeout = null
+    return shouldAdd
   }
 
   _getDOMNode () {
-    return findDOMNode(this.refs.name);
+    return findDOMNode(this.refs.name)
   }
 }

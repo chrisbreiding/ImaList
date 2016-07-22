@@ -1,33 +1,35 @@
-import cs from 'classnames';
-import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
+import cs from 'classnames'
+import { observer } from 'mobx-react'
+import React, { Component } from 'react'
+import { findDOMNode } from 'react-dom'
 
-import Name from './name';
+import Name from './name'
 
+@observer
 export default class Item extends Component {
   constructor (props) {
-    super(props);
+    super(props)
 
     this.state = {
       editing: false,
       showingOptions: false,
-    };
+    }
   }
 
   componentDidUpdate () {
     if (this.props.isEditing && !this.state.editing) {
       this.setState({ editing: true }, () => {
-        this.refs.name.focus();
-      });
+        this.refs.name.focus()
+      })
     }
 
     if (!this.props.isEditing && this.state.editing) {
-      this.setState({ editing: false });
+      this.setState({ editing: false })
     }
   }
 
   render () {
-    const type = this.props.model.type || 'todo';
+    const type = this.props.model.type || 'todo'
 
     return (
       <li
@@ -62,37 +64,37 @@ export default class Item extends Component {
           </button>
         </div>
       </li>
-    );
+    )
   }
 
   _toggleChecked () {
-    findDOMNode(this.refs.toggleChecked).blur();
+    findDOMNode(this.refs.toggleChecked).blur()
     this.props.onUpdate({
       id: this.props.model.id,
       isChecked: !this.props.model.isChecked,
-    });
+    })
   }
 
   _onEditingStatusChange (editing) {
-    this.props.onEdit(editing);
+    this.props.onEdit(editing)
 
     this.setState({
       showingOptions: false,
-    });
+    })
   }
 
   _updateName (name) {
     this.props.onUpdate({
       id: this.props.model.id,
       name,
-    });
+    })
   }
 
   _toggleOptions () {
-    this.setState({ showingOptions: !this.state.showingOptions });
+    this.setState({ showingOptions: !this.state.showingOptions })
   }
 
   _remove () {
-    this.props.onRemove();
+    this.props.onRemove()
   }
 }

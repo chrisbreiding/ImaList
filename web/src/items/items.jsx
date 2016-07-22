@@ -1,54 +1,39 @@
-import cs from 'classnames';
-import _ from 'lodash';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import cs from 'classnames'
+import _ from 'lodash'
+import { action, observable } from 'mobx'
+import { observer } from 'mobx-react'
+import React, { Component } from 'react'
 
-import {
-  addItem,
-  attemptBulkAdd,
-  attemptClearCompleted,
-  bulkAdd,
-  clearCompleted,
-  editItem,
-  removeItem,
-  updateItem,
-} from './items-actions';
+import appState from '../app/app-state'
 
-import ActionSheet from '../modal/action-sheet';
-import BulkAdd from './bulk-add';
-import Item from './item';
-import SortableList from '../lib/sortable-list';
+import ActionSheet from '../modal/action-sheet'
+import BulkAdd from './bulk-add'
+import Item from './item'
+import SortableList from '../lib/sortable-list'
 
-function curated (items) {
-  return _(items)
-    .map((item, id) => _.extend(item, { id }))
-    .sortBy('order')
-    .value();
-}
-
+@observer
 class Items extends Component {
-  constructor (props) {
-    super(props);
-    this.state = { editing: false };
-  }
+  @observable attemptingClearCompleted = false
+  @observable bulkAddingItems = false
+  @observable isEditing = false
 
   render () {
-    const items = curated(this.props.items);
+    const items = this.props.list.itemsStore.items()
 
     return (
       <div
         className={cs({
           'items': true,
-          'editing': this.state.editing,
+          'editing': this.isEditing,
         })}
       >
         <header className='fixed'>
           <h1>{this.props.list.name}</h1>
-          <button className='back' onClick={this._onBack.bind(this)}>
+          <button className='back' onClick={this._onBack}>
             <i className='fa fa-chevron-left'></i>
           </button>
-          <button className='edit' onClick={this._toggleEditing.bind(this)}>
-            {this.state.editing ? <span>Done</span> : <i className='fa fa-sort'></i>}
+          <button className='edit' onClick={this._toggleEditing}>
+            {this.isEditing ? <span>Done</span> : <i className='fa fa-sort'></i>}
           </button>
         </header>
         {this._items(items)}
@@ -69,25 +54,26 @@ class Items extends Component {
           {this._clearCompletedButton(items)}
         </footer>
         <BulkAdd
-          isShowing={this.props.app.bulkAddItems}
-          onCancel={() => this.props.dispatch(attemptBulkAdd(false))}
-          onAdd={this._addBulkItems.bind(this)}
+          isShowing={this.bulkAddingItems}
+          onCancel={this._cancelBulkAdd}
+          onAdd={this._bulkAddItems}
         />
         <ActionSheet
-          isShowing={this.props.app.attemptingClearCompleted}
+          isShowing={this.attemptingClearCompleted}
           confirmMessage='Clear Completed'
-          onConfirm={() => this.props.dispatch(clearCompleted(this.props.list))}
-          onCancel={() => this.props.dispatch(attemptClearCompleted(false))}
+          onConfirm={this._clearCompleted}
+          onCancel={this._cancelClearCompleted}
         />
       </div>
-    );
+    )
   }
 
+  // TODO: optimize by moving to own component
   _items (items) {
     if (this.props.isLoading) {
-      return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>;
+      return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
     } else if (!items.length) {
-      return <p className='no-items'>No Items</p>;
+      return <p className='no-items'>No Items</p>
     }
 
     return (
@@ -96,7 +82,7 @@ class Items extends Component {
         el='ul'
         handleClass='sort-handle'
         onSortingUpdate={(ids) => {
-          _.each(ids, (id, order) => this._updateItem({ id, order }));
+          _.each(ids, (id, order) => this._updateItem({ id, order }))
         }}
       >
       {_.map(items, (item, index) => (
@@ -104,7 +90,7 @@ class Items extends Component {
           ref={item.id}
           key={item.id}
           model={item}
-          isEditing={item.id === this.props.app.editItemId}
+          isEditing={item.id === appState.editingItemId}
           onEdit={(shouldEdit) => this._editItem(item, shouldEdit)}
           onUpdate={(item) => this._updateItem(item)}
           onRemove={() => this._removeItem(item)}
@@ -112,69 +98,78 @@ class Items extends Component {
         ></Item>
       ))}
       </SortableList>
-    );
+    )
   }
 
   _clearCompletedButton (items) {
-    if (!_.some(items, { isChecked: true })) return null;
+    if (!_.some(items, { isChecked: true })) return null
 
     return (
-      <button className='clear-completed' onClick={this._clearCompleted.bind(this)}>
+      <button className='clear-completed' onClick={this._attemptClearCompleted}>
         <span>Clear <i className='fa fa-check-square-o'></i></span>
         <i className='fa fa-ban'></i>
       </button>
-    );
+    )
   }
 
-  _clearCompleted () {
-    this.props.dispatch(attemptClearCompleted());
+  @action _attemptClearCompleted = () => {
+    this.attemptingClearCompleted = true
   }
 
-  _next (items, index) {
+  @action _cancelClearCompleted = () => {
+    this.attemptingClearCompleted = false
+  }
+
+  @action _clearCompleted = () => {
+    this.attemptingClearCompleted = false
+    this.props.list.itemsStore.clearCompleted(this.props.list)
+  }
+
+  @action _next (items, index) {
     if (index === items.length - 1) {
-      this._addItem();
+      this._addItem()
     } else {
-      this._editItem(items[index + 1], true);
+      this._editItem(items[index + 1], true)
     }
   }
 
-  _editItem (item, shouldEdit) {
-    this.props.dispatch(editItem(this.props.app.firebaseApp, shouldEdit ? item.id : null));
+  @action _editItem (item, shouldEdit) {
+    this.props.list.itemsStore.editItem(shouldEdit ? item.id : null)
   }
 
-  _onBack () {
-    this._setEditing(false);
-    return this.props.onShowLists();
+  @action _onBack = () => {
+    this.isEditing = false
+    this.props.onShowLists()
   }
 
-  _toggleEditing () {
-    return this._setEditing(!this.state.editing);
+  @action _toggleEditing = () => {
+    this.isEditing = !this.isEditing
   }
 
-  _setEditing (editing) {
-    return this.setState({ editing });
+  @action _addItem (type) {
+    this.props.list.itemsStore.addItem({ type })
   }
 
-  _addItem (type) {
-    this.props.dispatch(addItem(this.props.app.firebaseApp, this.props.list, { type }));
+  @action _updateItem (item) {
+    this.props.list.itemsStore.updateItem(item)
   }
 
-  _updateItem (item) {
-    this.props.dispatch(updateItem(this.props.app.firebaseApp, this.props.list, item));
+  @action _removeItem (item) {
+    this.props.list.itemsStore.removeItem(item.id)
   }
 
-  _removeItem (item) {
-    this.props.dispatch(removeItem(this.props.app.firebaseApp, this.props.list, item.id));
+  @action _attemptBulkAdd = () => {
+    this.bulkAddingItems = true
   }
 
-  _attemptBulkAdd () {
-    this.props.dispatch(attemptBulkAdd(true));
+  @action _cancelBulkAdd = () => {
+    this.bulkAddingItems = false
   }
 
-  _addBulkItems (names) {
-    this.props.dispatch(bulkAdd(this.props.app.firebaseApp, this.props.list, names));
-    this.props.dispatch(attemptBulkAdd(false));
+  @action _bulkAddItems = (names) => {
+    this.bulkAddingItems = false
+    this.props.list.itemsStore.bulkAdd(names)
   }
 }
 
-export default connect(({ app }) => ({ app }))(Items);
+export default Items

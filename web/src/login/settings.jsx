@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { observer } from 'mobx-react'
+import React, { Component } from 'react'
 
+import appState from '../app/app-state'
 import C from '../data/constants'
-import { updateFirebaseSettings } from '../app/app-actions';
+import { updateFirebaseSettings } from '../app/app-actions'
 
 import Modal from '../modal/modal'
 
+@observer
 class Settings extends Component {
   componentDidUpdate () {
-    if (this.props.app.showingFirebaseSettings) {
-      this.refs.appName.focus();
+    if (appState.showingFirebaseSettings) {
+      this.refs.appName.focus()
     }
   }
 
   render () {
-    const { app } = this.props
-
     return (
       <Modal className='settings modal-form' isShowing={this._shouldShowSettings()}>
         <header>
@@ -27,7 +27,7 @@ class Settings extends Component {
             <input
               ref='appName'
               placeholder='App Name'
-              defaultValue={app.appName}
+              defaultValue={appState.appName}
             />
           </fieldset>
           <fieldset>
@@ -35,7 +35,7 @@ class Settings extends Component {
             <input
               ref='apiKey'
               placeholder='API Key'
-              defaultValue={app.apiKey}
+              defaultValue={appState.apiKey}
             />
           </fieldset>
           <fieldset>
@@ -43,21 +43,19 @@ class Settings extends Component {
           </fieldset>
         </form>
       </Modal>
-    );
+    )
   }
 
   _shouldShowSettings () {
-    const { app } = this.props
-
-    return app.state === C.NEEDS_INITIALIZATION
-           || app.state === C.NEEDS_FIREBASE_CONFIG
-           || app.showingFirebaseSettings;
+    return appState.state === C.NEEDS_INITIALIZATION
+           || appState.state === C.NEEDS_FIREBASE_CONFIG
+           || appState.showingFirebaseSettings
   }
 
   _onSubmit (e) {
-    e.preventDefault();
+    e.preventDefault()
     this.props.dispatch(updateFirebaseSettings(this.refs.appName.value, this.refs.apiKey.value))
   }
 }
 
-export default connect(({ app }) => ({ app }))(Settings);
+export default Settings

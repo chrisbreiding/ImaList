@@ -1,73 +1,73 @@
-import _ from 'lodash';
-import dragula from 'dragula';
-import React, { createClass } from 'react';
-import { findDOMNode } from 'react-dom';
+import _ from 'lodash'
+import dragula from 'dragula'
+import React, { Component } from 'react'
+import { findDOMNode } from 'react-dom'
 
 function idsAndIndex (els, el) {
-  const ids = _.map(els, 'dataset.id');
-  const index = _.findIndex(ids, _.partial(_.isEqual, el.dataset.id));
+  const ids = _.map(els, 'dataset.id')
+  const index = _.findIndex(ids, _.partial(_.isEqual, el.dataset.id))
 
-  return { ids, index };
+  return { ids, index }
 }
 
-export default createClass({
-  displayName: 'SortableList',
-
-  propTypes: {
-    onSortingUpdate: React.PropTypes.func.isRequired,
-  },
-
+class SortableList extends Component {
   componentDidMount () {
-    this._setupSorting();
-  },
+    this._setupSorting()
+  }
 
   componentWillUnmount () {
-    this._tearDownSorting();
-  },
+    this._tearDownSorting()
+  }
 
   _setupSorting () {
-    this._tearDownSorting();
-    let originalIndex = null;
+    this._tearDownSorting()
+    let originalIndex = null
     this.drake = dragula([findDOMNode(this.refs.list)], {
       moves: (el, container, handle) => {
-        if (!this.props.handleClass) return true;
+        if (!this.props.handleClass) return true
 
-        let handleEl = handle;
+        let handleEl = handle
         while (handleEl !== el) {
-          if (this._hasHandleClass(handleEl)) return true;
-          handleEl = handleEl.parentElement;
+          if (this._hasHandleClass(handleEl)) return true
+          handleEl = handleEl.parentElement
         }
-        return false;
+        return false
       },
     }).on('drag', (el, container) => {
-      originalIndex = idsAndIndex(container.children, el).index;
+      originalIndex = idsAndIndex(container.children, el).index
     }).on('drop', (el, container) => {
-      const ref = idsAndIndex(container.children, el);
-      const ids = ref.ids;
-      const index = ref.index;
+      const ref = idsAndIndex(container.children, el)
+      const ids = ref.ids
+      const index = ref.index
 
       if (originalIndex === container.children.length - 1) {
-        container.appendChild(el);
+        container.appendChild(el)
       } else if (index < originalIndex) {
-        container.insertBefore(el, container.children[originalIndex + 1]);
+        container.insertBefore(el, container.children[originalIndex + 1])
       } else {
-        container.insertBefore(el, container.children[originalIndex]);
+        container.insertBefore(el, container.children[originalIndex])
       }
-      this.props.onSortingUpdate(ids);
-    });
-  },
+      this.props.onSortingUpdate(ids)
+    })
+  }
 
   _hasHandleClass (el) {
-    return el.className.indexOf(this.props.handleClass) >= 0;
-  },
+    return el.className.indexOf(this.props.handleClass) >= 0
+  }
 
   _tearDownSorting () {
     if (this.drake) {
-      this.drake.destroy();
+      this.drake.destroy()
     }
-  },
+  }
 
   render () {
-    return React.createElement(this.props.el || 'div', { ref: 'list' }, this.props.children);
-  },
-});
+    return React.createElement(this.props.el || 'div', { ref: 'list' }, this.props.children)
+  }
+}
+
+SortableList.propTypes = {
+  onSortingUpdate: React.PropTypes.func.isRequired,
+}
+
+export default SortableList

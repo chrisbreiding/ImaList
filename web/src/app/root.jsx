@@ -1,39 +1,35 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import { action, autorun } from 'mobx'
+import { observer } from 'mobx-react'
+import React, { Component } from 'react'
 
-import auth from '../login/auth';
+import appState from './app-state'
+import auth from '../login/auth'
 import firebase from '../data/firebase'
 import C from '../data/constants'
-import { updateAppState, updateFirebaseApp } from './app-actions'
 
-import App from  './app';
-import Login from  '../login/login';
+import App from  './app'
+import Login from  '../login/login'
 
+@observer
 class Root extends Component {
   componentWillMount () {
-    this._checkApp()
-  }
-
-  componentDidUpdate (prevProps) {
-    const { appName, apiKey } = this.props.app
-    if (appName !== prevProps.app.appName || apiKey !== prevProps.app.apiKey) {
-      this._checkApp()
-    }
-  }
-
-  _checkApp () {
-    const { appName, apiKey, firebaseApp } = this.props.app
-    const app = firebase.init(firebaseApp, appName, apiKey)
-    auth.init(this.props.dispatch);
-    if (app) {
-      this.props.dispatch(updateFirebaseApp(app))
-    } else {
-      this.props.dispatch(updateAppState(C.NEEDS_FIREBASE_CONFIG))
-    }
+    autorun(() => {
+      const { appName, apiKey } = appState
+      const app = firebase.init(appName, apiKey)
+      if (app) {
+        action('app:initialized', () => {
+          appState.app = app
+          appState.state = C.NEEDS_AUTH
+        })()
+        auth.listenForChange()
+      } else {
+        action('app:initialization:failed', () => appState.state = C.NEEDS_FIREBASE_CONFIG)()
+      }
+    })
   }
 
   render () {
-    switch (this.props.app.state) {
+    switch (appState.state) {
       case C.NEEDS_INITIALIZATION:
       case C.NEEDS_FIREBASE_CONFIG:
       case C.NEEDS_AUTH:
@@ -44,4 +40,4 @@ class Root extends Component {
   }
 }
 
-export default connect(({ app }) => ({ app }))(Root);
+export default Root

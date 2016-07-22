@@ -1,25 +1,27 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { action } from 'mobx'
+import { observer } from 'mobx-react'
+import React from 'react'
 
-import { login } from './auth-actions';
+import authState from './auth-state'
+import auth from './auth'
 
-import Settings from './settings';
+import Settings from './settings'
 
-const Login = ({ app, auth, dispatch }) => {
-  let email;
-  let password;
+const Login = observer(() => {
+  let email
+  let password
 
-  function attemptLogin (e) {
-    e.preventDefault();
-    dispatch(login(app.firebaseApp, email.value, password.value));
-  }
+  const attemptLogin = action('attempt:login', (e) => {
+    e.preventDefault()
+    auth.login(email.value, password.value)
+  })
 
   return (
     <div className='login'>
       <header>
         <h1>Please Log In</h1>
       </header>
-      {auth.loginFailed ? <p className='error'>Login failed. Please try again.</p> : null}
+      {authState.loginFailed ? <p className='error'>Login failed. Please try again.</p> : null}
       <form onSubmit={attemptLogin}>
         <fieldset>
           <label>Email</label>
@@ -30,7 +32,7 @@ const Login = ({ app, auth, dispatch }) => {
           <input ref={(node) => password = node} type='password' />
         </fieldset>
         <fieldset>
-          {auth.attemptingLogin ?
+          {authState.attemptingLogin ?
             <span><i className='fa fa-spinner fa-spin'></i></span> :
             <button>Log In</button>}
         </fieldset>
@@ -40,7 +42,7 @@ const Login = ({ app, auth, dispatch }) => {
       </button>
       <Settings />
     </div>
-  );
-}
+  )
+})
 
-export default connect(({ app, auth }) => ({ app, auth }))(Login);
+export default Login

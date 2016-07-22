@@ -1,84 +1,60 @@
-import cs from 'classnames';
-import _ from 'lodash';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import cs from 'classnames'
+import { action } from 'mobx'
+import { observer } from 'mobx-react'
+import React, { Component } from 'react'
 
-import { attemptLogout, logout } from '../login/auth-actions';
-import { listen, stopListening } from '../app/app-actions';
-import { selectList } from '../lists/lists-actions';
+import auth from '../login/auth'
+import authState from '../login/auth-state'
+import listsStore from '../lists/lists-store'
 
-import ActionSheet from '../modal/action-sheet';
-import Items from '../items/items';
-import Lists from '../lists/lists';
+import ActionSheet from '../modal/action-sheet'
+import Items from '../items/items'
+import Lists from '../lists/lists'
 
-function curatedLists (lists, auth) {
-  return _(lists)
-    .map((list, id) => _.extend(list, { id }))
-    .sortBy('order')
-    .filter((list) => list.shared || list.owner === auth.email)
-    .value();
-}
-
+@observer
 class App extends Component {
   componentWillMount () {
-    listen(this.props.app.firebaseApp, this.props.dispatch);
+    listsStore.listen()
   }
 
   componentWillUnmount () {
-    stopListening(this.props.app.firebaseApp);
+    listsStore.stopListening()
   }
 
   render () {
-    const { app, auth, dispatch } = this.props;
-    const lists = curatedLists(this.props.lists, auth);
-    const selectedList = this._selectedList(lists);
+    const lists = listsStore.lists()
 
     return (
       <div
         className={cs({
           'app': true,
-          'showing-items': app.showingItems,
+          'showing-items': listsStore.showingItems,
         })}
       >
         <Lists
           lists={lists}
-          selectedListId={app.selectedListId}
-          isLoading={app.loadingData}
-          userEmail={auth.email}
-          onLogout={() => dispatch(attemptLogout(true))}
+          onLogout={action('logout', () => authState.attemptingLogout = true)}
         />
         <Items
-          list={selectedList}
-          items={selectedList.items}
-          isLoading={app.loadingData}
-          onShowLists={() => dispatch(selectList())}
+          list={listsStore.selectedList(lists)}
+          isLoading={listsStore.isLoading}
+          onShowLists={action('show:lists', () => listsStore.selectList(null))}
         />
         {this._confirmLogout()}
       </div>
-    );
-  }
-
-  _selectedList (lists) {
-    const userSelectedId = this.props.app.selectedListId || null;
-    const fallbackId = lists[0] && lists[0].id;
-    const selectedListId = userSelectedId || fallbackId;
-
-    const selected = _.find(lists, { id: selectedListId });
-    const fallback = _.find(lists, { id: fallbackId });
-
-    return selected || fallback || { items: {} };
+    )
   }
 
   _confirmLogout () {
     return (
       <ActionSheet
-        isShowing={this.props.auth.attemptingLogout}
+        isShowing={authState.attemptingLogout}
         confirmMessage='Logout'
-        onConfirm={() => this.props.dispatch(logout(this.props.app.firebaseApp))}
-        onCancel={() => this.props.dispatch(attemptLogout(false))}
+        onConfirm={action('logout:confirmed', () => auth.logout())}
+        onCancel={action('logout:cancelled', () => authState.attemptingLogout = false)}
       />
-    );
+    )
   }
 }
 
-export default connect(({ auth, app, lists }) => ({ auth, app, lists }))(App);
+export default App
