@@ -6,13 +6,12 @@ function init (appName, apiKey) {
   if (appState.app) appState.app.delete()
 
   try {
-    const app = firebase.initializeApp({
+    return firebase.initializeApp({
       apiKey,
       authDomain: `${appName}.firebaseapp.com`,
       databaseURL: `https://${appName}.firebaseio.com`,
       storageBucket: `${appName}.appspot.com`,
     }, appName)
-    return app
   } catch (e) {
     return null
   }

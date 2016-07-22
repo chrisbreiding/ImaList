@@ -1,36 +1,35 @@
-import { action, autorun } from 'mobx'
+import { action } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
 import appState from './app-state'
-import auth from '../login/auth'
-import firebase from '../data/firebase'
 import C from '../data/constants'
 
 import App from  './app'
 import Login from  '../login/login'
 
+const Loading = () => (
+  <div className='app-loading'>
+    <header className='fixed'></header>
+    <p className='no-items'>
+      <i className='fa fa-hourglass-end fa-spin'></i> Loading...
+    </p>
+  </div>
+)
+
 @observer
 class Root extends Component {
   componentWillMount () {
-    autorun(() => {
-      const { appName, apiKey } = appState
-      const app = firebase.init(appName, apiKey)
-      if (app) {
-        action('app:initialized', () => {
-          appState.app = app
-          appState.state = C.NEEDS_AUTH
-        })()
-        auth.listenForChange()
-      } else {
-        action('app:initialization:failed', () => appState.state = C.NEEDS_FIREBASE_CONFIG)()
-      }
-    })
+    action('root:will:mount', () => {
+      appState.initializeFirebaseApp()
+    })()
   }
 
   render () {
     switch (appState.state) {
-      case C.NEEDS_INITIALIZATION:
+      case C.INITIALIZING_FIREBASE:
+      case C.CONFIRMING_AUTH:
+        return <Loading />
       case C.NEEDS_FIREBASE_CONFIG:
       case C.NEEDS_AUTH:
         return <Login />

@@ -1,6 +1,8 @@
 import { asReference, observable } from 'mobx'
 
+import auth from '../login/auth'
 import C from '../data/constants'
+import firebase from '../data/firebase'
 import localStore from '../data/local-store'
 
 class AppState {
@@ -10,10 +12,29 @@ class AppState {
   @observable attemptingClearCompleted = false
   @observable bulkAddingItems = false
   @observable editingItemId = null
+  @observable isLoading = true
   @observable firebaseApp = null
   @observable loadingData = false
   @observable showingFirebaseSettings = false
-  @observable state = C.NEEDS_INITIALIZATION
+  @observable state = C.INITIALIZING_FIREBASE
+
+  initializeFirebaseApp () {
+    this.app = firebase.init(this.appName, this.apiKey)
+
+    if (this.app) {
+      this.state = C.CONFIRMING_AUTH
+      auth.listenForChange()
+    } else {
+      this.state = C.NEEDS_FIREBASE_CONFIG
+    }
+  }
+
+  updateFirebaseSettings (appName, apiKey) {
+    localStore.set({ appName, apiKey })
+    this.appName = appName
+    this.apiKey = apiKey
+    this.initializeFirebaseApp()
+  }
 }
 
 export default new AppState()

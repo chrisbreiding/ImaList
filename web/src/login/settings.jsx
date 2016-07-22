@@ -1,9 +1,9 @@
+import { action } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
 import appState from '../app/app-state'
 import C from '../data/constants'
-import { updateFirebaseSettings } from '../app/app-actions'
 
 import Modal from '../modal/modal'
 
@@ -21,7 +21,7 @@ class Settings extends Component {
         <header>
           <h1>Firebase Settings</h1>
         </header>
-        <form onSubmit={this._onSubmit.bind(this)}>
+        <form onSubmit={this._updateFirebaseSettings}>
           <fieldset>
             <label>App Name</label>
             <input
@@ -47,14 +47,12 @@ class Settings extends Component {
   }
 
   _shouldShowSettings () {
-    return appState.state === C.NEEDS_INITIALIZATION
-           || appState.state === C.NEEDS_FIREBASE_CONFIG
-           || appState.showingFirebaseSettings
+    return appState.state === C.NEEDS_FIREBASE_CONFIG || appState.showingFirebaseSettings
   }
 
-  _onSubmit (e) {
+  @action _updateFirebaseSettings = (e) => {
     e.preventDefault()
-    this.props.dispatch(updateFirebaseSettings(this.refs.appName.value, this.refs.apiKey.value))
+    appState.updateFirebaseSettings(this.refs.appName.value, this.refs.apiKey.value)
   }
 }
 
