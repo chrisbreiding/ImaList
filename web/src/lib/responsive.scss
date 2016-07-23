@@ -1,0 +1,85 @@
+@media screen and (min-width: 550px) {
+  .app {
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  $list-width: 250px;
+
+  .showing-items .lists,
+  .lists {
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    left: 0;
+    position: relative;
+    width: $list-width;
+
+    footer {
+      width: $list-width;
+    }
+
+    li.is-selected {
+      background: darken($light-color, 5%);
+    }
+
+    header button {
+      display: none;
+    }
+  }
+
+  .showing-items .items,
+  .items {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    left: 0;
+    position: relative;
+
+    header {
+      display: none;
+    }
+  }
+
+  .list,
+  .item {
+    .sort-handle {
+      top: 0;
+    }
+  }
+
+  .list {
+    span.name {
+      padding-left: $unit;
+    }
+
+    &.showing-options .sort-handle  {
+      top: -($unit);
+    }
+  }
+
+  .items {
+    footer {
+      padding-right: $list-width;
+    }
+  }
+
+  .item {
+    .toggle-checked {
+      left: $unit;
+    }
+
+    .toggle-collapsed {
+      display: none;
+    }
+
+    .name {
+      padding-left: $unit * 2
+    }
+
+    &.type-label .name {
+      padding-left: $unit;
+    }
+
+    &.editing.type-label .name {
+      padding-left: .6em;
+    }
+  }
+}

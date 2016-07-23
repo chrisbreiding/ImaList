@@ -81,9 +81,7 @@ class Items extends Component {
         ref='list'
         el='ul'
         handleClass='sort-handle'
-        onSortingUpdate={(ids) => {
-          _.each(ids, (id, order) => this._updateItem({ id, order }))
-        }}
+        onSortingUpdate={this._sortingUpdated}
       >
       {_.map(items, (item, index) => (
         <Item
@@ -95,6 +93,7 @@ class Items extends Component {
           onUpdate={(item) => this._updateItem(item)}
           onRemove={() => this._removeItem(item)}
           onNext={() => this._next(items, index)}
+          onToggleCollapsed={() => this._toggleCollapsed(item)}
         ></Item>
       ))}
       </SortableList>
@@ -155,7 +154,16 @@ class Items extends Component {
   }
 
   @action _removeItem (item) {
-    this.props.list.itemsStore.removeItem(item.id)
+    this.props.list.itemsStore.removeItem(item)
+  }
+
+  @action _toggleCollapsed = (item) => {
+    this.props.list.itemsStore.toggleCollapsed(item)
+  }
+
+  @action _sortingUpdated = (ids) => {
+    this.props.list.itemsStore.expandAll()
+    _.each(ids, (id, order) => this._updateItem({ id, order }))
   }
 
   @action _attemptBulkAdd = () => {

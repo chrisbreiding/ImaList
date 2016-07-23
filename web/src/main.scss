@@ -4,4 +4,5 @@
 @import 'lib/mixins';
 @import 'lib/base';
 @import 'lib/shared';
-@import '!(lib)*/**/*';
+@import '!(lib|vendor)*/**/*';
+@import 'lib/responsive';

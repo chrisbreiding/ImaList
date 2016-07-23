@@ -87,8 +87,35 @@ class ItemsStore {
     firebase.getRef().child(`lists/${this.listId}/items/${item.id}`).update(item)
   }
 
-  removeItem (id) {
-    firebase.getRef().child(`lists/${this.listId}/items/${id}`).remove()
+  removeItem (item) {
+    this.expand(item)
+    firebase.getRef().child(`lists/${this.listId}/items/${item.id}`).remove()
+  }
+
+  toggleCollapsed (label) {
+    this._setCollapsed(label, !label.isCollapsed)
+  }
+
+  expand (label) {
+    this._setCollapsed(label, false)
+  }
+
+  _setCollapsed (label, isCollapsed) {
+    label.isCollapsed = isCollapsed
+    let hitNexLabel = false
+    _.each(this.items(), (item) => {
+      if (item.order <= label.order) return
+      if (item.type === 'label') hitNexLabel = true
+      if (hitNexLabel) return
+
+      item.isCollapsed = isCollapsed
+    })
+  }
+
+  expandAll () {
+    _.each(this.items(), (item) => {
+      item.isCollapsed = false
+    })
   }
 
   clearCompleted () {

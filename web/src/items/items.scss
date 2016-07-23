@@ -38,12 +38,28 @@
 .item {
   @include options(1);
 
-  .toggle-checked {
-    @include buttonize-color(#b7b7b7);
+  .toggle-checked,
+  .toggle-collapsed {
     @extend .icon-button;
     left: 0;
     position: absolute;
     top: 0;
+  }
+
+  .toggle-checked {
+    @include buttonize-color(#b7b7b7);
+  }
+
+  .toggle-collapsed {
+    @include buttonize-color($primary-color);
+
+    i {
+      @extend .#{$fa-css-prefix}-caret-down;
+    }
+  }
+
+  &.collapsed .toggle-collapsed i {
+    @extend .#{$fa-css-prefix}-caret-right;
   }
 
   .name {
@@ -67,6 +83,13 @@
     }
   }
 
+  &.type-todo {
+    &.collapsed,
+    .toggle-collapsed {
+      display: none;
+    }
+  }
+
   &.type-label {
     .toggle-checked {
       display: none;
@@ -75,13 +98,13 @@
     .name {
       background-color: #F8F8FF;
       font-weight: bold;
-      padding-left: .6em;
     }
   }
 
   .editing &,
   &.gu-mirror {
-    .toggle-checked {
+    .toggle-checked,
+    .toggle-collapsed {
       left: -($unit);
     }
 
@@ -91,7 +114,8 @@
   }
 
   &.editing {
-    .toggle-checked {
+    .toggle-checked,
+    .toggle-collapsed {
       left: -($unit);
     }
 

@@ -3,7 +3,6 @@
   transition: all .25s ease;
 
   &:hover,
-  &:focus,
   &:active {
     background: darken($color, 20%);
   }
@@ -14,7 +13,6 @@
   transition: all .25s ease;
 
   &:hover,
-  &:focus,
   &:active {
     color: darken($color, 20%);
   }

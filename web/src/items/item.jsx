@@ -35,6 +35,7 @@ export default class Item extends Component {
       <li
         className={cs('item', `type-${type}`, {
           'checked': this.props.model.isChecked,
+          'collapsed': this.props.model.isCollapsed,
           'editing': this.props.isEditing,
           'showing-options': this.state.showingOptions,
         })}
@@ -43,16 +44,22 @@ export default class Item extends Component {
         <Name
           ref='name'
           name={this.props.model.name}
-          onEditingStatusChange={this._onEditingStatusChange.bind(this)}
-          onUpdate={this._updateName.bind(this)}
+          onEditingStatusChange={this._onEditingStatusChange}
+          onUpdate={this._updateName}
           onNext={this.props.onNext}
         ></Name>
         <button
           ref='toggleChecked'
           className='toggle-checked'
-          onClick={this._toggleChecked.bind(this)}
+          onClick={this._toggleChecked}
         >
           <i className='fa fa-check'></i>
+        </button>
+        <button
+          className='toggle-collapsed'
+          onClick={this.props.onToggleCollapsed}
+        >
+          <i className='fa'></i>
         </button>
         <i className='sort-handle fa fa-arrows'></i>
         <div className='options'>
@@ -67,7 +74,7 @@ export default class Item extends Component {
     )
   }
 
-  _toggleChecked () {
+  _toggleChecked = () => {
     findDOMNode(this.refs.toggleChecked).blur()
     this.props.onUpdate({
       id: this.props.model.id,
@@ -75,7 +82,7 @@ export default class Item extends Component {
     })
   }
 
-  _onEditingStatusChange (editing) {
+  _onEditingStatusChange = (editing) => {
     this.props.onEdit(editing)
 
     this.setState({
@@ -83,7 +90,7 @@ export default class Item extends Component {
     })
   }
 
-  _updateName (name) {
+  _updateName = (name) => {
     this.props.onUpdate({
       id: this.props.model.id,
       name,
