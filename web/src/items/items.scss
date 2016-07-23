@@ -135,20 +135,6 @@
     }
   }
 
-  footer {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 0.6em;
-  }
-
-  button {
-    margin-left: 0.6em;
-  }
-
-  .cancel {
-    @include buttonize-background($neutral-color);
-  }
-
   .add {
     @include buttonize-background($primary-color);
   }

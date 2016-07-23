@@ -28,6 +28,21 @@ header {
   }
 }
 
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.6em;
+
+  button {
+    border-radius: 3px;
+    margin-left: 0.6em;
+  }
+
+  .cancel {
+    @include buttonize-background($neutral-color);
+  }
+}
+
 .app-loading,
 .lists,
 .items {

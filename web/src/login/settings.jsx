@@ -38,9 +38,10 @@ class Settings extends Component {
               defaultValue={appState.apiKey}
             />
           </fieldset>
-          <fieldset>
-            <button>Save</button>
-          </fieldset>
+          <div className='actions'>
+            <button className='save' type='submit'>Save</button>
+            <button className='cancel' onClick={this._cancel} href='#'>Cancel</button>
+          </div>
         </form>
       </Modal>
     )
@@ -53,6 +54,11 @@ class Settings extends Component {
   @action _updateFirebaseSettings = (e) => {
     e.preventDefault()
     appState.updateFirebaseSettings(this.refs.appName.value, this.refs.apiKey.value)
+  }
+
+  @action _cancel = (e) => {
+    e.preventDefault()
+    appState.showingFirebaseSettings = false
   }
 }
 

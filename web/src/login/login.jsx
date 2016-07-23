@@ -2,6 +2,7 @@ import { action } from 'mobx'
 import { observer } from 'mobx-react'
 import React from 'react'
 
+import appState from '../app/app-state'
 import authState from './auth-state'
 import auth from './auth'
 
@@ -14,6 +15,10 @@ const Login = observer(() => {
   const attemptLogin = action('attempt:login', (e) => {
     e.preventDefault()
     auth.login(email.value, password.value)
+  })
+
+  const showFirebaseSettings = action('show:firebase:settings', () => {
+    appState.showingFirebaseSettings = true
   })
 
   return (
@@ -31,15 +36,17 @@ const Login = observer(() => {
           <label>Password</label>
           <input ref={(node) => password = node} type='password' />
         </fieldset>
-        <fieldset>
+        <div className='actions'>
           {authState.attemptingLogin ?
             <span><i className='fa fa-spinner fa-spin'></i></span> :
             <button>Log In</button>}
-        </fieldset>
+        </div>
       </form>
-      <button>
-        <i className='fa fa-cog'></i> Firebase Settings
-      </button>
+      <footer>
+        <button onClick={showFirebaseSettings}>
+          <i className='fa fa-cog'></i>
+        </button>
+      </footer>
       <Settings />
     </div>
   )

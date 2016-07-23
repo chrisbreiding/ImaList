@@ -20,7 +20,7 @@ export default class BulkAdd extends Component {
           minRows={5}
           placeholder='Separate items with new lines...'
         />
-        <footer>
+        <footer className='actions'>
           <button className='cancel' onClick={this.props.onCancel}>
             Cancel
           </button>

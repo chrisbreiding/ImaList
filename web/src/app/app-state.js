@@ -30,10 +30,13 @@ class AppState {
   }
 
   updateFirebaseSettings (appName, apiKey) {
-    localStore.set({ appName, apiKey })
-    this.appName = appName
-    this.apiKey = apiKey
-    this.initializeFirebaseApp()
+    if (appName !== this.appName || apiKey !== this.apiKey) {
+      localStore.set({ appName, apiKey })
+      this.appName = appName
+      this.apiKey = apiKey
+      this.initializeFirebaseApp()
+    }
+    this.showingFirebaseSettings = false
   }
 }
 
