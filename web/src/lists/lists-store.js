@@ -52,9 +52,8 @@ class ListsStore {
       this._listRemoved(childSnapshot.key)
     }))
 
-    firebase.getRef().on('value', action('data:loaded', () => {
+    firebase.getRef().once('value', action('data:loaded', () => {
       this.isLoading = false
-      // TODO: remove listener here? is there a .once()?
     }))
   }
 
