@@ -33,10 +33,12 @@ class Auth {
 
   login (email, password) {
     authState.attemptingLogin = true
+    authState.loginFailed = false
 
     firebase.getAuth().signInWithEmailAndPassword(email, password)
     .then(action('login:succeeded', () => {
       authState.attemptingLogin = false
+      authState.loginFailed = false
       this._updateAuthStatus()
     }))
     .catch(action('login:failed', () => {
