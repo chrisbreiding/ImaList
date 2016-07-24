@@ -18,6 +18,10 @@ class ItemsStore {
     return _.sortBy(this._items.values(), 'order')
   }
 
+  @computed get hasCheckedItems () {
+    return _.some(this._items.values(), { isChecked: true })
+  }
+
   listen () {
     firebase.getRef().child(`lists/${this.listId}/items`).on('child_added', action('item:added', (childSnapshot) => {
       this._itemAdded(childSnapshot.key, childSnapshot.val())

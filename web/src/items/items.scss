@@ -1,6 +1,10 @@
 .items {
   .clear-completed {
-    align-self: flex-end;
+    opacity: 0.01;
+  }
+
+  &.has-checked-items .clear-completed {
+    opacity: 1.0;
   }
 }
 
