@@ -23,8 +23,6 @@ class App extends Component {
   }
 
   render () {
-    const lists = this.listsStore.lists()
-
     return (
       <div
         className={cs({
@@ -33,12 +31,11 @@ class App extends Component {
         })}
       >
         <Lists
-          lists={lists}
           listsStore={this.listsStore}
           onLogout={action('logout', () => authState.attemptingLogout = true)}
         />
         <Items
-          list={this.listsStore.selectedList(lists)}
+          list={this.listsStore.selectedList}
           isLoading={this.listsStore.isLoading}
           onShowLists={action('show:lists', () => this.listsStore.selectList(null))}
         />

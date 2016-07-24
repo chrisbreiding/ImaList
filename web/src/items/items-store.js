@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { action, map, observable } from 'mobx'
+import { action, computed, map, observable } from 'mobx'
 
 import appState from '../app/app-state'
 import firebase from '../data/firebase'
@@ -14,7 +14,7 @@ class ItemsStore {
     this.listId = listId
   }
 
-  items () {
+  @computed get items () {
     return _.sortBy(this._items.values(), 'order')
   }
 
@@ -103,7 +103,7 @@ class ItemsStore {
   _setCollapsed (label, isCollapsed) {
     label.isCollapsed = isCollapsed
     let hitNexLabel = false
-    _.each(this.items(), (item) => {
+    _.each(this.items, (item) => {
       if (item.order <= label.order) return
       if (item.type === 'label') hitNexLabel = true
       if (hitNexLabel) return
@@ -113,7 +113,7 @@ class ItemsStore {
   }
 
   expandAll () {
-    _.each(this.items(), (item) => {
+    _.each(this.items, (item) => {
       item.isCollapsed = false
     })
   }

@@ -18,8 +18,6 @@ class Items extends Component {
   @observable isEditing = false
 
   render () {
-    const items = this.props.list.itemsStore.items()
-
     return (
       <div
         className={cs({
@@ -36,7 +34,7 @@ class Items extends Component {
             {this.isEditing ? <span>Done</span> : <i className='fa fa-sort'></i>}
           </button>
         </header>
-        {this._items(items)}
+        {this._items()}
         <footer>
           <button onClick={() => this._addItem()}>
             <span>Item</span>
@@ -51,7 +49,7 @@ class Items extends Component {
             <i className='fa fa-plus-square-o'></i>
           </button>
           <div className='spacer'></div>
-          {this._clearCompletedButton(items)}
+          {this._clearCompletedButton()}
         </footer>
         <BulkAdd
           isShowing={this.bulkAddingItems}
@@ -69,10 +67,10 @@ class Items extends Component {
   }
 
   // TODO: optimize by moving to own component
-  _items (items) {
+  _items () {
     if (this.props.isLoading) {
       return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
-    } else if (!items.length) {
+    } else if (!this.props.list.itemsStore.items.length) {
       return <p className='no-items'>No Items</p>
     }
 
@@ -83,7 +81,7 @@ class Items extends Component {
         handleClass='sort-handle'
         onSortingUpdate={this._sortingUpdated}
       >
-      {_.map(items, (item, index) => (
+      {_.map(this.props.list.itemsStore.items, (item, index) => (
         <Item
           ref={item.id}
           key={item.id}
@@ -92,7 +90,7 @@ class Items extends Component {
           onEdit={(shouldEdit) => this._editItem(item, shouldEdit)}
           onUpdate={(item) => this._updateItem(item)}
           onRemove={() => this._removeItem(item)}
-          onNext={() => this._next(items, index)}
+          onNext={() => this._next(index)}
           onToggleCollapsed={() => this._toggleCollapsed(item)}
         ></Item>
       ))}
@@ -100,8 +98,8 @@ class Items extends Component {
     )
   }
 
-  _clearCompletedButton (items) {
-    if (!_.some(items, { isChecked: true })) return null
+  _clearCompletedButton () {
+    if (!_.some(this.props.list.itemsStore.items, { isChecked: true })) return null
 
     return (
       <button className='clear-completed' onClick={this._attemptClearCompleted}>
@@ -124,7 +122,8 @@ class Items extends Component {
     this.props.list.itemsStore.clearCompleted(this.props.list)
   }
 
-  @action _next (items, index) {
+  @action _next (index) {
+    const items = this.props.list.itemsStore.items
     if (index === items.length - 1) {
       this._addItem()
     } else {

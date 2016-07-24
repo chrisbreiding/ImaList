@@ -23,9 +23,9 @@ class Lists extends Component {
             {this.editing ? <span>Done</span> : <i className='fa fa-sort'></i>}
           </button>
         </header>
-        {this._lists(this.props.lists)}
+        {this._lists()}
         <footer>
-          <button onClick={() => this._addList(this.props.lists)}>
+          <button onClick={() => this._addList()}>
             <span>List</span>
             <i className='fa fa-plus'></i>
           </button>
@@ -41,10 +41,10 @@ class Lists extends Component {
   }
 
   // TODO: optimize by moving to own component
-  _lists (lists) {
+  _lists () {
     if (this.props.listsStore.isLoading) {
       return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
-    } else if (!lists.length) {
+    } else if (!this.props.listsStore.lists.length) {
       return <p className='no-items'>No Lists</p>
     }
 
@@ -56,7 +56,7 @@ class Lists extends Component {
           _.each(ids, (id, order) => this._updateList({ id, order }))
         }}
       >
-        {_.map(lists, (list) => (
+        {_.map(this.props.listsStore.lists, (list) => (
           <List
             key={list.id}
             ref={list.id}
@@ -95,8 +95,8 @@ class Lists extends Component {
     this.props.listsStore.selectList(list.id)
   }
 
-  @action _addList (lists) {
-    this.props.listsStore.addList(lists, authState.userEmail)
+  @action _addList () {
+    this.props.listsStore.addList()
   }
 
   @action _updateList (list) {

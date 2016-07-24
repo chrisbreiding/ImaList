@@ -19,14 +19,15 @@ class ListsStore {
     return !!this.selectedId
   }
 
-  lists () {
+  @computed get lists () {
     return _(this._lists.values())
       .sortBy('order')
       .filter((list) => list.shared || list.owner === authState.userEmail)
       .value()
   }
 
-  selectedList (lists) {
+  @computed get selectedList () {
+    const lists = this.lists
     const userSelectedId = this.selectedId || null
     const fallbackId = lists[0] && lists[0].id
     const selectedId = userSelectedId || fallbackId
@@ -79,9 +80,11 @@ class ListsStore {
     this.selectedId = listId
   }
 
-  addList (lists, email) {
+  addList () {
+    const lists = this.lists
     const order = lists.length ? Math.max(..._.map(lists, 'order')) + 1 : 0
-    const newRef = firebase.getRef().child('lists').push(this._newList({ order, owner: email }), action('added:list', () => {
+    const newList = this._newList({ order, owner: authState.userEmail })
+    const newRef = firebase.getRef().child('lists').push(newList, action('added:list', () => {
       this.editList(newRef.key)
     }))
   }
