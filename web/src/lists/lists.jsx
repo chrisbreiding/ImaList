@@ -5,7 +5,6 @@ import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
 import authState from '../login/auth-state'
-import listsStore from './lists-store'
 
 import ActionSheet from '../modal/action-sheet'
 import SortableList from '../lib/sortable-list'
@@ -43,7 +42,7 @@ class Lists extends Component {
 
   // TODO: optimize by moving to own component
   _lists (lists) {
-    if (listsStore.isLoading) {
+    if (this.props.listsStore.isLoading) {
       return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
     } else if (!lists.length) {
       return <p className='no-items'>No Lists</p>
@@ -63,8 +62,8 @@ class Lists extends Component {
             ref={list.id}
             model={list}
             isOwner={list.owner === authState.userEmail}
-            isEditing={list.id === listsStore.editingListId}
-            isSelected={list.id === listsStore.selectedId}
+            isEditing={list.id === this.props.listsStore.editingListId}
+            isSelected={list.id === this.props.listsStore.selectedId}
             onEdit={(shouldEdit) => this._editList(list, shouldEdit)}
             onSelect={() => this._goToList(list)}
             onUpdate={(list) => this._updateList(list)}
@@ -76,36 +75,36 @@ class Lists extends Component {
   }
 
   _removeConfirmation () {
-    const listId = listsStore.attemptingRemoveListId
+    const listId = this.props.listsStore.attemptingRemoveListId
 
     return (
       <ActionSheet
         isShowing={!!listId}
         confirmMessage='Remove List'
-        onConfirm={action('list:removal:confirmed', () => listsStore.removeList(listId))}
-        onCancel={action('list:removal:canceled', () => listsStore.attemptRemoveList(false))}
+        onConfirm={action('list:removal:confirmed', () => this.props.listsStore.removeList(listId))}
+        onCancel={action('list:removal:canceled', () => this.props.listsStore.attemptRemoveList(false))}
       />
     )
   }
 
   @action _editList (list, shouldEdit) {
-    listsStore.editList(shouldEdit ? list.id : null)
+    this.props.listsStore.editList(shouldEdit ? list.id : null)
   }
 
   @action _goToList (list) {
-    listsStore.selectList(list.id)
+    this.props.listsStore.selectList(list.id)
   }
 
   @action _addList (lists) {
-    listsStore.addList(lists, authState.userEmail)
+    this.props.listsStore.addList(lists, authState.userEmail)
   }
 
   @action _updateList (list) {
-    listsStore.updateList(list)
+    this.props.listsStore.updateList(list)
   }
 
   @action _attemptRemoveList (list) {
-    listsStore.attemptRemoveList(list.id)
+    this.props.listsStore.attemptRemoveList(list.id)
   }
 
   @action _toggleEditing = () => {

@@ -114,4 +114,4 @@ class ListsStore {
   }
 }
 
-export default new ListsStore()
+export default ListsStore

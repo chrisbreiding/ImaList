@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 
 import auth from '../login/auth'
 import authState from '../login/auth-state'
-import listsStore from '../lists/lists-store'
+import ListsStore from '../lists/lists-store'
 
 import ActionSheet from '../modal/action-sheet'
 import Items from '../items/items'
@@ -14,31 +14,33 @@ import Lists from '../lists/lists'
 @observer
 class App extends Component {
   componentWillMount () {
-    listsStore.listen()
+    this.listsStore = new ListsStore()
+    this.listsStore.listen()
   }
 
   componentWillUnmount () {
-    listsStore.stopListening()
+    this.listsStore.stopListening()
   }
 
   render () {
-    const lists = listsStore.lists()
+    const lists = this.listsStore.lists()
 
     return (
       <div
         className={cs({
           'app': true,
-          'showing-items': listsStore.showingItems,
+          'showing-items': this.listsStore.showingItems,
         })}
       >
         <Lists
           lists={lists}
+          listsStore={this.listsStore}
           onLogout={action('logout', () => authState.attemptingLogout = true)}
         />
         <Items
-          list={listsStore.selectedList(lists)}
-          isLoading={listsStore.isLoading}
-          onShowLists={action('show:lists', () => listsStore.selectList(null))}
+          list={this.listsStore.selectedList(lists)}
+          isLoading={this.listsStore.isLoading}
+          onShowLists={action('show:lists', () => this.listsStore.selectList(null))}
         />
         {this._confirmLogout()}
       </div>
