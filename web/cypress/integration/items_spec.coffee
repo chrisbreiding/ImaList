@@ -7,9 +7,10 @@ describe 'items', ->
       .clearLists()
       .createList()
       .get('.list').first().within ->
-        cy.get('input').type('list name')
-        cy.get('.toggle-options').click()
-        cy.get('.name').click()
+        cy
+          .get('input').type('list name')
+          .get('.toggle-options').click()
+          .get('.name').click()
 
   it 'shows the items', ->
     cy
@@ -103,8 +104,9 @@ describe 'items', ->
 
       beforeEach ->
         cy.get('.item').first().within ->
-          cy.get('.toggle-options').click()
-          cy.get('.remove').click()
+          cy
+            .get('.toggle-options').click()
+            .get('.remove').click()
 
       it 'removes the item', ->
         cy.get('.item').should 'have.length', 0
@@ -162,12 +164,12 @@ describe 'items', ->
         .click()
         .click()
 
-      cy.get('.item').first().find('.toggle-checked').click()
-      cy.get('.item').eq(1).find('textarea').type 'will remain'
-      cy.get('.item').last().find('.toggle-checked').click()
+        .get('.item').first().find('.toggle-checked').click()
+        .get('.item').eq(1).find('textarea').type 'will remain'
+        .get('.item').last().find('.toggle-checked').click()
 
-      cy.get('.items > footer button').last().click()
-      cy.get('.confirm:contains("Clear Completed")').click()
+        .get('.items > footer button').last().click()
+        .get('.confirm:contains("Clear Completed")').click()
 
     it 'removes the checked items', ->
       cy
@@ -175,3 +177,14 @@ describe 'items', ->
           .should 'have.length', 1
         .first().find('textarea')
           .should 'have.value', 'will remain'
+
+  describe 'wide mode', ->
+
+    describe 'when no list is selected', ->
+
+      it 'shows no list selected message', ->
+        cy
+          .get('.back').click()
+          .viewport(560, 300)
+          .get('.no-items')
+            .should('have.text', 'No List Selected')

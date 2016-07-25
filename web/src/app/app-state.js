@@ -12,7 +12,6 @@ class AppState {
   @observable attemptingClearCompleted = false
   @observable bulkAddingItems = false
   @observable editingItemId = null
-  @observable isLoading = true
   @observable firebaseApp = null
   @observable loadingData = false
   @observable showingFirebaseSettings = false

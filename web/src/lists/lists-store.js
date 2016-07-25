@@ -27,15 +27,8 @@ class ListsStore {
   }
 
   @computed get selectedList () {
-    const lists = this.lists
-    const userSelectedId = this.selectedId || null
-    const fallbackId = lists[0] && lists[0].id
-    const selectedId = userSelectedId || fallbackId
-
-    const selected = _.find(lists, { id: selectedId })
-    const fallback = _.find(lists, { id: fallbackId })
-
-    return selected || fallback || { itemsStore: { items: () => ({}) } }
+    const selected = _.find(this.lists, { id: this.selectedId })
+    return selected || { itemsStore: { items: [], none: true } }
   }
 
   listen () {
