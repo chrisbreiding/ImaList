@@ -26,22 +26,24 @@ const Login = observer(() => {
       <header>
         <h1>Please Log In</h1>
       </header>
-      {authState.loginFailed ? <p className='error'>Login failed. Please try again.</p> : null}
-      <form onSubmit={attemptLogin}>
-        <fieldset>
-          <label>Email</label>
-          <input ref={(node) => email = node} type='email' />
-        </fieldset>
-        <fieldset>
-          <label>Password</label>
-          <input ref={(node) => password = node} type='password' />
-        </fieldset>
-        <div className='actions'>
-          {authState.attemptingLogin ?
-            <span><i className='fa fa-spinner fa-spin'></i></span> :
-            <button>Log In</button>}
-        </div>
-      </form>
+      <div className='container'>
+        {authState.loginFailed ? <p className='error'>Login failed. Please try again.</p> : null}
+        <form onSubmit={attemptLogin}>
+          <fieldset>
+            <label>Email</label>
+            <input ref={(node) => email = node} type='email' />
+          </fieldset>
+          <fieldset>
+            <label>Password</label>
+            <input ref={(node) => password = node} type='password' />
+          </fieldset>
+          <div className='actions'>
+            {authState.attemptingLogin ?
+              <span><i className='fa fa-spinner fa-spin'></i></span> :
+              <button>Log In</button>}
+          </div>
+        </form>
+      </div>
       <footer>
         <button onClick={showFirebaseSettings}>
           <i className='fa fa-cog'></i>
