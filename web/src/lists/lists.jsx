@@ -1,14 +1,10 @@
 import cs from 'classnames'
-import _ from 'lodash'
 import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
-import authState from '../login/auth-state'
-
 import ActionSheet from '../modal/action-sheet'
-import SortableList from '../lib/sortable-list'
-import List from './list'
+import ListsList from './lists-list'
 
 @observer
 class Lists extends Component {
@@ -23,9 +19,9 @@ class Lists extends Component {
             {this.editing ? <span>Done</span> : <i className='fa fa-sort'></i>}
           </button>
         </header>
-        {this._lists()}
+        <ListsList listsStore={this.props.listsStore} />
         <footer>
-          <button onClick={() => this._addList()}>
+          <button onClick={this._addList}>
             <span>List</span>
             <i className='fa fa-plus'></i>
           </button>
@@ -35,76 +31,26 @@ class Lists extends Component {
             <i className='fa fa-sign-out'></i>
           </button>
         </footer>
-        {this._removeConfirmation()}
+        <ActionSheet
+          isShowing={!!this.props.listsStore.attemptingRemoveListId}
+          confirmMessage='Remove List'
+          onConfirm={this._removeList}
+          onCancel={this._cancelRemoveList}
+        />
       </div>
     )
   }
 
-  // TODO: optimize by moving to own component
-  _lists () {
-    if (this.props.listsStore.isLoading) {
-      return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
-    } else if (!this.props.listsStore.lists.length) {
-      return <p className='no-items'>No Lists</p>
-    }
-
-    return (
-      <SortableList
-        el='ul'
-        handleClass='sort-handle'
-        onSortingUpdate={(ids) => {
-          _.each(ids, (id, order) => this._updateList({ id, order }))
-        }}
-      >
-        {_.map(this.props.listsStore.lists, (list) => (
-          <List
-            key={list.id}
-            ref={list.id}
-            model={list}
-            isOwner={list.owner === authState.userEmail}
-            isEditing={list.id === this.props.listsStore.editingListId}
-            isSelected={list.id === this.props.listsStore.selectedId}
-            onEdit={(shouldEdit) => this._editList(list, shouldEdit)}
-            onSelect={() => this._goToList(list)}
-            onUpdate={(list) => this._updateList(list)}
-            onRemove={() => this._attemptRemoveList(list)}
-          />
-        ))}
-      </SortableList>
-    )
-  }
-
-  _removeConfirmation () {
-    const listId = this.props.listsStore.attemptingRemoveListId
-
-    return (
-      <ActionSheet
-        isShowing={!!listId}
-        confirmMessage='Remove List'
-        onConfirm={action('list:removal:confirmed', () => this.props.listsStore.removeList(listId))}
-        onCancel={action('list:removal:canceled', () => this.props.listsStore.attemptRemoveList(false))}
-      />
-    )
-  }
-
-  @action _editList (list, shouldEdit) {
-    this.props.listsStore.editList(shouldEdit ? list.id : null)
-  }
-
-  @action _goToList (list) {
-    this.props.listsStore.selectList(list.id)
-  }
-
-  @action _addList () {
+  @action _addList = () => {
     this.props.listsStore.addList()
   }
 
-  @action _updateList (list) {
-    this.props.listsStore.updateList(list)
+  @action _removeList = () => {
+    this.props.listsStore.removeList(this.props.listsStore.attemptingRemoveListId)
   }
 
-  @action _attemptRemoveList (list) {
-    this.props.listsStore.attemptRemoveList(list.id)
+  @action _cancelRemoveList = () => {
+    this.props.listsStore.attemptRemoveList(false)
   }
 
   @action _toggleEditing = () => {
