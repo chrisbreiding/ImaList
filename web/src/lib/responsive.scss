@@ -6,6 +6,19 @@
 
   $list-width: 250px;
 
+  .app-loading,
+  .login,
+  .lists,
+  .items {
+    header {
+      display: none;
+    }
+
+    ul {
+      top: 0;
+    }
+  }
+
   .showing-items .lists,
   .lists {
     -webkit-flex-shrink: 0;
@@ -21,10 +34,6 @@
     li.is-selected {
       background: darken($light-color, 5%);
     }
-
-    header button {
-      display: none;
-    }
   }
 
   .showing-items .items,
@@ -32,10 +41,6 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     left: 0;
     position: relative;
-
-    header {
-      display: none;
-    }
   }
 
   .list,
