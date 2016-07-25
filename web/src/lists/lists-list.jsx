@@ -28,34 +28,28 @@ class ListsList extends Component {
         {_.map(this.props.listsStore.lists, (list) => (
           <List
             key={list.id}
-            ref={list.id}
             model={list}
             isOwner={list.owner === authState.userEmail}
             isEditing={list.id === this.props.listsStore.editingListId}
             isSelected={list.id === this.props.listsStore.selectedId}
-            onEdit={(shouldEdit) => this._editList(list, shouldEdit)}
-            onSelect={() => this._goToList(list)}
-            onUpdate={(list) => this._updateList(list)}
-            onRemove={() => this._attemptRemoveList(list)}
+            onSelect={this._goToList}
+            onUpdate={this._updateList}
+            onRemove={this._attemptRemoveList}
           />
         ))}
       </SortableList>
     )
   }
 
-  @action _editList (list, shouldEdit) {
-    this.props.listsStore.editList(shouldEdit ? list.id : null)
-  }
-
-  @action _goToList (list) {
+  @action _goToList = (list) => {
     this.props.listsStore.selectList(list.id)
   }
 
-  @action _updateList (list) {
+  @action _updateList = (list) => {
     this.props.listsStore.updateList(list)
   }
 
-  @action _attemptRemoveList (list) {
+  @action _attemptRemoveList = (list) => {
     this.props.listsStore.attemptRemoveList(list.id)
   }
 }

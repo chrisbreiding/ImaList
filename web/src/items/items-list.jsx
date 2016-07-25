@@ -30,11 +30,11 @@ class ItemsList extends Component {
             key={item.id}
             model={item}
             isEditing={item.id === appState.editingItemId}
-            onEdit={(shouldEdit) => this._editItem(item, shouldEdit)}
-            onUpdate={(item) => this._updateItem(item)}
-            onRemove={() => this._removeItem(item)}
+            onEdit={this._editItem}
+            onUpdate={this._updateItem}
+            onRemove={this._removeItem}
             onNext={() => this._next(index)}
-            onToggleCollapsed={() => this._toggleCollapsed(item)}
+            onToggleCollapsed={this._toggleCollapsed}
           ></Item>
         ))}
       </SortableList>

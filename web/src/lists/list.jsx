@@ -42,13 +42,13 @@ export default class List extends Component {
         <span>{this._name()}</span>
         <div className='options'>
           <i className='shared-indicator fa fa-share-alt-square'></i>
-          <button className='toggle-options' onClick={this._toggleOptions.bind(this)}>
+          <button className='toggle-options' onClick={this._toggleOptions}>
             <i className='fa fa-ellipsis-h'></i>
           </button>
-          <button className='toggle-shared' onClick={this._toggledShared.bind(this)}>
+          <button className='toggle-shared' onClick={this._toggledShared}>
             <i className='fa fa-share-alt'></i>
           </button>
-          <button className='remove' onClick={this._remove.bind(this)}>
+          <button className='remove' onClick={this._removeList}>
             <i className='fa fa-times'></i>
           </button>
         </div>
@@ -63,42 +63,46 @@ export default class List extends Component {
           ref='name'
           className='name'
           defaultValue={this.props.model.name}
-          onChange={this._updateName.bind(this)}
-          onKeyUp={this._keyup.bind(this)}
+          onChange={this._updateName}
+          onKeyUp={this._keyup}
         />
       )
     } else {
       return (
-        <span className='name' onClick={this.props.onSelect}>
+        <span className='name' onClick={this._selectList}>
           {this.props.model.name}
         </span>
       )
     }
   }
 
-  _toggleOptions () {
+  _selectList = () => {
+    this.props.onSelect(this.props.model)
+  }
+
+  _removeList = () => {
+    this.props.onRemove(this.props.model)
+  }
+
+  _toggleOptions = () => {
     this.setState({ showingOptions: !this.state.showingOptions })
   }
 
-  _toggledShared () {
+  _toggledShared = () => {
     this.props.onUpdate({
       id: this.props.model.id,
       shared: !this.props.model.shared,
     })
   }
 
-  _remove () {
-    this.props.onRemove()
-  }
-
-  _updateName () {
+  _updateName = () => {
     this.props.onUpdate({
       id: this.props.model.id,
       name: findDOMNode(this.refs.name).value,
     })
   }
 
-  _keyup (e) {
+  _keyup = (e) => {
     if (e.key === 'Enter') {
       this._toggleOptions()
     }

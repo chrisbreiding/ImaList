@@ -6,16 +6,18 @@ const ENTER_DELAY = 200
 
 export default class Name extends Component {
   render () {
-    return <Textarea
-      ref='name'
-      className='name'
-      value={this.props.name}
-      onFocus={() => this.props.onEditingStatusChange(true)}
-      onBlur={() => this.props.onEditingStatusChange(false)}
-      onChange={this._updateName.bind(this)}
-      onKeyDown={this._onKeyDown.bind(this)}
-      onKeyUp={this._onKeyUp.bind(this)}
-    />
+    return (
+      <Textarea
+        ref='name'
+        className='name'
+        value={this.props.name}
+        onFocus={() => this.props.onEditingStatusChange(true)}
+        onBlur={() => this.props.onEditingStatusChange(false)}
+        onChange={this._updateName}
+        onKeyDown={this._onKeyDown}
+        onKeyUp={this._onKeyUp}
+      />
+    )
   }
 
   focus () {
@@ -30,11 +32,11 @@ export default class Name extends Component {
     return this._getDOMNode().value || ''
   }
 
-  _updateName () {
+  _updateName = () => {
     this.props.onUpdate(this._value())
   }
 
-  _onKeyDown (e) {
+  _onKeyDown = (e) => {
     const isEnter = e.key === 'Enter'
 
     if ((isEnter && e.shiftKey) || (isEnter && this._shouldAddNewLine())) {
@@ -51,7 +53,7 @@ export default class Name extends Component {
     }
   }
 
-  _onKeyUp (e) {
+  _onKeyUp = (e) => {
     if (e.key === 'Escape') {
       this._getDOMNode().blur()
     }

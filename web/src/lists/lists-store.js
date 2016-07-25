@@ -85,7 +85,7 @@ class ListsStore {
     const order = lists.length ? Math.max(..._.map(lists, 'order')) + 1 : 0
     const newList = this._newList({ order, owner: authState.userEmail })
     const newRef = firebase.getRef().child('lists').push(newList, action('added:list', () => {
-      this.editList(newRef.key)
+      this._editList(newRef.key)
     }))
   }
 
@@ -99,7 +99,7 @@ class ListsStore {
     }
   }
 
-  editList (listId) {
+  _editList (listId) {
     this.editingListId = listId
   }
 

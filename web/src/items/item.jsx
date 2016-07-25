@@ -57,16 +57,16 @@ export default class Item extends Component {
         </button>
         <button
           className='toggle-collapsed'
-          onClick={this.props.onToggleCollapsed}
+          onClick={this._toggleCollapsed}
         >
           <i className='fa'></i>
         </button>
         <i className='sort-handle fa fa-arrows'></i>
         <div className='options'>
-          <button className='toggle-options' onClick={this._toggleOptions.bind(this)}>
+          <button className='toggle-options' onClick={this._toggleOptions}>
             <i className='fa fa-ellipsis-h'></i>
           </button>
-          <button className='remove' onClick={this._remove.bind(this)}>
+          <button className='remove' onClick={this._remove}>
             <i className='fa fa-times'></i>
           </button>
         </div>
@@ -82,8 +82,12 @@ export default class Item extends Component {
     })
   }
 
+  _toggleCollapsed = () => {
+    this.props.onToggleCollapsed(this.props.model)
+  }
+
   _onEditingStatusChange = (editing) => {
-    this.props.onEdit(editing)
+    this.props.onEdit(this.props.model, editing)
 
     this.setState({
       showingOptions: false,
@@ -97,11 +101,11 @@ export default class Item extends Component {
     })
   }
 
-  _toggleOptions () {
+  _toggleOptions = () => {
     this.setState({ showingOptions: !this.state.showingOptions })
   }
 
-  _remove () {
-    this.props.onRemove()
+  _remove = () => {
+    this.props.onRemove(this.props.model)
   }
 }
