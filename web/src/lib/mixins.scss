@@ -53,10 +53,6 @@
       padding-right: $full-width + 1em;
     }
 
-    &.editing .name {
-      padding-right: .6em;
-    }
-
     .toggle-options {
       padding-left: .5em;
       width: $unit + .5em;
@@ -74,8 +70,7 @@
     }
   }
 
-  &.editing .options,
-  .editing & .options {
+  .is-sorting & .options {
     right: -($full-width);
   }
 }

@@ -100,16 +100,10 @@ header {
     width: $unit;
   }
 
-  .editing &,
+  .is-sorting &,
   &.gu-mirror {
     .sort-handle {
       top: 0;
-    }
-  }
-
-  &.editing {
-    .sort-handle {
-      top: -($unit);
     }
   }
 

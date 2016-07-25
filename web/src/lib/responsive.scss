@@ -4,7 +4,7 @@
     display: flex;
   }
 
-  $list-width: 250px;
+  $list-width: 40%;
 
   .app-loading,
   .login,
@@ -74,10 +74,6 @@
 
     .name {
       padding-left: $unit * 2
-    }
-
-    &.editing.type-label .name {
-      padding-left: .6em;
     }
   }
 }

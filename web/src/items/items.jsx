@@ -11,14 +11,14 @@ import ItemsList from './items-list'
 class Items extends Component {
   @observable attemptingClearCompleted = false
   @observable bulkAddingItems = false
-  @observable isEditing = false
+  @observable isSorting = false
 
   render () {
     return (
       <div
         className={cs({
           'items': true,
-          'editing': this.isEditing,
+          'is-sorting': this.isSorting,
           'has-checked-items': this.props.list.itemsStore.hasCheckedItems,
         })}
       >
@@ -27,8 +27,8 @@ class Items extends Component {
           <button className='back' onClick={this._onBack}>
             <i className='fa fa-chevron-left'></i>
           </button>
-          <button className='edit' onClick={this._toggleEditing}>
-            {this.isEditing ? <span>Done</span> : <i className='fa fa-sort'></i>}
+          <button className='edit' onClick={this._toggleSorting}>
+            {this.isSorting ? <span>Done</span> : <i className='fa fa-sort'></i>}
           </button>
         </header>
         <ItemsList
@@ -84,12 +84,12 @@ class Items extends Component {
   }
 
   @action _onBack = () => {
-    this.isEditing = false
+    this.isSorting = false
     this.props.onShowLists()
   }
 
-  @action _toggleEditing = () => {
-    this.isEditing = !this.isEditing
+  @action _toggleSorting = () => {
+    this.isSorting = !this.isSorting
   }
 
   @action _addItem = (type) => {

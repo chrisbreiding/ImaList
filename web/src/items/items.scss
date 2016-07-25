@@ -19,7 +19,7 @@
   right: 0;
   text-align: right;
 
-  .editing & {
+  .is-sorting & {
     width: auto;
   }
 
@@ -68,7 +68,7 @@
 
   .name {
     background: none;
-    border: solid $primary-color 0;
+    border: solid transparent 0.2em;
     border-radius: 0;
     box-sizing: border-box;
     display: block;
@@ -76,14 +76,13 @@
     line-height: 1.5;
     min-height: $unit;
     outline: none;
-    padding: .6em $unit;
+    padding: .4em $unit - 0.2em;
     text-overflow: ellipsis;
     transition: all .25s ease;
     width: 100%;
 
     &:focus {
-      border-width: .2em;
-      padding: .4em .6em;
+      border-color: $primary-color;
     }
   }
 
@@ -105,7 +104,7 @@
     }
   }
 
-  .editing &,
+  .is-sorting &,
   &.gu-mirror {
     .toggle-checked,
     .toggle-collapsed {
@@ -114,17 +113,6 @@
 
     .name {
       padding-left: $unit;
-    }
-  }
-
-  &.editing {
-    .toggle-checked,
-    .toggle-collapsed {
-      left: -($unit);
-    }
-
-    .name {
-      padding-left: .6em;
     }
   }
 

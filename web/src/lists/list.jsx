@@ -103,7 +103,7 @@ export default class List extends Component {
   }
 
   _keyup = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.key === 'Escape') {
       this._toggleOptions()
     }
   }

@@ -8,15 +8,15 @@ import ListsList from './lists-list'
 
 @observer
 class Lists extends Component {
-  @observable editing = false
+  @observable isSorting = false
 
   render () {
     return (
-      <div className={cs('lists', { editing: this.editing })}>
+      <div className={cs('lists', { 'is-sorting': this.isSorting })}>
         <header className='fixed'>
           <h1>ImaList</h1>
-          <button className='edit' onClick={this._toggleEditing}>
-            {this.editing ? <span>Done</span> : <i className='fa fa-sort'></i>}
+          <button className='edit' onClick={this._toggleSorting}>
+            {this.isSorting ? <span>Done</span> : <i className='fa fa-sort'></i>}
           </button>
         </header>
         <ListsList listsStore={this.props.listsStore} />
@@ -53,8 +53,8 @@ class Lists extends Component {
     this.props.listsStore.attemptRemoveList(false)
   }
 
-  @action _toggleEditing = () => {
-    this.editing = !this.editing
+  @action _toggleSorting = () => {
+    this.isSorting = !this.isSorting
   }
 }
 

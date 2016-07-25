@@ -11,20 +11,20 @@ export default class Item extends Component {
     super(props)
 
     this.state = {
-      editing: false,
+      isEditing: false,
       showingOptions: false,
     }
   }
 
   componentDidUpdate () {
-    if (this.props.isEditing && !this.state.editing) {
-      this.setState({ editing: true }, () => {
+    if (this.props.isEditing && !this.state.isEditing) {
+      this.setState({ isEditing: true }, () => {
         this.refs.name.focus()
       })
     }
 
-    if (!this.props.isEditing && this.state.editing) {
-      this.setState({ editing: false })
+    if (!this.props.isEditing && this.state.isEditing) {
+      this.setState({ isEditing: false })
     }
   }
 
@@ -36,7 +36,6 @@ export default class Item extends Component {
         className={cs('item', `type-${type}`, {
           'checked': this.props.model.isChecked,
           'collapsed': this.props.model.isCollapsed,
-          'editing': this.props.isEditing,
           'showing-options': this.state.showingOptions,
         })}
         data-id={this.props.model.id}
@@ -86,8 +85,8 @@ export default class Item extends Component {
     this.props.onToggleCollapsed(this.props.model)
   }
 
-  _onEditingStatusChange = (editing) => {
-    this.props.onEdit(this.props.model, editing)
+  _onEditingStatusChange = (isEditing) => {
+    this.props.onEdit(this.props.model, isEditing)
 
     this.setState({
       showingOptions: false,
