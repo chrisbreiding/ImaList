@@ -67,20 +67,13 @@
   }
 
   .item {
-    .toggle-checked {
-      left: $unit;
-    }
-
+    .toggle-checked,
     .toggle-collapsed {
-      display: none;
+      left: $unit;
     }
 
     .name {
       padding-left: $unit * 2
-    }
-
-    &.type-label .name {
-      padding-left: $unit;
     }
 
     &.editing.type-label .name {
