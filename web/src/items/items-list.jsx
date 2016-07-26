@@ -32,6 +32,7 @@ class ItemsList extends Component {
             key={item.id}
             model={item}
             isEditing={item.id === appState.editingItemId}
+            isCollapsed={this.props.itemsStore.isCollapsed(item)}
             onEdit={this._editItem}
             onUpdate={this._updateItem}
             onRemove={this._removeItem}

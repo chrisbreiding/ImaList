@@ -34,8 +34,8 @@ export default class Item extends Component {
     return (
       <li
         className={cs('item', `type-${type}`, {
-          'checked': this.props.model.isChecked,
-          'collapsed': this.props.model.isCollapsed,
+          'is-checked': this.props.model.isChecked,
+          'is-collapsed': this.props.isCollapsed,
           'showing-options': this.state.showingOptions,
         })}
         data-id={this.props.model.id}

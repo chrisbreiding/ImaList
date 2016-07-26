@@ -9,6 +9,7 @@ import Item from './item-model'
 
 class ItemsStore {
   @observable _items = map()
+  @observable _collapsed = map()
 
   constructor (listId) {
     this.listId = listId
@@ -16,6 +17,22 @@ class ItemsStore {
 
   @computed get items () {
     return _.sortBy(this._items.values(), 'order')
+  }
+
+  @computed get _collapsedItems () {
+    const collapsed = {}
+    const items = this._items.values()
+    _.each(this._collapsed.keys(), (id) => {
+      const label = _.find(items, { id })
+      let hitNextLabel = false
+      _.each(this.items, (item) => {
+        if (item.order < label.order) return
+        if (item.id !== id && item.type === 'label') hitNextLabel = true
+        if (hitNextLabel) return
+        collapsed[item.id] = true
+      })
+    })
+    return collapsed
   }
 
   @computed get hasCheckedItems () {
@@ -52,8 +69,12 @@ class ItemsStore {
     firebase.getRef().off()
   }
 
-  _newOrder () {
-    return this._items.size ? Math.max(..._.map(this._items.values(), 'order')) + 1 : 0
+  _newOrder (collapsedItems) {
+    if (collapsedItems[0]) {
+      return collapsedItems[0].order
+    } else {
+      return this._items.size ? _.last(this.items).order + 1 : 0
+    }
   }
 
   _newItem ({ order, type = 'todo', name = '' }) {
@@ -66,21 +87,43 @@ class ItemsStore {
   }
 
   addItem ({ type }) {
-    const order = this._newOrder()
-    const newRef = firebase.getRef().child(`lists/${this.listId}/items`)
-      .push(this._newItem({ order, type }), action('added:item', () => {
-        appState.editingItemId = newRef.key
-      }))
+    // add item before the last non-collapsed item or at the end if
+    // there are no collapsed items
+    const collapsedItems = this._trailingCollapsed()
+    const order = this._newOrder(collapsedItems)
+    const newItem = this._newItem({ order, type })
+
+    this._reorderCollapsed(collapsedItems, order + 1)
+    const newRef = this._addItemToFirebase(newItem, action('added:item', () => {
+      appState.editingItemId = newRef.key
+    }))
   }
 
   bulkAdd (names) {
-    const startingOrder = this._newOrder()
-    _(names)
+    // same as addItem, but account for adding multiple items
+    const collapsedItems = this._trailingCollapsed()
+    const startingOrder = this._newOrder(collapsedItems)
+    const newItems = _(names)
       .reject((name) => !name.trim())
       .map((name, index) => this._newItem({ name, order: startingOrder + index }))
-      .each((item) => {
-        firebase.getRef().child(`lists/${this.listId}/items`).push(item)
-      })
+      .value()
+
+    this._reorderCollapsed(collapsedItems, startingOrder + newItems.length)
+    _.each(newItems, (item) => this._addItemToFirebase(item))
+  }
+
+  _addItemToFirebase (item, cb) {
+    return firebase.getRef().child(`lists/${this.listId}/items`).push(item, cb)
+  }
+
+  _trailingCollapsed () {
+    return _.takeRightWhile(this.items, (item) => this.isCollapsed(item))
+  }
+
+  _reorderCollapsed (collapsedItems, fromOrder) {
+    _.each(collapsedItems, (item, index) => {
+      this.updateItem({ id: item.id, order: fromOrder + index })
+    })
   }
 
   editItem (id) {
@@ -92,34 +135,33 @@ class ItemsStore {
   }
 
   removeItem (item) {
-    this.expand(item)
+    this._expand(item)
     firebase.getRef().child(`lists/${this.listId}/items/${item.id}`).remove()
   }
 
+  isCollapsed (item) {
+    return !!this._collapsedItems[item.id]
+  }
+
   toggleCollapsed (label) {
-    this._setCollapsed(label, !label.isCollapsed)
+    const isCollapsed = this._collapsed.get(label.id)
+    if (isCollapsed) {
+      this._expand(label)
+    } else {
+      this._collapse(label)
+    }
   }
 
-  expand (label) {
-    this._setCollapsed(label, false)
+  _collapse (label) {
+    this._collapsed.set(label.id, true)
   }
 
-  _setCollapsed (label, isCollapsed) {
-    label.isCollapsed = isCollapsed
-    let hitNexLabel = false
-    _.each(this.items, (item) => {
-      if (item.order <= label.order) return
-      if (item.type === 'label') hitNexLabel = true
-      if (hitNexLabel) return
-
-      item.isCollapsed = isCollapsed
-    })
+  _expand (label) {
+    this._collapsed.delete(label.id)
   }
 
   expandAll () {
-    _.each(this.items, (item) => {
-      item.isCollapsed = false
-    })
+    this._collapsed = map()
   }
 
   clearCompleted () {

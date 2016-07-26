@@ -62,7 +62,7 @@
     }
   }
 
-  &.collapsed .toggle-collapsed i {
+  &.is-collapsed .toggle-collapsed i {
     @extend .#{$fa-css-prefix}-caret-right;
   }
 
@@ -87,7 +87,7 @@
   }
 
   &.type-todo {
-    &.collapsed,
+    &.is-collapsed,
     .toggle-collapsed {
       display: none;
     }
@@ -116,7 +116,7 @@
     }
   }
 
-  &.checked {
+  &.is-checked {
     .toggle-checked {
       @include buttonize-color($action-color);
     }

@@ -7,8 +7,6 @@ class Item {
   @observable type
   @observable isChecked = false
 
-  @observable isCollapsed = false
-
   constructor (id, props) {
     this.id = id
     this.update(props)
