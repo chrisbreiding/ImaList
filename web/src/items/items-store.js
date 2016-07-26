@@ -90,14 +90,23 @@ class ItemsStore {
     }
   }
 
-  addItem ({ type }) {
-    // add item before the last non-collapsed item or at the end if
-    // there are no collapsed items
-    const collapsedItems = this._trailingCollapsed()
-    const order = this._newOrder(collapsedItems)
+  addItem ({ type, order }) {
+    let reorderItems = []
+    if (order != null) {
+      // if order is specified, reorder everything after
+      reorderItems = _.takeRightWhile(this.items, (item) => item.order >= order)
+    } else if (type === 'label') {
+      // always add labels to end
+      order = this._newOrder([])
+    } else {
+      // add before the last non-collapsed item or at the end if
+      // there are no collapsed items
+      reorderItems = this._trailingCollapsed()
+      order = this._newOrder(reorderItems)
+    }
     const newItem = this._newItem({ order, type })
 
-    this._reorderCollapsed(collapsedItems, order + 1)
+    this._reorder(reorderItems, order + 1)
     const newRef = this._addItemToFirebase(newItem, action('added:item', () => {
       appState.editingItemId = newRef.key
     }))
@@ -112,7 +121,7 @@ class ItemsStore {
       .map((name, index) => this._newItem({ name, order: startingOrder + index }))
       .value()
 
-    this._reorderCollapsed(collapsedItems, startingOrder + newItems.length)
+    this._reorder(collapsedItems, startingOrder + newItems.length)
     _.each(newItems, (item) => this._addItemToFirebase(item))
   }
 
@@ -124,8 +133,8 @@ class ItemsStore {
     return _.takeRightWhile(this.items, (item) => this.isCollapsed(item))
   }
 
-  _reorderCollapsed (collapsedItems, fromOrder) {
-    _.each(collapsedItems, (item, index) => {
+  _reorder (items, fromOrder) {
+    _.each(items, (item, index) => {
       this.updateItem({ id: item.id, order: fromOrder + index })
     })
   }

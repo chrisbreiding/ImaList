@@ -41,7 +41,7 @@ class Items extends Component {
             <span>Item</span>
             <i className='fa fa-plus'></i>
           </button>
-          <button onClick={() => this._addItem('label')}>
+          <button onClick={() => this._addItem({ type: 'label' })}>
             <span>Label</span>
             <i className='fa fa-plus-square'></i>
           </button>
@@ -92,8 +92,8 @@ class Items extends Component {
     this.isSorting = !this.isSorting
   }
 
-  @action _addItem = (type) => {
-    this.props.list.itemsStore.addItem({ type })
+  @action _addItem = (props = {}) => {
+    this.props.list.itemsStore.addItem(props)
   }
 
   @action _attemptBulkAdd = () => {

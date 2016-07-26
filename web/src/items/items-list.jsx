@@ -45,10 +45,14 @@ class ItemsList extends Component {
   }
 
   @action _next = (index) => {
-    if (index === this.props.itemsStore.items.length - 1) {
+    const nextItem = this.props.itemsStore.items[index + 1]
+
+    if (!nextItem) {
       this.props.addItem()
+    } else if (nextItem.type === 'label') {
+      this.props.addItem({ order: nextItem.order })
     } else {
-      this._editItem(this.props.itemsStore.items[index + 1], true)
+      this._editItem(nextItem, true)
     }
   }
 
