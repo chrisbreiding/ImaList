@@ -4,15 +4,17 @@ import { action, computed, map, observable } from 'mobx'
 import appState from '../app/app-state'
 import firebase from '../data/firebase'
 import Item from './item-model'
+import localStore from '../data/local-store'
 
 // TODO: move firebase stuff into items-api.js
 
 class ItemsStore {
   @observable _items = map()
-  @observable _collapsed = map()
+  @observable _collapsed
 
   constructor (listId) {
     this.listId = listId
+    this._collapsed = map((localStore.get('collapsed') || {})[listId])
   }
 
   @computed get items () {
@@ -22,6 +24,8 @@ class ItemsStore {
   @computed get _collapsedItems () {
     const collapsed = {}
     const items = this._items.values()
+    if (!items.length) return collapsed
+
     _.each(this._collapsed.keys(), (id) => {
       const label = _.find(items, { id })
       let hitNextLabel = false
@@ -154,14 +158,27 @@ class ItemsStore {
 
   _collapse (label) {
     this._collapsed.set(label.id, true)
+    this._saveCollapsed()
   }
 
   _expand (label) {
     this._collapsed.delete(label.id)
+    this._saveCollapsed()
   }
 
   expandAll () {
     this._collapsed = map()
+    this._saveCollapsed()
+  }
+
+  _saveCollapsed () {
+    const collapsed = localStore.get('collapsed') || {}
+    if (this._collapsed.size) {
+      collapsed[this.listId] = this._collapsed.toJS()
+    } else {
+      delete collapsed[this.listId]
+    }
+    localStore.set('collapsed', collapsed)
   }
 
   clearCompleted () {
