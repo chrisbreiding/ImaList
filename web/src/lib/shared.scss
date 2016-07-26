@@ -53,12 +53,17 @@ header {
   transition: all .35s ease-out;
   width: 100%;
 
+  header {
+    transition: all 0.35s ease-out;    
+  }
+
   ul {
     @extend .fill-container;
     bottom: $unit;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     top: $unit;
+    transition: all 0.35s ease-out;
   }
 
   li {
