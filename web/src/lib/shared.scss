@@ -54,7 +54,7 @@ header {
   width: 100%;
 
   header {
-    transition: all 0.35s ease-out;    
+    transition: all 0.35s ease-out;
   }
 
   ul {
@@ -119,15 +119,14 @@ header {
     text-overflow: ellipsis;
   }
 
-  &.gu-transit {
-    background: darken($light-color, 5%);
-    opacity: 0.4;
+  &.gu-transit .name {
+    border-color: lighten($neutral-color, 20%);
   }
 
   &.gu-mirror {
     background: $light-color;
     border: solid 1px darken($light-color, 20%);
-    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+    opacity: 0.8;
     position: fixed;
     z-index: 9999;
 
