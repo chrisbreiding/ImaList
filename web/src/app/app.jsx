@@ -48,9 +48,16 @@ class App extends Component {
     return (
       <ActionSheet
         isShowing={authState.attemptingLogout}
-        confirmMessage='Logout'
-        onConfirm={action('logout:confirmed', () => auth.logout())}
-        onCancel={action('logout:cancelled', () => authState.attemptingLogout = false)}
+        actions={[
+          {
+            label: 'Log Out',
+            handler: action('logout:confirmed', () => auth.logout()),
+          }, {
+            label: 'Cancel',
+            handler: action('logout:cancelled', () => authState.attemptingLogout = false),
+            type: 'cancel',
+          },
+        ]}
       />
     )
   }

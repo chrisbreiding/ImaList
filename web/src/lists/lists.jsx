@@ -33,9 +33,16 @@ class Lists extends Component {
         </footer>
         <ActionSheet
           isShowing={!!this.props.listsStore.attemptingRemoveListId}
-          confirmMessage='Remove List'
-          onConfirm={this._removeList}
-          onCancel={this._cancelRemoveList}
+          actions={[
+            {
+              label: 'Remove List',
+              handler: this._removeList,
+            }, {
+              label: 'Cancel',
+              handler: this._cancelRemoveList,
+              type: 'cancel',
+            },
+          ]}
         />
       </div>
     )

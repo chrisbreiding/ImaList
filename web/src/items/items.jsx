@@ -62,9 +62,16 @@ class Items extends Component {
         />
         <ActionSheet
           isShowing={this.attemptingClearCompleted}
-          confirmMessage='Clear Completed'
-          onConfirm={this._clearCompleted}
-          onCancel={this._cancelClearCompleted}
+          actions={[
+            {
+              label: 'Clear Completed',
+              handler: this._clearCompleted,
+            }, {
+              label: 'Cancel',
+              handler: this._cancelClearCompleted,
+              type: 'cancel',
+            },
+          ]}
         />
       </div>
     )

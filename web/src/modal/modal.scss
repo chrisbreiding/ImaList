@@ -32,11 +32,11 @@
 
     .confirm {
       @include buttonize-background($error-color);
+      margin-bottom: .5em;
     }
 
     .cancel {
       @include buttonize-background($neutral-color);
-      margin-top: .5em;
     }
   }
 

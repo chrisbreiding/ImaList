@@ -1,15 +1,13 @@
+import _ from 'lodash'
 import React from 'react'
 
 import Modal from './modal'
 
 const ActionSheet = (props) => (
   <Modal {...props} className='action-sheet'>
-    <button className='confirm' onClick={props.onConfirm}>
-      {props.confirmMessage || 'Confirm'}
-    </button>
-    <button className='cancel' onClick={props.onCancel}>
-      {props.cancelMessage || 'Cancel'}
-    </button>
+    {_.map(props.actions, ({ label, handler, type = 'confirm' }) => (
+      <button key={label} className={type} onClick={handler}>{label}</button>
+    ))}
   </Modal>
 )
 
