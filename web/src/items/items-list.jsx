@@ -1,15 +1,18 @@
 import _ from 'lodash'
-import { action } from 'mobx'
+import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
 import appState from '../app/app-state'
 
+import ActionSheet from '../modal/action-sheet'
 import Item from './item'
 import SortableList from '../lib/sortable-list'
 
 @observer
 class ItemsList extends Component {
+  @observable attempingRemoveLabel = null
+
   render () {
     if (this.props.isLoading) {
       return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
@@ -35,11 +38,27 @@ class ItemsList extends Component {
             isCollapsed={this.props.itemsStore.isCollapsed(item)}
             onEdit={this._editItem}
             onUpdate={this._updateItem}
-            onRemove={this._removeItem}
+            onRemove={this._attemptRemoveItem}
             onNext={() => this._next(index)}
             onToggleCollapsed={this._toggleCollapsed}
           ></Item>
         ))}
+        <ActionSheet
+          isShowing={!!this.attempingRemoveLabel}
+          actions={[
+            {
+              label: 'Remove label and all its items',
+              handler: this._removeLabelAndItems,
+            }, {
+              label: 'Remove label only',
+              handler: this._removeLabel,
+            }, {
+              label: 'Cancel',
+              handler: this._cancelRemoveLabel,
+              type: 'cancel',
+            },
+          ]}
+        />
       </SortableList>
     )
   }
@@ -64,8 +83,35 @@ class ItemsList extends Component {
     this.props.itemsStore.updateItem(item)
   }
 
+  @action _attemptRemoveItem = (item) => {
+    if (item.type === 'label') {
+      const associatedItems = this.props.itemsStore.associatedItemsForLabel(item).value()
+      if (associatedItems.length) {
+        this.attempingRemoveLabel = item
+      } else {
+        this._removeItem(item)
+      }
+    } else {
+      this._removeItem(item)
+    }
+  }
+
   @action _removeItem = (item) => {
     this.props.itemsStore.removeItem(item)
+  }
+
+  @action _removeLabelAndItems = () => {
+    this.props.itemsStore.removeLabelAndItems(this.attempingRemoveLabel)
+    this.attempingRemoveLabel = null
+  }
+
+  @action _removeLabel = () => {
+    this._removeItem(this.attempingRemoveLabel)
+    this.attempingRemoveLabel = null
+  }
+
+  @action _cancelRemoveLabel = () => {
+    this.attempingRemoveLabel = null
   }
 
   @action _toggleCollapsed = (item) => {

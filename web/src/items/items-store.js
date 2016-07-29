@@ -27,7 +27,9 @@ class ItemsStore {
     if (!items.length) return collapsed
 
     _.each(this._collapsed.keys(), (id) => {
-      this._associatedItemsForLabelId(items, id).each((item) => {
+      const label = this._items.get(id)
+      collapsed[label.id] = true
+      this.associatedItemsForLabel(label).each((item) => {
         collapsed[item.id] = true
       })
     })
@@ -38,10 +40,10 @@ class ItemsStore {
     return _.some(this._items.values(), { isChecked: true })
   }
 
-  _associatedItemsForLabelId (items, labelId) {
-    return _(items)
-      .dropWhile((item) => item.id !== labelId)
-      .takeWhile((item) => item.id === labelId || item.type !== 'label')
+  associatedItemsForLabel (label) {
+    return _(this.items)
+      .dropWhile((item) => item.order <= label.order)
+      .takeWhile((item) => item.type !== 'label')
   }
 
   listen () {
@@ -145,7 +147,7 @@ class ItemsStore {
     if (item.type !== 'label' || !this.isCollapsed(item)) return ids
 
     const movedIndex = _.findIndex(ids, (id) => id === movedId)
-    const itemsToMove = this._associatedItemsForLabelId(this.items, movedId).value().slice(1)
+    const itemsToMove = this.associatedItemsForLabel(item).value()
     if (!itemsToMove.length) return ids
 
     this._expand(item)
@@ -163,9 +165,14 @@ class ItemsStore {
     firebase.getRef().child(`lists/${this.listId}/items/${item.id}`).update(item)
   }
 
-  removeItem (item) {
+  removeItem = (item) => {
     this._expand(item)
     firebase.getRef().child(`lists/${this.listId}/items/${item.id}`).remove()
+  }
+
+  removeLabelAndItems (label) {
+    this.removeItem(label)
+    this.associatedItemsForLabel(label).each(this.removeItem)
   }
 
   isCollapsed (item) {
