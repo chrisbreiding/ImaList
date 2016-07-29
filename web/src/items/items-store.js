@@ -23,16 +23,11 @@ class ItemsStore {
 
   @computed get _collapsedItems () {
     const collapsed = {}
-    const items = this._items.values()
+    const items = this.items
     if (!items.length) return collapsed
 
     _.each(this._collapsed.keys(), (id) => {
-      const label = _.find(items, { id })
-      let hitNextLabel = false
-      _.each(this.items, (item) => {
-        if (item.order < label.order) return
-        if (item.id !== id && item.type === 'label') hitNextLabel = true
-        if (hitNextLabel) return
+      this._associatedItemsForLabelId(items, id).each((item) => {
         collapsed[item.id] = true
       })
     })
@@ -41,6 +36,12 @@ class ItemsStore {
 
   @computed get hasCheckedItems () {
     return _.some(this._items.values(), { isChecked: true })
+  }
+
+  _associatedItemsForLabelId (items, labelId) {
+    return _(items)
+      .dropWhile((item) => item.id !== labelId)
+      .takeWhile((item) => item.id === labelId || item.type !== 'label')
   }
 
   listen () {
@@ -137,6 +138,21 @@ class ItemsStore {
     _.each(items, (item, index) => {
       this.updateItem({ id: item.id, order: fromOrder + index })
     })
+  }
+
+  sorted (ids, movedId) {
+    const item = this._items.get(movedId)
+    if (item.type !== 'label' || !this.isCollapsed(item)) return ids
+
+    const movedIndex = _.findIndex(ids, (id) => id === movedId)
+    const itemsToMove = this._associatedItemsForLabelId(this.items, movedId).value().slice(1)
+    if (!itemsToMove.length) return ids
+
+    this._expand(item)
+    const itemIndex = _.findIndex(ids, (id) => id === itemsToMove[0].id)
+    const itemIds = ids.splice(itemIndex, itemsToMove.length)
+    ids.splice(movedIndex + 1, 0, ...itemIds)
+    return ids
   }
 
   editItem (id) {

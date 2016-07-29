@@ -72,8 +72,8 @@ class ItemsList extends Component {
     this.props.itemsStore.toggleCollapsed(item)
   }
 
-  @action _updateSorting = (ids) => {
-    this.props.itemsStore.expandAll()
+  @action _updateSorting = (ids, movedId) => {
+    ids = this.props.itemsStore.sorted(ids, movedId)
     _.each(ids, (id, order) => this._updateItem({ id, order }))
   }
 }

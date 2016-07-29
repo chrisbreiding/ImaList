@@ -47,7 +47,7 @@ class SortableList extends Component {
       } else {
         container.insertBefore(el, container.children[originalIndex])
       }
-      this.props.onSortingUpdate(ids)
+      this.props.onSortingUpdate(ids, el.dataset.id)
     })
   }
 

@@ -56,14 +56,15 @@
 
   .toggle-collapsed {
     @include buttonize-color($primary-color);
+    line-height: 3;
 
     i {
-      @extend .#{$fa-css-prefix}-caret-down;
+      transition: all 0.25s ease;
     }
   }
 
   &.is-collapsed .toggle-collapsed i {
-    @extend .#{$fa-css-prefix}-caret-right;
+    transform: rotate(-90deg);
   }
 
   .name {

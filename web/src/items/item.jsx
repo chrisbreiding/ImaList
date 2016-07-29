@@ -58,7 +58,7 @@ export default class Item extends Component {
           className='toggle-collapsed'
           onClick={this._toggleCollapsed}
         >
-          <i className='fa'></i>
+          <i className='fa fa-caret-down'></i>
         </button>
         <i className='sort-handle fa fa-arrows'></i>
         <div className='options'>
