@@ -2,11 +2,8 @@ import _ from 'lodash'
 import { action, computed, map, observable } from 'mobx'
 
 import appState from '../app/app-state'
-import firebase from '../data/firebase'
 import Item from './item-model'
-import localStore from '../data/local-store'
-
-// TODO: move firebase stuff into items-api.js
+import ItemsApi from './items-api'
 
 class ItemsStore {
   @observable _items = map()
@@ -14,7 +11,8 @@ class ItemsStore {
 
   constructor (listId) {
     this.listId = listId
-    this._collapsed = map((localStore.get('collapsed') || {})[listId])
+    this.itemsApi = new ItemsApi(listId)
+    this._collapsed = map(this.itemsApi.fetchCollapsed())
   }
 
   @computed get items () {
@@ -47,33 +45,15 @@ class ItemsStore {
   }
 
   listen () {
-    firebase.getRef().child(`lists/${this.listId}/items`).on('child_added', action('item:added', (childSnapshot) => {
-      this._itemAdded(childSnapshot.key, childSnapshot.val())
-    }))
-
-    firebase.getRef().child(`lists/${this.listId}/items`).on('child_changed', action('item:changed', (childSnapshot) => {
-      this._itemUpdated(childSnapshot.key, childSnapshot.val())
-    }))
-
-    firebase.getRef().child(`lists/${this.listId}/items`).on('child_removed', action('item:removed', (childSnapshot) => {
-      this._itemRemoved(childSnapshot.key)
-    }))
-  }
-
-  _itemAdded (id, item) {
-    this._items.set(id, new Item(id, item))
-  }
-
-  _itemUpdated (id, item) {
-    this._items.get(id).update(item)
-  }
-
-  _itemRemoved (id) {
-    this._items.delete(id)
+    this.itemsApi.listen({
+      onAdd: (id, item) => { this._items.set(id, new Item(id, item)) },
+      onUpdate: (id, item) => { this._items.get(id).update(item) },
+      onRemove: (id) => { this._items.delete(id) },
+    })
   }
 
   stopListening () {
-    firebase.getRef().off()
+    this.itemsApi.stopListening()
   }
 
   _newOrder (collapsedItems) {
@@ -110,26 +90,22 @@ class ItemsStore {
     const newItem = this._newItem({ order, type })
 
     this._reorder(reorderItems, order + 1)
-    const newRef = this._addItemToFirebase(newItem, action('added:item', () => {
+    const newRef = this.itemsApi.addItem(newItem, action('added:item', () => {
       appState.editingItemId = newRef.key
     }))
   }
 
   bulkAdd (names) {
-    // same as addItem, but account for adding multiple items
-    const collapsedItems = this._trailingCollapsed()
-    const startingOrder = this._newOrder(collapsedItems)
+    // similar to addItem, but account for adding multiple items
+    const trailingCollapsed = this._trailingCollapsed()
+    const startingOrder = this._newOrder(trailingCollapsed)
     const newItems = _(names)
       .reject((name) => !name.trim())
       .map((name, index) => this._newItem({ name, order: startingOrder + index }))
       .value()
 
-    this._reorder(collapsedItems, startingOrder + newItems.length)
-    _.each(newItems, (item) => this._addItemToFirebase(item))
-  }
-
-  _addItemToFirebase (item, cb) {
-    return firebase.getRef().child(`lists/${this.listId}/items`).push(item, cb)
+    this._reorder(trailingCollapsed, startingOrder + newItems.length)
+    _.each(newItems, (item) => this.itemsApi.addItem(item))
   }
 
   _trailingCollapsed () {
@@ -162,12 +138,12 @@ class ItemsStore {
   }
 
   updateItem (item) {
-    firebase.getRef().child(`lists/${this.listId}/items/${item.id}`).update(item)
+    this.itemsApi.updateItem(item)
   }
 
   removeItem = (item) => {
     this._expand(item)
-    firebase.getRef().child(`lists/${this.listId}/items/${item.id}`).remove()
+    this.itemsApi.removeItem(item)
   }
 
   removeLabelAndItems (label) {
@@ -204,19 +180,13 @@ class ItemsStore {
   }
 
   _saveCollapsed () {
-    const collapsed = localStore.get('collapsed') || {}
-    if (this._collapsed.size) {
-      collapsed[this.listId] = this._collapsed.toJS()
-    } else {
-      delete collapsed[this.listId]
-    }
-    localStore.set('collapsed', collapsed)
+    this.itemsApi.saveCollapsed(this._collapsed.toJS())
   }
 
   clearCompleted () {
     _.each(this._items.values(), (item) => {
       if (item.isChecked) {
-        firebase.getRef().child(`lists/${this.listId}/items/${item.id}`).remove()
+        this.itemsApi.removeItem(item)
       }
     })
   }

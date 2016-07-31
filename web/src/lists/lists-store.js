@@ -2,21 +2,25 @@ import _ from 'lodash'
 import { action, computed, map, observable } from 'mobx'
 
 import authState from '../login/auth-state'
-import firebase from '../data/firebase'
 import List from './list-model'
-import localStore from '../data/local-store'
-
-// TODO: move firebase stuff into lists-api.js
+import ListsApi from './lists-api'
 
 class ListsStore {
   @observable _lists = map()
   @observable attemptingRemoveListId = null
-  @observable isLoading = false
   @observable editingListId = null
-  @observable selectedId = localStore.get('selectedListId') || null
+  @observable isLoading = false
+  @observable selectedListId = null
+
+  constructor () {
+    this.listsApi = new ListsApi()
+    action('fetch:selected:list', () => {
+      this.selectedListId = this.listsApi.fetchSelectedList()
+    })()
+  }
 
   @computed get showingItems () {
-    return !!this.selectedId
+    return !!this.selectedListId
   }
 
   @computed get lists () {
@@ -27,58 +31,39 @@ class ListsStore {
   }
 
   @computed get selectedList () {
-    const selected = _.find(this.lists, { id: this.selectedId })
+    const selected = _.find(this.lists, { id: this.selectedListId })
     return selected || { itemsStore: { items: [], none: true } }
   }
 
   listen () {
     action('begin:loading:data', () => this.isLoading = true)()
-
-    firebase.getRef().child('lists').on('child_added', action('list:added', (childSnapshot) => {
-      this._listAdded(childSnapshot.key, childSnapshot.val())
-    }))
-
-    firebase.getRef().child('lists').on('child_changed', action('list:changed', (childSnapshot) => {
-      this._listUpdated(childSnapshot.key, childSnapshot.val())
-    }))
-
-    firebase.getRef().child('lists').on('child_removed', action('list:removed', (childSnapshot) => {
-      this._listRemoved(childSnapshot.key)
-    }))
-
-    firebase.getRef().once('value', action('data:loaded', () => {
-      this.isLoading = false
-    }))
-  }
-
-  _listAdded (id, list) {
-    this._lists.set(id, new List(id, list))
-  }
-
-  _listUpdated (id, list) {
-    this._lists.get(id).update(list)
-  }
-
-  _listRemoved (id) {
-    this._lists.get(id).willRemove()
-    this._lists.delete(id)
+    this.listsApi.listen({
+      onAdd: (id, list) => { this._lists.set(id, new List(id, list)) },
+      onUpdate: (id, list) => { this._lists.get(id).update(list) },
+      onRemove: (id) => {
+        this._lists.get(id).willRemove()
+        this._lists.delete(id)
+      },
+      onDataLoad: () => { this.isLoading = false },
+    })
   }
 
   stopListening () {
-    firebase.getRef().off()
+    this.listsApi.stopListening()
   }
 
-  selectList (listId = null) {
-    localStore.set({ selectedListId: listId })
-    this.selectedId = listId
+  selectList (list) {
+    const id = list ? list.id : null
+    this.listsApi.saveSelectedList(id)
+    this.selectedListId = id
   }
 
   addList () {
     const lists = this.lists
     const order = lists.length ? Math.max(..._.map(lists, 'order')) + 1 : 0
     const newList = this._newList({ order, owner: authState.userEmail })
-    const newRef = firebase.getRef().child('lists').push(newList, action('added:list', () => {
-      this._editList(newRef.key)
+    const newRef = this.listsApi.addList(newList, action('added:list', () => {
+      this.editingListId = newRef.key
     }))
   }
 
@@ -92,20 +77,16 @@ class ListsStore {
     }
   }
 
-  _editList (listId) {
-    this.editingListId = listId
-  }
-
   updateList (list) {
-    firebase.getRef().child(`lists/${list.id}`).update(list)
+    this.listsApi.updateList(list)
   }
 
-  attemptRemoveList (listId) {
-    this.attemptingRemoveListId = listId
+  attemptRemoveList (list) {
+    this.attemptingRemoveListId = list.id
   }
 
   removeList (id) {
-    firebase.getRef().child(`lists/${id}`).remove()
+    this.listsApi.removeList(id)
     this.attemptingRemoveListId = null
   }
 }

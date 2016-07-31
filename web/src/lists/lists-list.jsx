@@ -42,7 +42,7 @@ class ListsList extends Component {
   }
 
   @action _goToList = (list) => {
-    this.props.listsStore.selectList(list.id)
+    this.props.listsStore.selectList(list)
   }
 
   @action _updateList = (list) => {
@@ -50,7 +50,7 @@ class ListsList extends Component {
   }
 
   @action _attemptRemoveList = (list) => {
-    this.props.listsStore.attemptRemoveList(list.id)
+    this.props.listsStore.attemptRemoveList(list)
   }
 }
 
