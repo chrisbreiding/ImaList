@@ -39,7 +39,7 @@ describe 'items', ->
       cy.get('.item').should 'have.length', 1
 
     it 'focuses the item', ->
-      cy.get('.item').first().should 'have.class', 'editing'
+      cy.focused().parent().should 'have.class', 'item'
 
     describe 'changing the item name', ->
 
@@ -59,20 +59,18 @@ describe 'items', ->
       beforeEach ->
         cy.get('.item').first().find('textarea').type 'first one{enter}'
 
-      it 'adds another item', ->
+      it 'adds another item and focuses it', ->
         cy
           .get '.item'
             .should 'have.length', 2
-          .first().find('textarea').should 'have.value', 'first one'
+          .first().find('textarea')
+            .should 'have.value', 'first one'
 
-      describe 'from first item', ->
-
-        beforeEach ->
-          cy.get('.item').first().find('textarea').type '{enter}'
-
-        it 'focuses the second item', ->
-          cy.get('.item').last()
-            .should 'have.class', 'editing'
+        cy.focused()
+          .parent()
+            .should 'have.class', 'item'
+          .prev()
+            .should 'have.class', 'item' # makes sure the focused one is second
 
     describe 'double-tapping enter', ->
 
@@ -98,7 +96,7 @@ describe 'items', ->
       it 'persists the item checked state', ->
         cy
           .get('.item').first()
-          .should 'have.class', 'checked'
+          .should 'have.class', 'is-checked'
 
     describe 'removing the item', ->
 
@@ -120,7 +118,7 @@ describe 'items', ->
       cy.get('.type-label').should 'have.length', 1
 
     it 'focuses the label', ->
-      cy.get('.type-label').first().should 'have.class', 'editing'
+      cy.focused().parent().should('have.class', 'type-label')
 
   describe 'bulk adding items', ->
 
