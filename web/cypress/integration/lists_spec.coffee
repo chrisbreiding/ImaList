@@ -73,3 +73,15 @@ describe 'lists', ->
       cy
         .get '.list'
         .should 'have.length', 0
+
+  describe 'wide mode', ->
+
+    beforeEach ->
+      cy.viewport(560, 300)
+
+    it 'selecting a list shows it as selected', ->
+      cy
+        .createList()
+        .selectList()
+        .get('.list').first()
+          .should('have.class', 'is-selected')

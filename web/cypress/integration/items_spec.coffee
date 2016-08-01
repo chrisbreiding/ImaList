@@ -6,11 +6,7 @@ describe 'items', ->
       .login()
       .clearLists()
       .createList()
-      .get('.list').first().within ->
-        cy
-          .get('input').type('list name')
-          .get('.toggle-options').click()
-          .get('.name').click()
+      .selectList()
 
   it 'shows the items', ->
     cy

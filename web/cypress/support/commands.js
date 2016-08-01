@@ -35,3 +35,12 @@ Cypress.addParentCommand('clearLists', function () {
 Cypress.addParentCommand('createList', function () {
   cy.get('.lists > footer button').first().click();
 });
+
+Cypress.addParentCommand('selectList', function () {
+  cy.get('.list').first().within(function () {
+    cy
+      .get('input').type('list name')
+      .get('.toggle-options').click()
+      .get('.name').click()
+  })
+});

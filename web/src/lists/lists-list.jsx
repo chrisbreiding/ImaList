@@ -31,7 +31,7 @@ class ListsList extends Component {
             model={list}
             isOwner={list.owner === authState.userEmail}
             isEditing={list.id === this.props.listsStore.editingListId}
-            isSelected={list.id === this.props.listsStore.selectedId}
+            isSelected={list.id === this.props.listsStore.selectedListId}
             onSelect={this._goToList}
             onUpdate={this._updateList}
             onRemove={this._attemptRemoveList}
