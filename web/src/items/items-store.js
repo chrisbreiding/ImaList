@@ -38,6 +38,10 @@ class ItemsStore {
     return _.some(this._items.values(), { isChecked: true })
   }
 
+  itemById (id) {
+    return this._items.get(id)
+  }
+
   associatedItemsForLabel (label) {
     return _(this.items)
       .dropWhile((item) => item.order <= label.order)
@@ -126,10 +130,10 @@ class ItemsStore {
     const itemsToMove = this.associatedItemsForLabel(item).value()
     if (!itemsToMove.length) return ids
 
-    this._expand(item)
     const itemIndex = _.findIndex(ids, (id) => id === itemsToMove[0].id)
     const itemIds = ids.splice(itemIndex, itemsToMove.length)
-    ids.splice(movedIndex + 1, 0, ...itemIds)
+    const moveTo = (movedIndex > itemIndex ? movedIndex - itemsToMove.length : movedIndex) + 1
+    ids.splice(moveTo, 0, ...itemIds)
     return ids
   }
 
@@ -142,7 +146,7 @@ class ItemsStore {
   }
 
   removeItem = (item) => {
-    this._expand(item)
+    this.expand(item)
     this.itemsApi.removeItem(item)
   }
 
@@ -158,7 +162,7 @@ class ItemsStore {
   toggleCollapsed (label) {
     const isCollapsed = this._collapsed.get(label.id)
     if (isCollapsed) {
-      this._expand(label)
+      this.expand(label)
     } else {
       this._collapse(label)
     }
@@ -169,7 +173,7 @@ class ItemsStore {
     this._saveCollapsed()
   }
 
-  _expand (label) {
+  expand (label) {
     this._collapsed.delete(label.id)
     this._saveCollapsed()
   }

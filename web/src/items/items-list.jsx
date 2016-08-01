@@ -120,6 +120,7 @@ class ItemsList extends Component {
 
   @action _updateSorting = (ids, movedId) => {
     ids = this.props.itemsStore.sorted(ids, movedId)
+    this.props.itemsStore.expand(this.props.itemsStore.itemById(movedId))
     _.each(ids, (id, order) => this._updateItem({ id, order }))
   }
 }
