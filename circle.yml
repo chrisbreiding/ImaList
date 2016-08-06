@@ -4,12 +4,19 @@ machine:
 
 dependencies:
   override:
-    - npm install
     - npm install -g cypress-cli
+    - npm install:
+      pwd:
+        web
 
 test:
   pre:
-    - cd web && npm run build-prod && npm run serve-prod --port 8000:
+    - npm run build-prod:
+      pwd:
+        web
+    - npm run serve-prod:
       background: true
+      pwd:
+        web
   override:
     - cypress ci

@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "build-prod": "zunder build-prod",
+    "serve-prod": "zunder serve-prod --port 8000",
     "start": "zunder watch",
     "deploy": "zunder deploy"
   },
