@@ -6,17 +6,17 @@ dependencies:
   override:
     - npm install -g cypress-cli
     - npm install:
-      pwd:
-        web
+        pwd:
+          web
 
 test:
   pre:
     - npm run build-prod:
-      pwd:
-        web
+        pwd:
+          web
     - npm run serve-prod:
-      background: true
-      pwd:
-        web
+        background: true
+        pwd:
+          web
   override:
     - cypress ci
