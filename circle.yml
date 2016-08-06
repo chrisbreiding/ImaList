@@ -1,0 +1,15 @@
+machine:
+  node:
+    version: 5.10.0
+
+dependencies:
+  override:
+    - npm install
+    - npm install -g cypress-cli
+
+test:
+  pre:
+    - cd web && npm run build-prod && npm run serve-prod --port 8000:
+      background: true
+  override:
+    - cypress ci
