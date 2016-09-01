@@ -26,6 +26,7 @@ class ItemsStore {
 
     _.each(this._collapsed.keys(), (id) => {
       const label = this._items.get(id)
+      if (!label) return // label may be gone if removed on another device
       collapsed[label.id] = true
       this.associatedItemsForLabel(label).each((item) => {
         collapsed[item.id] = true
@@ -52,7 +53,11 @@ class ItemsStore {
     this.itemsApi.listen({
       onAdd: (id, item) => { this._items.set(id, new Item(id, item)) },
       onUpdate: (id, item) => { this._items.get(id).update(item) },
-      onRemove: (id) => { this._items.delete(id) },
+      onRemove: (id) => {
+        const item = this._items.get(id)
+        this.expand(item)
+        this._items.delete(id)
+      },
     })
   }
 
@@ -146,7 +151,6 @@ class ItemsStore {
   }
 
   removeItem = (item) => {
-    this.expand(item)
     this.itemsApi.removeItem(item)
   }
 
