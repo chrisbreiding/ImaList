@@ -22,7 +22,11 @@ class AppState {
 
     if (this.app) {
       this.state = C.CONFIRMING_AUTH
-      auth.listenForChange()
+      try {
+        auth.listenForChange()
+      } catch (e) {
+        this.state = C.NEEDS_FIREBASE_CONFIG
+      }
     } else {
       this.state = C.NEEDS_FIREBASE_CONFIG
     }

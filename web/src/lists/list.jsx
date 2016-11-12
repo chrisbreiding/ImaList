@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 
 @observer
-export default class List extends Component {
+class List extends Component {
   constructor (props) {
     super(props)
 

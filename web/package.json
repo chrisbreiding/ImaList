@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
-    "eslint": "^3.1.1",
+    "eslint": "^3.10.0",
     "eslint-plugin-react": "^5.2.2",
     "zunder": "^3.3.11"
   },
@@ -18,7 +18,7 @@
     "classnames": "^2.2.3",
     "dragula": "^3.6.8",
     "fastclick": "^1.0.6",
-    "firebase": "^3.2.0",
+    "firebase": "^3.6.0",
     "lodash": "^4.8.2",
     "mobx": "^2.3.7",
     "mobx-react": "^3.5.1",
