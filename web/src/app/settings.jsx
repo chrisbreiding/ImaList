@@ -6,6 +6,7 @@ import appState from './app-state'
 import auth from '../auth/auth'
 import authState from '../auth/auth-state'
 import Modal from '../modal/modal'
+import PasscodeInput from '../auth/passcode-input'
 
 @observer
 class Settings extends Component {
@@ -25,17 +26,15 @@ class Settings extends Component {
         </header>
         <form onSubmit={this._submit}>
           <label>Old passcode</label>
-          <input
+          <PasscodeInput
             ref='oldPasscode'
-            type='tel'
             value={this.oldPasscode}
             onChange={this._updateOldPasscode}
           />
           <p className='error'>{this.error}</p>
           <label>New passcode</label>
-          <input
+          <PasscodeInput
             ref='newPasscode'
-            type='tel'
             value={this.newPasscode}
             onChange={this._updateNewPasscode}
           />
@@ -52,18 +51,12 @@ class Settings extends Component {
     this.refs.oldPasscode.focus()
   }
 
-  @action _updateOldPasscode = (e) => {
-    const value = (e.target.value).toString()
-    if (value.length <= 4) {
-      this.oldPasscode = value
-    }
+  @action _updateOldPasscode = (passcode) => {
+    this.oldPasscode = passcode
   }
 
-  @action _updateNewPasscode = (e) => {
-    const value = (e.target.value).toString()
-    if (value.length <= 4) {
-      this.newPasscode = value
-    }
+  @action _updateNewPasscode = (passcode) => {
+    this.newPasscode = passcode
   }
 
   @action _cancel = (e) => {

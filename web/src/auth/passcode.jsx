@@ -6,6 +6,7 @@ import auth from './auth'
 import authState from './auth-state'
 import C from '../data/constants'
 import Modal from '../modal/modal'
+import PasscodeInput from './passcode-input'
 
 @observer
 class Passcode extends Component {
@@ -21,8 +22,9 @@ class Passcode extends Component {
       <Modal className='passcode' isShowing={true}>
         <form onSubmit={this._submit}>
           <label>{this._message()}</label>
-          <input
+          <PasscodeInput
             ref='passcode'
+            className='passcode-input'
             type='tel'
             value={this.passcode}
             onChange={this._updatePasscode}
@@ -63,11 +65,8 @@ class Passcode extends Component {
     }
   }
 
-  @action _updatePasscode = (e) => {
-    const value = (e.target.value).toString()
-    if (value.length <= 4) {
-      this.passcode = value
-    }
+  @action _updatePasscode = (passcode) => {
+    this.passcode = passcode
   }
 
   @action _cancel = (e) => {
