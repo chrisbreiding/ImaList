@@ -25,10 +25,20 @@ class Settings extends Component {
         </header>
         <form onSubmit={this._submit}>
           <label>Old passcode</label>
-          <input ref='oldPasscode' type='number' value={this.oldPasscode} onChange={this._updateOldPasscode} />
+          <input
+            ref='oldPasscode'
+            type='tel'
+            value={this.oldPasscode}
+            onChange={this._updateOldPasscode}
+          />
           <p className='error'>{this.error}</p>
           <label>New passcode</label>
-          <input ref='newPasscode' type='number' value={this.newPasscode} onChange={this._updateNewPasscode} />
+          <input
+            ref='newPasscode'
+            type='tel'
+            value={this.newPasscode}
+            onChange={this._updateNewPasscode}
+          />
           <div className='actions'>
             <button className='submit' disabled={!this.isValid}>Save</button>
             <button className='cancel' onClick={this._cancel}>Cancel</button>

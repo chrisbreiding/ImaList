@@ -21,7 +21,12 @@ class Passcode extends Component {
       <Modal className='passcode' isShowing={true}>
         <form onSubmit={this._submit}>
           <label>{this._message()}</label>
-          <input ref='passcode' type='number' value={this.passcode} onChange={this._updatePasscode} />
+          <input
+            ref='passcode'
+            type='tel'
+            value={this.passcode}
+            onChange={this._updatePasscode}
+          />
           <p className='error'>{this.error}</p>
           <div className='actions'>
             <button className='submit' disabled={!this.isValid}>
