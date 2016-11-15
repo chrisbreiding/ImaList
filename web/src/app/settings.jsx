@@ -78,6 +78,7 @@ class Settings extends Component {
 
     if (authState.user.passcode !== this.oldPasscode) {
       this.error = 'Passcode incorrect'
+      this.refs.oldPasscode.focus()
       return
     }
 

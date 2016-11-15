@@ -85,6 +85,7 @@ class Passcode extends Component {
       case C.CONFIRM_PASSCODE: {
         if (authState.user.passcode !== this.passcode) {
           this.error = 'Passcode incorrect'
+          this.refs.oldPasscode.focus()
           return
         }
         break
