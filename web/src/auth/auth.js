@@ -28,9 +28,7 @@ class Auth {
 
   @action _setUserPasscode = (users) => {
     const user = users && users[authState.user.id]
-    if (user) {
-      authState.user.passcode = user.passcode
-    }
+    authState.user.passcode = user ? user.passcode : undefined
   }
 
   updatePasscode (passcode) {

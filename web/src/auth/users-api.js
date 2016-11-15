@@ -16,6 +16,9 @@ class UsersApi {
     firebase.getRef().child('users').on('value', action('users:updated', (childSnapshot) => {
       onUpdate(childSnapshot.val())
     }))
+    firebase.getRef().child('users').on('child_removed', () => {
+      onUpdate({})
+    })
   }
 
   updateUser (user) {
