@@ -16,6 +16,7 @@ class AppState {
   @observable loadingData = false
   @observable showingFirebaseSettings = false
   @observable state = C.INITIALIZING_FIREBASE
+  @observable viewingSettings = false
 
   initializeFirebaseApp () {
     this.app = firebase.init(this.appName, this.apiKey)

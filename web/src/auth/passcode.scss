@@ -19,27 +19,11 @@
     width: 100%;
   }
 
-  .error {
-    color: $error-color;
-    font-size: 0.8em;
-    margin-top: 0.4em;
-  }
-
   .submit {
-    @include buttonize-background($action-color);
     order: 1;
-
-    &[disabled],
-    &[disabled]:hover,
-    &[disabled]:focus {
-      background-color: $action-color;
-      cursor: default;
-      opacity: 0.5;
-    }
   }
 
   .cancel {
-    @include buttonize-background($neutral-color);
     order: 0;
   }
 }

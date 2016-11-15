@@ -2,3 +2,34 @@
   overflow: hidden;
   @extend .fill-container;
 }
+
+.app-settings {
+  display: flex;
+
+  .container {
+    background: $light-color;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding: 1em;
+  }
+
+  form {
+    margin-top: $unit;
+  }
+
+  label {
+    color: $neutral-color;
+    display: block;
+    font-size: 0.8em;
+    margin: 0.4em 0;
+  }
+
+  .submit {
+    order: 1;
+  }
+
+  .cancel {
+    order: 0;
+  }
+}

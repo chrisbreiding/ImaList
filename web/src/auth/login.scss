@@ -6,7 +6,7 @@
 }
 
 .login,
-.settings {
+.auth-settings {
   .error {
     color: $error-color;
     font-size: .8em;
@@ -62,7 +62,7 @@
   }
 }
 
-.settings {
+.auth-settings {
   .cancel {
     order: 0
   }

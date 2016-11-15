@@ -38,6 +38,18 @@ header {
     margin-left: 0.6em;
   }
 
+  .submit {
+    @include buttonize-background($action-color);
+
+    &[disabled],
+    &[disabled]:hover,
+    &[disabled]:focus {
+      background-color: $action-color;
+      cursor: default;
+      opacity: 0.5;
+    }
+  }
+
   .cancel {
     @include buttonize-background($neutral-color);
   }
@@ -52,10 +64,6 @@ header {
   top: 0;
   transition: all .35s ease-out;
   width: 100%;
-
-  header {
-    transition: all 0.35s ease-out;
-  }
 
   ul {
     @extend .fill-container;
@@ -77,6 +85,14 @@ header {
       border-top: none;
     }
   }
+}
+
+.app-loading header,
+.lists header,
+.items header,
+.app-settings header,
+.app-settings form {
+  transition: all 0.35s ease-out;
 }
 
 .lists {
@@ -198,4 +214,10 @@ header {
     max-width: 20em;
     width: 90%;
   }
+}
+
+form .error {
+  color: $error-color;
+  font-size: 0.8em;
+  margin-top: 0.4em;
 }

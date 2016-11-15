@@ -3,6 +3,7 @@ import { action } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
+import appState from '../app/app-state'
 import auth from '../auth/auth'
 import authState from '../auth/auth-state'
 import ListsStore from '../lists/lists-store'
@@ -11,6 +12,7 @@ import ActionSheet from '../modal/action-sheet'
 import Items from '../items/items'
 import Lists from '../lists/lists'
 import Passcode from '../auth/passcode'
+import Settings from '../app/settings'
 
 @observer
 class App extends Component {
@@ -39,6 +41,7 @@ class App extends Component {
       >
         <Lists
           listsStore={this.listsStore}
+          onViewSettings={action('view:settings', () => appState.viewingSettings = true)}
           onLogout={action('logout', () => authState.attemptingLogout = true)}
         />
         <Items
@@ -46,18 +49,11 @@ class App extends Component {
           isLoading={this.listsStore.isLoading}
           onShowLists={action('show:lists', () => this.listsStore.selectList(null))}
         />
-        {this._passcode()}
         {this._confirmLogout()}
+        {authState.passcodeAction ? <Passcode /> : null}
+        {appState.viewingSettings ? <Settings /> : null}
       </div>
     )
-  }
-
-  _passcode () {
-    if (!authState.passcodeAction) {
-      return null
-    }
-
-    return <Passcode />
   }
 
   _confirmLogout () {

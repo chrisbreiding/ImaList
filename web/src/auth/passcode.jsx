@@ -74,20 +74,18 @@ class Passcode extends Component {
   @action _submit = (e) => {
     e.preventDefault()
 
-    const passcode = this.passcodeValue()
+    if (!this.isValid) return
 
     switch (authState.passcodeAction) {
       case C.CONFIRM_PASSCODE: {
-        if (authState.user.passcode !== passcode) {
+        if (authState.user.passcode !== this.passcode) {
           this.error = 'Passcode incorrect'
           return
         }
         break
       }
       case C.SET_PASSCODE: {
-        if (!this.isValid) return
-        authState.user.passcode = passcode
-        auth.updatePasscode(passcode)
+        auth.updatePasscode(this.passcode)
         break
       }
       default: {} // eslint-disable-line no-empty
@@ -95,10 +93,6 @@ class Passcode extends Component {
 
     authState.passcodeAction = null
     authState.onPasscodeSubmit()
-  }
-
-  passcodeValue () {
-    return (this.refs.passcode.value).toString()
   }
 }
 

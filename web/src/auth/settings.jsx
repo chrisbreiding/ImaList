@@ -17,7 +17,7 @@ class Settings extends Component {
 
   render () {
     return (
-      <Modal className='settings modal-form' isShowing={this._shouldShowSettings()}>
+      <Modal className='auth-settings modal-form' isShowing={this._shouldShowSettings()}>
         <header>
           <h1>Firebase Settings</h1>
         </header>

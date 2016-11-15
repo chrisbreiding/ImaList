@@ -75,7 +75,8 @@
 
 @media screen and (max-height: 400px) {
   .lists,
-  .items {
+  .items,
+  .app-settings {
     header {
       top: -($unit);
     }
@@ -83,5 +84,9 @@
     ul {
       top: 0;
     }
+  }
+
+  .app-settings form {
+    margin-top: 0;
   }
 }

@@ -26,6 +26,10 @@ class Lists extends Component {
             <i className='fa fa-plus'></i>
           </button>
           <div className='spacer'></div>
+          <button className='settings' onClick={this.props.onViewSettings}>
+            <span>Settings</span>
+            <i className='fa fa-cog'></i>
+          </button>
           <button className='logout' onClick={this.props.onLogout}>
             <span>Logout</span>
             <i className='fa fa-sign-out'></i>

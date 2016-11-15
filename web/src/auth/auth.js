@@ -32,6 +32,7 @@ class Auth {
   }
 
   updatePasscode (passcode) {
+    authState.user.passcode = passcode
     this.usersApi.updateUser({ id: authState.user.id, passcode })
   }
 
