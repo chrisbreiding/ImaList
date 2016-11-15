@@ -8,6 +8,7 @@ class List {
   @observable order = 0
   @observable owner
   @observable shared = false
+  @observable isPrivate = false
   @observable itemsStore
 
   constructor (id, props) {
@@ -26,6 +27,7 @@ class List {
     this.order = props.order
     this.owner = props.owner
     this.shared = props.shared
+    this.isPrivate = props.isPrivate
   }
 
   willRemove () {

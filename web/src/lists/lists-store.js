@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { action, computed, map, observable } from 'mobx'
 
-import authState from '../login/auth-state'
+import authState from '../auth/auth-state'
 import List from './list-model'
 import ListsApi from './lists-api'
 
@@ -26,7 +26,7 @@ class ListsStore {
   @computed get lists () {
     return _(this._lists.values())
       .sortBy('order')
-      .filter((list) => list.shared || list.owner === authState.userEmail)
+      .filter((list) => list.shared || list.owner === authState.user.email)
       .value()
   }
 
@@ -61,7 +61,7 @@ class ListsStore {
   addList () {
     const lists = this.lists
     const order = lists.length ? Math.max(..._.map(lists, 'order')) + 1 : 0
-    const newList = this._newList({ order, owner: authState.userEmail })
+    const newList = this._newList({ order, owner: authState.user.email })
     const newRef = this.listsApi.addList(newList, action('added:list', () => {
       this.editingListId = newRef.key
     }))

@@ -1,21 +1,38 @@
 import cs from 'classnames'
-import { action } from 'mobx'
+import { action, autorun } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
-import auth from '../login/auth'
-import authState from '../login/auth-state'
+import auth from '../auth/auth'
+import authState from '../auth/auth-state'
 import ListsStore from '../lists/lists-store'
 
 import ActionSheet from '../modal/action-sheet'
 import Items from '../items/items'
 import Lists from '../lists/lists'
+import Passcode from '../auth/passcode'
 
 @observer
 class App extends Component {
   componentWillMount () {
+    // move listsStore.isLoading to local state this.isLoading ?
+    // and say data.loadData.then(() => {}) ?
     this.listsStore = new ListsStore()
     this.listsStore.listen()
+
+    auth.fetchUserData().then(() => {
+      auth.listenForUserDataChanges()
+    })
+
+    autorun(() => {
+      console.log(authState.user.id)
+    })
+    autorun(() => {
+      console.log(authState.user.email)
+    })
+    autorun(() => {
+      console.log(authState.user.passcode)
+    })
   }
 
   componentWillUnmount () {
@@ -39,9 +56,18 @@ class App extends Component {
           isLoading={this.listsStore.isLoading}
           onShowLists={action('show:lists', () => this.listsStore.selectList(null))}
         />
+        {this._passcode()}
         {this._confirmLogout()}
       </div>
     )
+  }
+
+  _passcode () {
+    if (!authState.passcodeAction) {
+      return null
+    }
+
+    return <Passcode />
   }
 
   _confirmLogout () {

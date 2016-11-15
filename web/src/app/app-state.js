@@ -1,6 +1,6 @@
 import { asReference, observable } from 'mobx'
 
-import auth from '../login/auth'
+import auth from '../auth/auth'
 import C from '../data/constants'
 import firebase from '../data/firebase'
 import localStore from '../data/local-store'

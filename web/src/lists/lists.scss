@@ -5,9 +5,9 @@
 }
 
 .list {
-  @include options(1);
+  @include options(2);
 
-  $owner-width: $unit * 3;
+  $owner-width: $unit * 4;
 
   &.is-owner .options {
     right: -($owner-width - $unit);
@@ -29,19 +29,38 @@
     right: -($owner-width);
   }
 
-  .shared-indicator {
-    color: $primary-color;
-    display: none;
+  .indicators {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+    height: 100%;
+    justify-content: center;
     position: absolute;
-    left: -.8em;
-    top: .8em;
+    left: -0.8em;
+    top: 0;
+
+    i {
+      display: none;
+      font-size: 0.8em;
+      margin: 0.3em;
+    }
+
+    .shared-indicator {
+      color: $shared-color;
+    }
+
+    .is-private-indicator {
+      color: $private-color;
+    }
   }
 
-  &.showing-options.shared .shared-indicator {
+  &.showing-options.shared .shared-indicator,
+  &.showing-options.is-private .is-private-indicator {
     display: block;
   }
 
-  .is-sorting &.showing-options.shared .shared-indicator {
+  .is-sorting &.showing-options.shared .shared-indicator,
+  .is-sorting &.showing-options.is-private .is-private-indicator {
     display: none;
   }
 
@@ -80,11 +99,19 @@
   }
 
   .toggle-shared {
-    @include buttonize-background($neutral-color);
+    @include buttonize-background($shared-color);
     display: none;
   }
 
-  &.is-owner .toggle-shared {
+  .toggle-is-private {
+    @include buttonize-background($private-color);
+  }
+
+  .options .remove {
+    display: none;
+  }
+
+  &.is-owner .options .remove {
     display: inline-block;
   }
 }

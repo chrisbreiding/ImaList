@@ -40,7 +40,7 @@ class Settings extends Component {
           </fieldset>
           <div className='actions'>
             <button className='save' type='submit'>Save</button>
-            <button className='cancel' onClick={this._cancel} href='#'>Cancel</button>
+            <button className='cancel' onClick={this._cancel}>Cancel</button>
           </div>
         </form>
       </Modal>

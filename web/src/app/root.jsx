@@ -6,7 +6,7 @@ import appState from './app-state'
 import C from '../data/constants'
 
 import App from  './app'
-import Login from  '../login/login'
+import Login from  '../auth/login'
 
 const Loading = () => (
   <div className='app-loading'>

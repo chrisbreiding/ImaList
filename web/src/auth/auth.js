@@ -4,15 +4,37 @@ import appState from '../app/app-state'
 import authState from './auth-state'
 import C from '../data/constants'
 import firebase from '../data/firebase'
+import User from './user-model'
+import UsersApi from './users-api'
 
 class Auth {
-  isAuthenticated () {
-    return !!this._currentUser()
+  constructor () {
+    this.usersApi = new UsersApi()
   }
 
-  userEmail () {
-    const user = this._currentUser()
-    return user ? user.email : null
+  isAuthenticated () {
+    return !!this._firebaseUser()
+  }
+
+  fetchUserData () {
+    return this.usersApi.fetchUsersData().then(this._setUserPasscode)
+  }
+
+  listenForUserDataChanges () {
+    this.usersApi.listen({
+      onUpdate: this._setUserPasscode,
+    })
+  }
+
+  @action _setUserPasscode = (users) => {
+    const user = users && users[authState.user.id]
+    if (user) {
+      authState.user.passcode = user.passcode
+    }
+  }
+
+  updatePasscode (passcode) {
+    this.usersApi.updateUser({ id: authState.user.id, passcode })
   }
 
   listenForChange () {
@@ -27,7 +49,8 @@ class Auth {
   }
 
   _updateAuthStatus () {
-    authState.userEmail = appState.app ? this.userEmail() : null
+    const { uid, email } = this._firebaseUser() || {}
+    authState.user = appState.app ? new User({ id: uid, email }) : new User()
     authState.isAuthenticated = appState.app ? this.isAuthenticated() : false
   }
 
@@ -54,7 +77,7 @@ class Auth {
     }))
   }
 
-  _currentUser () {
+  _firebaseUser () {
     return firebase.getAuth().currentUser
   }
 }

@@ -15,6 +15,7 @@
     "zunder": "^3.3.11"
   },
   "dependencies": {
+    "bluebird": "^3.4.6",
     "classnames": "^2.2.3",
     "dragula": "^3.6.8",
     "fastclick": "^1.0.6",

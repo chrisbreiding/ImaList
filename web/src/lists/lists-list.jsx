@@ -3,10 +3,11 @@ import { action } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
-import authState from '../login/auth-state'
+import authState from '../auth/auth-state'
+import C from '../data/constants'
 
-import SortableList from '../lib/sortable-list'
 import List from './list'
+import SortableList from '../lib/sortable-list'
 
 @observer
 class ListsList extends Component {
@@ -29,11 +30,12 @@ class ListsList extends Component {
           <List
             key={list.id}
             model={list}
-            isOwner={list.owner === authState.userEmail}
+            isOwner={list.owner === authState.user.email}
             isEditing={list.id === this.props.listsStore.editingListId}
             isSelected={list.id === this.props.listsStore.selectedListId}
             onSelect={this._goToList}
             onUpdate={this._updateList}
+            onUpdatePrivacy={this._updateListPrivacy}
             onRemove={this._attemptRemoveList}
           />
         ))}
@@ -47,6 +49,18 @@ class ListsList extends Component {
 
   @action _updateList = (list) => {
     this.props.listsStore.updateList(list)
+  }
+
+  @action _updateListPrivacy = ({ id, willBePrivate }) => {
+    if (willBePrivate && !authState.user.passcode) {
+      authState.passcodeAction = C.SET_PASSCODE
+    } else {
+      authState.passcodeAction = C.CONFIRM_PASSCODE
+    }
+    authState.afterReceivingPasscode = action('finished:password:action', () => {
+      this._updateList({ id, isPrivate: willBePrivate })
+      authState.afterReceivingPasscode = () => {}
+    })
   }
 
   @action _attemptRemoveList = (list) => {

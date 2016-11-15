@@ -27,26 +27,35 @@ class List extends Component {
   }
 
   render () {
+    const { model } = this.props
+
     return (
       <li
         className={cs({
           'list': true,
           'showing-options': this.state.showingOptions,
-          'shared': this.props.model.shared,
+          'shared': model.shared,
+          'is-private': model.isPrivate,
           'is-owner': this.props.isOwner,
           'is-selected': this.props.isSelected,
         })}
-        data-id={this.props.model.id}
+        data-id={model.id}
       >
         <i className='sort-handle fa fa-arrows'></i>
         <span>{this._name()}</span>
         <div className='options'>
-          <i className='shared-indicator fa fa-share-alt-square'></i>
+          <div className='indicators'>
+            <i className='shared-indicator fa fa-share-alt-square'></i>
+            <i className='is-private-indicator fa fa-lock'></i>
+          </div>
           <button className='toggle-options' onClick={this._toggleOptions}>
             <i className='fa fa-ellipsis-h'></i>
           </button>
-          <button className='toggle-shared' onClick={this._toggledShared}>
+          <button className='toggle-shared' onClick={this._toggleShared}>
             <i className='fa fa-share-alt'></i>
+          </button>
+          <button className='toggle-is-private' onClick={this._toggleIsPrivate}>
+            <i className={`fa fa-${model.isPrivate ? 'unlock-alt' : 'lock'}`}></i>
           </button>
           <button className='remove' onClick={this._removeList}>
             <i className='fa fa-times'></i>
@@ -88,10 +97,17 @@ class List extends Component {
     this.setState({ showingOptions: !this.state.showingOptions })
   }
 
-  _toggledShared = () => {
+  _toggleShared = () => {
     this.props.onUpdate({
       id: this.props.model.id,
       shared: !this.props.model.shared,
+    })
+  }
+
+  _toggleIsPrivate = () => {
+    this.props.onUpdatePrivacy({
+      id: this.props.model.id,
+      willBePrivate: !this.props.model.isPrivate,
     })
   }
 
