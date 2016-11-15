@@ -1,5 +1,5 @@
 import cs from 'classnames'
-import { action, autorun } from 'mobx'
+import { action } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
@@ -22,16 +22,6 @@ class App extends Component {
 
     auth.fetchUserData().then(() => {
       auth.listenForUserDataChanges()
-    })
-
-    autorun(() => {
-      console.log(authState.user.id)
-    })
-    autorun(() => {
-      console.log(authState.user.email)
-    })
-    autorun(() => {
-      console.log(authState.user.passcode)
     })
   }
 

@@ -9,11 +9,11 @@ import Modal from '../modal/modal'
 
 @observer
 class Passcode extends Component {
-  @observable _passcode = ''
-  @observable _error = ''
+  @observable passcode = ''
+  @observable error = ''
 
-  @computed get _isValid () {
-    return this._passcode.length === 4
+  @computed get isValid () {
+    return this.passcode.length === 4
   }
 
   render () {
@@ -21,10 +21,10 @@ class Passcode extends Component {
       <Modal className='passcode' isShowing={true}>
         <form onSubmit={this._submit}>
           <label>{this._message()}</label>
-          <input ref='passcode' type='number' value={this._passcode} onChange={this._updatePasscode} />
-          <p className='error'>{this._error}</p>
+          <input ref='passcode' type='number' value={this.passcode} onChange={this._updatePasscode} />
+          <p className='error'>{this.error}</p>
           <div className='actions'>
-            <button className='submit' disabled={!this._isValid}>
+            <button className='submit' disabled={!this.isValid}>
               {this._button()}
             </button>
             <button className='cancel' onClick={this._cancel}>Cancel</button>
@@ -61,7 +61,7 @@ class Passcode extends Component {
   @action _updatePasscode = (e) => {
     const value = (e.target.value).toString()
     if (value.length <= 4) {
-      this._passcode = value
+      this.passcode = value
     }
   }
 
@@ -73,18 +73,18 @@ class Passcode extends Component {
   @action _submit = (e) => {
     e.preventDefault()
 
-    const passcode = this._passcodeValue()
+    const passcode = this.passcodeValue()
 
     switch (authState.passcodeAction) {
       case C.CONFIRM_PASSCODE: {
         if (authState.user.passcode !== passcode) {
-          this._error = 'Passcode incorrect'
+          this.error = 'Passcode incorrect'
           return
         }
         break
       }
       case C.SET_PASSCODE: {
-        if (!this._isValid) return
+        if (!this.isValid) return
         authState.user.passcode = passcode
         auth.updatePasscode(passcode)
         break
@@ -96,7 +96,7 @@ class Passcode extends Component {
     authState.afterReceivingPasscode()
   }
 
-  _passcodeValue () {
+  passcodeValue () {
     return (this.refs.passcode.value).toString()
   }
 }
