@@ -57,9 +57,9 @@ class ListsList extends Component {
     } else {
       authState.passcodeAction = C.CONFIRM_PASSCODE
     }
-    authState.afterReceivingPasscode = action('finished:password:action', () => {
+    authState.onPasscodeSubmit = action('finished:password:action', () => {
       this._updateList({ id, isPrivate: willBePrivate })
-      authState.afterReceivingPasscode = () => {}
+      authState.resetPasscodeCallbacks()
     })
   }
 

@@ -3,6 +3,9 @@ import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
+import authState from '../auth/auth-state'
+import C from '../data/constants'
+
 import ActionSheet from '../modal/action-sheet'
 import BulkAdd from './bulk-add'
 import ItemsList from './items-list'
@@ -12,6 +15,39 @@ class Items extends Component {
   @observable attemptingClearCompleted = false
   @observable bulkAddingItems = false
   @observable isSorting = false
+  @observable canShow = false
+
+  componentWillMount () {
+    this._checkCanShow()
+  }
+
+  componentDidUpdate () {
+    this._checkCanShow()
+  }
+
+  _checkCanShow () {
+    if (this.props.list.id !== this.listId) {
+      this.listId = this.props.list.id
+      this._setCanShow()
+    }
+  }
+
+  _setCanShow () {
+    action('set:can:show', () => {
+      this.canShow = !this.props.list.isPrivate
+      if (!this.canShow) {
+        authState.passcodeAction = C.CONFIRM_PASSCODE
+        authState.onPasscodeSubmit = action('passcode:confirmed', () => {
+          this.canShow = true
+          authState.resetPasscodeCallbacks()
+        })
+        authState.onPasscodeCancel = action('passcode:cancelled', () => {
+          this.props.onShowLists()
+          authState.resetPasscodeCallbacks()
+        })
+      }
+    })()
+  }
 
   render () {
     return (
@@ -33,6 +69,7 @@ class Items extends Component {
         </header>
         <ItemsList
           addItem={this._addItem}
+          canShow={this.canShow}
           isLoading={this.props.isLoading}
           itemsStore={this.props.list.itemsStore}
         />

@@ -1,6 +1,8 @@
 import { observable } from 'mobx'
 import User from './user-model'
 
+function noop () {}
+
 class AuthState {
   @observable attemptingLogin = false
   @observable attemptingLogout = false
@@ -9,7 +11,13 @@ class AuthState {
   @observable loginFailed = false
 
   @observable passcodeAction
-  afterReceivingPasscode = () => {}
+  onPasscodeSubmit = noop
+  onPasscodeCancel = noop
+
+  resetPasscodeCallbacks () {
+    this.onPasscodeSubmit = noop
+    this.onPasscodeCancel = noop
+  }
 }
 
 export default new AuthState()

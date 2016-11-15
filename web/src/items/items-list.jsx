@@ -18,6 +18,8 @@ class ItemsList extends Component {
       return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
     } else if (this.props.itemsStore.none) {
       return <p className='no-items'>No List Selected</p>
+    } else if (!this.props.canShow) {
+      return <p className='no-items'>Private list - need passcode</p>
     } else if (!this.props.itemsStore.items.length) {
       return <p className='no-items'>No Items</p>
     }

@@ -68,6 +68,7 @@ class Passcode extends Component {
   @action _cancel = (e) => {
     e.preventDefault()
     authState.passcodeAction = null
+    authState.onPasscodeCancel()
   }
 
   @action _submit = (e) => {
@@ -93,7 +94,7 @@ class Passcode extends Component {
     }
 
     authState.passcodeAction = null
-    authState.afterReceivingPasscode()
+    authState.onPasscodeSubmit()
   }
 
   passcodeValue () {
