@@ -2,7 +2,19 @@ import _ from 'lodash'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
-const validKeys = /(?:\d|Backspace)/
+const keys = {
+  8: 'Backspace',
+  48: '0',
+  49: '1',
+  50: '2',
+  51: '3',
+  52: '4',
+  53: '5',
+  54: '6',
+  55: '7',
+  56: '8',
+  57: '9',
+}
 
 function replaceCharAt (str, index, replacement) {
   return str.substr(0, index) + replacement + str.substr(index + replacement.length)
@@ -32,13 +44,14 @@ class PasscodeInput extends Component {
   }
 
   _updatePasscode = (index) => (e) => {
-    if (!validKeys.test(e.key)) return
+    const key = keys[e.which]
+    if (key == null) return
 
     const currentValue = this.props.value
 
-    const newValue = e.key === 'Backspace' ?
+    const newValue = key === 'Backspace' ?
       currentValue.substr(0, currentValue.length - 1) :
-      replaceCharAt(currentValue, index, e.key)
+      replaceCharAt(currentValue, index, key)
 
     this.props.onChange(newValue)
   }
