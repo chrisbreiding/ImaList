@@ -36,7 +36,7 @@ class Items extends Component {
     action('set:can:show', () => {
       this.canShow = !this.props.list.isPrivate
       if (!this.canShow) {
-        authState.passcodeAction = C.CONFIRM_PASSCODE
+        authState.passcodeNeeded = true
         authState.onPasscodeSubmit = action('passcode:confirmed', () => {
           this.canShow = true
           authState.resetPasscodeCallbacks()

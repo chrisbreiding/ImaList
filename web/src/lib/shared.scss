@@ -52,6 +52,7 @@ header {
 
   .cancel {
     @include buttonize-background($neutral-color);
+    margin-left: 0;
   }
 }
 

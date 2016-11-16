@@ -52,11 +52,7 @@ class ListsList extends Component {
   }
 
   @action _updateListPrivacy = ({ id, willBePrivate }) => {
-    if (willBePrivate && !authState.user.passcode) {
-      authState.passcodeAction = C.SET_PASSCODE
-    } else {
-      authState.passcodeAction = C.CONFIRM_PASSCODE
-    }
+    authState.passcodeNeeded = true
     authState.onPasscodeSubmit = action('finished:password:action', () => {
       this._updateList({ id, isPrivate: willBePrivate })
       authState.resetPasscodeCallbacks()

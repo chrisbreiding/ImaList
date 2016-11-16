@@ -22,6 +22,7 @@
     "firebase": "^3.6.0",
     "font-awesome": "^4.7.0",
     "lodash": "^4.8.2",
+    "md5": "^2.2.1",
     "mobx": "^2.3.7",
     "mobx-react": "^3.5.1",
     "react": "^15.1.0",

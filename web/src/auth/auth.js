@@ -1,3 +1,4 @@
+import md5 from 'md5'
 import { action } from 'mobx'
 
 import appState from '../app/app-state'
@@ -28,12 +29,17 @@ class Auth {
 
   @action _setUserPasscode = (users) => {
     const user = users && users[authState.user.id]
-    authState.user.passcode = user ? user.passcode : undefined
+    authState.user.hashedPasscode = user ? user.hashedPasscode : undefined
+  }
+
+  matchesUserPasscode (passcode) {
+    return authState.user.hashedPasscode === md5(passcode)
   }
 
   updatePasscode (passcode) {
-    authState.user.passcode = passcode
-    this.usersApi.updateUser({ id: authState.user.id, passcode })
+    const hashedPasscode = md5(passcode)
+    authState.user.hashedPasscode = hashedPasscode
+    this.usersApi.updateUser({ id: authState.user.id, hashedPasscode })
   }
 
   listenForChange () {

@@ -26,7 +26,7 @@
 .passcode-input {
   display: flex;
   justify-content: space-between;
-  width: 11em;
+  min-width: 11em;
 
   input {
     font-size: 1.2em;

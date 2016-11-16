@@ -10,7 +10,7 @@ class AuthState {
   @observable isAuthenticated = false
   @observable loginFailed = false
 
-  @observable passcodeAction
+  @observable passcodeNeeded = false
   onPasscodeSubmit = noop
   onPasscodeCancel = noop
 

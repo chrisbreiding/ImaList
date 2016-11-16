@@ -46,23 +46,11 @@ class Passcode extends Component {
   }
 
   _message () {
-    switch (authState.passcodeAction) {
-      case C.CONFIRM_PASSCODE:
-        return 'Enter your passcode'
-      case C.SET_PASSCODE:
-        return 'Set a passcode'
-      default:
-        return ''
-    }
+    return authState.user.hasPasscode ? 'Enter your passcode' : 'Set a passcode'
   }
 
   _button () {
-    switch (authState.passcodeAction) {
-      case C.SET_PASSCODE:
-        return 'Set passcode'
-      default:
-        return 'Submit'
-    }
+    return authState.user.hasPasscode ? 'Submit' : 'Set passcode'
   }
 
   @action _updatePasscode = (passcode) => {
@@ -71,7 +59,7 @@ class Passcode extends Component {
 
   @action _cancel = (e) => {
     e.preventDefault()
-    authState.passcodeAction = null
+    authState.passcodeNeeded = false
     authState.onPasscodeCancel()
   }
 
@@ -80,23 +68,17 @@ class Passcode extends Component {
 
     if (!this.isValid) return
 
-    switch (authState.passcodeAction) {
-      case C.CONFIRM_PASSCODE: {
-        if (authState.user.passcode !== this.passcode) {
-          this.error = 'Passcode incorrect'
-          this.refs.oldPasscode.focus()
-          return
-        }
-        break
+    if (authState.user.hasPasscode) {
+      if (!auth.matchesUserPasscode(this.passcode)) {
+        this.error = 'Passcode incorrect'
+        this.refs.passcode.focus()
+        return
       }
-      case C.SET_PASSCODE: {
-        auth.updatePasscode(this.passcode)
-        break
-      }
-      default: {} // eslint-disable-line no-empty
+    } else {
+      auth.updatePasscode(this.passcode)
     }
 
-    authState.passcodeAction = null
+    authState.passcodeNeeded = false
     authState.onPasscodeSubmit()
   }
 }

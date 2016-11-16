@@ -50,7 +50,7 @@ class App extends Component {
           onShowLists={action('show:lists', () => this.listsStore.selectList(null))}
         />
         {this._confirmLogout()}
-        {authState.passcodeAction ? <Passcode /> : null}
+        {authState.passcodeNeeded ? <Passcode /> : null}
         {appState.viewingSettings ? <Settings /> : null}
       </div>
     )
