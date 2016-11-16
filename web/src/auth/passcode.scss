@@ -14,11 +14,6 @@
     margin-bottom: 0.4em;
   }
 
-  input {
-    box-sizing: border-box;
-    width: 100%;
-  }
-
   .submit {
     order: 1;
   }
@@ -29,8 +24,13 @@
 }
 
 .passcode-input {
-  box-sizing: border-box;
-  font-size: 1.2em;
-  letter-spacing: 0.4em;
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 11em;
+
+  input {
+    font-size: 1.2em;
+    text-align: center;
+    width: 1em;
+  }
 }
