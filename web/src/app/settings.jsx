@@ -15,7 +15,11 @@ class Settings extends Component {
   @observable error = ''
 
   @computed get isValid () {
-    return this.oldPasscode.length === 4 && this.newPasscode.length === 4
+    if (authState.user.hasPasscode) {
+      return this.oldPasscode.length === 4 && this.newPasscode.length === 4
+    } else {
+      return this.newPasscode.length === 4
+    }
   }
 
   render () {
@@ -25,19 +29,15 @@ class Settings extends Component {
           <h1>Settings</h1>
         </header>
         <form onSubmit={this._submit}>
-          <label>Old passcode</label>
-          <PasscodeInput
-            ref='oldPasscode'
-            value={this.oldPasscode}
-            onChange={this._updateOldPasscode}
-          />
-          <p className='error'>{this.error}</p>
-          <label>New passcode</label>
-          <PasscodeInput
-            ref='newPasscode'
-            value={this.newPasscode}
-            onChange={this._updateNewPasscode}
-          />
+          {this._oldPasscode()}
+          <fieldset>
+            <label>{authState.user.hasPasscode ? 'New passcode' : 'Passcode'}</label>
+            <PasscodeInput
+              ref='newPasscode'
+              value={this.newPasscode}
+              onChange={this._updateNewPasscode}
+            />
+          </fieldset>
           <div className='actions'>
             <button className='submit' disabled={!this.isValid}>Save</button>
             <button className='cancel' onClick={this._cancel}>Cancel</button>
@@ -47,8 +47,24 @@ class Settings extends Component {
     )
   }
 
+  _oldPasscode () {
+    if (!authState.user.hasPasscode) return null
+
+    return (
+      <fieldset>
+        <label>Old passcode</label>
+        <PasscodeInput
+          ref='oldPasscode'
+          value={this.oldPasscode}
+          onChange={this._updateOldPasscode}
+        />
+        <p className='error'>{this.error}</p>
+      </fieldset>
+    )
+  }
+
   componentDidMount () {
-    this.refs.oldPasscode.focus()
+    this.refs[authState.user.hasPasscode ? 'oldPasscode' : 'newPasscode'].focus()
   }
 
   @action _updateOldPasscode = (passcode) => {
@@ -69,7 +85,7 @@ class Settings extends Component {
 
     if (!this.isValid) return
 
-    if (!auth.matchesUserPasscode(this.oldPasscode)) {
+    if (authState.user.hasPasscode && !auth.matchesUserPasscode(this.oldPasscode)) {
       this.error = 'Passcode incorrect'
       this.refs.oldPasscode.focus()
       return
