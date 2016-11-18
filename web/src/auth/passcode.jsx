@@ -54,7 +54,10 @@ class Passcode extends Component {
   }
 
   @action _updatePasscode = (passcode) => {
-    this.passcode = passcode
+    if (this.passcode !== passcode) {
+      this.error = ''
+      this.passcode = passcode
+    }
   }
 
   @action _cancel = (e) => {
