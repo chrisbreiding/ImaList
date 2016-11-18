@@ -5,7 +5,10 @@
 
   .container {
     background: $light-color;
-    padding: 1em 2em;
+  }
+
+  fieldset {
+    padding: 1em 1em 0.4em;
   }
 
   label {
@@ -14,7 +17,15 @@
     margin-bottom: 0.4em;
   }
 
+  button {
+    border-radius: 0;
+    flex-grow: 1;
+    margin: 0;
+    white-space: nowrap;
+  }
+
   .submit {
+    border-left: solid 1px $light-color;
     order: 1;
   }
 
