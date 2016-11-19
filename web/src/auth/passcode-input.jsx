@@ -30,8 +30,8 @@ class PasscodeInput extends Component {
             key={index}
             ref={`passcode${index}`}
             type='tel'
-            value={this.props.value.charAt(index) || ''}
             onClick={this.focus}
+            value={this.props.value.charAt(index) ? '*' : ''}
             onKeyUp={this._updatePasscode(index)}
           />
         ))}
