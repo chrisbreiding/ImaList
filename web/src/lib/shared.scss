@@ -39,7 +39,7 @@ header {
   }
 
   .submit {
-    @include buttonize-background($action-color);
+    @include buttonize-background($action-color, true);
 
     &[disabled],
     &[disabled]:hover,
@@ -51,7 +51,7 @@ header {
   }
 
   .cancel {
-    @include buttonize-background($neutral-color);
+    @include buttonize-background($neutral-color, true);
     margin-left: 0;
   }
 }

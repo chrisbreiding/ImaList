@@ -1,10 +1,16 @@
-@mixin buttonize-background($color) {
+@mixin buttonize-background($color, $focus: false) {
   background: $color;
   transition: all .25s ease;
 
   &:hover,
   &:active {
     background: darken($color, 20%);
+  }
+
+  @if $focus {
+    &:focus {
+      background: darken($color, 20%);
+    }
   }
 }
 
