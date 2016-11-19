@@ -30,9 +30,10 @@ class PasscodeInput extends Component {
             key={index}
             ref={`passcode${index}`}
             type='tel'
-            onClick={this.focus}
             value={this.props.value.charAt(index) ? '*' : ''}
+            onFocus={this.focus}
             onKeyUp={this._updatePasscode(index)}
+            tabIndex={index === this._focusIndex() ? 0 : -1}
           />
         ))}
       </div>
@@ -57,9 +58,12 @@ class PasscodeInput extends Component {
   }
 
   focus = () => {
+    this.refs[`passcode${this._focusIndex()}`].focus()
+  }
+
+  _focusIndex () {
     const valueLength = this.props.value.length
-    const focusIndex = valueLength > 3 ? 3 : valueLength
-    this.refs[`passcode${focusIndex}`].focus()
+    return valueLength > 3 ? 3 : valueLength
   }
 }
 
