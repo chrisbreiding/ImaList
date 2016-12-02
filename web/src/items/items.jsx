@@ -1,10 +1,9 @@
 import cs from 'classnames'
-import { action, observable } from 'mobx'
+import { action, autorun, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
 import authState from '../auth/auth-state'
-import C from '../data/constants'
 
 import ActionSheet from '../modal/action-sheet'
 import BulkAdd from './bulk-add'
@@ -17,8 +16,14 @@ class Items extends Component {
   @observable isSorting = false
   @observable canShow = false
 
-  componentWillMount () {
+  componentDidMount () {
     this._checkCanShow()
+
+    autorun(() => {
+      if (this.canShow) {
+        this._dismissKeyboard()
+      }
+    })
   }
 
   componentDidUpdate () {
@@ -30,6 +35,13 @@ class Items extends Component {
       this.listId = this.props.list.id
       this._setCanShow()
     }
+  }
+
+  _dismissKeyboard () {
+    // after a passcode check, the keyboard doesn't go away for some
+    // reason on mobile safari, so this ensures it gets dimissed
+    this.refs.back.focus()
+    this.refs.back.blur()
   }
 
   _setCanShow () {
@@ -60,7 +72,7 @@ class Items extends Component {
       >
         <header className='fixed'>
           <h1>{this.props.list.name}</h1>
-          <button className='back' onClick={this._onBack}>
+          <button ref='back' className='back' onClick={this._onBack}>
             <i className='fa fa-chevron-left'></i>
           </button>
           <button className='edit' onClick={this._toggleSorting}>

@@ -61,10 +61,6 @@ class PasscodeInput extends Component {
     this.refs[`passcode${this._focusIndex()}`].focus()
   }
 
-  blur = () => {
-    this.refs[`passcode${this._focusIndex()}`].blur()
-  }
-
   _focusIndex () {
     const valueLength = this.props.value.length
     return valueLength > 3 ? 3 : valueLength

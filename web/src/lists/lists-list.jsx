@@ -4,7 +4,6 @@ import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
 import authState from '../auth/auth-state'
-import C from '../data/constants'
 
 import List from './list'
 import SortableList from '../lib/sortable-list'

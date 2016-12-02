@@ -88,7 +88,6 @@ class Passcode extends Component {
         return
       }
     } else {
-      this.refs.passcode.blur()
       auth.updatePasscode(this.passcode)
     }
 
