@@ -1,28 +1,16 @@
 import cs from 'classnames'
+import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 
 @observer
 class List extends Component {
-  constructor (props) {
-    super(props)
+  @observable isFocused = false
 
-    this.state = {
-      editing: false,
-      showingOptions: false,
-    }
-  }
-
-  componentDidUpdate () {
-    if (this.props.isEditing && !this.state.editing) {
-      this.setState({ editing: true, showingOptions: true }, () => {
-        this.refs.name.focus()
-      })
-    }
-
-    if (!this.props.isEditing && this.state.editing) {
-      this.setState({ editing: false })
+  componentDidUpdate (prevProps) {
+    if (!prevProps.isEditing && this.props.isEditing) {
+      this.refs.name.focus()
     }
   }
 
@@ -33,11 +21,13 @@ class List extends Component {
       <li
         className={cs({
           'list': true,
-          'showing-options': this.state.showingOptions,
           'shared': model.shared,
           'is-private': model.isPrivate,
           'is-owner': this.props.isOwner,
+          'showing-options': this.props.isEditing,
+          'is-editing': this.props.isEditing,
           'is-selected': this.props.isSelected,
+          'is-focused': this.isFocused,
         })}
         data-id={model.id}
       >
@@ -50,7 +40,7 @@ class List extends Component {
             <i className='shared-indicator fa fa-share-alt-square'></i>
             <i className='is-private-indicator fa fa-lock'></i>
           </div>
-          <button className='toggle-options' onClick={this._toggleOptions}>
+          <button className='toggle-options' onClick={this._toggleEditing}>
             <i className='fa fa-ellipsis-h'></i>
           </button>
           <button className='toggle-shared' onClick={this._toggleShared}>
@@ -68,13 +58,15 @@ class List extends Component {
   }
 
   _name () {
-    if (this.state.showingOptions) {
+    if (this.props.isEditing) {
       return (
         <input
           ref='name'
           defaultValue={this.props.model.name}
           onChange={this._updateName}
           onKeyUp={this._keyup}
+          onFocus={this._focus}
+          onBlur={this._blur}
         />
       )
     } else {
@@ -83,7 +75,7 @@ class List extends Component {
   }
 
   _selectList = () => {
-    if (!this.state.showingOptions) {
+    if (!this.props.isEditing) {
       this.props.onSelect(this.props.model)
     }
   }
@@ -92,8 +84,8 @@ class List extends Component {
     this.props.onRemove(this.props.model)
   }
 
-  _toggleOptions = () => {
-    this.setState({ showingOptions: !this.state.showingOptions })
+  _toggleEditing = () => {
+    this.props.onEdit(this.props.isEditing ? { id: null } : this.props.model)
   }
 
   _toggleShared = () => {
@@ -121,6 +113,14 @@ class List extends Component {
     if (e.key === 'Enter' || e.key === 'Escape') {
       this._toggleOptions()
     }
+  }
+
+  @action _focus = () => {
+    this.isFocused = true
+  }
+
+  @action _blur = () => {
+    this.isFocused = false
   }
 }
 

@@ -14,7 +14,7 @@
     width: $owner-width;
   }
 
-  &.is-owner.showing-options {
+  &.is-owner.is-editing {
     .name {
       padding-right: $owner-width;
     }
@@ -54,13 +54,13 @@
     }
   }
 
-  &.showing-options.shared .shared-indicator,
-  &.showing-options.is-private .is-private-indicator {
+  &.is-editing.shared .shared-indicator,
+  &.is-editing.is-private .is-private-indicator {
     display: block;
   }
 
-  .is-sorting &.showing-options.shared .shared-indicator,
-  .is-sorting &.showing-options.is-private .is-private-indicator {
+  .is-sorting &.is-editing.shared .shared-indicator,
+  .is-sorting &.is-editing.is-private .is-private-indicator {
     display: none;
   }
 
@@ -86,10 +86,10 @@
     padding: 0;
     text-overflow: ellipsis;
     width: 100%;
+  }
 
-    &:focus {
-      border-color: $primary-color;
-    }
+  &.is-focused .name {
+    border-color: $primary-color;
   }
 
   .is-sorting &,
@@ -99,7 +99,7 @@
     }
   }
 
-  &.showing-options .name {
+  &.is-editing .name {
     cursor: default;
     padding-left: 0.5em;
 

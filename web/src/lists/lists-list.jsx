@@ -32,6 +32,7 @@ class ListsList extends Component {
             isOwner={list.owner === authState.user.email}
             isEditing={list.id === this.props.listsStore.editingListId}
             isSelected={list.id === this.props.listsStore.selectedListId}
+            onEdit={this._editList}
             onSelect={this._goToList}
             onUpdate={this._updateList}
             onUpdatePrivacy={this._updateListPrivacy}
@@ -40,6 +41,10 @@ class ListsList extends Component {
         ))}
       </SortableList>
     )
+  }
+
+  @action _editList = (list) => {
+    this.props.listsStore.editList(list)
   }
 
   @action _goToList = (list) => {
