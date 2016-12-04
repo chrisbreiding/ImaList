@@ -42,7 +42,9 @@ class List extends Component {
         data-id={model.id}
       >
         <i className='sort-handle fa fa-arrows'></i>
-        <span>{this._name()}</span>
+        <span className='name' onClick={this._selectList}>
+          {this._name()}
+        </span>
         <div className='options'>
           <div className='indicators'>
             <i className='shared-indicator fa fa-share-alt-square'></i>
@@ -70,23 +72,20 @@ class List extends Component {
       return (
         <input
           ref='name'
-          className='name'
           defaultValue={this.props.model.name}
           onChange={this._updateName}
           onKeyUp={this._keyup}
         />
       )
     } else {
-      return (
-        <span className='name' onClick={this._selectList}>
-          {this.props.model.name}
-        </span>
-      )
+      return this.props.model.name
     }
   }
 
   _selectList = () => {
-    this.props.onSelect(this.props.model)
+    if (!this.state.showingOptions) {
+      this.props.onSelect(this.props.model)
+    }
   }
 
   _removeList = () => {

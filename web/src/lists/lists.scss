@@ -16,7 +16,7 @@
 
   &.is-owner.showing-options {
     .name {
-      padding-right: $owner-width + 1em;
+      padding-right: $owner-width;
     }
 
     .options {
@@ -66,13 +66,12 @@
 
   .name {
     border: solid transparent 0.2em;
-    line-height: $unit - 0.4em;
-    padding: 0 ($unit - 0.2em) 0 0.5em;
-    transition: all .25s ease;
-  }
-
-  span.name {
     cursor: pointer;
+    line-height: $unit - 0.4em;
+    overflow: hidden;
+    padding: 0 ($unit - 0.2em) 0 0.5em;
+    text-overflow: ellipsis;
+    transition: all .25s ease;
 
     &:hover,
     &:focus {
@@ -80,9 +79,11 @@
     }
   }
 
-  input.name {
-    border-radius: 0;
+  .name input {
+    background: none;
+    border: none;
     outline: none;
+    padding: 0;
     text-overflow: ellipsis;
     width: 100%;
 
@@ -95,6 +96,16 @@
   &.gu-mirror {
     .name {
       padding-left: $unit;
+    }
+  }
+
+  &.showing-options .name {
+    cursor: default;
+    padding-left: 0.5em;
+
+    &:hover,
+    &:focus {
+      background: none;
     }
   }
 
