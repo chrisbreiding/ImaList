@@ -84,7 +84,8 @@ class List extends Component {
     this.props.onRemove(this.props.model)
   }
 
-  _toggleEditing = () => {
+  @action _toggleEditing = () => {
+    if (this.props.isEditing) this.isFocused = false
     this.props.onEdit(this.props.isEditing ? { id: null } : this.props.model)
   }
 
@@ -111,7 +112,7 @@ class List extends Component {
 
   _keyup = (e) => {
     if (e.key === 'Enter' || e.key === 'Escape') {
-      this._toggleOptions()
+      this._toggleEditing()
     }
   }
 

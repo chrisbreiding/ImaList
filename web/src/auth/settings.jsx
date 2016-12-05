@@ -17,7 +17,7 @@ class Settings extends Component {
 
   render () {
     return (
-      <Modal className='auth-settings modal-form' isShowing={this._shouldShowSettings()}>
+      <div>
         <header>
           <h1>Firebase Settings</h1>
         </header>
@@ -43,12 +43,8 @@ class Settings extends Component {
             <button className='cancel' onClick={this._cancel}>Cancel</button>
           </div>
         </form>
-      </Modal>
+      </div>
     )
-  }
-
-  _shouldShowSettings () {
-    return appState.state === C.NEEDS_FIREBASE_CONFIG || appState.showingFirebaseSettings
   }
 
   @action _updateFirebaseSettings = (e) => {
@@ -62,4 +58,14 @@ class Settings extends Component {
   }
 }
 
-export default Settings
+const shouldShowSettings = () => (
+  appState.state === C.NEEDS_FIREBASE_CONFIG || appState.showingFirebaseSettings
+)
+
+const SettingsModal = observer(() => (
+  <Modal className='auth-settings modal-form' isShowing={shouldShowSettings()}>
+    <Settings />
+  </Modal>
+))
+
+export default SettingsModal

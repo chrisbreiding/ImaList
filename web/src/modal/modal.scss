@@ -6,7 +6,7 @@
   transition: all .35s ease;
   z-index: -1;
 
-  &.modal-showing {
+  .has-entered & {
     opacity: 1;
     z-index: 100;
   }
@@ -38,10 +38,10 @@
     .cancel {
       @include buttonize-background($neutral-color);
     }
-  }
 
-  &.modal-showing .container {
-    bottom: 0;
+    .has-entered & {
+      bottom: 0;
+    }
   }
 }
 
@@ -54,11 +54,11 @@
       margin-top: -50px;
       top: -200px;
       width: 300px;
-    }
 
-    &.modal-showing .container {
-      bottom: auto;
-      top: 50%;
+      .has-entered & {
+        bottom: auto;
+        top: 50%;
+      }
     }
   }
 }

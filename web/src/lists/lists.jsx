@@ -3,8 +3,11 @@ import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 
+import appState from '../app/app-state'
+
 import ActionSheet from '../modal/action-sheet'
 import ListsList from './lists-list'
+import Settings from '../app/settings'
 
 @observer
 class Lists extends Component {
@@ -26,7 +29,7 @@ class Lists extends Component {
             <i className='fa fa-plus'></i>
           </button>
           <div className='spacer'></div>
-          <button className='settings' onClick={this.props.onViewSettings}>
+          <button className='settings' onClick={this._showSettings}>
             <span>Settings</span>
             <i className='fa fa-cog'></i>
           </button>
@@ -48,6 +51,7 @@ class Lists extends Component {
             },
           ]}
         />
+        <Settings />
       </div>
     )
   }
@@ -66,6 +70,10 @@ class Lists extends Component {
 
   @action _toggleSorting = () => {
     this.isSorting = !this.isSorting
+  }
+
+  @action _showSettings = () => {
+    appState.viewingSettings = true
   }
 }
 

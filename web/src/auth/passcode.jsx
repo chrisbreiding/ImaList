@@ -18,25 +18,23 @@ class Passcode extends Component {
 
   render () {
     return (
-      <Modal className='passcode' isShowing={true}>
-        <form onSubmit={this._submit}>
-          <fieldset>
-            <label>{this._message()}</label>
-            <PasscodeInput
-              ref='passcode'
-              className='passcode-input'
-              type='tel'
-              value={this.passcode}
-              onChange={this._updatePasscode}
-            />
-            <p className='error'>{this.error}</p>
-          </fieldset>
-          <div className='actions'>
-            {this._submitButton()}
-            <button className='cancel' onClick={this._cancel}>Cancel</button>
-          </div>
-        </form>
-      </Modal>
+      <form onSubmit={this._submit}>
+        <fieldset>
+          <label>{this._message()}</label>
+          <PasscodeInput
+            ref='passcode'
+            className='passcode-input'
+            type='tel'
+            value={this.passcode}
+            onChange={this._updatePasscode}
+          />
+          <p className='error'>{this.error}</p>
+        </fieldset>
+        <div className='actions'>
+          {this._submitButton()}
+          <button className='cancel' onClick={this._cancel}>Cancel</button>
+        </div>
+      </form>
     )
   }
 
@@ -96,4 +94,10 @@ class Passcode extends Component {
   }
 }
 
-export default Passcode
+const PasscodeModal = observer(() => (
+  <Modal className='passcode' isShowing={authState.passcodeNeeded}>
+    <Passcode />
+  </Modal>
+))
+
+export default PasscodeModal

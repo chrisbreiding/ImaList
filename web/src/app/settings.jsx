@@ -24,7 +24,7 @@ class Settings extends Component {
 
   render () {
     return (
-      <Modal className='app-settings' isShowing={true}>
+      <div>
         <header className='fixed'>
           <h1>Settings</h1>
         </header>
@@ -43,7 +43,7 @@ class Settings extends Component {
             <button className='cancel' onClick={this._cancel}>Cancel</button>
           </div>
         </form>
-      </Modal>
+      </div>
     )
   }
 
@@ -96,4 +96,10 @@ class Settings extends Component {
   }
 }
 
-export default Settings
+const SettingsModal = observer(() => (
+  <Modal className='app-settings' isShowing={appState.viewingSettings}>
+    <Settings />
+  </Modal>
+))
+
+export default SettingsModal

@@ -1,31 +1,57 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
+import { Component } from 'react'
+import { render, unmountComponentAtNode } from 'react-dom'
 
 let idNum = 0
 
 class Portal extends Component {
-  componentDidMount () {
-    const id = `portal-${idNum++}`
-    let element = document.getElementById(id)
-    if (!element) {
-      element = document.createElement('div')
-      element.id = id
-      document.body.appendChild(element)
-    }
-    this.element = element
-    this.componentDidUpdate()
+  constructor (...args) {
+    super(...args)
+
+    this.id = `portal-${idNum++}`
+    this.hasEntered = false
   }
 
   componentWillUnmount () {
-    document.body.removeChild(this.element)
+    this._removeContainer()
   }
 
-  componentDidUpdate () {
-    render((
-      <div className={this.props.className || ''}>
-        {this.props.children}
-      </div>
-    ), this.element)
+  componentDidUpdate ({ isShowing: wasShowing }) {
+    if (!wasShowing && this.props.isShowing) {
+      this._findOrCreateContainer()
+      render(this.props.children, this.element)
+      this._enter()
+    }
+
+    if (wasShowing && !this.props.isShowing) {
+      this._removeContainer()
+    }
+  }
+
+  _findOrCreateContainer () {
+    let element = document.getElementById(this.id)
+    if (!element) {
+      element = document.createElement('div')
+      element.id = this.id
+      document.body.appendChild(element)
+    }
+    this.element = element
+  }
+
+  _enter () {
+    setTimeout(() => {
+      this.element.className = 'has-entered'
+    })
+  }
+
+  _removeContainer () {
+    if (!this.element) return
+
+    this.element.className = ''
+    setTimeout(() => {
+      unmountComponentAtNode(this.element)
+      document.body.removeChild(this.element)
+      this.element = null
+    }, 350)
   }
 
   render () {

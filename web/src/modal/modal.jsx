@@ -3,10 +3,12 @@ import React from 'react'
 
 import Portal from './portal'
 
-const Modal = (props) => (
-  <Portal className={cs('modal', props.className, { 'modal-showing': props.isShowing })}>
-    <div className='container'>
-      {props.children}
+const Modal = ({ children, className, isShowing }) => (
+  <Portal isShowing={isShowing}>
+    <div className={cs('modal', className)}>
+      <div className='container'>
+        {children}
+      </div>
     </div>
   </Portal>
 )

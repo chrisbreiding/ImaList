@@ -3,18 +3,14 @@ import Textarea from 'react-textarea-autosize'
 
 import Modal from '../modal/modal'
 
-export default class BulkAdd extends Component {
-  componentDidUpdate () {
-    if (this.props.isShowing) {
-      this.refs.bulkItems.focus()
-    } else {
-      this.refs.bulkItems.value = ''
-    }
+class BulkAdd extends Component {
+  componentDidMount () {
+    this.refs.bulkItems.focus()
   }
 
   render () {
     return (
-      <Modal className='bulk-add modal-form' isShowing={this.props.isShowing}>
+      <div>
         <Textarea
           ref='bulkItems'
           minRows={5}
@@ -31,7 +27,15 @@ export default class BulkAdd extends Component {
             Add
           </button>
         </footer>
-      </Modal>
+      </div>
     )
   }
 }
+
+const BulkAddModal = (props) => (
+  <Modal className='bulk-add modal-form' isShowing={props.isShowing}>
+    <BulkAdd {...props} />
+  </Modal>
+)
+
+export default BulkAddModal
