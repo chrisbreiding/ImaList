@@ -7,7 +7,6 @@ import ListsApi from './lists-api'
 
 class ListsStore {
   @observable _lists = map()
-  @observable attemptingRemoveListId = null
   @observable editingListId = null
   @observable isLoading = false
   @observable selectedListId = null
@@ -85,13 +84,8 @@ class ListsStore {
     this.listsApi.updateList(list)
   }
 
-  attemptRemoveList (list) {
-    this.attemptingRemoveListId = list.id
-  }
-
-  removeList (id) {
-    this.listsApi.removeList(id)
-    this.attemptingRemoveListId = null
+  removeList (list) {
+    this.listsApi.removeList(list)
   }
 }
 

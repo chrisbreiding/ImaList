@@ -40,7 +40,7 @@ class Portal extends Component {
   _enter () {
     setTimeout(() => {
       this.element.className = 'has-entered'
-    })
+    }, 50)
   }
 
   _removeContainer () {

@@ -5,7 +5,6 @@ import React, { Component } from 'react'
 
 import appState from '../app/app-state'
 
-import ActionSheet from '../modal/action-sheet'
 import ListsList from './lists-list'
 import Settings from '../app/settings'
 
@@ -38,19 +37,6 @@ class Lists extends Component {
             <i className='fa fa-sign-out'></i>
           </button>
         </footer>
-        <ActionSheet
-          isShowing={!!this.props.listsStore.attemptingRemoveListId}
-          actions={[
-            {
-              label: 'Remove List',
-              handler: this._removeList,
-            }, {
-              label: 'Cancel',
-              handler: this._cancelRemoveList,
-              type: 'cancel',
-            },
-          ]}
-        />
         <Settings />
       </div>
     )
@@ -58,14 +44,6 @@ class Lists extends Component {
 
   @action _addList = () => {
     this.props.listsStore.addList()
-  }
-
-  @action _removeList = () => {
-    this.props.listsStore.removeList(this.props.listsStore.attemptingRemoveListId)
-  }
-
-  @action _cancelRemoveList = () => {
-    this.props.listsStore.attemptRemoveList(false)
   }
 
   @action _toggleSorting = () => {

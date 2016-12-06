@@ -36,7 +36,7 @@ class ListsList extends Component {
             onSelect={this._goToList}
             onUpdate={this._updateList}
             onUpdatePrivacy={this._updateListPrivacy}
-            onRemove={this._attemptRemoveList}
+            onRemove={this._removeList}
           />
         ))}
       </SortableList>
@@ -63,8 +63,8 @@ class ListsList extends Component {
     })
   }
 
-  @action _attemptRemoveList = (list) => {
-    this.props.listsStore.attemptRemoveList(list)
+  @action _removeList = (list) => {
+    this.props.listsStore.removeList(list)
   }
 }
 

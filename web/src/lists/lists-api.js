@@ -48,8 +48,8 @@ class ListsApi {
     firebase.getRef().child(`lists/${list.id}`).update(list)
   }
 
-  removeList (id) {
-    firebase.getRef().child(`lists/${id}`).remove()
+  removeList (list) {
+    firebase.getRef().child(`lists/${list.id}`).remove()
   }
 }
 

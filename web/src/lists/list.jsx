@@ -4,9 +4,12 @@ import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 
+import ActionSheet from '../modal/action-sheet'
+
 @observer
 class List extends Component {
   @observable isFocused = false
+  @observable attemptingRemove
 
   componentDidUpdate (prevProps) {
     if (!prevProps.isEditing && this.props.isEditing) {
@@ -32,7 +35,7 @@ class List extends Component {
         data-id={model.id}
       >
         <i className='sort-handle fa fa-arrows'></i>
-        <span className='name' onClick={this._selectList}>
+        <span className='name' onClick={this._select}>
           {this._name()}
         </span>
         <div className='options'>
@@ -49,10 +52,23 @@ class List extends Component {
           <button className='toggle-is-private' onClick={this._toggleIsPrivate}>
             <i className={`fa fa-${model.isPrivate ? 'unlock-alt' : 'lock'}`}></i>
           </button>
-          <button className='remove' onClick={this._removeList}>
+          <button className='remove' onClick={this._attemptRemove}>
             <i className='fa fa-times'></i>
           </button>
         </div>
+        <ActionSheet
+          isShowing={this.attemptingRemove}
+          actions={[
+            {
+              label: 'Remove List',
+              handler: this._remove,
+            }, {
+              label: 'Cancel',
+              handler: this._cancelRemove,
+              type: 'cancel',
+            },
+          ]}
+        />
       </li>
     )
   }
@@ -74,14 +90,22 @@ class List extends Component {
     }
   }
 
-  _selectList = () => {
+  _select = () => {
     if (!this.props.isEditing) {
       this.props.onSelect(this.props.model)
     }
   }
 
-  _removeList = () => {
+  @action _attemptRemove = () => {
+    this.attemptingRemove = true
+  }
+
+  _remove = () => {
     this.props.onRemove(this.props.model)
+  }
+
+  @action _cancelRemove = () => {
+    this.attemptingRemove = false
   }
 
   @action _toggleEditing = () => {
