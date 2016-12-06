@@ -63,7 +63,7 @@ const shouldShowSettings = () => (
 )
 
 const SettingsModal = observer(() => (
-  <Modal className='auth-settings modal-form' isShowing={shouldShowSettings()}>
+  <Modal className='auth-settings light-box' isShowing={shouldShowSettings()}>
     <Settings />
   </Modal>
 ))

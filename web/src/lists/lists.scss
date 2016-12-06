@@ -5,64 +5,8 @@
 }
 
 .list {
-  @include options(2);
-
-  $owner-width: $unit * 4;
-
-  &.is-owner .options {
-    right: -($owner-width - $unit);
-    width: $owner-width;
-  }
-
-  &.is-owner.is-editing {
-    .name {
-      padding-right: $owner-width;
-    }
-
-    .options {
-      right: 0;
-      width: $owner-width + .5em;
-    }
-  }
-
-  .is-sorting &.is-owner .options {
-    right: -($owner-width);
-  }
-
-  .indicators {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap-reverse;
-    height: 100%;
-    justify-content: center;
-    position: absolute;
-    left: -0.8em;
-    top: 0;
-
-    i {
-      display: none;
-      font-size: 0.8em;
-      margin: 0.3em;
-    }
-
-    .shared-indicator {
-      color: $shared-color;
-    }
-
-    .is-private-indicator {
-      color: $private-color;
-    }
-  }
-
-  &.is-editing.shared .shared-indicator,
-  &.is-editing.is-private .is-private-indicator {
-    display: block;
-  }
-
-  .is-sorting &.is-editing.shared .shared-indicator,
-  .is-sorting &.is-editing.is-private .is-private-indicator {
-    display: none;
-  }
+  overflow: hidden;
+  position: relative;
 
   .name {
     border: solid transparent 0.2em;
@@ -79,19 +23,6 @@
     }
   }
 
-  .name input {
-    background: none;
-    border: none;
-    outline: none;
-    padding: 0;
-    text-overflow: ellipsis;
-    width: 100%;
-  }
-
-  &.is-focused .name {
-    border-color: $primary-color;
-  }
-
   .is-sorting &,
   &.gu-mirror {
     .name {
@@ -99,30 +30,103 @@
     }
   }
 
-  &.is-editing .name {
-    cursor: default;
-    padding-left: 0.5em;
+  .indicators {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+    right: $unit - 0.4em;
+    top: 0;
 
-    &:hover,
+    i {
+      color: lighten($neutral-color, 10%);
+      display: none;
+      font-size: 0.8em;
+      margin: 0.3em;
+    }
+  }
+
+  &.is-shared .is-shared-indicator,
+  &.is-private .is-private-indicator {
+    display: block;
+  }
+
+  .is-sorting &.is-shared .is-shared-indicator,
+  .is-sorting &.is-private .is-private-indicator {
+    display: none;
+  }
+
+  .edit-list {
+    @include buttonize-color(#b7b7b7);
+    @extend .icon-button;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    i {
+      transition: all .25s ease;
+    }
+  }
+}
+
+.list-editor {
+  fieldset {
+    padding: 0.6em 0.6em 0.1em;
+  }
+
+  input {
+    box-sizing: border-box;
+    margin-bottom: 0.6em;
+    padding: 0.6em 0.8em;
+    width: 100%;
+
     &:focus {
-      background: none;
+      outline: solid 3px $primary-color;
+    }
+  }
+
+  .list-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    button {
+      margin: 0.4em 2%;
+      width: 46%;
+    }
+
+    i {
+      margin-right: 0.4em;
     }
   }
 
   .toggle-shared {
     @include buttonize-background($shared-color);
-    display: none;
   }
 
   .toggle-is-private {
     @include buttonize-background($private-color);
   }
 
-  .options .remove {
+  .remove {
+    @include buttonize-background($error-color);
     display: none;
   }
 
-  &.is-owner .options .remove {
-    display: inline-block;
+  .is-owner .remove {
+    display: block;
+  }
+
+  .actions {
+    background: #e3e3e3;
+    border-top: solid 1px #c7c7c7;
+    padding: 0.4em;
+
+    button {
+      @include buttonize-background($action-color);
+    }
   }
 }

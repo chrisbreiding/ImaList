@@ -39,7 +39,6 @@
     button,
     span {
       @include buttonize-background($action-color, true);
-      border-radius: 3px;
       color: $light-color;
       margin-top: .5em;
       padding: .5em .75em;

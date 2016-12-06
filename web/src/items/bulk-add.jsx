@@ -33,7 +33,7 @@ class BulkAdd extends Component {
 }
 
 const BulkAddModal = (props) => (
-  <Modal className='bulk-add modal-form' isShowing={props.isShowing}>
+  <Modal className='bulk-add light-box' isShowing={props.isShowing}>
     <BulkAdd {...props} />
   </Modal>
 )

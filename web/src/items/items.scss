@@ -135,7 +135,7 @@
 
   textarea {
     box-sizing: border-box;
-    border: solid 3px lighten($neutral-color, 40%);
+    border: solid 1px #c7c7c7;
     color: $dark-color;
     display: block;
     font-size: 0.8em;
@@ -144,7 +144,7 @@
     width: 100%;
 
     &:focus {
-      border-color: $primary-color;
+      outline: solid 3px $primary-color;
     }
   }
 
