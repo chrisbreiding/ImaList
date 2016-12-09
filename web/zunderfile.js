@@ -1,4 +1,5 @@
 require('zunder').setConfig({
+  appCache: true,
   deployBranch: 'production',
   staticGlobs: {
     'static/**': '',
