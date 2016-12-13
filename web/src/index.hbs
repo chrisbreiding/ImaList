@@ -55,6 +55,12 @@
 <body>
   <div id="app"></div>
 
+  {{#unless isProd}}
+    <script>
+      window.env = '{{env.NODE_ENV}}'
+    </script>
+  {{/unless}}
+
   {{#each scripts}}
     <script src="{{this}}"></script>
   {{/each}}
