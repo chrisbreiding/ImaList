@@ -38,20 +38,24 @@ class Portal extends Component {
   }
 
   _enter () {
-    setTimeout(() => {
+    setTimeout(this._withElement(() => {
       this.element.className = 'has-entered'
-    }, 50)
+    }, 50))
   }
 
   _removeContainer () {
     if (!this.element) return
 
     this.element.className = ''
-    setTimeout(() => {
+    setTimeout(this._withElement(() => {
       unmountComponentAtNode(this.element)
       document.body.removeChild(this.element)
       this.element = null
-    }, 350)
+    }, 350))
+  }
+
+  _withElement (fn) {
+    if (this.element) fn()
   }
 
   render () {
