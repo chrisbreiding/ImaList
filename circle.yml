@@ -2,6 +2,11 @@ machine:
   node:
     version: 5.10.0
 
+general:
+  branches:
+    only:
+      - master
+
 dependencies:
   override:
     - npm install -g cypress-cli
