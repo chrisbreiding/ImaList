@@ -9,26 +9,47 @@ class BulkAdd extends Component {
   }
 
   render () {
+    const lotsOfSpaces = Array(40).join(' ')
+
     return (
       <div>
         <Textarea
           ref='bulkItems'
           minRows={5}
-          placeholder='Separate items with new lines...'
+          placeholder={`• Separate items with new lines${lotsOfSpaces}• Prefix with # to make a label`}
         />
         <footer className='actions'>
           <button className='cancel' onClick={this.props.onCancel}>
             Cancel
           </button>
+          <button className='format' onClick={this._format}>
+            Format
+          </button>
           <button
-            className='add'
-            onClick={() => this.props.onAdd(this.refs.bulkItems.value.split('\n'))}
+            className='submit'
+            onClick={this._add}
           >
             Add
           </button>
         </footer>
       </div>
     )
+  }
+
+  _format = () => {
+    const value = this.refs.bulkItems.value
+
+    this.refs.bulkItems.value = value.split('\n').map((line) => {
+      // strip non-word characters from beginning of lines
+      line = line.replace(/^\s*[^a-zA-Z#]+\s*/, '')
+      // clean up #s, which denote labels
+      line = line.replace(/^\s*#+\s*/, '# ')
+      return line
+    }).join('\n')
+  }
+
+  _add = () => {
+    this.props.onAdd(this.refs.bulkItems.value.split('\n'))
   }
 }
 

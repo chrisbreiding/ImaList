@@ -110,7 +110,14 @@ class ItemsStore {
     const startingOrder = this._newOrder(trailingCollapsed)
     const newItems = _(names)
       .reject((name) => !name.trim())
-      .map((name, index) => this._newItem({ name, order: startingOrder + index }))
+      .map((name, index) => {
+        let type = 'todo'
+        if (/^\s*#/.test(name)) {
+          type = 'label'
+          name = name.replace(/^\s*#+\s+/, '')
+        }
+        return this._newItem({ name, order: startingOrder + index, type })
+      })
       .value()
 
     this._reorder(trailingCollapsed, startingOrder + newItems.length)
