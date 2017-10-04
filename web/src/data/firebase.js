@@ -18,18 +18,16 @@ function getRef () {
 // App
 
 function init (appName, apiKey) {
-  if (appState.app) appState.app.delete()
+  const ready = appState.app ? appState.app.delete() : Promise.resolve()
 
-  try {
+  return ready.then(() => {
     return firebase.initializeApp({
       apiKey,
       authDomain: `${appName}.firebaseapp.com`,
       databaseURL: `https://${appName}.firebaseio.com`,
       storageBucket: `${appName}.appspot.com`,
     }, appName)
-  } catch (e) {
-    return null
-  }
+  })
 }
 
 // Auth
@@ -39,7 +37,7 @@ function getCurrentUser () {
 }
 
 function onAuthStateChanged (callback) {
-  getAuth.onAuthStateChanged(callback)
+  getAuth().onAuthStateChanged(callback)
 }
 
 function signIn (email, password) {
@@ -82,7 +80,7 @@ function stop (path) {
   if (path) {
     getRef().child(path).off()
   } else {
-    getRef.off()
+    getRef().off()
   }
 }
 

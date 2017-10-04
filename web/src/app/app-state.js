@@ -19,18 +19,20 @@ class AppState {
   @observable viewingSettings = false
 
   initializeFirebaseApp () {
-    this.app = firebase.init(this.appName, this.apiKey)
+    firebase.init(this.appName, this.apiKey).then(action('firebase:init', (app) => {
+      this.app = app
 
-    if (this.app) {
-      this.state = C.CONFIRMING_AUTH
-      try {
-        auth.listenForChange()
-      } catch (e) {
+      if (this.app) {
+        this.state = C.CONFIRMING_AUTH
+        try {
+          auth.listenForChange()
+        } catch (e) {
+          this.state = C.NEEDS_FIREBASE_CONFIG
+        }
+      } else {
         this.state = C.NEEDS_FIREBASE_CONFIG
       }
-    } else {
-      this.state = C.NEEDS_FIREBASE_CONFIG
-    }
+    }))
   }
 
   updateFirebaseSettings (appName, apiKey) {
