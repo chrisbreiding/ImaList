@@ -43,13 +43,8 @@ class Auth {
   }
 
   listenForChange () {
-    firebase.getAuth().onAuthStateChanged(action('auth:state:changed', () => {
+    firebase.onAuthStateChanged(action('auth:state:changed', () => {
       this._updateAuthStatus()
-      if (authState.isAuthenticated) {
-        appState.state = C.READY
-      } else {
-        appState.state = C.NEEDS_AUTH
-      }
     }))
   }
 
@@ -57,13 +52,19 @@ class Auth {
     const { uid, email } = this._firebaseUser() || {}
     authState.user = appState.app ? new User({ id: uid, email }) : new User()
     authState.isAuthenticated = appState.app ? this.isAuthenticated() : false
+
+    if (authState.isAuthenticated) {
+      appState.state = C.READY
+    } else {
+      appState.state = C.NEEDS_AUTH
+    }
   }
 
   login (email, password) {
     authState.attemptingLogin = true
     authState.loginFailed = false
 
-    firebase.getAuth().signInWithEmailAndPassword(email, password)
+    firebase.signIn(email, password)
     .then(action('login:succeeded', () => {
       authState.attemptingLogin = false
       authState.loginFailed = false
@@ -76,14 +77,14 @@ class Auth {
   }
 
   logout () {
-    firebase.getAuth().signOut().then(action('logged:out', () => {
+    firebase.signOut().then(action('logged:out', () => {
       authState.attemptingLogout = false
       this._updateAuthStatus()
     }))
   }
 
   _firebaseUser () {
-    return firebase.getAuth().currentUser
+    return firebase.getCurrentUser()
   }
 }
 

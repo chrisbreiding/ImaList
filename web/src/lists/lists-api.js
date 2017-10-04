@@ -14,22 +14,23 @@ class ListsApi {
 
   listen (callbacks) {
     this.callbacks = callbacks
-    firebase.getRef().child('lists').on('child_added', this._listAdded)
-    firebase.getRef().child('lists').on('child_changed', this._listUpdated)
-    firebase.getRef().child('lists').on('child_removed', this._listRemoved)
-    firebase.getRef().once('value', this._dataLoaded)
+
+    firebase.whenever('lists', 'child_added', this._listAdded)
+    firebase.whenever('lists', 'child_changed', this._listUpdated)
+    firebase.whenever('lists', 'child_removed', this._listRemoved)
+    firebase.whenLoaded().then(this._dataLoaded)
   }
 
-  @action _listAdded = (childSnapshot) => {
-    this.callbacks.onAdd(childSnapshot.key, childSnapshot.val())
+  @action _listAdded = ({ id, value: list }) => {
+    this.callbacks.onAdd(id, list)
   }
 
-  @action _listUpdated = (childSnapshot) => {
-    this.callbacks.onUpdate(childSnapshot.key, childSnapshot.val())
+  @action _listUpdated = ({ id, value: list }) => {
+    this.callbacks.onUpdate(id, list)
   }
 
-  @action _listRemoved = (childSnapshot) => {
-    this.callbacks.onRemove(childSnapshot.key)
+  @action _listRemoved = ({ id, value: list }) => {
+    this.callbacks.onRemove(id, list)
   }
 
   @action _dataLoaded = () => {
@@ -37,19 +38,19 @@ class ListsApi {
   }
 
   stopListening () {
-    firebase.getRef().off()
+    firebase.stop()
   }
 
-  addList (list, cb) {
-    return firebase.getRef().child('lists').push(list, cb)
+  addList (list) {
+    return firebase.add('lists', list)
   }
 
   updateList (list) {
-    firebase.getRef().child(`lists/${list.id}`).update(list)
+    firebase.update(`lists/${list.id}`, list)
   }
 
   removeList (list) {
-    firebase.getRef().child(`lists/${list.id}`).remove()
+    firebase.remove(`lists/${list.id}`)
   }
 }
 

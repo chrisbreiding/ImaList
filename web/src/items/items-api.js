@@ -25,37 +25,38 @@ class ItemsApi {
 
   listen (callbacks) {
     this.callbacks = callbacks
-    firebase.getRef().child(`lists/${this.listId}/items`).on('child_added', this._itemAdded)
-    firebase.getRef().child(`lists/${this.listId}/items`).on('child_changed', this._itemUpdated)
-    firebase.getRef().child(`lists/${this.listId}/items`).on('child_removed', this._itemRemoved)
+    firebase.whenever(`lists/${this.listId}/items`, 'child_added', this._itemAdded)
+    firebase.whenever(`lists/${this.listId}/items`, 'child_added', this._itemAdded)
+    firebase.whenever(`lists/${this.listId}/items`, 'child_changed', this._itemUpdated)
+    firebase.whenever(`lists/${this.listId}/items`, 'child_removed', this._itemRemoved)
   }
 
-  @action _itemAdded = (childSnapshot) => {
-    this.callbacks.onAdd(childSnapshot.key, childSnapshot.val())
+  @action _itemAdded = ({ id, value: item }) => {
+    this.callbacks.onAdd(id, item)
   }
 
-  @action _itemUpdated = (childSnapshot) => {
-    this.callbacks.onUpdate(childSnapshot.key, childSnapshot.val())
+  @action _itemUpdated = ({ id, value: item }) => {
+    this.callbacks.onUpdate(id, item)
   }
 
-  @action _itemRemoved = (childSnapshot) => {
-    this.callbacks.onRemove(childSnapshot.key, childSnapshot.val())
+  @action _itemRemoved = ({ id, value: item }) => {
+    this.callbacks.onRemove(id, item)
   }
 
   stopListening () {
-    firebase.getRef().child(`lists/${this.listId}/items`).off()
+    firebase.stop(`lists/${this.listId}/items`)
   }
 
-  addItem (item, cb) {
-    return firebase.getRef().child(`lists/${this.listId}/items`).push(item, cb)
+  addItem (item) {
+    return firebase.add(`lists/${this.listId}/items`, item)
   }
 
   updateItem (item) {
-    firebase.getRef().child(`lists/${this.listId}/items/${item.id}`).update(item)
+    firebase.update(`lists/${this.listId}/items/${item.id}`, item)
   }
 
   removeItem (item) {
-    firebase.getRef().child(`lists/${this.listId}/items/${item.id}`).remove()
+    firebase.remove(`lists/${this.listId}/items/${item.id}`)
   }
 }
 

@@ -1,28 +1,23 @@
 import { action } from 'mobx'
-import Promise from 'bluebird/js/browser/bluebird.core'
 
 import firebase from '../data/firebase'
 
 class UsersApi {
   fetchUsersData () {
-    return new Promise((resolve) => {
-      firebase.getRef().child('users').once('value', (childSnapshot) => {
-        resolve(childSnapshot.val())
-      })
-    })
+    return firebase.when('users', 'value')
   }
 
   listen ({ onUpdate }) {
-    firebase.getRef().child('users').on('value', action('users:updated', (childSnapshot) => {
-      onUpdate(childSnapshot.val())
+    firebase.whenever('users', 'value', action('users:updated', ({ value: users }) => {
+      onUpdate(users)
     }))
-    firebase.getRef().child('users').on('child_removed', () => {
+    firebase.whenever('users', 'child_removed', action('users:removed', () => {
       onUpdate({})
-    })
+    }))
   }
 
   updateUser (user) {
-    firebase.getRef().child(`users/${user.id}`).update(user)
+    firebase.update(`users/${user.id}`, user)
   }
 }
 

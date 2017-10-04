@@ -99,8 +99,8 @@ class ItemsStore {
     const newItem = this._newItem({ order, type })
 
     this._reorder(reorderItems, order + 1)
-    const newRef = this.itemsApi.addItem(newItem, action('added:item', () => {
-      appState.editingItemId = newRef.key
+    this.itemsApi.addItem(newItem, action('added:item', (id) => {
+      appState.editingItemId = id
     }))
   }
 

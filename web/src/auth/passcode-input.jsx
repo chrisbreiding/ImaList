@@ -58,7 +58,10 @@ class PasscodeInput extends Component {
   }
 
   focus = () => {
-    this.refs[`passcode${this._focusIndex()}`].focus()
+    const el = this.refs[`passcode${this._focusIndex()}`]
+    if (el) {
+      el.focus()
+    }
   }
 
   _focusIndex () {
