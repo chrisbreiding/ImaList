@@ -12,19 +12,29 @@ class Portal extends Component {
   }
 
   componentWillUnmount () {
-    this._removeContainer()
+    this._unmount()
+  }
+
+  componentDidMount () {
+    if (this.props.isShowing) {
+      this._mount()
+    }
   }
 
   componentDidUpdate ({ isShowing: wasShowing }) {
     if (!wasShowing && this.props.isShowing) {
-      this._findOrCreateContainer()
-      render(this.props.children, this.element)
-      this._enter()
+      this._mount()
     }
 
     if (wasShowing && !this.props.isShowing) {
-      this._removeContainer()
+      this._unmount()
     }
+  }
+
+  _mount () {
+    this._findOrCreateContainer()
+    render(this.props.children, this.element)
+    this._enter()
   }
 
   _findOrCreateContainer () {
@@ -43,7 +53,7 @@ class Portal extends Component {
     }, 50))
   }
 
-  _removeContainer () {
+  _unmount () {
     if (!this.element) return
 
     this.element.className = ''
