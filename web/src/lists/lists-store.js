@@ -1,12 +1,12 @@
 import _ from 'lodash'
-import { action, computed, map, observable } from 'mobx'
+import { action, computed, observable } from 'mobx'
 
 import authState from '../auth/auth-state'
 import List from './list-model'
 import ListsApi from './lists-api'
 
 class ListsStore {
-  @observable _lists = map()
+  @observable _lists = observable.map()
   @observable editingListId = null
   @observable isLoading = false
   @observable selectedListId = null

@@ -1,18 +1,18 @@
 import _ from 'lodash'
-import { action, computed, map, observable } from 'mobx'
+import { action, computed, observable } from 'mobx'
 
 import appState from '../app/app-state'
 import Item from './item-model'
 import ItemsApi from './items-api'
 
 class ItemsStore {
-  @observable _items = map()
+  @observable _items = observable.map()
   @observable _collapsed
 
   constructor (listId) {
     this.listId = listId
     this.itemsApi = new ItemsApi(listId)
-    this._collapsed = map(this.itemsApi.fetchCollapsed())
+    this._collapsed = observable.map(this.itemsApi.fetchCollapsed())
   }
 
   @computed get items () {
@@ -190,7 +190,7 @@ class ItemsStore {
   }
 
   expandAll () {
-    this._collapsed = map()
+    this._collapsed = observable.map()
     this._saveCollapsed()
   }
 

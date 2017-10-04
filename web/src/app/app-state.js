@@ -1,4 +1,4 @@
-import { asReference, observable } from 'mobx'
+import { action, observable } from 'mobx'
 
 import auth from '../auth/auth'
 import C from '../data/constants'
@@ -6,7 +6,7 @@ import firebase from '../data/firebase'
 import localStore from '../data/local-store'
 
 class AppState {
-  @observable app = asReference(null)
+  @observable.ref app = null
   @observable appName = localStore.get('appName') || 'imalist'
   @observable apiKey = localStore.get('apiKey')
   @observable attemptingClearCompleted = false
