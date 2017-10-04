@@ -66,8 +66,4 @@ class SortableList extends Component {
   }
 }
 
-SortableList.propTypes = {
-  onSortingUpdate: React.PropTypes.func.isRequired,
-}
-
 export default SortableList
