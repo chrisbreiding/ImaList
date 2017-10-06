@@ -23,7 +23,6 @@ function init (projectId, apiKey) {
   return ready.then(() => {
     const app = firebase.initializeApp({
       apiKey,
-      authDomain: `${projectId}.firebaseapp.com`,
       projectId,
     })
 
