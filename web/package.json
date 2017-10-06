@@ -19,7 +19,7 @@
     "classnames": "^2.2.3",
     "dragula": "^3.6.8",
     "fastclick": "^1.0.6",
-    "firebase": "^3.6.0",
+    "firebase": "^4.5.0",
     "font-awesome": "^4.7.0",
     "lodash": "^4.8.2",
     "md5": "^2.2.1",

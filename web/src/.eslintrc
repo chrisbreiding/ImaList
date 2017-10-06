@@ -1,7 +1,10 @@
 {
   "env": {
     "browser": true,
-    "commonjs": true,
+    "commonjs": true
+  },
+  "globals": {
+    "Promise": true
   },
   "parser": "babel-eslint",
   "parserOptions": {

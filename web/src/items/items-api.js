@@ -25,10 +25,11 @@ class ItemsApi {
 
   listen (callbacks) {
     this.callbacks = callbacks
-    firebase.whenever(`lists/${this.listId}/items`, 'child_added', this._itemAdded)
-    firebase.whenever(`lists/${this.listId}/items`, 'child_added', this._itemAdded)
-    firebase.whenever(`lists/${this.listId}/items`, 'child_changed', this._itemUpdated)
-    firebase.whenever(`lists/${this.listId}/items`, 'child_removed', this._itemRemoved)
+    this._stopListening = firebase.watchCollection(`lists/${this.listId}/items`, {
+      added: this._itemAdded,
+      modified: this._itemUpdated,
+      removed: this._itemRemoved,
+    })
   }
 
   @action _itemAdded = ({ id, value: item }) => {
@@ -44,7 +45,7 @@ class ItemsApi {
   }
 
   stopListening () {
-    firebase.stop(`lists/${this.listId}/items`)
+    this._stopListening && this._stopListening()
   }
 
   addItem (item) {

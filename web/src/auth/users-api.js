@@ -1,19 +1,14 @@
-import { action } from 'mobx'
-
 import firebase from '../data/firebase'
 
 class UsersApi {
-  fetchUsersData () {
-    return firebase.when('users', 'value')
+  fetchUsersData (userId) {
+    return firebase.when(`users/${userId}`)
   }
 
-  listen ({ onUpdate }) {
-    firebase.whenever('users', 'value', action('users:updated', ({ value: users }) => {
-      onUpdate(users)
-    }))
-    firebase.whenever('users', 'child_removed', action('users:removed', () => {
-      onUpdate({})
-    }))
+  listen (userId, callback) {
+    firebase.watchDoc(`users/${userId}`, ({ value: user }) => {
+      callback(user)
+    })
   }
 
   updateUser (user) {

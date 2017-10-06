@@ -75,7 +75,6 @@ class ListsStore {
       order,
       owner,
       name: '',
-      items: {},
       shared: false,
     }
   }

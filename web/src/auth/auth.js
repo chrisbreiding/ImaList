@@ -18,17 +18,14 @@ class Auth {
   }
 
   fetchUserData () {
-    return this.usersApi.fetchUsersData().then(this._setUserPasscode)
+    return this.usersApi.fetchUsersData(authState.user.id).then(this._setUserPasscode)
   }
 
   listenForUserDataChanges () {
-    this.usersApi.listen({
-      onUpdate: this._setUserPasscode,
-    })
+    this.usersApi.listen(authState.user.id, this._setUserPasscode)
   }
 
-  @action _setUserPasscode = (users) => {
-    const user = users && users[authState.user.id]
+  @action _setUserPasscode = (user) => {
     authState.user.hashedPasscode = user ? user.hashedPasscode : undefined
   }
 

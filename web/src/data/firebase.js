@@ -1,7 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
-import Promise from 'bluebird/js/browser/bluebird.core'
+import 'firebase/firestore'
 
 import appState from '../app/app-state'
 
@@ -11,22 +11,28 @@ function getAuth () {
   return appState.app.auth()
 }
 
-function getRef () {
-  return appState.app.database().ref()
+function getDb () {
+  return firebase.firestore()
 }
 
 // App
 
-function init (appName, apiKey) {
+function init (projectId, apiKey) {
   const ready = appState.app ? appState.app.delete() : Promise.resolve()
 
   return ready.then(() => {
-    return firebase.initializeApp({
+    const app = firebase.initializeApp({
       apiKey,
-      authDomain: `${appName}.firebaseapp.com`,
-      databaseURL: `https://${appName}.firebaseio.com`,
-      storageBucket: `${appName}.appspot.com`,
-    }, appName)
+      authDomain: `${projectId}.firebaseapp.com`,
+      projectId,
+    })
+
+    return firebase.firestore().enablePersistence()
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.log('Failed to enable offline persistence:', err)
+    })
+    .then(() => app)
   })
 }
 
@@ -50,60 +56,68 @@ function signOut () {
 
 // Events
 
-function when (path, event) {
-  return new Promise((resolve) => {
-    getRef().child(path).once(event, (snapshot) => {
-      resolve({
-        id: snapshot.key,
-        value: snapshot.val(),
-      })
+function watchDoc (path, callback) {
+  return getDb().doc(path).onSnapshot((snapshot) => {
+    if (!snapshot.exists) return
+
+    callback({
+      id: snapshot.id,
+      value: snapshot.data(),
     })
   })
 }
 
-function whenever (path, event, callback) {
-  getRef().child(path).on(event, (snapshot) => {
-    callback({
-      id: snapshot.key,
-      value: snapshot.val(),
+function watchCollection (path, callbacks) {
+  return getDb().collection(path).onSnapshot((snapshot) => {
+    snapshot.docChanges.forEach((change) => {
+      if (callbacks[change.type]) {
+        callbacks[change.type]({
+          id: change.doc.id,
+          value: change.doc.data(),
+        })
+      }
     })
+  })
+}
+
+// db.collection("users").get().then((snapshot) => {
+//     snapshot.forEach((doc) => {
+//         console.log(`${doc.id} => ${doc.data()}`);
+//     });
+// });
+
+function when (path) {
+  return getDb().doc(path).get().then((snapshot) => {
+    if (!snapshot.exists) return
+
+    return {
+      id: snapshot.key,
+      value: snapshot.data(),
+    }
   })
 }
 
 function whenLoaded () {
-  return new Promise((resolve) => {
-    getRef().once('value', resolve)
-  })
-}
-
-function stop (path) {
-  if (path) {
-    getRef().child(path).off()
-  } else {
-    getRef().off()
-  }
+  return Promise.all([
+    getDb().collection('lists').get(),
+    getDb().collection('users').get(),
+  ])
 }
 
 // Data
 
 function add (path, value) {
-  return new Promise((resolve) => {
-    const newRef = getRef().child(path).push(value, () => {
-      resolve(newRef.key)
-    })
+  return getDb().collection(path).add(value).then((docRef) => {
+    return docRef.id
   })
 }
 
 function remove (path) {
-  return new Promise((resolve) => {
-    getRef().child(path).remove(resolve)
-  })
+  return getDb().doc(path).delete()
 }
 
 function update (path, value) {
-  return new Promise((resolve) => {
-    getRef().child(path).update(value, resolve)
-  })
+  return getDb().doc(path).set(value, { merge: true })
 }
 
 
@@ -115,10 +129,10 @@ const api = {
   signIn,
   signOut,
 
+  watchCollection,
+  watchDoc,
   when,
-  whenever,
   whenLoaded,
-  stop,
 
   add,
   remove,
@@ -134,7 +148,7 @@ export default api
 /**
 This API
 
-  #init(appName, apiKey)
+  #init(projectId, apiKey)
   > firebase.App
   #getCurrentUser()
   > firebase.User
@@ -145,10 +159,9 @@ This API
   > Promise
   #when(path, event)
   > Promise
-  #whenever(path, event, callback)
+  #whenever(path, callbacks)
   #whenLoaded()
   > Promise
-  #stop(path?)
   #add(path, value)
   > Promise
   #remove(path)
@@ -158,7 +171,7 @@ This API
 
 Firebase API
 
-  #initializeApp(appDetails, appName)
+  #initializeApp(appDetails, projectId)
   > firebase.App
     #delete()
     #auth()

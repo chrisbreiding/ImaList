@@ -15,9 +15,11 @@ class ListsApi {
   listen (callbacks) {
     this.callbacks = callbacks
 
-    firebase.whenever('lists', 'child_added', this._listAdded)
-    firebase.whenever('lists', 'child_changed', this._listUpdated)
-    firebase.whenever('lists', 'child_removed', this._listRemoved)
+    this._stopListening = firebase.watchCollection('lists', {
+      added: this._listAdded,
+      modified: this._listUpdated,
+      removed: this._listRemoved,
+    })
     firebase.whenLoaded().then(this._dataLoaded)
   }
 
@@ -38,7 +40,7 @@ class ListsApi {
   }
 
   stopListening () {
-    firebase.stop()
+    this._stopListening && this._stopListening()
   }
 
   addList (list) {
