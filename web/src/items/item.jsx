@@ -1,4 +1,5 @@
 import cs from 'classnames'
+import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
@@ -7,24 +8,17 @@ import Name from './name'
 
 @observer
 export default class Item extends Component {
-  constructor (props) {
-    super(props)
+  @observable isEditing = false
+  @observable showingOptions = false
 
-    this.state = {
-      isEditing: false,
-      showingOptions: false,
-    }
-  }
-
-  componentDidUpdate () {
-    if (this.props.isEditing && !this.state.isEditing) {
-      this.setState({ isEditing: true }, () => {
-        this.refs.name.focus()
-      })
+  @action componentDidUpdate () {
+    if (this.props.isEditing && !this.isEditing) {
+      this.isEditing = true
+      this.refs.name.focus()
     }
 
-    if (!this.props.isEditing && this.state.isEditing) {
-      this.setState({ isEditing: false })
+    if (!this.props.isEditing && this.isEditing) {
+      this.isEditing = false
     }
   }
 
@@ -36,7 +30,7 @@ export default class Item extends Component {
         className={cs('item', `type-${type}`, {
           'is-checked': this.props.model.isChecked,
           'is-collapsed': this.props.isCollapsed,
-          'showing-options': this.state.showingOptions,
+          'showing-options': this.showingOptions,
         })}
         data-id={this.props.model.id}
       >
@@ -85,12 +79,9 @@ export default class Item extends Component {
     this.props.onToggleCollapsed(this.props.model)
   }
 
-  _onEditingStatusChange = (isEditing) => {
+  @action _onEditingStatusChange = (isEditing) => {
     this.props.onEdit(this.props.model, isEditing)
-
-    this.setState({
-      showingOptions: false,
-    })
+    this.showingOptions = false
   }
 
   _updateName = (name) => {
@@ -100,8 +91,8 @@ export default class Item extends Component {
     })
   }
 
-  _toggleOptions = () => {
-    this.setState({ showingOptions: !this.state.showingOptions })
+  @action _toggleOptions = () => {
+    this.showingOptions = !this.showingOptions
   }
 
   _remove = () => {
