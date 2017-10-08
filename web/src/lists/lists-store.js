@@ -61,7 +61,7 @@ class ListsStore {
     const lists = this.lists
     const order = lists.length ? Math.max(..._.map(lists, 'order')) + 1 : 0
     const newList = this._newList({ order, owner: authState.user.email })
-    this.listsApi.addList(newList, action('added:list', (id) => {
+    this.listsApi.addList(newList).then(action('added:list', (id) => {
       this.editList({ id })
     }))
   }
