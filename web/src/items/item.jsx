@@ -3,9 +3,19 @@ import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
+import { DragSource, DropTarget } from 'react-dnd'
 
 import Name from './name'
+import { sortableSource, sortableTarget } from '../lib/sortable-list'
 
+@DropTarget('sortable-item', sortableTarget, (connect) => ({
+  connectDropTarget: connect.dropTarget(),
+}))
+@DragSource('sortable-item', sortableSource, (connect, monitor) => ({
+  connectDragPreview: connect.dragPreview(),
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging(),
+}))
 @observer
 export default class Item extends Component {
   @observable isEditing = false
@@ -25,14 +35,20 @@ export default class Item extends Component {
   render () {
     const type = this.props.model.type || 'todo'
 
-    return (
+    const {
+      connectDragPreview,
+      // isDragging,
+      connectDragSource,
+      connectDropTarget,
+    } = this.props
+
+    return connectDragPreview(connectDropTarget(
       <li
         className={cs('item', `type-${type}`, {
           'is-checked': this.props.model.isChecked,
           'is-collapsed': this.props.isCollapsed,
           'showing-options': this.showingOptions,
         })}
-        data-id={this.props.model.id}
       >
         <Name
           ref='name'
@@ -54,7 +70,7 @@ export default class Item extends Component {
         >
           <i className='fa fa-caret-down'></i>
         </button>
-        <i className='sort-handle fa fa-arrows'></i>
+        {connectDragSource(<i className='sort-handle fa fa-arrows'></i>)}
         <div className='options'>
           <button className='toggle-options' onClick={this._toggleOptions}>
             <i className='fa fa-ellipsis-h'></i>
@@ -64,7 +80,7 @@ export default class Item extends Component {
           </button>
         </div>
       </li>
-    )
+    ))
   }
 
   _toggleChecked = () => {

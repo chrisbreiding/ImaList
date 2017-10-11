@@ -19,27 +19,29 @@ class ListsList extends Component {
 
     return (
       <SortableList
-        el='ul'
         handleClass='sort-handle'
         onSortingUpdate={(ids) => {
           _.each(ids, (id, order) => this._updateList({ id, order }))
         }}
-      >
-        {_.map(this.props.listsStore.lists, (list) => (
+        items={this.props.listsStore.lists}
+        renderItem={(list, index, onMove) => (
           <List
             key={list.id}
+            id={list.id}
+            index={index}
             model={list}
             isOwner={list.owner === authState.user.email}
             isEditing={list.id === this.props.listsStore.editingListId}
             isSelected={list.id === this.props.listsStore.selectedListId}
             onEdit={this._editList}
+            onMove={onMove}
             onSelect={this._goToList}
             onUpdate={this._updateList}
             onUpdatePrivacy={this._updateListPrivacy}
             onRemove={this._removeList}
           />
-        ))}
-      </SortableList>
+        )}
+      />
     )
   }
 

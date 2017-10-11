@@ -27,24 +27,27 @@ class ItemsList extends Component {
     return (
       <SortableList
         ref='list'
-        el='ul'
         handleClass='sort-handle'
         onSortingUpdate={this._updateSorting}
-      >
-        {_.map(this.props.itemsStore.items, (item, index) => (
+        items={this.props.itemsStore.items}
+        renderItem={(item, index, onMove) => (
           <Item
             ref={item.id}
             key={item.id}
+            id={item.id}
+            index={index}
             model={item}
             isEditing={item.id === appState.editingItemId}
             isCollapsed={this.props.itemsStore.isCollapsed(item)}
             onEdit={this._editItem}
+            onMove={onMove}
             onUpdate={this._updateItem}
             onRemove={this._attemptRemoveItem}
             onNext={() => this._next(index)}
             onToggleCollapsed={this._toggleCollapsed}
-          ></Item>
-        ))}
+          />
+        )}
+      >
         <ActionSheet
           isShowing={!!this.attempingRemoveLabel}
           actions={[

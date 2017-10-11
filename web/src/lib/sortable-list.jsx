@@ -1,68 +1,71 @@
 import _ from 'lodash'
-import dragula from 'dragula'
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
-function idsAndIndex (els, el) {
-  const ids = _.map(els, 'dataset.id')
-  const index = _.findIndex(ids, _.partial(_.isEqual, el.dataset.id))
+export const sortableSource = {
+  beginDrag ({ id, index }) {
+    return { id, index }
+  },
 
-  return { ids, index }
+  // endDrag
 }
 
+export const sortableTarget = {
+  hover (props, monitor, component) {
+    const dragIndex = monitor.getItem().index
+    const hoverIndex = props.index
+
+    // don't replace items with themselves
+    if (dragIndex === hoverIndex) return
+
+    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect()
+    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+    const clientOffset = monitor.getClientOffset()
+    const hoverClientY = clientOffset.y - hoverBoundingRect.top
+
+    // only perform the move when the mouse has crossed half of the items height
+    // when dragging downwards, only move when the cursor is below 50%
+    // when dragging upwards, only move when the cursor is above 50%
+
+    // dragging downwards
+    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return
+    // dragging upwards
+    if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return
+
+    props.onMove(dragIndex, hoverIndex)
+
+    // note: we're mutating the monitor item here!
+    // generally it's better to avoid mutations,
+    // but it's good here for the sake of performance
+    // to avoid expensive index searches.
+    monitor.getItem().index = hoverIndex
+  },
+}
+
+@DragDropContext(HTML5Backend)
 class SortableList extends Component {
-  componentDidMount () {
-    this._setupSorting()
-  }
-
-  componentWillUnmount () {
-    this._tearDownSorting()
-  }
-
-  _setupSorting () {
-    this._tearDownSorting()
-    let originalIndex = null
-    this.drake = dragula([findDOMNode(this.refs.list)], {
-      moves: (el, container, handle) => {
-        if (!this.props.handleClass) return true
-
-        let handleEl = handle
-        while (handleEl !== el) {
-          if (this._hasHandleClass(handleEl)) return true
-          handleEl = handleEl.parentElement
-        }
-        return false
-      },
-    }).on('drag', (el, container) => {
-      originalIndex = idsAndIndex(container.children, el).index
-    }).on('drop', (el, container) => {
-      const ref = idsAndIndex(container.children, el)
-      const ids = ref.ids
-      const index = ref.index
-
-      if (originalIndex === container.children.length - 1) {
-        container.appendChild(el)
-      } else if (index < originalIndex) {
-        container.insertBefore(el, container.children[originalIndex + 1])
-      } else {
-        container.insertBefore(el, container.children[originalIndex])
-      }
-      this.props.onSortingUpdate(ids, el.dataset.id)
-    })
-  }
-
-  _hasHandleClass (el) {
-    return el.className.indexOf(this.props.handleClass) >= 0
-  }
-
-  _tearDownSorting () {
-    if (this.drake) {
-      this.drake.destroy()
-    }
-  }
-
   render () {
-    return React.createElement(this.props.el || 'div', { ref: 'list' }, this.props.children)
+    const { items, renderItem } = this.props
+
+    return (
+      <ul>
+        {items.map((item, index) => (
+          renderItem(item, index, this._onMove)
+        ))}
+        {this.props.children}
+      </ul>
+    )
+  }
+
+  _onMove = (fromIndex, toIndex) => {
+    const { items } = this.props
+    const ids = _.map(items, 'id')
+    const movedId = ids[fromIndex]
+    ids.splice(toIndex, 0, ids.splice(fromIndex, 1)[0])
+
+    this.props.onSortingUpdate(ids, movedId)
   }
 }
 

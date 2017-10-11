@@ -2,16 +2,33 @@ import cs from 'classnames'
 import { action } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { DragSource, DropTarget } from 'react-dnd'
 
 import ListEditor from './list-editor'
+import { sortableSource, sortableTarget } from '../lib/sortable-list'
 
+@DropTarget('sortable-list', sortableTarget, (connect) => ({
+  connectDropTarget: connect.dropTarget(),
+}))
+@DragSource('sortable-list', sortableSource, (connect, monitor) => ({
+  connectDragPreview: connect.dragPreview(),
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging(),
+}))
 @observer
 class List extends Component {
   render () {
-    const { model } = this.props
+    const {
+      connectDragPreview,
+      connectDragSource,
+      connectDropTarget,
+      isDragging,
+      model,
+    } = this.props
 
-    return (
+    return connectDragPreview(connectDropTarget(
       <li
+        style={{ opacity: isDragging ? 0.5 : 1 }}
         className={cs({
           'list': true,
           'is-shared': model.shared,
@@ -19,9 +36,8 @@ class List extends Component {
           'is-owner': this.props.isOwner,
           'is-selected': this.props.isSelected,
         })}
-        data-id={model.id}
       >
-        <i className='sort-handle fa fa-arrows'></i>
+        {connectDragSource(<i className='sort-handle fa fa-arrows'></i>)}
         <span className='name' onClick={this._select}>
           {this.props.model.name}
         </span>
@@ -43,7 +59,7 @@ class List extends Component {
           onClose={this._closeEditor}
         />
       </li>
-    )
+    ))
   }
 
   _select = () => {
