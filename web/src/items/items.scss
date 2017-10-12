@@ -19,10 +19,6 @@
   right: 0;
   text-align: right;
 
-  .is-sorting & {
-    width: auto;
-  }
-
   span {
     font-size: 0.8em;
   }
@@ -55,7 +51,7 @@
   .toggle-checked,
   .toggle-collapsed {
     @extend .icon-button;
-    left: 0;
+    left: 0.5em;
     position: absolute;
     top: 0;
   }
@@ -87,7 +83,7 @@
     line-height: 1.5;
     min-height: $unit;
     outline: none;
-    padding: .4em $unit - 0.2em;
+    padding: 0.4em $unit - 0.2em 0.4em $unit + 0.4em;
     text-overflow: ellipsis;
     transition: all .25s ease;
     width: 100%;
@@ -105,14 +101,6 @@
     .name {
       background-color: #F8F8FF;
       font-weight: bold;
-    }
-  }
-
-  .is-sorting &,
-  .sorting-helper & {
-    .toggle-checked,
-    .toggle-collapsed {
-      left: -($unit);
     }
   }
 

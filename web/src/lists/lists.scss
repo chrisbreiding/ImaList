@@ -14,7 +14,7 @@
     cursor: pointer;
     line-height: $unit - 0.4em;
     overflow: hidden;
-    padding: 0 ($unit - 0.2em) 0 0.5em;
+    padding: 0 ($unit - 0.2em) 0 1em;
     text-overflow: ellipsis;
     transition: all .25s ease;
 
@@ -25,14 +25,6 @@
 
     .is-dragging &:hover {
       background: none;
-    }
-  }
-
-
-  .is-sorting &,
-  .sorting-helper & {
-    .name {
-      padding-left: $unit;
     }
   }
 
@@ -58,11 +50,6 @@
   .is-shared & .is-shared-indicator,
   .is-private & .is-private-indicator {
     display: block;
-  }
-
-  .is-sorting .is-shared & .is-shared-indicator,
-  .is-sorting .is-private & .is-private-indicator {
-    display: none;
   }
 
   .edit-list {

@@ -65,7 +65,6 @@
       text-align: left;
 
       i {
-        -webkit-transform: rotate(90deg);
         transform: rotate(90deg);
       }
     }
@@ -76,7 +75,20 @@
     }
   }
 
-  .is-sorting & .options {
-    right: -($full-width);
+  .sorting-helper & {
+    .name {
+      padding-right: 1em;
+    }
+
+    .toggle-options {
+      i {
+        transform: none;
+      }
+    }
+
+    .options {
+      right: -($full-width - $unit);
+      width: $full-width;
+    }
   }
 }

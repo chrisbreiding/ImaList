@@ -118,21 +118,13 @@ header {
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
-    display: inline-block;
+    display: block;
     height: $unit;
     line-height: $unit;
     position: absolute;
     text-align: center;
-    top: -($unit);
-    transition: all .25s ease;
-    width: $unit;
-  }
-
-  .is-sorting &,
-  .sorting-helper & {
-    .sort-handle {
-      top: 0;
-    }
+    top: 0;
+    width: 1em;
   }
 
   .name {
@@ -147,10 +139,6 @@ header {
     border: solid 1px darken($light-color, 20%);
     transform: rotate(-2deg);
     opacity: 0.8;
-
-    .options {
-      display: none;
-    }
   }
 }
 

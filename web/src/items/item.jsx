@@ -7,7 +7,7 @@ import { SortableElement, SortableHandle } from 'react-sortable-hoc'
 
 import Name from './name'
 
-const SortHandle = SortableHandle(() => <i className='sort-handle fa fa-arrows'></i>)
+const SortHandle = SortableHandle(() => <i className='sort-handle fa fa-ellipsis-v'></i>)
 
 @observer
 class Item extends Component {

@@ -1,4 +1,3 @@
-import cs from 'classnames'
 import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
@@ -10,16 +9,11 @@ import Settings from '../app/settings'
 
 @observer
 class Lists extends Component {
-  @observable isSorting = false
-
   render () {
     return (
-      <div className={cs('lists', { 'is-sorting': this.isSorting })}>
+      <div className='lists'>
         <header className='fixed'>
           <h1>ImaList</h1>
-          <button className='edit' onClick={this._toggleSorting}>
-            {this.isSorting ? <span>Done</span> : <i className='fa fa-sort'></i>}
-          </button>
         </header>
         <ListsList listsStore={this.props.listsStore} />
         <footer>
@@ -44,10 +38,6 @@ class Lists extends Component {
 
   @action _addList = () => {
     this.props.listsStore.addList()
-  }
-
-  @action _toggleSorting = () => {
-    this.isSorting = !this.isSorting
   }
 
   @action _showSettings = () => {
