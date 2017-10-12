@@ -38,37 +38,9 @@
     }
   }
 
-  .list-container,
-  .item-container {
-    .sort-handle {
-      top: 0;
-    }
-  }
-
-  .list-container {
-    span.name {
-      padding-left: $unit;
-    }
-
-    .showing-options & .sort-handle  {
-      top: -($unit);
-    }
-  }
-
   .items {
     footer {
       padding-right: $list-width;
-    }
-  }
-
-  .item-container {
-    .toggle-checked,
-    .toggle-collapsed {
-      left: $unit;
-    }
-
-    .name {
-      padding-left: $unit * 2
     }
   }
 }
