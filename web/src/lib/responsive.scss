@@ -38,19 +38,19 @@
     }
   }
 
-  .list,
-  .item {
+  .list-container,
+  .item-container {
     .sort-handle {
       top: 0;
     }
   }
 
-  .list {
+  .list-container {
     span.name {
       padding-left: $unit;
     }
 
-    &.showing-options .sort-handle  {
+    .showing-options & .sort-handle  {
       top: -($unit);
     }
   }
@@ -61,7 +61,7 @@
     }
   }
 
-  .item {
+  .item-container {
     .toggle-checked,
     .toggle-collapsed {
       left: $unit;

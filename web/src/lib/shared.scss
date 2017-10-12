@@ -103,8 +103,15 @@ header {
   left: 100%;
 }
 
-.list,
-.item {
+.list.sorting-helper,
+.item.sorting-helper {
+  z-index: 9999;
+}
+
+.list-container,
+.item-container {
+  width: 100%;
+
   .sort-handle {
     color: #b7b7b7;
     cursor: move;
@@ -122,7 +129,7 @@ header {
   }
 
   .is-sorting &,
-  &.sorting-helper {
+  .sorting-helper & {
     .sort-handle {
       top: 0;
     }
@@ -135,16 +142,11 @@ header {
     text-overflow: ellipsis;
   }
 
-  &.gu-transit .name {
-    border-color: lighten($neutral-color, 20%);
-  }
-
-  &.sorting-helper {
+  .sorting-helper & {
     background: $light-color;
     border: solid 1px darken($light-color, 20%);
+    transform: rotate(-2deg);
     opacity: 0.8;
-    position: fixed;
-    z-index: 9999;
 
     .options {
       display: none;

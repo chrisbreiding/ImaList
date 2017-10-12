@@ -54,7 +54,7 @@
     }
   }
 
-  &.showing-options {
+  .showing-options & {
     .name {
       padding-right: $full-width + 1em;
     }

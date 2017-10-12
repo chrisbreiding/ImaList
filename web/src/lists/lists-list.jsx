@@ -1,5 +1,6 @@
 import _ from 'lodash'
-import { action } from 'mobx'
+import cs from 'classnames'
+import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { SortableContainer, arrayMove } from 'react-sortable-hoc'
@@ -12,7 +13,7 @@ import List from './list'
 class ListsList extends Component {
   render () {
     return (
-      <ul>
+      <ul className={cs({ 'is-dragging': this.props.isDragging })}>
         {_.map(this.props.listsStore.lists, (list, index) => (
             <List
             key={list.id}
@@ -59,26 +60,38 @@ class ListsList extends Component {
 
 const SortableListsList = SortableContainer(ListsList)
 
-const ListsListContainer = (props) => {
-  const onSortEnd = ({ oldIndex, newIndex }) => {
-    const ids = arrayMove(_.map(props.listsStore.lists, 'id'), oldIndex, newIndex)
-    _.each(ids, (id, order) => props.listsStore.updateList({ id, order }))
+@observer
+class ListsListContainer extends Component {
+  @observable isDragging = false
+
+  render () {
+    if (this.props.listsStore.isLoading) {
+      return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
+    } else if (!this.props.listsStore.lists.length) {
+      return <p className='no-items'>No Lists</p>
+    }
+
+    return (
+      <SortableListsList
+        {...this.props}
+        helperClass='sorting-helper'
+        isDragging={this.isDragging}
+        onSortStart={this._onSortStart}
+        onSortEnd={this._onSortEnd}
+        useDragHandle={true}
+      />
+    )
   }
 
-  if (props.listsStore.isLoading) {
-    return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
-  } else if (!props.listsStore.lists.length) {
-    return <p className='no-items'>No Lists</p>
+  @action _onSortStart = () => {
+    this.isDragging = true
   }
 
-  return (
-    <SortableListsList
-      {...props}
-      helperClass='sorting-helper'
-      onSortEnd={onSortEnd}
-      useDragHandle={true}
-    />
-  )
+  @action _onSortEnd = ({ oldIndex, newIndex }) => {
+    this.isDragging = false
+    const ids = arrayMove(_.map(this.props.listsStore.lists, 'id'), oldIndex, newIndex)
+    _.each(ids, (id, order) => this.props.listsStore.updateList({ id, order }))
+  }
 }
 
 export default ListsListContainer

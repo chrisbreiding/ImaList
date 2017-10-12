@@ -23,27 +23,29 @@ class List extends Component {
           'is-selected': this.props.isSelected,
         })}
       >
-        <SortHandle />
-        <span className='name' onClick={this._select}>
-          {this.props.model.name}
+        <span className='list-container'>
+          <SortHandle />
+          <span className='name' onClick={this._select}>
+            {this.props.model.name}
+          </span>
+          <div className='indicators'>
+            <i className='is-shared-indicator fa fa-share-alt-square' title='Shared'></i>
+            <i className='is-private-indicator fa fa-lock' title='Locked'></i>
+          </div>
+          <button className='edit-list' onClick={this._openEditor}>
+            <i className='fa fa-ellipsis-h'></i>
+          </button>
+          <ListEditor
+            model={this.props.model}
+            isOwner={this.props.isOwner}
+            isEditing={this.props.isEditing}
+            onUpdateName={this._updateName}
+            onToggleShared={this._toggleShared}
+            onToggleIsPrivate={this._toggleIsPrivate}
+            onRemove={this._remove}
+            onClose={this._closeEditor}
+          />
         </span>
-        <div className='indicators'>
-          <i className='is-shared-indicator fa fa-share-alt-square' title='Shared'></i>
-          <i className='is-private-indicator fa fa-lock' title='Locked'></i>
-        </div>
-        <button className='edit-list' onClick={this._openEditor}>
-          <i className='fa fa-ellipsis-h'></i>
-        </button>
-        <ListEditor
-          model={this.props.model}
-          isOwner={this.props.isOwner}
-          isEditing={this.props.isEditing}
-          onUpdateName={this._updateName}
-          onToggleShared={this._toggleShared}
-          onToggleIsPrivate={this._toggleIsPrivate}
-          onRemove={this._remove}
-          onClose={this._closeEditor}
-        />
       </li>
     )
   }

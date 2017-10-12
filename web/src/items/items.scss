@@ -40,6 +40,16 @@
 }
 
 .item {
+  &.type-todo {
+    &.is-collapsed,
+    .toggle-collapsed {
+      display: none;
+    }
+  }
+}
+
+.item-container {
+  display: block;
   @include options(1);
 
   .toggle-checked,
@@ -63,7 +73,7 @@
     }
   }
 
-  &.is-collapsed .toggle-collapsed i {
+  .is-collapsed & .toggle-collapsed i {
     transform: rotate(-90deg);
   }
 
@@ -87,14 +97,7 @@
     }
   }
 
-  &.type-todo {
-    &.is-collapsed,
-    .toggle-collapsed {
-      display: none;
-    }
-  }
-
-  &.type-label {
+  .type-label & {
     .toggle-checked {
       display: none;
     }
@@ -106,14 +109,14 @@
   }
 
   .is-sorting &,
-  &.sorting-helper {
+  .sorting-helper & {
     .toggle-checked,
     .toggle-collapsed {
       left: -($unit);
     }
   }
 
-  &.is-checked {
+  .is-checked & {
     .toggle-checked {
       @include buttonize-color($action-color);
     }
@@ -122,10 +125,6 @@
       color: #979797;
     }
   }
-}
-
-.gu-hide {
-  display: none !important;
 }
 
 .bulk-add {

@@ -36,35 +36,37 @@ class Item extends Component {
           'showing-options': this.showingOptions,
         })}
       >
-        <Name
-          ref='name'
-          name={this.props.model.name}
-          onEditingStatusChange={this._onEditingStatusChange}
-          onUpdate={this._updateName}
-          onNext={this.props.onNext}
-        ></Name>
-        <button
-          ref='toggleChecked'
-          className='toggle-checked'
-          onClick={this._toggleChecked}
-        >
-          <i className='fa fa-check'></i>
-        </button>
-        <button
-          className='toggle-collapsed'
-          onClick={this._toggleCollapsed}
-        >
-          <i className='fa fa-caret-down'></i>
-        </button>
-        <SortHandle />
-        <div className='options'>
-          <button className='toggle-options' onClick={this._toggleOptions}>
-            <i className='fa fa-ellipsis-h'></i>
+        <span className='item-container'>
+          <Name
+            ref='name'
+            name={this.props.model.name}
+            onEditingStatusChange={this._onEditingStatusChange}
+            onUpdate={this._updateName}
+            onNext={this.props.onNext}
+          ></Name>
+          <button
+            ref='toggleChecked'
+            className='toggle-checked'
+            onClick={this._toggleChecked}
+          >
+            <i className='fa fa-check'></i>
           </button>
-          <button className='remove' onClick={this._remove}>
-            <i className='fa fa-times'></i>
+          <button
+            className='toggle-collapsed'
+            onClick={this._toggleCollapsed}
+          >
+            <i className='fa fa-caret-down'></i>
           </button>
-        </div>
+          <SortHandle />
+          <div className='options'>
+            <button className='toggle-options' onClick={this._toggleOptions}>
+              <i className='fa fa-ellipsis-h'></i>
+            </button>
+            <button className='remove' onClick={this._remove}>
+              <i className='fa fa-times'></i>
+            </button>
+          </div>
+        </span>
       </li>
     )
   }

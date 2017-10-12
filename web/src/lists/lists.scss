@@ -4,7 +4,8 @@
   }
 }
 
-.list {
+.list-container {
+  display: block;
   overflow: hidden;
   position: relative;
 
@@ -21,10 +22,15 @@
     &:focus {
       background: darken($light-color, 5%);
     }
+
+    .is-dragging &:hover {
+      background: none;
+    }
   }
 
+
   .is-sorting &,
-  &.sorting-helper {
+  .sorting-helper & {
     .name {
       padding-left: $unit;
     }
@@ -49,13 +55,13 @@
     }
   }
 
-  &.is-shared .is-shared-indicator,
-  &.is-private .is-private-indicator {
+  .is-shared & .is-shared-indicator,
+  .is-private & .is-private-indicator {
     display: block;
   }
 
-  .is-sorting &.is-shared .is-shared-indicator,
-  .is-sorting &.is-private .is-private-indicator {
+  .is-sorting .is-shared & .is-shared-indicator,
+  .is-sorting .is-private & .is-private-indicator {
     display: none;
   }
 
