@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import { action, computed, observable } from 'mobx'
+import { arrayMove } from 'react-sortable-hoc'
 
 import appState from '../app/app-state'
 import Item from './item-model'
@@ -134,17 +135,20 @@ class ItemsStore {
     })
   }
 
-  sorted (ids, movedId) {
-    const item = this._items.get(movedId)
-    if (item.type !== 'label' || !this.isCollapsed(item)) return ids
+  sortedIds (oldIndex, newIndex) {
+    const item = this.items[oldIndex]
+    const ids = _.map(this.items, 'id')
+    if (item.type !== 'label' || !this.isCollapsed(item)) {
+      return arrayMove(ids, oldIndex, newIndex)
+    }
 
-    const movedIndex = _.findIndex(ids, (id) => id === movedId)
     const itemsToMove = this.associatedItemsForLabel(item).value()
-    if (!itemsToMove.length) return ids
+    if (!itemsToMove.length) {
+      return arrayMove(ids, oldIndex, newIndex)
+    }
 
-    const itemIndex = _.findIndex(ids, (id) => id === itemsToMove[0].id)
-    const itemIds = ids.splice(itemIndex, itemsToMove.length)
-    const moveTo = (movedIndex > itemIndex ? movedIndex - itemsToMove.length : movedIndex) + 1
+    const itemIds = ids.splice(oldIndex, itemsToMove.length + 1)
+    const moveTo = newIndex > oldIndex ? newIndex - itemsToMove.length : newIndex
     ids.splice(moveTo, 0, ...itemIds)
     return ids
   }

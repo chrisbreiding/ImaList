@@ -3,11 +3,14 @@ import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
+import { SortableElement, SortableHandle } from 'react-sortable-hoc'
 
 import Name from './name'
 
+const SortHandle = SortableHandle(() => <i className='sort-handle fa fa-arrows'></i>)
+
 @observer
-export default class Item extends Component {
+class Item extends Component {
   @observable isEditing = false
   @observable showingOptions = false
 
@@ -32,7 +35,6 @@ export default class Item extends Component {
           'is-collapsed': this.props.isCollapsed,
           'showing-options': this.showingOptions,
         })}
-        data-id={this.props.model.id}
       >
         <Name
           ref='name'
@@ -54,7 +56,7 @@ export default class Item extends Component {
         >
           <i className='fa fa-caret-down'></i>
         </button>
-        <i className='sort-handle fa fa-arrows'></i>
+        <SortHandle />
         <div className='options'>
           <button className='toggle-options' onClick={this._toggleOptions}>
             <i className='fa fa-ellipsis-h'></i>
@@ -99,3 +101,5 @@ export default class Item extends Component {
     this.props.onRemove(this.props.model)
   }
 }
+
+export default SortableElement(Item)

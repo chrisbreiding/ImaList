@@ -2,39 +2,24 @@ import _ from 'lodash'
 import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { SortableContainer } from 'react-sortable-hoc'
 
 import appState from '../app/app-state'
 
 import ActionSheet from '../modal/action-sheet'
 import Item from './item'
-import SortableList from '../lib/sortable-list'
 
 @observer
 class ItemsList extends Component {
   @observable attempingRemoveLabel = null
 
   render () {
-    if (this.props.isLoading) {
-      return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
-    } else if (this.props.itemsStore.none) {
-      return <p className='no-items'>No List Selected</p>
-    } else if (!this.props.canShow) {
-      return <p className='no-items'>Private list - need passcode</p>
-    } else if (!this.props.itemsStore.items.length) {
-      return <p className='no-items'>No Items</p>
-    }
-
     return (
-      <SortableList
-        ref='list'
-        el='ul'
-        handleClass='sort-handle'
-        onSortingUpdate={this._updateSorting}
-      >
+      <ul>
         {_.map(this.props.itemsStore.items, (item, index) => (
           <Item
-            ref={item.id}
             key={item.id}
+            index={index}
             model={item}
             isEditing={item.id === appState.editingItemId}
             isCollapsed={this.props.itemsStore.isCollapsed(item)}
@@ -61,7 +46,7 @@ class ItemsList extends Component {
             },
           ]}
         />
-      </SortableList>
+    </ul>
     )
   }
 
@@ -119,12 +104,31 @@ class ItemsList extends Component {
   @action _toggleCollapsed = (item) => {
     this.props.itemsStore.toggleCollapsed(item)
   }
-
-  @action _updateSorting = (ids, movedId) => {
-    ids = this.props.itemsStore.sorted(ids, movedId)
-    this.props.itemsStore.expand(this.props.itemsStore.itemById(movedId))
-    _.each(ids, (id, order) => this._updateItem({ id, order }))
-  }
 }
 
-export default ItemsList
+const SortableItemsList = SortableContainer(ItemsList)
+
+const ItemsListContainer = (props) => {
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    const item = props.itemsStore.items[oldIndex]
+    const ids = props.itemsStore.sortedIds(oldIndex, newIndex)
+    props.itemsStore.expand(item)
+    _.each(ids, (id, order) => props.itemsStore.updateItem({ id, order }))
+  }
+
+  if (props.isLoading) {
+    return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
+  } else if (props.itemsStore.none) {
+    return <p className='no-items'>No List Selected</p>
+  } else if (!props.canShow) {
+    return <p className='no-items'>Private list - need passcode</p>
+  } else if (!props.itemsStore.items.length) {
+    return <p className='no-items'>No Items</p>
+  }
+
+  return (
+    <SortableItemsList {...props} onSortEnd={onSortEnd} useDragHandle={true} />
+  )
+}
+
+export default ItemsListContainer

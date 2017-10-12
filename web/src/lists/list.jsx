@@ -2,8 +2,11 @@ import cs from 'classnames'
 import { action } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { SortableElement, SortableHandle } from 'react-sortable-hoc'
 
 import ListEditor from './list-editor'
+
+const SortHandle = SortableHandle(() => <i className='sort-handle fa fa-arrows'></i>)
 
 @observer
 class List extends Component {
@@ -19,9 +22,8 @@ class List extends Component {
           'is-owner': this.props.isOwner,
           'is-selected': this.props.isSelected,
         })}
-        data-id={model.id}
       >
-        <i className='sort-handle fa fa-arrows'></i>
+        <SortHandle />
         <span className='name' onClick={this._select}>
           {this.props.model.name}
         </span>
@@ -84,4 +86,4 @@ class List extends Component {
   }
 }
 
-export default List
+export default SortableElement(List)

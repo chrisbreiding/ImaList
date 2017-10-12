@@ -2,32 +2,21 @@ import _ from 'lodash'
 import { action } from 'mobx'
 import { observer } from 'mobx-react'
 import React, { Component } from 'react'
+import { SortableContainer, arrayMove } from 'react-sortable-hoc'
 
 import authState from '../auth/auth-state'
 
 import List from './list'
-import SortableList from '../lib/sortable-list'
 
 @observer
 class ListsList extends Component {
   render () {
-    if (this.props.listsStore.isLoading) {
-      return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
-    } else if (!this.props.listsStore.lists.length) {
-      return <p className='no-items'>No Lists</p>
-    }
-
     return (
-      <SortableList
-        el='ul'
-        handleClass='sort-handle'
-        onSortingUpdate={(ids) => {
-          _.each(ids, (id, order) => this._updateList({ id, order }))
-        }}
-      >
-        {_.map(this.props.listsStore.lists, (list) => (
-          <List
+      <ul>
+        {_.map(this.props.listsStore.lists, (list, index) => (
+            <List
             key={list.id}
+            index={index}
             model={list}
             isOwner={list.owner === authState.user.email}
             isEditing={list.id === this.props.listsStore.editingListId}
@@ -39,7 +28,7 @@ class ListsList extends Component {
             onRemove={this._removeList}
           />
         ))}
-      </SortableList>
+      </ul>
     )
   }
 
@@ -68,4 +57,23 @@ class ListsList extends Component {
   }
 }
 
-export default ListsList
+const SortableListsList = SortableContainer(ListsList)
+
+const ListsListContainer = (props) => {
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    const ids = arrayMove(_.map(props.listsStore.lists, 'id'), oldIndex, newIndex)
+    _.each(ids, (id, order) => props.listsStore.updateList({ id, order }))
+  }
+
+  if (props.listsStore.isLoading) {
+    return <p className='no-items'><i className='fa fa-hourglass-end fa-spin'></i> Loading...</p>
+  } else if (!props.listsStore.lists.length) {
+    return <p className='no-items'>No Lists</p>
+  }
+
+  return (
+    <SortableListsList {...props} onSortEnd={onSortEnd} useDragHandle={true} />
+  )
+}
+
+export default ListsListContainer
