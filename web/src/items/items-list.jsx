@@ -127,7 +127,12 @@ const ItemsListContainer = (props) => {
   }
 
   return (
-    <SortableItemsList {...props} onSortEnd={onSortEnd} useDragHandle={true} />
+    <SortableItemsList
+      {...props}
+      helperClass='sorting-helper'
+      onSortEnd={onSortEnd}
+      useDragHandle={true}
+    />
   )
 }
 

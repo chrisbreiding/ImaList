@@ -122,7 +122,7 @@ header {
   }
 
   .is-sorting &,
-  &.gu-mirror {
+  &.sorting-helper {
     .sort-handle {
       top: 0;
     }
@@ -139,7 +139,7 @@ header {
     border-color: lighten($neutral-color, 20%);
   }
 
-  &.gu-mirror {
+  &.sorting-helper {
     background: $light-color;
     border: solid 1px darken($light-color, 20%);
     opacity: 0.8;

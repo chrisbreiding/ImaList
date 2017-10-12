@@ -106,7 +106,7 @@
   }
 
   .is-sorting &,
-  &.gu-mirror {
+  &.sorting-helper {
     .toggle-checked,
     .toggle-collapsed {
       left: -($unit);
