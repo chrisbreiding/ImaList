@@ -53,12 +53,8 @@ class ItemsStore {
   listen () {
     this.itemsApi.listen({
       onAdd: (id, item) => { this._items.set(id, new Item(id, item)) },
-      onUpdate: (id, item) => { this._items.get(id).update(item) },
-      onRemove: (id) => {
-        const item = this._items.get(id)
-        this.expand(item)
-        this._items.delete(id)
-      },
+      onUpdate: this._onUpdate,
+      onRemove: this._onRemove,
     })
   }
 
@@ -129,6 +125,17 @@ class ItemsStore {
     return _.takeRightWhile(this.items, (item) => this.isCollapsed(item))
   }
 
+  _onUpdate = (id, item) => {
+    this._items.get(id).update(item)
+  }
+
+  _onRemove = (id) => {
+    const item = this._items.get(id)
+    if (!item) return
+    this.expand(item)
+    this._items.delete(id)
+  }
+
   _reorder (items, fromOrder) {
     _.each(items, (item, index) => {
       this.updateItem({ id: item.id, order: fromOrder + index })
@@ -157,11 +164,13 @@ class ItemsStore {
     appState.editingItemId = id
   }
 
-  updateItem (item) {
+  @action updateItem = (item) => {
+    this._onUpdate(item.id, item)
     this.itemsApi.updateItem(item)
   }
 
-  removeItem = (item) => {
+  @action removeItem = (item) => {
+    this._onRemove(item.id)
     this.itemsApi.removeItem(item)
   }
 

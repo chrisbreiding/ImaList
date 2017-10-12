@@ -38,11 +38,8 @@ class ListsStore {
     action('begin:loading:data', () => this.isLoading = true)()
     this.listsApi.listen({
       onAdd: (id, list) => { this._lists.set(id, new List(id, list)) },
-      onUpdate: (id, list) => { this._lists.get(id).update(list) },
-      onRemove: (id) => {
-        this._lists.get(id).willRemove()
-        this._lists.delete(id)
-      },
+      onUpdate: this._onUpdate,
+      onRemove: this._onRemove,
       onDataLoad: () => { this.isLoading = false },
     })
   }
@@ -79,11 +76,24 @@ class ListsStore {
     }
   }
 
-  updateList (list) {
+  _onUpdate = (id, list) => {
+    this._lists.get(id).update(list)
+  }
+
+  _onRemove = (id) => {
+    const list = this._lists.get(id)
+    if (!list) return
+    list.willRemove()
+    this._lists.delete(id)
+  }
+
+  @action updateList (list) {
+    this._onUpdate(list.id, list)
     this.listsApi.updateList(list)
   }
 
-  removeList (list) {
+  @action removeList (list) {
+    this._onRemove(list.id)
     this.listsApi.removeList(list)
   }
 }

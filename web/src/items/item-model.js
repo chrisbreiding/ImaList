@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { observable } from 'mobx'
 
 class Item {
@@ -13,10 +14,7 @@ class Item {
   }
 
   update (props) {
-    this.name = props.name
-    this.order = props.order
-    this.type = props.type
-    this.isChecked = props.isChecked
+    _.extend(this, _.pick(props, 'name', 'order', 'type', 'isChecked'))
   }
 }
 

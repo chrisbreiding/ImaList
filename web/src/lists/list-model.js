@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { observable } from 'mobx'
 
 import ItemsStore from '../items/items-store'
@@ -23,11 +24,7 @@ class List {
   }
 
   _updatePrimitiveProps (props) {
-    this.name = props.name
-    this.order = props.order
-    this.owner = props.owner
-    this.shared = props.shared
-    this.isPrivate = props.isPrivate
+    _.extend(this, _.pick(props, 'name', 'order', 'owner', 'shared', 'isPrivate'))
   }
 
   willRemove () {
