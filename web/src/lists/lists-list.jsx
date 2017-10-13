@@ -89,6 +89,8 @@ class ListsListContainer extends Component {
 
   @action _onSortEnd = ({ oldIndex, newIndex }) => {
     this.isDragging = false
+    if (oldIndex === newIndex) return
+
     const ids = arrayMove(_.map(this.props.listsStore.lists, 'id'), oldIndex, newIndex)
     _.each(ids, (id, order) => this.props.listsStore.updateList({ id, order }))
   }

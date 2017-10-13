@@ -155,7 +155,13 @@ class ItemsStore {
     }
 
     const itemIds = ids.splice(oldIndex, itemsToMove.length + 1)
-    const moveTo = newIndex > oldIndex ? newIndex - itemsToMove.length : newIndex
+    let moveTo = newIndex > oldIndex ? newIndex - itemsToMove.length : newIndex
+    const prevItem = this._items.get(ids[moveTo - 1])
+    // if the item is dropped after a collapsed label, the index will be off
+    // by the number of that label's items
+    if (prevItem && prevItem.type === 'label' && this.isCollapsed(prevItem)) {
+      moveTo = moveTo + this.associatedItemsForLabel(prevItem).value().length
+    }
     ids.splice(moveTo, 0, ...itemIds)
     return ids
   }

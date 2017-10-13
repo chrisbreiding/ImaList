@@ -16,20 +16,26 @@ class ItemsList extends Component {
   render () {
     return (
       <ul>
-        {_.map(this.props.itemsStore.items, (item, index) => (
-          <Item
-            key={item.id}
-            index={index}
-            model={item}
-            isEditing={item.id === appState.editingItemId}
-            isCollapsed={this.props.itemsStore.isCollapsed(item)}
-            onEdit={this._editItem}
-            onUpdate={this._updateItem}
-            onRemove={this._attemptRemoveItem}
-            onNext={() => this._next(index)}
-            onToggleCollapsed={this._toggleCollapsed}
-          ></Item>
-        ))}
+        {_.map(this.props.itemsStore.items, (item, index) => {
+          const isCollapsed = this.props.itemsStore.isCollapsed(item)
+
+          // index and disabled are for SortableElement
+          return (
+            <Item
+              key={item.id}
+              index={index}
+              disabled={isCollapsed && item.type !== 'label'}
+              model={item}
+              isEditing={item.id === appState.editingItemId}
+              isCollapsed={isCollapsed}
+              onEdit={this._editItem}
+              onUpdate={this._updateItem}
+              onRemove={this._attemptRemoveItem}
+              onNext={() => this._next(index)}
+              onToggleCollapsed={this._toggleCollapsed}
+            ></Item>
+          )
+        })}
         <ActionSheet
           isShowing={!!this.attempingRemoveLabel}
           actions={[
@@ -110,6 +116,8 @@ const SortableItemsList = SortableContainer(ItemsList)
 
 const ItemsListContainer = (props) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
+    if (oldIndex === newIndex) return
+
     const item = props.itemsStore.items[oldIndex]
     const ids = props.itemsStore.sortedIds(oldIndex, newIndex)
     props.itemsStore.expand(item)
