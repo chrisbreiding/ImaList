@@ -137,7 +137,7 @@ header {
   .sorting-helper & {
     background: $light-color;
     border: solid 1px darken($light-color, 20%);
-    transform: rotate(-2deg);
+    transform: rotate(1deg);
     opacity: 0.8;
   }
 }
