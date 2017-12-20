@@ -114,7 +114,7 @@ class ItemsList extends Component {
 
 const SortableItemsList = SortableContainer(ItemsList)
 
-const ItemsListContainer = (props) => {
+const ItemsListContainer = observer((props) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex === newIndex) return
 
@@ -142,6 +142,6 @@ const ItemsListContainer = (props) => {
       useDragHandle={true}
     />
   )
-}
+})
 
 export default ItemsListContainer
