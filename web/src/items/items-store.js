@@ -52,7 +52,13 @@ class ItemsStore {
 
   listen () {
     this.itemsApi.listen({
-      onAdd: (id, item) => { this._items.set(id, new Item(id, item)) },
+      onAdd: (id, item) => {
+        this._items.set(id, new Item(id, item))
+        if (item._tempId === this._justAddedId) {
+          appState.editingItemId = id
+          this._justAddedId = null
+        }
+      },
       onUpdate: this._onUpdate,
       onRemove: this._onRemove,
     })
@@ -70,8 +76,9 @@ class ItemsStore {
     }
   }
 
-  _newItem ({ order, type = 'todo', name = '' }) {
+  _newItem ({ _tempId, order, type = 'todo', name = '' }) {
     return {
+      _tempId,
       order,
       type,
       name,
@@ -93,12 +100,11 @@ class ItemsStore {
       reorderItems = this._trailingCollapsed()
       order = this._newOrder(reorderItems)
     }
-    const newItem = this._newItem({ order, type })
+    const _tempId = this._justAddedId = `${new Date().valueOf()}${Math.random()}`
+    const newItem = this._newItem({ _tempId, order, type })
 
     this._reorder(reorderItems, order + 1)
-    this.itemsApi.addItem(newItem).then(action('added:item', (id) => {
-      appState.editingItemId = id
-    }))
+    this.itemsApi.addItem(newItem)
   }
 
   bulkAdd (names) {

@@ -14,7 +14,15 @@ class Item extends Component {
   @observable isEditing = false
   @observable showingOptions = false
 
-  @action componentDidUpdate () {
+  componentDidMount () {
+    this._checkEditing()
+  }
+
+  componentDidUpdate () {
+    this._checkEditing()
+  }
+
+  @action _checkEditing () {
     if (this.props.isEditing && !this.isEditing) {
       this.isEditing = true
       this.refs.name.focus()
