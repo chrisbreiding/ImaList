@@ -76,14 +76,17 @@ class ItemsStore {
     }
   }
 
-  _newItem ({ _tempId, order, type = 'todo', name = '' }) {
-    return {
-      _tempId,
+  _newItem ({ order, _tempId, type = 'todo', name = '' }) {
+    const item = {
       order,
       type,
       name,
       isChecked: false,
     }
+
+    if (_tempId) item._tempId = _tempId
+
+    return item
   }
 
   addItem ({ type, order }) {
