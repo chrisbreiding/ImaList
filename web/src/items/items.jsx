@@ -81,7 +81,7 @@ class Items extends Component {
           itemsStore={this.props.list.itemsStore}
         />
         <footer>
-          <button onClick={() => this._addItem()}>
+          <button onClick={() => this._addItem({}, true)}>
             <span>Item</span>
             <i className='fa fa-plus'></i>
           </button>
@@ -138,7 +138,18 @@ class Items extends Component {
     this.props.onShowLists()
   }
 
-  @action _addItem = (props = {}) => {
+  @action _addItem = (props = {}, fixFocus = false) => {
+    // fixes focusing on new item on iOS safari by synchronously
+    // focusing another element first
+    if (fixFocus) {
+      let focusFixer = document.querySelector('#focus-fixer')
+      if (!focusFixer) {
+        focusFixer = document.createElement('input')
+        focusFixer.id = 'focus-fixer'
+        document.body.appendChild(focusFixer)
+      }
+      focusFixer.focus()
+    }
     this.props.list.itemsStore.addItem(props)
   }
 
