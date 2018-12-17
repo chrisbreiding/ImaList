@@ -8,6 +8,9 @@ $light-color: #FFF;
 $dark-color: #333;
 
 $unit: 2.8em;
+:root {
+  --unit: 2.8em;
+}
 
 $fa-font-path: 'fonts';
 $monospace: 'Consolas', 'Monaco', 'Andale Mono', monospace;

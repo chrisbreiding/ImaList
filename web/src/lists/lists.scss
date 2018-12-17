@@ -4,6 +4,10 @@
   }
 }
 
+.list {
+  padding-left: env(safe-area-inset-left);
+}
+
 .list-container {
   display: block;
   overflow: hidden;

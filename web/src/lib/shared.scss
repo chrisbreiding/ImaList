@@ -67,10 +67,11 @@ header {
 
   ul {
     @extend .fill-container;
-    bottom: $unit;
+    bottom: var(--unit);
+    bottom: calc(var(--unit) + env(safe-area-inset-bottom));
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    top: $unit;
+    top: var(--unit);
     transition: all 0.35s ease-out;
   }
 
@@ -160,7 +161,9 @@ header {
     bottom: 0;
     box-sizing: border-box;
     display: flex;
-    height: $unit;
+    height: var(--unit);
+    height: calc(var(--unit) + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
     position: fixed;
     width: 100%;
 

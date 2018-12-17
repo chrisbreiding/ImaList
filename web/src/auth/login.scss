@@ -51,6 +51,7 @@
 
   footer {
     bottom: 0;
+    padding-bottom: env(safe-area-inset-bottom);
     position: absolute;
     right: 0;
 
